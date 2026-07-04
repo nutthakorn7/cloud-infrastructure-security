@@ -1,0 +1,44 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Build / artifacts
+dist/
+build/
+*.o
+*.out
+*.bin
+
+# Security tool output
+*.sarif
+trivy-report.*
+semgrep-report.*
+sbom.json
+sbom.xml
+*.sig
+
+# Secrets — never commit
+.env
+*.pem
+*.key
+secrets/
+
+# AWS Academy official curriculum — licensed, never redistribute (see course-plan.md)
+aws-academy-official/
+
+# Instructor-only — answer keys, CTF flags, exam keys (never publish)
+instructor/
