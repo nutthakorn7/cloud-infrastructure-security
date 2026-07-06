@@ -181,8 +181,8 @@ not their content. **Not resolved here — the user's call.**
 
 - The third challenge-host itself (provisioning, not the wiring) — needs budget/approval.
 - The OSF amendment for the dose problem above — needs the user's decision.
-- A `challenges-import.csv` / `ctfd/challenges.yml` deployment catalog — deployment-specific,
-  scoped out until a real cohort is being stood up (same as both sibling courses).
+- The Docker images (`airsec-cloud/*:dev`) referenced by the now-built
+  `challenges-import.csv`/`ctfd/challenges.yml` deployment catalog aren't built/pushed yet.
 
 ## Repo visibility — decided: public
 
