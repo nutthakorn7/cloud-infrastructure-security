@@ -97,9 +97,10 @@ in use by this repo's `lesson05-s3-static-site-lambda-sns` lab (built concurrent
 uses `:8104` (vulnerable) and `:8117` (fixed) instead — both confirmed free across every other
 lesson's `docker-compose.yml` in this repo at the time of writing.
 
-Per-student flag: this course's own `instructor/seed_flags.py` doesn't exist yet (open item in
-`course-plan.md`) — until then `FLAG_EC2` defaults to `FLAG{ssrf_steals_the_instance_role}` and
-can be overridden: `FLAG_EC2=FLAG{...} docker compose up`.
+Per-student flag: run `python3 instructor/seed_flags.py env <STUDENT_ID>` — this course's own
+`instructor/seed_flags.py` already exists and its `CHALLENGES` list already includes `"ec2"`.
+Without it, `FLAG_EC2` defaults to `FLAG{ssrf_steals_the_instance_role}` and can be overridden:
+`FLAG_EC2=FLAG{...} docker compose up`.
 
 **Evidence artifact.** The attributable evidence is the captured `flag` value inside the fetched
 metadata body returned by the *vulnerable* app's `/fetch-preview` response. The fixed app never

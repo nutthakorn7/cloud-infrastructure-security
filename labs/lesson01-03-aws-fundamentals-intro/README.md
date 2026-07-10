@@ -34,7 +34,7 @@ coding bug in any artifact.
 ## 🔎 Signature exercise — "Audit the AI"
 No lab/flag this lesson (CONCEPTUAL) — the personalized, attributable artifact is **which planted
 error your assigned AI explanation contains** (see `worksheet.md` Part 2a). Every student gets a
-different variant (`variant = student_id_number mod 4`, from a bank of 4); correctly identifying
+different variant (`variant = (last digit of your student ID) mod 4`, from a bank of 4); correctly identifying
 *your own* variant's specific error is what's attributable — describing someone else's variant's
 error does not satisfy the task.
 

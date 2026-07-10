@@ -77,9 +77,10 @@ Exit code `0`. Negative controls confirmed separately: `devuser`/anonymous calle
 `bucket1` (no matching resource or identity policy); an unknown bucket name returns `403`, not a
 crash.
 
-Per-student flag: this course's own `instructor/seed_flags.py` doesn't exist yet (open item in
-`course-plan.md`) — until then `FLAG_IAM` defaults to `FLAG{wildcard_principal_grants_the_world}`
-and can be overridden: `FLAG_IAM=FLAG{...} docker compose up`.
+Per-student flag: run `python3 instructor/seed_flags.py env <STUDENT_ID>` — this course's own
+`instructor/seed_flags.py` already exists and its `CHALLENGES` list already includes `"iam"`.
+Without it, `FLAG_IAM` defaults to `FLAG{wildcard_principal_grants_the_world}` and can be
+overridden: `FLAG_IAM=FLAG{...} docker compose up`.
 
 **Evidence artifact.** The attributable evidence is the captured `flag` value returned by the
 *vulnerable* app's anonymous write to bucket3. The fixed app never returns it. Submitting

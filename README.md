@@ -8,9 +8,9 @@ Shinya Oyama. Third arm of the same preregistered study as
 research design, structurally different course (see below).
 
 > ⚠️ **Status: DRAFT.** All 10 lesson topics built and Docker-verified (see
-> [course-plan.md](course-plan.md)). Not built: this course's own `seed_flags.py`/CTFd wiring
-> (labs currently use static default flags), research instruments (H1–H4 adapted to this
-> course's shared-AWS-baseline structure). Do not use this for a live course yet.
+> [course-plan.md](course-plan.md)). `seed_flags.py`/CTFd wiring and the research instruments
+> (H1–H4, adapted to this course's shared-AWS-baseline structure) are done. Not yet built: the
+> third challenge-host and the deployable Docker images — do not use this for a live course yet.
 
 > ⚠️ **This repo never contains AWS Academy's official material.** The underlying curriculum
 > (Cloud Foundations, Cloud Security Foundations, all Learner Lab instructions) is Shinya's own

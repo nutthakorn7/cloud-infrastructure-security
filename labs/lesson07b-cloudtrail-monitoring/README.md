@@ -111,10 +111,12 @@ identically shaped, are in the actual run output.) Negative control confirmed se
 (`alert: true`), proving its counter mechanics work — it is specifically the `(ip, username)`
 key choice that misses the password-spray pattern, not a broken counter.
 
-Per-student flag: this course's own `instructor/seed_flags.py` doesn't exist yet (open item in
-`course-plan.md`) — until then `FLAG_MONITOR` defaults to
-`FLAG{aggregation_key_must_match_the_threat_model}` and can be overridden:
-`FLAG_MONITOR=FLAG{...} docker compose up`.
+Per-student flag: run `python3 instructor/seed_flags.py env <STUDENT_ID>` — this course's own
+`instructor/seed_flags.py` already exists and its `CHALLENGES` list already includes `"monitor"`.
+Unlike the other lessons, `vulnerable_app.py`'s `FLAG_MONITOR = os.environ.get("FLAG_MONITOR")`
+has **no default value** — if it's unset, the response simply never includes a `flag` key at all
+(by design: the vulnerable app's own code path must never leak one, see below). Set it explicitly
+via `FLAG_MONITOR=FLAG{...} docker compose up` to exercise the fixed app's alert-then-flag path.
 
 **Evidence artifact.** The attributable evidence is the captured `flag` value returned once the
 *fixed* app's alert fires. The vulnerable app never returns it, no matter how many attempts are

@@ -34,7 +34,7 @@ Two Flask targets, same endpoints, one condition flipped in the remediation logi
 
 | Service | Port | `/remediate` logic | After remediation, is port 22 from `0.0.0.0/0` gone? | Are 80/443 still there? |
 |---|---|---|---|---|
-| `vulnerable_app.py` | `:8115` | keeps rules whose port **is** in the allowed set `{80, 443}` (inverted) | **No — it survives** | **No — wrongly revoked** |
+| `vulnerable_app.py` | `:8115` | keeps rules whose port is **NOT** in the allowed set `{80, 443}` (inverted) | **No — it survives** | **No — wrongly revoked** |
 | `fixed_app.py` | `:8116` | keeps only rules whose port **is** in the allowed set `{80, 443}` (correct) | **Yes — revoked** | **Yes — kept** |
 
 **Why it's exciting:** the bug is a single flipped comparison (`in` vs. `not in`), the function
@@ -82,10 +82,10 @@ Exit code `0`. Negative controls confirmed separately: calling `/remediate` a se
 either target is idempotent (fixed app stays at `{80, 443}`; vulnerable app stays at `{22}`) — the
 bug isn't a one-time fluke, it's the function's steady-state behavior.
 
-Per-student flag: this course's own `instructor/seed_flags.py` doesn't exist yet (open item in
-`course-plan.md`) — until then `FLAG_REMEDIATE` defaults to
-`FLAG{inverted_allowlist_leaves_ssh_open}` and can be overridden:
-`FLAG_REMEDIATE=FLAG{...} docker compose up`.
+Per-student flag: run `python3 instructor/seed_flags.py env <STUDENT_ID>` — this course's own
+`instructor/seed_flags.py` already exists and its `CHALLENGES` list already includes
+`"remediate"`. Without it, `FLAG_REMEDIATE` defaults to `FLAG{inverted_allowlist_leaves_ssh_open}`
+and can be overridden: `FLAG_REMEDIATE=FLAG{...} docker compose up`.
 
 **Evidence artifact.** The attributable evidence is the captured `flag` value returned by the
 *vulnerable* app's `GET /security-group` after `/remediate` has run. The fixed app never returns

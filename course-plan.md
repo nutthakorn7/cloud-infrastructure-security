@@ -4,8 +4,9 @@
 > preregistered study (`software-security/instructor/research/preregistration.md` §3, where this
 > course is named "Cloud Infra & Security"). Read this whole file before touching any lesson —
 > the shape of this course is genuinely different from its two sibling repos and the usual
-> 19-week LAB/HYBRID/CONCEPTUAL template does not transfer directly. Remaining before this is
-> usable for a live course: `seed_flags.py`/CTFd wiring, research instruments (H1–H4) — see
+> 19-week LAB/HYBRID/CONCEPTUAL template does not transfer directly. `seed_flags.py`/CTFd wiring
+> and the research instruments (H1–H4) are done; remaining before this is usable for a live
+> course: the third challenge-host, the Docker images, and the OSF amendment decision — see
 > [Open / not yet done](#open--not-yet-done).
 
 ## Why this course is structurally different from its two siblings

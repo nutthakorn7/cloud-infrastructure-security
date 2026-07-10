@@ -95,10 +95,10 @@ does not break legitimate access); a request on an unrelated port (`22`) with no
 falls through to the implicit default **deny** on both apps, matching AWS's own NACL behavior
 of an implicit deny-all when nothing matches.
 
-Per-student flag: this course's own `instructor/seed_flags.py` doesn't exist yet (open item in
-`course-plan.md`) — until then `FLAG_NACL` defaults to
-`FLAG{low_numbered_allow_shadows_the_deny}` and can be overridden:
-`FLAG_NACL=FLAG{...} docker compose up`.
+Per-student flag: run `python3 instructor/seed_flags.py env <STUDENT_ID>` — this course's own
+`instructor/seed_flags.py` already exists and its `CHALLENGES` list already includes `"nacl"`.
+Without it, `FLAG_NACL` defaults to `FLAG{low_numbered_allow_shadows_the_deny}` and can be
+overridden: `FLAG_NACL=FLAG{...} docker compose up`.
 
 **Evidence artifact.** The attributable evidence is the captured `flag` value returned by the
 *vulnerable* app's `/check-access` response for an external IP on port 5432. The fixed app

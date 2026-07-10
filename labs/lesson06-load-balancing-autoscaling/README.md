@@ -88,9 +88,10 @@ the correct `X-Api-Key` still gets capped — 5 successful calls (`current_insta
 `load_units` stops at 5), then a `6th` call returns `429 {"error": "TooManyRequests", ...}`. This
 is the defense-in-depth proof: the fix is auth **and** a throttle together, not either one alone.
 
-Per-student flag: this course's own `instructor/seed_flags.py` doesn't exist yet (open item in
-`course-plan.md`) — until then `FLAG_SCALING` defaults to `FLAG{denial_of_wallet_no_throttle}`
-and can be overridden: `FLAG_SCALING=FLAG{...} docker compose up`.
+Per-student flag: run `python3 instructor/seed_flags.py env <STUDENT_ID>` — this course's own
+`instructor/seed_flags.py` already exists and its `CHALLENGES` list already includes `"scaling"`.
+Without it, `FLAG_SCALING` defaults to `FLAG{denial_of_wallet_no_throttle}` and can be overridden:
+`FLAG_SCALING=FLAG{...} docker compose up`.
 
 **Evidence artifact.** The attributable evidence is the captured `flag` value returned by the
 *vulnerable* app once `current_instances` reaches 6. The fixed app never returns it. Submitting

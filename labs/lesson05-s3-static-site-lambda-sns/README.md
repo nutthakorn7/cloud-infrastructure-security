@@ -83,10 +83,10 @@ NoSuchKey` (not a crash) on both apps; re-`GET`ting `index.html` on the vulnerab
 exploit confirms the defacement persisted (the site now really does serve the attacker's HTML),
 demonstrating that this is a real overwrite, not just an accepted-but-discarded request.
 
-Per-student flag: this course's own `instructor/seed_flags.py` doesn't exist yet (open item in
-`course-plan.md`) — until then `FLAG_S3SITE` defaults to
-`FLAG{public_putobject_defaces_your_website}` and can be overridden:
-`FLAG_S3SITE=FLAG{...} docker compose up`.
+Per-student flag: run `python3 instructor/seed_flags.py env <STUDENT_ID>` — this course's own
+`instructor/seed_flags.py` already exists and its `CHALLENGES` list already includes `"s3site"`.
+Without it, `FLAG_S3SITE` defaults to `FLAG{public_putobject_defaces_your_website}` and can be
+overridden: `FLAG_S3SITE=FLAG{...} docker compose up`.
 
 **Evidence artifact.** The attributable evidence is the captured `flag` value returned by the
 *vulnerable* app's anonymous write to `index.html`. The fixed app never returns it. Submitting
