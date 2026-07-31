@@ -74,8 +74,12 @@ This is a security course — we practice the same rigor on your own work. Assum
 - **Your flags are unique to you.** Each student receives **personalized lab flags** derived from
   your student ID. A flag is traceable to the person it was issued to — submitting someone else's
   flag is detected automatically and counts as a violation for **both** parties.
-- **Your screenshots must show you.** Evidence must include your **terminal `whoami` / login email /
-  student ID** and a **timestamp**. Generic or borrowed screenshots are not accepted.
+- **Your screenshots must show you.** Evidence must include a terminal running `printf '%s | %s | ' "$(whoami)" '<YOUR-STUDENT-ID>'; date '+%F %T %Z'` **in
+  the same image as the evidence**. When the evidence is a browser page, a DevTools panel or a
+  rendered response, put that terminal **beside the browser and capture the whole screen** — a
+  cropped window carries nothing that identifies you, and the lab's own output is
+  byte-identical for the whole cohort *by design*, so the stamp is the only thing that makes
+  the shot yours. Generic or borrowed screenshots are not accepted.
 - **Random live checks.** You may be asked to **reproduce a task or explain your fix live**. Answers
   you can't explain in your own words score zero.
 - **Explain, don't copy.** Reflection and Audit-the-AI questions are graded on *your* reasoning about
