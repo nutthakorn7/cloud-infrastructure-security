@@ -14,7 +14,14 @@ approved sandboxes only — see [ETHICS.md](ETHICS.md).
 ## One-time setup (Lesson 1)
 1. Join the **Google Classroom** (code given in class) and accept the **AWS Academy Learner Lab**
    invite posted there.
-2. Install **Docker Desktop** + Git for the local add-on labs (each lab is `docker compose up`).
+2. Install **Docker Desktop** + Git, then get this course's repo — the local add-on
+   labs all begin with `cd labs/lessonNN-…`, so you need it on your own machine:
+   ```bash
+   git clone https://github.com/nutthakorn7/cloud-infrastructure-security.git
+   cd cloud-infrastructure-security
+   ```
+   Each add-on lab is then `docker compose up`. All the reading is also published at
+   **`learn.zcr.ai/learn/cloud-security/`** — no sign-in needed.
 3. Confirm you can start your Learner Lab and reach the AWS console.
 
 ---
