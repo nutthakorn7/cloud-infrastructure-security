@@ -92,6 +92,22 @@ AIR-Sec / Block 2 Conventional; Section B = reversed.** Lessons 1–5 + Lab6/Loa
 1; Lessons 7(monitoring)/10/11/13/14 = Block 2. (Lesson 7's *two* topics split across blocks
 deliberately — the IAM topic anchors Block 1's LAB week, the monitoring topic is Block 2 HYBRID.)
 
+**Section mapping — randomised before term, as `preregistration.md` §3 requires.** Drawn once on
+2026-10-31 18:54:30 +07:00 (before Week 1 on 3 Nov 2026) with Python
+`secrets.choice(["C5R1", "C5R2"])`:
+
+| Room | Section | Block 1 | Block 2 |
+|---|---|---|---|
+| **C5R2** | **A** | AIR-Sec | Conventional |
+| **C5R1** | **B** | Conventional | AIR-Sec |
+
+Not yet decided: which worksheets count as Block 1 and which as Block 2. The Classroom runs the
+lessons in AWS Academy order, so two of them land in the other half of term from the lesson list
+above: Local 04 (S3 versioning/replication, Weeks 7–8) and Local 06 (IAM, Weeks 11–12). Either
+blocks follow the lesson list above, or they follow the half of term (Local 01–05 / Local 06–10).
+`preregistration.md` §3 defines a block as "a set of topics/weeks (e.g., first vs second half)".
+Local 01–03, 05 and 07–10 fall in the same block either way.
+
 ## All 10 lesson topics — built and verified
 
 - **CONCEPTUAL — "AWS Fundamentals Audit-the-AI"** (`lesson01-03-aws-fundamentals-intro/`):
