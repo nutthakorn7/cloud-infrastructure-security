@@ -97,16 +97,18 @@ smaller demonstrable exploit plus conceptual material; CONCEPTUAL = analysis, no
 | 4 | EC2 instance roles, Lambda, Elastic Beanstalk — SSRF → instance-role credential theft | HYBRID | 1 | `labs/lesson04-ec2-lambda-beanstalk` | 2, 3 |
 | 5 | S3 static hosting + Lambda/SNS — public-write bucket policy | LAB | 1 | `labs/lesson05-s3-static-site-lambda-sns` | 2, 3 |
 | Lab 6 | Load balancing & auto-scaling under load | HYBRID | 1 | `labs/lesson06-load-balancing-autoscaling` | 2, 3 |
-| 7 | IAM privilege escalation — identity vs. resource policy evaluation | LAB | 1 | `labs/lesson07-iam-policy-evaluation` | 1, 2, 3 |
+| 7 | IAM privilege escalation — identity vs. resource policy evaluation | LAB | 2 | `labs/lesson07-iam-policy-evaluation` | 1, 2, 3 |
 | 7 (2nd topic) | CloudTrail + CloudWatch + EventBridge alerting on failed logins | HYBRID | 2 | `labs/lesson07b-cloudtrail-monitoring` | 2, 3 |
 | 10 | VPC networking — subnets, NAT, security groups vs. network ACLs | HYBRID | 2 | `labs/lesson10-vpc-networking` | 2, 3 |
 | 11 | S3 SSE-KMS — envelope encryption and key-disable blast radius | CONCEPTUAL | 2 | `labs/lesson11-kms-envelope-encryption` | 1, 4 |
-| 13 | "Cafe" challenge — S3 versioning, lifecycle, cross-region replication | CONCEPTUAL | 2 | `labs/lesson13-s3-versioning-lifecycle-replication` | 1, 4 |
+| 13 | "Cafe" challenge — S3 versioning, lifecycle, cross-region replication | CONCEPTUAL | 1 | `labs/lesson13-s3-versioning-lifecycle-replication` | 1, 4 |
 | 14 | AWS Config + Lambda auto-remediation of a non-compliant security group | HYBRID | 2 | `labs/lesson14-config-lambda-remediation` | 2, 3 |
 | 15 | AWS-graded reflection / wrap-up | — | — | *(no add-on)* | — |
 
 Block assignment follows the preregistration: **Section A** = Block 1 AIR-Sec / Block 2
-Conventional; **Section B** = the reverse.
+Conventional; **Section B** = the reverse. Blocks follow the half of term (2026-10-31): Block 1 = Weeks 1–10,
+Block 2 = Weeks 11–20, which puts Lesson 13 in Block 1 and Lesson 7 (IAM) in Block 2. Section A = C5R2,
+Section B = C5R1 (random draw, `course-plan.md`).
 
 ## 7. Teaching and learning methods
 

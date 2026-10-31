@@ -5,7 +5,7 @@
 | **Course** | Cloud Infrastructure & Security · subject code **02005097** (`course-plan.md` line 1; `docs/course-specification.md` §1 still records the course code as ⬚) |
 | **AWS lesson this attaches to** | **AWS Academy Lesson 13** — the challenge lab that exercises S3 versioning, lifecycle rules and cross-region replication (topic named in our own words; **no AWS Academy file, scenario, character name or lab wording is reproduced in this plan or in the lab** — lab `README.md`) |
 | **Add-on kind** | **CONCEPTUAL** — no exploitable target, no Docker, no flag (`docs/course-specification.md` §6; lab `README.md`) |
-| **Block** | **2** (`docs/course-specification.md` §6). Block 2 = **Conventional for Section A**, **AIR-Sec for Section B** — the reverse of this course's Block 1 lessons (`course-plan.md`; specification §6) |
+| **Block** | **1** — blocks follow the half of term since 2026-10-31, and this add-on runs in Weeks 7–8 (Local 04). Block 1 = **AIR-Sec for Section A (C5R2)**, **Conventional for Section B (C5R1)**, the same way round as Lessons 1–3, 4 and 5 (`course-plan.md`; specification §6) |
 | **Duration of this add-on** | **45–60 min, no Docker** — the figure the lab's own README states. This is *not* a full contact session: the AWS Academy Learner Lab is the baseline and comes first |
 | **Lab folder** | `labs/lesson13-s3-versioning-lifecycle-replication` (`README.md`, `worksheet.md` — no code files this lesson) |
 | **Signature exercise** | "Audit the Backup Plan" (lab `README.md`) |
@@ -14,12 +14,11 @@
 | **Slides / quizzes** | ⬚ — none authored, deliberately; `slides/` and `quizzes/` in this course are intentionally empty (`slides/README.md`, `quizzes/README.md`) |
 | **Date / section / room** | ⬚ |
 
-> **Which arm is this section in today?** This lesson sits in **Block 2**. Under the block table
-> (specification §6, `course-plan.md`): **Section A = Block 1 AIR-Sec / Block 2 Conventional**, and
-> **Section B = the reverse**. So *in this lesson* **Section A does Part 1 (Conventional)** and
-> **Section B does Part 2 (AIR-Sec)** — the opposite way round from Lessons 1–3, 4 and 5. Announce
-> it before the worksheet is opened; §8 explains why this cannot be left to the worksheet's own
-> opening line, which in this lesson points the wrong way for Section B.
+> **Which arm is this section in today?** This lesson sits in **Block 1** (it moved from Block 2 on
+> 2026-10-31, when blocks started following the half of term). So *in this lesson* **Section A (C5R2)
+> does Part 2 (AIR-Sec)** and **Section B (C5R1) does Part 1 (Conventional)**, the same way round as
+> Lessons 1–3, 4 and 5. Announce it before the worksheet is opened; §8 explains why this cannot be
+> left to the worksheet's own opening line, which points the wrong way for Section B.
 
 > **Naming note.** The lab folder, README, worksheet and the submission filename all call this
 > **Lesson 13** — the *AWS lesson number* it attaches to. The curriculum monorepo
@@ -49,7 +48,7 @@ By the end of this add-on a student can:
 
 **Skills (P)**
 
-*AIR-Sec arm — worksheet Part 2 (Section B in Block 2):*
+*AIR-Sec arm — worksheet Part 2 (Section A, C5R2, in Block 1):*
 - P1 — Compute their own variant with `variant = (last digit of your student ID) mod 4` and read
   **only** that passage.
 - P2 — Identify the single planted factual error in their own assigned passage, quote the exact
@@ -62,7 +61,7 @@ By the end of this add-on a student can:
 - P5 — (2c, viva) Answer the viva prompt without notes: what happens to the pre-existing objects
   when the primary region is lost, and whose assumption was wrong.
 
-*Conventional arm — worksheet Part 1 (Section A in Block 2):*
+*Conventional arm — worksheet Part 1 (Section B, C5R1, in Block 1):*
 - P6 — Answer the four essay questions in their own words: recovering an accidentally overwritten
   object in a versioning-enabled bucket (and how the outcome differs without versioning); what a
   30-day transition rule does to the *current* versus *noncurrent* versions and whether those are
@@ -115,7 +114,7 @@ afterwards and does not re-teach them.
 - **Signed** the ETHICS.md acknowledgment (ETHICS.md states this is signed in Lesson 1).
 
 **Instructor, before the session**
-- Confirm and be ready to state which arm this section is in **for Block 2** — see the header note
+- Confirm and be ready to state which arm this section is in **for Block 1** — see the header note
   and §8 item 1. This is the lesson where the worksheet's own opening line is most likely to send a
   student to the wrong Part.
 - Post the worksheet in Classroom with the arm stated in writing.
@@ -135,7 +134,7 @@ afterwards and does not re-teach them.
 >
 > The two arms are **alternatives, not a sequence**. A student does 4.1 *or* 4.2, never both.
 
-### 4.1 AIR-Sec arm — worksheet Part 2 (Section B in Block 2)
+### 4.1 AIR-Sec arm — worksheet Part 2 (Section A, C5R2, in Block 1)
 
 | Time | Task | Student does | Evidence produced |
 |---|---|---|---|
@@ -156,7 +155,7 @@ afterwards and does not re-teach them.
 > correction to one of the four variants (§8 item 2). Keep the room on 2a until 0:25 and do not
 > preview 2b's wording — a student who reads ahead has been handed that variant's answer.
 
-### 4.2 Conventional arm — worksheet Part 1 (Section A in Block 2)
+### 4.2 Conventional arm — worksheet Part 1 (Section B, C5R1, in Block 1)
 
 No personalised artefact and no AI-resilience layer here — that absence *is* the manipulated
 variable (`course-plan.md`), so do not add the viva or a variant to this arm.
@@ -267,9 +266,9 @@ they are reported upward instead. Handle them in delivery.
 
 1. **The worksheet's opening line points the wrong way in this lesson.** `worksheet.md` opens with
    *"Section is assigned Block 1 = AIR-Sec or Block 2 = Conventional per `course-plan.md`'s block
-   table"*. Read literally that says Block 2 is always the Conventional arm — and this is a **Block
-   2** lesson, so a Section B student self-selecting from that line will do **Part 1 instead of
-   their assigned Part 2**, producing evidence that cannot be graded for their arm and contaminating
+   table"*. Read literally that says Block 1 is always the AIR-Sec arm — and this is a **Block
+   1** lesson, so a Section B student self-selecting from that line will do **Part 2 instead of
+   their assigned Part 1**, producing evidence that cannot be graded for their arm and contaminating
    the block's comparison. The same line was already reported from Lesson 1–3's plan (§8 there); it
    is a standing worksheet defect, not a new one, but this is the lesson where it does damage. **In
    delivery:** state the section's arm aloud *and* in Classroom before the worksheet is opened, and
@@ -311,7 +310,7 @@ they are reported upward instead. Handle them in delivery.
 
 | Risk | Mitigation |
 |---|---|
-| **Arm/section mix-up in Block 2** (§8 item 1) — this lesson reverses the arm assignment relative to every Block 1 add-on already taught, and the worksheet's opening line reinforces the wrong answer for Section B | Announce the arm before the worksheet opens and post it in Classroom in writing, so a late arrival cannot guess wrong. Do not rely on students remembering "we're the AIR-Sec section" from Block 1 — for one of the two sections that is now false |
+| **Arm/section mix-up** (§8 item 1) — this lesson was listed as Block 2 until 2026-10-31, so older notes may expect a reversal, and the worksheet's opening line points the wrong way for Section B | Announce the arm before the worksheet opens; the Classroom post's first line states it. Arms are the same as Local 01–03: C5R2 = Part 2, C5R1 = Part 1 |
 | **The leaked variant** (§8 item 2) compounds the built-in skew | Apply §5's marking adjustment on that variant; sample it *last* in the viva (§4.3) so the earlier oral answers do not repeat the correction to the room; record variant numbers against scores for §10 |
 | **Variant skew is built into the formula.** `(last digit of student ID) mod 4` maps three digits to variants 0 and 1 (0/4/8 and 1/5/9) but only two to variants 2 and 3 (2/6 and 3/7) — roughly a 30/30/20/20 split | When choosing viva subjects, deliberately sample across all four variants rather than relying on volunteers, or the two larger buckets dominate the oral evidence. Hold the four-variant walk-through until the following add-on, after the Part 2a deadline (§4.1) |
 | A student computes the wrong variant, or answers a passage that is not theirs — the lab README states describing someone else's variant's error does not satisfy the task | Have every student write their variant number **and** their ID's last digit at the top of the sheet in the 0:05–0:10 slot, and check them then, not at marking time. A visible mismatch is a viva follow-up, not an automatic accusation — arithmetic slips look identical to copying at first glance |
@@ -329,8 +328,8 @@ they are reported upward instead. Handle them in delivery.
 *Complete after the session — this also feeds the course's engagement data.*
 
 - Attendance / completion: ⬚
-- Which arm this section actually ran, and whether anyone did the wrong Part (the Block 2 reversal is
-  the specific risk this time): ⬚
+- Which arm this section actually ran, and whether anyone did the wrong Part (the block move on
+  2026-10-31 is the specific risk this time): ⬚
 - Time actually taken per task (vs. the 45-minute floor above): ⬚
 - Variant distribution as it fell out in the room, vs. the expected 30/30/20/20: ⬚
 - Detection rate **per variant** — which planted error went uncaught most often, and whether the

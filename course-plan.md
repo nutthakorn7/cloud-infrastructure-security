@@ -74,11 +74,11 @@ files themselves) — these are the *topics*, described in our own words:
 | 4 | EC2 instance roles, Lambda basics, Elastic Beanstalk (SSRF → instance-role credential theft) | **HYBRID ✅** | 1 | `lesson04-ec2-lambda-beanstalk` |
 | 5 | S3 static website hosting; Lambda + SNS (public-write bucket-policy misconfig) | **LAB ✅** | 1 | `lesson05-s3-static-site-lambda-sns` |
 | — | Load balancing & auto-scaling under load (Cloud Foundations Lab 6) | **HYBRID ✅** | 1 | `lesson06-load-balancing-autoscaling` |
-| 7 | IAM privilege escalation — identity-based vs. resource-based policy conflicts (assume-role to reach a bucket the identity policy alone doesn't permit) | **LAB ✅** | 1 | `lesson07-iam-policy-evaluation` |
+| 7 | IAM privilege escalation — identity-based vs. resource-based policy conflicts (assume-role to reach a bucket the identity policy alone doesn't permit) | **LAB ✅** | 2 *(was 1; see below)* | `lesson07-iam-policy-evaluation` |
 | 7 (same lesson, 2nd topic) | CloudTrail + CloudWatch + EventBridge monitoring/alerting on failed logins | **HYBRID ✅** | 2 | `lesson07b-cloudtrail-monitoring` |
 | 10 | VPC networking — public/private subnets, NAT gateway, security groups vs. network ACLs | **HYBRID ✅** | 2 | `lesson10-vpc-networking` |
 | 11 | S3 server-side encryption with KMS — envelope encryption, key-disable blast radius | **CONCEPTUAL ✅** | 2 | `lesson11-kms-envelope-encryption` |
-| 13 | "Cafe" challenge lab — S3 versioning, lifecycle rules, cross-region replication (official AWS Academy Cloud Architect lab; topic only, never the file) | **CONCEPTUAL ✅** | 2 | `lesson13-s3-versioning-lifecycle-replication` |
+| 13 | "Cafe" challenge lab — S3 versioning, lifecycle rules, cross-region replication (official AWS Academy Cloud Architect lab; topic only, never the file) | **CONCEPTUAL ✅** | 1 *(was 2; see below)* | `lesson13-s3-versioning-lifecycle-replication` |
 | 14 | AWS Config + Lambda auto-remediation of a non-compliant security group | **HYBRID ✅** | 2 | `lesson14-config-lambda-remediation` |
 | 15 | Reflection / wrap-up (existing AWS-graded mock exams) | — | — | n/a |
 
@@ -91,6 +91,7 @@ Block assignment follows `preregistration.md` §3's table for this course: **Sec
 AIR-Sec / Block 2 Conventional; Section B = reversed.** Lessons 1–5 + Lab6/Load-Balancing = Block
 1; Lessons 7(monitoring)/10/11/13/14 = Block 2. (Lesson 7's *two* topics split across blocks
 deliberately — the IAM topic anchors Block 1's LAB week, the monitoring topic is Block 2 HYBRID.)
+*Superseded for Lessons 7 (IAM) and 13 on 2026-10-31: blocks now follow the half of term (below).*
 
 **Section mapping — randomised before term, as `preregistration.md` §3 requires.** Drawn once on
 2026-10-31 18:54:30 +07:00 (before Week 1 on 3 Nov 2026) with Python
@@ -101,12 +102,14 @@ deliberately — the IAM topic anchors Block 1's LAB week, the monitoring topic 
 | **C5R2** | **A** | AIR-Sec | Conventional |
 | **C5R1** | **B** | Conventional | AIR-Sec |
 
-Not yet decided: which worksheets count as Block 1 and which as Block 2. The Classroom runs the
-lessons in AWS Academy order, so two of them land in the other half of term from the lesson list
-above: Local 04 (S3 versioning/replication, Weeks 7–8) and Local 06 (IAM, Weeks 11–12). Either
-blocks follow the lesson list above, or they follow the half of term (Local 01–05 / Local 06–10).
-`preregistration.md` §3 defines a block as "a set of topics/weeks (e.g., first vs second half)".
-Local 01–03, 05 and 07–10 fall in the same block either way.
+**Blocks follow the half of term (owner decision, 2026-10-31).** Block 1 = Local 01–05 (Weeks 1–10),
+Block 2 = Local 06–10 (Weeks 11–20), so the arms switch once, at Week 11. The Classroom runs the
+lessons in AWS Academy order, which puts two of them in the other half from the lesson list above:
+Lesson 13 (S3 versioning/replication, Local 04, Weeks 7–8) is now **Block 1**, and Lesson 7's IAM
+topic (Local 06, Weeks 11–12) is now **Block 2**, so Block 1's LAB anchor is Lesson 5 alone.
+`preregistration.md` §3 defines a block as "a set of topics/weeks (e.g., first vs second half)";
+the move of these two lessons still goes in the OSF amendment, with the dose note. Each Local post
+in Classroom opens with the Part each room does.
 
 ## All 10 lesson topics — built and verified
 
