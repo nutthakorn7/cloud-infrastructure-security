@@ -9,7 +9,7 @@ topics are described in our own words only.*
 | **Course** | Cloud Infrastructure & Security (02005097) |
 | **Attaches to (AWS lesson)** | AWS Academy **Cloud Security Foundations Lab 3.1** — the identity-vs-resource IAM policy topic (lab `README.md` header); course specification §6 row **"AWS lesson 7"** |
 | **Kind** | LAB — runnable vulnerable/fixed pair with a per-student flag (course specification §6; lab `README.md` header) |
-| **Block** | 1 — "the IAM topic anchors Block 1's LAB week" (`course-plan.md`) |
+| **Block** | **2** — blocks follow the half of term since 2026-10-31, and this lab runs in Weeks 11–12 (Local 06), the first week after the switch. **Section A (C5R2) = Conventional, Section B (C5R1) = AIR-Sec** (`course-plan.md`) |
 | **Add-on duration** | **60–90 min** (per the lab's own `README.md`) — this is the single 60–90 min add-on the course specification §1 refers to; every other add-on is 45–60 min |
 | **Lab folder** | `labs/lesson07-iam-policy-evaluation` |
 | **Slides** | ⬚ (no deck in the repo — `slides/` holds only `README.md`; so does `quizzes/`) |
@@ -134,7 +134,7 @@ actions it may take.
 
 ## 5. Conventional-arm variant (same slot, no flag)
 
-The section assigned the **Conventional** arm for Block 1 does **worksheet Part 1 only** — five
+The section assigned the **Conventional** arm for Block 2 (Section A, C5R2) does **worksheet Part 1 only** — five
 essay questions on the same concepts: identity-based vs resource-based policy with an example of
 each; why `devuser` (via `BucketsAccessRole`) can still read bucket1 and write bucket2 when its
 identity policy grants neither; what `"Principal": "*"` actually grants and whether that equals "any
