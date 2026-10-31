@@ -269,7 +269,7 @@ manifest for this lesson carries `flag_keys: []`
 **Submission** ([SUBMISSION.md](../../SUBMISSION.md)): worksheet exported to PDF → Google Classroom,
 named `Lesson11_<StudentID>.pdf`, with Name + Student ID on the file and an AI-tool usage disclosure
 ("None" is a valid disclosure); due before the next class session unless told otherwise; late
-−10%/day up to 3 days. The worksheet's own Submit line asks the AIR-Sec arm for variant + error +
+−10% of the earned score per day down to 0, marked only after a viva. The worksheet's own Submit line asks the AIR-Sec arm for variant + error +
 correction + Parts 2b/2c, and the Conventional arm for Part 1 only.
 
 **Grading scale, and this layer's share of the final grade: ⬚** — an institutional decision recorded

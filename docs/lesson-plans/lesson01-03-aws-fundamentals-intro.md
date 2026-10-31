@@ -169,7 +169,7 @@ and §8).
 
 **Submission** (SUBMISSION.md): worksheet exported to PDF → Google Classroom, named
 `Lesson<NN>_<StudentID>.pdf`, with an AI-tool usage disclosure; due before the next class session
-unless told otherwise; late −10%/day up to 3 days. ⬚ — SUBMISSION.md does not state which `NN` a
+unless told otherwise; late −10% of the earned score per day down to 0, marked only after a viva. ⬚ — SUBMISSION.md does not state which `NN` a
 single add-on covering Modules 1–3 should use; fix a convention in Classroom before hand-out.
 
 ## 6. Materials
