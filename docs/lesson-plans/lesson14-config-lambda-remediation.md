@@ -289,7 +289,7 @@ allowlist condition is more dangerous than a rule that simply does nothing.
 
 **Submission.** Worksheet exported to PDF with screenshots embedded, named
 `Lesson14_<StudentID>.pdf`, plus the captured flag → Google Classroom, before the next class
-session; AI-tool disclosure required; late −10%/day up to 3 days
+session; AI-tool disclosure required; late −10% of the earned score per day down to 0, marked only after a viva
 ([SUBMISSION.md](../../SUBMISSION.md)).
 
 **Grading scale, and this layer's share of the final grade: ⬚** — an institutional decision,

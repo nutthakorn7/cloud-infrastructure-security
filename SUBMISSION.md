@@ -44,7 +44,8 @@ approved sandboxes only — see [ETHICS.md](ETHICS.md).
 | Flag | the captured `FLAG{…}` for that lesson (LAB/HYBRID lessons) |
 
 **File name:** `Lesson<NN>_<StudentID>.pdf`  (e.g. `Lesson04_65123456.pdf`)
-**Deadline:** before the next class session (unless told otherwise).
+**Deadline:** before the start of the next week's class. The exact date and time is the due date
+on the Classroom assignment.
 **Grading:** the rubric in each worksheet; the AWS Knowledge Checks are graded by AWS.
 
 ---
@@ -63,7 +64,17 @@ approved sandboxes only — see [ETHICS.md](ETHICS.md).
 ## Rules for every submission
 - **Name + Student ID** on every file; labs are individual unless a task says otherwise.
 - **AI-tool disclosure** on worksheets/reports.
-- **Late:** −10%/day, up to 3 days (see `course-plan.md`); submit what you have.
+- **Late:** 10% of the score you earned is taken off for every 24 hours (or part of 24 hours)
+  after the due time, down to 0 after 10 days. Submit what you have.
+- **Late work needs a viva:** the answers are walked through in the class right after the
+  deadline, so a late worksheet is marked only after you explain it to the instructor in a short
+  viva.
+- **Local 10**, the last worksheet, closes on the date the instructor announces; nothing is
+  accepted after it.
+- **Extensions:** for illness or a documented technical failure, tell the instructor (before the
+  deadline if you can). Extensions are decided case by case.
+- These rules cover the local worksheets only. AWS Academy items follow the LMS due dates and the
+  first-attempt rule.
 
 ---
 

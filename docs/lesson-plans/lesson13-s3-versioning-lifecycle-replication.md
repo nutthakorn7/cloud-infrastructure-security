@@ -211,7 +211,7 @@ variant number against the score so the per-variant detection rate stays interpr
 
 **Submission** (SUBMISSION.md): worksheet exported to PDF → Google Classroom, named
 `Lesson13_<StudentID>.pdf`, with an AI-tool usage disclosure; due before the next class session
-unless told otherwise; late −10%/day up to 3 days. There is **no flag to submit** — SUBMISSION.md
+unless told otherwise; late −10% of the earned score per day down to 0, marked only after a viva. There is **no flag to submit** — SUBMISSION.md
 asks for a captured flag on LAB/HYBRID lessons only, and this add-on is CONCEPTUAL.
 
 ## 6. Materials

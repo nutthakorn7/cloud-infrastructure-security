@@ -130,7 +130,7 @@ The lab is a small local Flask pair standing in for S3 behaviour, and the course
 
 **Deliverable, per the lab README.** The captured flag + the exact request (method, path, headers-or-lack-thereof, body) that produced it + a one-paragraph explanation of why granting `Principal: "*"` the `PutObject` action is a fundamentally different and much worse mistake than granting it `GetObject` on a website-hosting bucket.
 
-**Submission.** Worksheet exported to PDF with screenshots embedded, named `Lesson05_<StudentID>.pdf`, plus the captured flag → Google Classroom, before the next class session; AI-tool disclosure required; late −10%/day up to 3 days ([SUBMISSION.md](../../SUBMISSION.md)).
+**Submission.** Worksheet exported to PDF with screenshots embedded, named `Lesson05_<StudentID>.pdf`, plus the captured flag → Google Classroom, before the next class session; AI-tool disclosure required; late −10% of the earned score per day down to 0, marked only after a viva ([SUBMISSION.md](../../SUBMISSION.md)).
 
 **Grading scale, and this layer's share of the final grade: ⬚** — an institutional decision, recorded nowhere in this repository (`docs/course-specification.md` §4, §8).
 

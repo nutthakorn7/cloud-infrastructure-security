@@ -287,7 +287,7 @@ broader rule ahead of it already decided the outcome.
 
 **Submission.** Worksheet exported to PDF with screenshots embedded, named
 `Lesson10_<StudentID>.pdf`, plus the captured flag → Google Classroom, before the next class session;
-AI-tool disclosure required; late −10%/day up to 3 days ([SUBMISSION.md](../../SUBMISSION.md)).
+AI-tool disclosure required; late −10% of the earned score per day down to 0, marked only after a viva ([SUBMISSION.md](../../SUBMISSION.md)).
 Evidence must show the student's own `whoami` / login / student ID and a timestamp.
 
 **Grading scale, and this layer's share of the final grade: ⬚** — an institutional decision recorded
