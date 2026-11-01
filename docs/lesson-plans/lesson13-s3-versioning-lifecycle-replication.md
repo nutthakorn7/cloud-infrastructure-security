@@ -23,8 +23,9 @@
 > **Naming note.** The lab folder, README, worksheet and the submission filename all call this
 > **Lesson 13** — the *AWS lesson number* it attaches to. The curriculum monorepo
 > (`../KOSEN69 - curriculum/courses/cloud-infrastructure-security.yml`) lists the same lesson at
-> **slot 9** of 11 schedule slots (ten add-ons plus a wrap-up). Use "Lesson 13" with students: it is
-> what the worksheet header and `Lesson<NN>_<StudentID>.pdf` require.
+> **slot 9** of 11 schedule slots (ten add-ons plus a wrap-up). With students, say "Lesson 13" for
+> the worksheet (its header uses it) and "Local 04" for the submission: that is the Classroom
+> assignment, and the file is `Local04_<StudentID>.pdf` ([SUBMISSION.md](../../SUBMISSION.md)).
 
 ---
 
@@ -209,7 +210,7 @@ actually happens instead, and what closes the gap — not on the identification 
 variant number against the score so the per-variant detection rate stays interpretable (§10).
 
 **Submission** (SUBMISSION.md): worksheet exported to PDF → Google Classroom, named
-`Lesson13_<StudentID>.pdf`, with an AI-tool usage disclosure; due before the next class session
+`Local04_<StudentID>.pdf`, with an AI-tool usage disclosure; due before the next class session
 unless told otherwise; late −10% of the earned score per day down to 0, marked only after a viva. There is **no flag to submit** — SUBMISSION.md
 asks for a captured flag on LAB/HYBRID lessons only, and this add-on is CONCEPTUAL.
 

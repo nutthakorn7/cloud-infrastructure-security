@@ -42,10 +42,25 @@ approved sandboxes only — see [ETHICS.md](ETHICS.md).
 | Worksheet | the completed worksheet exported to **PDF** (screenshots embedded) |
 | Flag | the captured `FLAG{…}` for that lesson (LAB/HYBRID lessons) |
 
-**File name:** `Lesson<NN>_<StudentID>.pdf`  (e.g. `Lesson04_65123456.pdf`)
+**File name:** `LocalNN_StudentID.pdf` (e.g. `Local04_65123456.pdf`). `NN` is the number of the
+**Local** assignment in Classroom, which is not the lesson folder number (see the table below).
 **Deadline:** before the start of the next week's class. The exact date and time is the due date
 on the Classroom assignment.
 **Grading:** the rubric in each worksheet; the AWS Knowledge Checks are graded by AWS.
+
+**Which Local is which lab:**
+| Classroom assignment | Lab folder |
+|---|---|
+| Local 01 | `labs/lesson01-03-aws-fundamentals-intro` |
+| Local 02 | `labs/lesson04-ec2-lambda-beanstalk` |
+| Local 03 | `labs/lesson05-s3-static-site-lambda-sns` |
+| Local 04 | `labs/lesson13-s3-versioning-lifecycle-replication` |
+| Local 05 | `labs/lesson06-load-balancing-autoscaling` |
+| Local 06 | `labs/lesson07-iam-policy-evaluation` |
+| Local 07 | `labs/lesson10-vpc-networking` |
+| Local 08 | `labs/lesson11-kms-envelope-encryption` |
+| Local 09 | `labs/lesson07b-cloudtrail-monitoring` |
+| Local 10 | `labs/lesson14-config-lambda-remediation` |
 
 ---
 

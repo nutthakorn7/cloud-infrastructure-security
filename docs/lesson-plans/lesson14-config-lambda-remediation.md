@@ -28,9 +28,9 @@ words only (`course-plan.md` §"Licensing"; `docs/course-specification.md` §2).
 > **Naming note.** The lab folder, README and worksheet call this **Lesson 14** — the *AWS lesson
 > number* it attaches to. The curriculum monorepo (`courses/cloud-infrastructure-security.yml`)
 > lists the same lesson at **slot 10** of 11 slots, because only ten AWS lessons carry an add-on.
-> Both labels refer to the same material; use "Lesson 14" with students, since that is what the
-> worksheet header and the `Lesson<NN>_<StudentID>.pdf` submission convention use
-> ([SUBMISSION.md](../../SUBMISSION.md)).
+> Both labels refer to the same material. With students, say "Lesson 14" for the worksheet (its
+> header uses it) and "Local 10" for the submission: that is the Classroom assignment, and the file
+> is `Local10_<StudentID>.pdf` ([SUBMISSION.md](../../SUBMISSION.md)).
 
 ---
 
@@ -160,7 +160,7 @@ on first run. See §8 risk 1 before the class types the last two lines.)
 | 0:32–0:40 | **Confirm the fix (worksheet 2a, step 4)** | The identical sequence against **:8116** → only 80/443 remain, `dangerous_rules_present` is false, and **no flag** appears. Then open `remediation_engine.py` and point at the one-token difference between `remediate_correct` and `remediate_inverted` | The fixed app's post-remediation state + the named comparison (`in` vs `not in` the allowed set `{80, 443}`) |
 | 0:40–0:50 | **Worksheet 2b — Audit-the-AI** | Trace the AI-supplied `remediate()` in the worksheet by hand with `allowed_ports = {80, 443}` and rules on 80, 443 and 22; state which ports end up in `remaining_rules` and what the function is really doing | Written answer — the planted flaw named, plus what the function actually returns (start in class, finish as homework) |
 | 0:50–0:57 | **Worksheet 2c — EiPE + simplification debrief** | 3–4 sentences a non-technical stakeholder could follow on why a "successful" remediation left the network exposed, and why that is scarier than loud failure; then the instructor walks §6 (where this simulation is *not* AWS Config or Lambda) | Written answer + no one leaves with a wrong model of the real services |
-| 0:57–1:00 | **Submit + tear down** | Confirm the submission bundle; `docker compose down` | `Lesson14_<StudentID>.pdf` + the flag → Google Classroom |
+| 0:57–1:00 | **Submit + tear down** | Confirm the submission bundle; `docker compose down` | `Local10_<StudentID>.pdf` + the flag → Google Classroom |
 
 **Compressing to 45 minutes.** Keep 0:00–0:40 intact — the 2a sequence against both targets and the
 `remediation_engine.py` comparison are the assessed core and the only part that needs the running
@@ -288,7 +288,7 @@ another student's flag is a violation for both parties
 allowlist condition is more dangerous than a rule that simply does nothing.
 
 **Submission.** Worksheet exported to PDF with screenshots embedded, named
-`Lesson14_<StudentID>.pdf`, plus the captured flag → Google Classroom, before the next class
+`Local10_<StudentID>.pdf`, plus the captured flag → Google Classroom, before the next class
 session; AI-tool disclosure required; late −10% of the earned score per day down to 0, marked only after a viva
 ([SUBMISSION.md](../../SUBMISSION.md)).
 

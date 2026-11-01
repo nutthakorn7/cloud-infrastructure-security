@@ -95,7 +95,7 @@ its configured maximum. That makes the interesting question not "where is the fl
 | 0:27–0:37 | **Worksheet 2a (ii) — the control** | Same anonymous request against `:8110` → `401`. Then repeat with the correct `X-Api-Key` (value is in the lab's own `docker-compose.yml`) until the response changes to `429`, and re-check `GET /status` | Both responses + the fixed app's `/status` afterwards |
 | 0:37–0:47 | **Worksheet 2b — EiPE** | Answer the teammate who says an API key alone is enough, in 3–4 sentences a non-technical stakeholder would follow; and why "just add more instances" is not a security fix | Written answer |
 | 0:47–0:53 | **Worksheet 2c — blast radius** | One valid key leaks to a public repository: worst-case scaling-relevant calls before cut-off, and why that number bounds the damage | Written answer |
-| 0:53–0:55 | **Submit + tear down** | Export the worksheet to PDF as `Lesson06_<StudentID>.pdf`, submit worksheet + flag to Classroom; `docker compose down` | Submission |
+| 0:53–0:55 | **Submit + tear down** | Export the worksheet to PDF as `Local05_<StudentID>.pdf`, submit worksheet + flag to Classroom; `docker compose down` | Submission |
 
 **Checks for understanding**
 - After 2a(i), cold-call: *"nothing crashed and no error was returned — so what exactly did the

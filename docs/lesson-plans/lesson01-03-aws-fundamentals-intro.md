@@ -167,10 +167,9 @@ Marking detail (the point split and the model answers) lives in the instructor-h
 here. The exact weight of this repository's layer within the final grade is ⬚ (specification §4
 and §8).
 
-**Submission** (SUBMISSION.md): worksheet exported to PDF → Google Classroom, named
-`Lesson<NN>_<StudentID>.pdf`, with an AI-tool usage disclosure; due before the next class session
-unless told otherwise; late −10% of the earned score per day down to 0, marked only after a viva. ⬚ — SUBMISSION.md does not state which `NN` a
-single add-on covering Modules 1–3 should use; fix a convention in Classroom before hand-out.
+**Submission** (SUBMISSION.md): worksheet exported to PDF → Google Classroom assignment **Local 01**,
+named `Local01_<StudentID>.pdf`, with an AI-tool usage disclosure; due before the next class session
+unless told otherwise; late −10% of the earned score per day down to 0, marked only after a viva.
 
 ## 6. Materials
 
