@@ -88,7 +88,7 @@ python exploit.py
 | 0:32–0:40 | **Worksheet 2a, confirm the fix** | The identical anonymous `PUT` against :8106 → `403` `AccessDenied`, no flag; then the identical anonymous `GET` on :8106 → still `200`; open both apps' `BUCKET_POLICY` and name the one difference | 403 response + the still-working GET + the policy diff in the student's own words |
 | 0:40–0:50 | **Worksheet 2b — Audit-the-AI** | Examine the AI-supplied "standard static-website-hosting policy" in the worksheet; find the planted flaw and state what the statement actually grants | Written answer (start in class, finish as homework) |
 | 0:50–0:57 | **Worksheet 2c — EiPE + simplification debrief** | 3–4 sentences for a non-technical stakeholder on why removing `PutObject` while keeping `GetObject` fixes the bug without breaking the site; then the instructor walks §5 (where the simulation is *not* real S3) | Written answer + no one leaves with a wrong model of the service |
-| 0:57–1:00 | **Submit + tear down** | Confirm the submission bundle; `docker compose down` | `Lesson05_<StudentID>.pdf` → Google Classroom |
+| 0:57–1:00 | **Submit + tear down** | Confirm the submission bundle; `docker compose down` | `Local03_<StudentID>.pdf` → Google Classroom |
 
 **Compressing to 45 minutes.** Keep 0:00–0:40 intact — the four 2a steps and the policy comparison are the assessed core and the only part that needs the running targets. Send 2b and 2c home as written work, and replace the 0:50–0:57 debrief with the two-minute version of §5 (in-memory bucket; no Block Public Access; no identity policies). If the room is short on time to run the requests by hand, `python exploit.py` performs the whole GET/PUT/GET sequence against both targets in one shot — but the worksheet asks for *the exact request the student sent*, so anyone who takes that route must still be able to state it.
 
@@ -130,7 +130,7 @@ The lab is a small local Flask pair standing in for S3 behaviour, and the course
 
 **Deliverable, per the lab README.** The captured flag + the exact request (method, path, headers-or-lack-thereof, body) that produced it + a one-paragraph explanation of why granting `Principal: "*"` the `PutObject` action is a fundamentally different and much worse mistake than granting it `GetObject` on a website-hosting bucket.
 
-**Submission.** Worksheet exported to PDF with screenshots embedded, named `Lesson05_<StudentID>.pdf`, plus the captured flag → Google Classroom, before the next class session; AI-tool disclosure required; late −10% of the earned score per day down to 0, marked only after a viva ([SUBMISSION.md](../../SUBMISSION.md)).
+**Submission.** Worksheet exported to PDF with screenshots embedded, named `Local03_<StudentID>.pdf`, plus the captured flag → Google Classroom, before the next class session; AI-tool disclosure required; late −10% of the earned score per day down to 0, marked only after a viva ([SUBMISSION.md](../../SUBMISSION.md)).
 
 **Grading scale, and this layer's share of the final grade: ⬚** — an institutional decision, recorded nowhere in this repository (`docs/course-specification.md` §4, §8).
 

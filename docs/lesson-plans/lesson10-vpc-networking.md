@@ -24,8 +24,9 @@ anywhere in this plan or in the lab** — the topic is described in our own word
 > number* it attaches to. The curriculum monorepo (`courses/cloud-infrastructure-security.yml`)
 > lists the same lesson at **slot 7** of 11 total schedule slots — only 10 of which carry an add-on
 > (slot 11 is the AWS-graded "Reflection & Wrap-up" review, not an add-on lesson). Both labels refer
-> to the same material; use "Lesson 10" with students, since that is what the worksheet header and
-> the `Lesson<NN>_<StudentID>.pdf` submission convention use.
+> to the same material. With students, say "Lesson 10" for the worksheet (its header uses it) and
+> "Local 07" for the submission: that is the Classroom assignment, and the file is
+> `Local07_<StudentID>.pdf` ([SUBMISSION.md](../../SUBMISSION.md)).
 
 ---
 
@@ -165,7 +166,7 @@ on a first run. See §7 risk 1 before the class types the last two lines — on 
 | 0:30–0:38 | **Worksheet 2a, confirm the fix** | The **identical** request against **:8114** → `{"action": "deny", …}`, `matched_rule_number` **100**, no flag; then name the one difference between the two `#90` rules | The 2nd response + which rule number matched first in each case, in the student's own words |
 | 0:38–0:48 | **Worksheet 2b — Audit-the-AI** | Walk the AI's three-rule summary (#10 / #20 / #30) in ascending order for an external IP **and** for a request from the CIDR the AI claims is the real app tier; decide whether rule #30 ever runs for either | Written answer (start in class, finish as homework) |
 | 0:48–0:56 | **Worksheet 2c — EiPE + simplification debrief** | 3–4 sentences a non-technical stakeholder could follow, plus the one-sentence rule of thumb about where a narrow rule goes relative to a broad one; then the instructor walks §5 out loud (what this simulation is *not*) | Written answer + nobody leaves with a wrong model of NACLs or security groups |
-| 0:56–1:00 | **Submit + tear down** | Confirm the submission bundle; `docker compose down` | `Lesson10_<StudentID>.pdf` + the flag → Google Classroom |
+| 0:56–1:00 | **Submit + tear down** | Confirm the submission bundle; `docker compose down` | `Local07_<StudentID>.pdf` + the flag → Google Classroom |
 
 **Optional one-shot check.** `python exploit.py` (host, `requests` installed) runs `GET /rules` and
 the external-IP `POST /check-access` against both targets and prints two `PASS` lines, exiting `0`.
@@ -286,7 +287,7 @@ number can still be completely unreachable — it is not that the deny rule is w
 broader rule ahead of it already decided the outcome.
 
 **Submission.** Worksheet exported to PDF with screenshots embedded, named
-`Lesson10_<StudentID>.pdf`, plus the captured flag → Google Classroom, before the next class session;
+`Local07_<StudentID>.pdf`, plus the captured flag → Google Classroom, before the next class session;
 AI-tool disclosure required; late −10% of the earned score per day down to 0, marked only after a viva ([SUBMISSION.md](../../SUBMISSION.md)).
 Evidence must show the student's own `whoami` / login / student ID and a timestamp.
 

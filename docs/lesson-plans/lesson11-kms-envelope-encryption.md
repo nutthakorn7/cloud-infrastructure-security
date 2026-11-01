@@ -26,8 +26,9 @@
 > lists the same lesson at **slot 8** of the monorepo's **11 schedule entries** (10 add-on lessons
 > plus a final non-add-on "review" slot, Reflection & Wrap-up) — the offset between "Lesson 11" and
 > "slot 8" exists because only ten of the AWS lessons carry an add-on. Both labels refer to the same
-> material; use "Lesson 11" with students, since that is what the worksheet header and the
-> `Lesson<NN>_<StudentID>.pdf` submission convention use.
+> material. With students, say "Lesson 11" for the worksheet (its header uses it) and "Local 08"
+> for the submission: that is the Classroom assignment, and the file is `Local08_<StudentID>.pdf`
+> ([SUBMISSION.md](../../SUBMISSION.md)).
 
 ---
 
@@ -267,7 +268,7 @@ manifest for this lesson carries `flag_keys: []`
 **not** reproduced here: this repository is public.
 
 **Submission** ([SUBMISSION.md](../../SUBMISSION.md)): worksheet exported to PDF → Google Classroom,
-named `Lesson11_<StudentID>.pdf`, with Name + Student ID on the file and an AI-tool usage disclosure
+named `Local08_<StudentID>.pdf`, with Name + Student ID on the file and an AI-tool usage disclosure
 ("None" is a valid disclosure); due before the next class session unless told otherwise; late
 −10% of the earned score per day down to 0, marked only after a viva. The worksheet's own Submit line asks the AIR-Sec arm for variant + error +
 correction + Parts 2b/2c, and the Conventional arm for Part 1 only.
