@@ -46,21 +46,28 @@ approved sandboxes only — see [ETHICS.md](ETHICS.md).
 **Local** assignment in Classroom, which is not the lesson folder number (see the table below).
 **Deadline:** before the start of the next week's class. The exact date and time is the due date
 on the Classroom assignment.
-**Grading:** the rubric in each worksheet; the AWS Knowledge Checks are graded by AWS.
+**Grading:** the 6-criterion rubric on each Local assignment in Classroom, worth the points in the
+table below; the AWS Knowledge Checks are graded by AWS.
 
-**Which Local is which lab:**
-| Classroom assignment | Lab folder |
-|---|---|
-| Local 01 | `labs/lesson01-03-aws-fundamentals-intro` |
-| Local 02 | `labs/lesson04-ec2-lambda-beanstalk` |
-| Local 03 | `labs/lesson05-s3-static-site-lambda-sns` |
-| Local 04 | `labs/lesson13-s3-versioning-lifecycle-replication` |
-| Local 05 | `labs/lesson06-load-balancing-autoscaling` |
-| Local 06 | `labs/lesson07-iam-policy-evaluation` |
-| Local 07 | `labs/lesson10-vpc-networking` |
-| Local 08 | `labs/lesson11-kms-envelope-encryption` |
-| Local 09 | `labs/lesson07b-cloudtrail-monitoring` |
-| Local 10 | `labs/lesson14-config-lambda-remediation` |
+**Which Local is which lab, and what it is worth:**
+| Classroom assignment | Lab folder | Points (of 60) | Basic / Technical / Interdisciplinary |
+|---|---|---|---|
+| Local 01 | `labs/lesson01-03-aws-fundamentals-intro` | 4 | 2 / 1 / 1 |
+| Local 02 | `labs/lesson04-ec2-lambda-beanstalk` | 7 | 0 / 6 / 1 |
+| Local 03 | `labs/lesson05-s3-static-site-lambda-sns` | 7 | 0 / 6 / 1 |
+| Local 04 | `labs/lesson13-s3-versioning-lifecycle-replication` | 4 | 1 / 2 / 1 |
+| Local 05 | `labs/lesson06-load-balancing-autoscaling` | 7 | 0 / 6 / 1 |
+| Local 06 | `labs/lesson07-iam-policy-evaluation` | 8 | 1 / 6 / 1 |
+| Local 07 | `labs/lesson10-vpc-networking` | 7 | 0 / 6 / 1 |
+| Local 08 | `labs/lesson11-kms-envelope-encryption` | 4 | 1 / 2 / 1 |
+| Local 09 | `labs/lesson07b-cloudtrail-monitoring` | 6 | 0 / 5 / 1 |
+| Local 10 | `labs/lesson14-config-lambda-remediation` | 6 | 0 / 5 / 1 |
+| **Total** | | **60** | **5 / 45 / 10** |
+
+Each rubric criterion is marked Very Good (full marks), Good (75%) or Fail (0). Basic comes from
+criterion 1, Technical from the average of criteria 2–4 and Interdisciplinary from the average of
+criteria 5–6. Where a Local's Basic is 0, criterion 1 is feedback only. The late rule below is
+applied to the points you earn.
 
 ---
 
