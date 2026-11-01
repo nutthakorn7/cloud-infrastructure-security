@@ -114,7 +114,10 @@ in Classroom opens with the Part each room does.
 **The term has 18 Tuesdays, not 20 (owner decision, 2026-11-01).** Both rooms' calendar runs
 3 Nov 2026–2 Mar 2027 with no gaps, so the planned Weeks 19–20 fold into Weeks 17–18: Local 09 is
 due Mon 1 Mar 2027 and Local 10 closes Mon 8 Mar 2027, with their local parts done outside class,
-and the course closes in the Week 18 class. Block 2 is therefore 8 meetings (Weeks 11–18) against
+and the course closes in the Week 18 class. Late work for Local 09 also stops at Mon 8 Mar 2027
+23:59 (owner, 2026-11-01): Classroom cannot close an assignment after its due date on its own, so
+the instructor turns on "Close submissions" for Local 09 at that time, and late-work vivas after
+the last class are arranged outside class. Block 2 is therefore 8 meetings (Weeks 11–18) against
 Block 1's 10; add this dose imbalance to the OSF amendment as well. The institutional syllabus
 still plans 20 weeks (2,000 minutes); class time is now 18 × 100 minutes.
 

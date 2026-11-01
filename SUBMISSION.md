@@ -90,8 +90,9 @@ applied to the points you earn.
 - **Late work needs a viva:** the answers are walked through in the class right after the
   deadline, so a late worksheet is marked only after you explain it to the instructor in a short
   viva.
-- **Local 10**, the last worksheet, closes on the date the instructor announces; nothing is
-  accepted after it.
+- **Local 10**, the last worksheet, and late work for **Local 09** close on the date the
+  instructor announces; nothing is accepted after it. A viva for work handed in late after the
+  last class is arranged with the instructor outside class.
 - **Extensions:** for illness or a documented technical failure, tell the instructor (before the
   deadline if you can). Extensions are decided case by case.
 - These rules cover the local worksheets only. AWS Academy items follow the LMS due dates and the
