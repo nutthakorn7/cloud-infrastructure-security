@@ -107,7 +107,8 @@ smaller demonstrable exploit plus conceptual material; CONCEPTUAL = analysis, no
 
 Block assignment follows the preregistration: **Section A** = Block 1 AIR-Sec / Block 2
 Conventional; **Section B** = the reverse. Blocks follow the half of term (2026-10-31): Block 1 = Weeks 1–10,
-Block 2 = Weeks 11–20, which puts Lesson 13 in Block 1 and Lesson 7 (IAM) in Block 2. Section A = C5R2,
+Block 2 = Weeks 11–18 (the term has 18 meetings; the planned Weeks 19–20 fold into Weeks 17–18,
+2026-11-01), which puts Lesson 13 in Block 1 and Lesson 7 (IAM) in Block 2. Section A = C5R2,
 Section B = C5R1 (random draw, `course-plan.md`).
 
 ## 7. Teaching and learning methods

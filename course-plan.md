@@ -103,13 +103,20 @@ deliberately — the IAM topic anchors Block 1's LAB week, the monitoring topic 
 | **C5R1** | **B** | Conventional | AIR-Sec |
 
 **Blocks follow the half of term (owner decision, 2026-10-31).** Block 1 = Local 01–05 (Weeks 1–10),
-Block 2 = Local 06–10 (Weeks 11–20), so the arms switch once, at Week 11. The Classroom runs the
+Block 2 = Local 06–10 (Weeks 11–18), so the arms switch once, at Week 11. The Classroom runs the
 lessons in AWS Academy order, which puts two of them in the other half from the lesson list above:
 Lesson 13 (S3 versioning/replication, Local 04, Weeks 7–8) is now **Block 1**, and Lesson 7's IAM
 topic (Local 06, Weeks 11–12) is now **Block 2**, so Block 1's LAB anchor is Lesson 5 alone.
 `preregistration.md` §3 defines a block as "a set of topics/weeks (e.g., first vs second half)";
 the move of these two lessons still goes in the OSF amendment, with the dose note. Each Local post
 in Classroom opens with the Part each room does.
+
+**The term has 18 Tuesdays, not 20 (owner decision, 2026-11-01).** Both rooms' calendar runs
+3 Nov 2026–2 Mar 2027 with no gaps, so the planned Weeks 19–20 fold into Weeks 17–18: Local 09 is
+due Mon 1 Mar 2027 and Local 10 closes Mon 8 Mar 2027, with their local parts done outside class,
+and the course closes in the Week 18 class. Block 2 is therefore 8 meetings (Weeks 11–18) against
+Block 1's 10; add this dose imbalance to the OSF amendment as well. The institutional syllabus
+still plans 20 weeks (2,000 minutes); class time is now 18 × 100 minutes.
 
 ## All 10 lesson topics — built and verified
 
