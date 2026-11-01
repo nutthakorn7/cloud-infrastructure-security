@@ -126,9 +126,15 @@ Section B = C5R1 (random draw, `course-plan.md`).
 
 ## 8. Assessment criteria and grading
 
-The AWS-graded portion is scored by AWS. This layer's worksheets are graded against the rubric in
-each lesson's worksheet; the per-student artefact is an integrity control that also carries marks.
-Grading scale and the exact weight of this layer: ⬚.
+The AWS-graded portion (40 of 100 points) is scored by AWS. This layer is the other 60 points,
+split as in the syllabus: Basic 5 / Technical 45 / Interdisciplinary 10. Each Local is marked on
+the syllabus's 6-criterion rubric, attached to its Classroom assignment, at Very Good = 1,
+Good = 0.75, Fail = 0. Criterion 1 gives Basic, the mean of criteria 2–4 gives Technical and the
+mean of criteria 5–6 gives Interdisciplinary, each multiplied by that Local's weight (table in
+[SUBMISSION.md](../SUBMISSION.md); instructor-approved 2026-11-01), then the late rule applies.
+The per-student artefact (flag or planted-error variant) is an integrity control and counts as
+evidence when the rubric is applied.
+Letter-grade bands follow the institution's scale: ⬚.
 
 ## 9. Verification of student achievement
 
