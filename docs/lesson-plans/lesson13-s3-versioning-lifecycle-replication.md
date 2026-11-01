@@ -50,7 +50,7 @@ By the end of this add-on a student can:
 **Skills (P)**
 
 *AIR-Sec arm — worksheet Part 2 (Section A, C5R2, in Block 1):*
-- P1 — Compute their own variant with `variant = (last digit of your student ID) mod 4` and read
+- P1 — Find their own variant from the last digit of their student ID (the worksheet's table) and read
   **only** that passage.
 - P2 — Identify the single planted factual error in their own assigned passage, quote the exact
   sentence(s), and state what actually happens instead.
@@ -140,7 +140,7 @@ afterwards and does not re-teach them.
 | Time | Task | Student does | Evidence produced |
 |---|---|---|---|
 | 0:00–0:05 | **Frame the add-on** | Hears which arm this section is in, that the AWS Lesson 13 challenge lab is the prerequisite, and that today assesses those concepts rather than adding AWS content; notes that no Docker and no console access is needed | — |
-| 0:05–0:10 | **Compute the variant** | `variant = (last digit of your student ID) mod 4`; writes the variant number and the ID's last digit at the top of the sheet; reads **only** that passage | Variant number recorded before reading |
+| 0:05–0:10 | **Find the variant** | Looks up the last digit of their student ID in the worksheet's table; writes the variant number and the ID's last digit at the top of the sheet; reads **only** that passage | Variant number recorded before reading |
 | 0:10–0:25 | **Part 2a — "Audit the Backup Plan" (personalised)** | Finds the single planted error in their own passage; records the exact sentence(s), why it is wrong (what actually happens instead), and the corrected sentence | Variant no. + quoted error sentence + explanation + correction |
 | 0:25–0:35 | **Part 2b — EiPE** | Writes 3–4 sentences for a non-technical stakeholder: why switching on cross-region replication is not an instant backup of everything already in the bucket, and what would actually be needed so years of old data are protected like new uploads | Short written answer |
 | 0:35–0:45 | **Part 2c — viva spot-check + close** | 3–4 rotating students answer the viva prompt without notes — CRR enabled six months ago, no Batch Replication job ever run for the pre-existing objects, primary region destroyed today: what happens to those older objects, and whose assumption was wrong; the class then closes on *method* — how to test a confident claim against AWS's own documentation | Oral answers noted against the student |
@@ -283,7 +283,7 @@ they are reported upward instead. Handle them in delivery.
    AIR-Sec students the question whose answer is that correction; and the Part 2c viva prompt, which
    names the remedy outright. (Naming the affected claim here adds no disclosure: `course-plan.md`
    already states it in this same public repository.) Two consequences: that variant is materially
-   easier than the other three, and under `(last digit of student ID) mod 4` it falls into one of
+   easier than the other three, and under the worksheet's last-digit table it falls into one of
    the two *larger* buckets, so the leak lands on roughly 30% of the cohort — which distorts the
    per-variant planted-error detection rate the research layer measures. **In delivery:** do not
    edit the worksheet mid-term; apply §5's marking adjustment, keep the room on 2a until 0:25, and
@@ -313,8 +313,8 @@ they are reported upward instead. Handle them in delivery.
 |---|---|
 | **Arm/section mix-up** (§8 item 1) — this lesson was listed as Block 2 until 2026-10-31, so older notes may expect a reversal, and the worksheet's opening line points the wrong way for Section B | Announce the arm before the worksheet opens; the Classroom post's first line states it. Arms are the same as Local 01–03: C5R2 = Part 2, C5R1 = Part 1 |
 | **The leaked variant** (§8 item 2) compounds the built-in skew | Apply §5's marking adjustment on that variant; sample it *last* in the viva (§4.3) so the earlier oral answers do not repeat the correction to the room; record variant numbers against scores for §10 |
-| **Variant skew is built into the formula.** `(last digit of student ID) mod 4` maps three digits to variants 0 and 1 (0/4/8 and 1/5/9) but only two to variants 2 and 3 (2/6 and 3/7) — roughly a 30/30/20/20 split | When choosing viva subjects, deliberately sample across all four variants rather than relying on volunteers, or the two larger buckets dominate the oral evidence. Hold the four-variant walk-through until the following add-on, after the Part 2a deadline (§4.1) |
-| A student computes the wrong variant, or answers a passage that is not theirs — the lab README states describing someone else's variant's error does not satisfy the task | Have every student write their variant number **and** their ID's last digit at the top of the sheet in the 0:05–0:10 slot, and check them then, not at marking time. A visible mismatch is a viva follow-up, not an automatic accusation — arithmetic slips look identical to copying at first glance |
+| **Variant skew is built into the table.** The worksheet's last-digit table maps three digits to variants 0 and 1 (0/4/8 and 1/5/9) but only two to variants 2 and 3 (2/6 and 3/7) — roughly a 30/30/20/20 split | When choosing viva subjects, deliberately sample across all four variants rather than relying on volunteers, or the two larger buckets dominate the oral evidence. Hold the four-variant walk-through until the following add-on, after the Part 2a deadline (§4.1) |
+| A student reads the wrong row of the variant table, or answers a passage that is not theirs — the lab README states describing someone else's variant's error does not satisfy the task | Have every student write their variant number **and** their ID's last digit at the top of the sheet in the 0:05–0:10 slot, and check them then, not at marking time. A visible mismatch is a viva follow-up, not an automatic accusation — a misread row looks identical to copying at first glance |
 | A student pastes their passage into an AI assistant, which confidently confirms the planted claim — the failure mode this lesson is *about* — or invents a different "error" | Repo policy permits AI use **with disclosure** (SUBMISSION.md), so this is not automatically misconduct; what is graded is the student's own reasoning. Require the corrected sentence to be justified against the AWS pages in the lab README's References, and use the Part 2c viva as the tiebreak. ⬚ — the worksheet does not state whether Part 2a is closed-book on AI; fix that instruction in Classroom before hand-out if you want it closed-book |
 | The four deliberately-false passages sit in a **public** repository and can be screenshotted and later quoted as AWS guidance about backups | Say at hand-out that every passage contains exactly one false claim and none is an AWS statement; make the corrected sentence, not the passage, the thing students keep (§7) |
 | A student proposes to settle a claim by demonstrating it in their Learner Lab — enabling versioning, creating a second-region bucket, running a replication job | The add-on needs no console at all and the whole envelope is 45–60 min. Route them to the README's References for today; a console demonstration is Learner Lab time, not add-on time, and versioning in particular cannot be undone once enabled (the subject of Part 1 Q4) |
