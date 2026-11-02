@@ -88,6 +88,13 @@ it will never fetch, **before** the outbound request — not fetch first and hop
 > per-segment minutes below are *suggested instructor pacing* within that envelope, not budgets
 > prescribed by the worksheet; adjust freely. Task names, payloads, ports and commands are copied
 > from the lab. Section assigned the **Conventional** arm this block runs §5 instead of this table.
+>
+> **Plainer worksheet (owner, 2026-11-02).** KOSEN students come through an accelerated high-school
+> track, so the worksheet was reworded into short, concrete questions in both Parts, students may
+> answer in Thai or English, and the lab README now has a copy-paste **Step-by-step** (curl
+> commands with the expected output, run and checked). Same concepts, same flag, same point split.
+> Mark the reasoning, not the language. If a curl prints only `HTTP 000`, the apps are still
+> starting: wait a few seconds and rerun.
 
 | Suggested | Task | Student does (exact from lab) | Evidence produced |
 |---|---|---|---|
@@ -95,7 +102,7 @@ it will never fetch, **before** the outbound request — not fetch first and hop
 | 0:08–0:15 | **Baseline (benign)** | `POST /fetch-preview {"url": "http://vulnerable:5000/ping"}` — works on both apps; the feature is legitimate, the bug is the *lack of restriction* | Note that the benign fetch succeeds |
 | 0:15–0:30 | **The self-SSRF (capture)** | `POST /fetch-preview {"url": "http://localhost:5000/latest/meta-data/iam/security-credentials/AppRole"}` against `:8104` — the app fetches its own metadata route on your behalf and returns the fake `AccessKeyId`/`SecretAccessKey`/`Token` **and the flag** in the fetched body | The exact request body + the captured flag from the vulnerable app's response |
 | 0:30–0:40 | **Confirm the fix** | The identical request against `:8117` → `403` *before* any outbound fetch; so is the literal `http://169.254.169.254/latest/meta-data/iam/security-credentials/AppRole`; an ordinary URL still returns `200` | The rejected request + its `403` response; note the ordinary URL still works |
-| 0:40–0:45 | **One-shot check (optional)** | `python exploit.py` — expect two `PASS` lines and exit `0` (leak on `:8104`, rejection on `:8117`) | The two PASS lines |
+| 0:40–0:45 | **One-shot check (optional)** | `python exploit.py` — expect five `PASS` lines and exit `0` (leak on `:8104`; on `:8117` the self-SSRF, the literal `169.254.169.254` form and a redirect bypass are rejected, an ordinary URL still fetches) | The five PASS lines |
 | 0:45–0:60 | **EiPE + viva prep + submit** | Draft worksheet **2b** (plain-English: why "fetch a URL for me" leaks cloud credentials, and why blocking the literal `169.254.169.254` string is not a full fix — think `localhost`); ready the **2c** viva answers; submit | Worksheet 2a request/response pair + 2b answer → Classroom; 2c is a live spot-check |
 
 **Formative checkpoints.**
@@ -108,7 +115,7 @@ it will never fetch, **before** the outbound request — not fetch first and hop
 
 ## 5. Conventional-arm variant (same slot, no flag)
 
-The section assigned the **Conventional** arm for Block 1 does **worksheet Part 1 only** — six essay
+The section assigned the **Conventional** arm for Block 1 does **worksheet Part 1 only** — six short-answer
 questions on the same concepts (instance role vs long-lived key; what IMDS is and why it is
 on-instance-only; how the URL-fetch feature is abused and what the class is called; ≥2 defences
 beyond the literal-string block; the EC2→Lambda operational/security shift; why the
@@ -123,7 +130,7 @@ slot for guided discussion of those questions; the exploit is not run in this ar
 | Worksheet Part 2a (AIR-Sec arm) | The `POST /fetch-preview` body that leaked the flag, the captured flag, and the fixed-app request/response | K2, P2, P3, A2 | Part of the worksheet mark |
 | Worksheet Part 2b — **EiPE** (AI-resilient) | 3–4 plain-English sentences on the credential-theft path and why a literal-string block is insufficient | K2, A3, CLO4 | The AI-resilient task for this lesson |
 | Worksheet Part 2c — **viva** spot-check | Verbal, <2 min: why the metadata route "works correctly"; the one-line fix and its check category (allowlist vs blocklist vs auth); why adding login alone would not fix it | K3, P4 | Live during lab/office hours, not a written submission |
-| Worksheet Part 1 (Conventional arm) | Six essays | K1–K2, P4 | The Conventional arm's whole submission |
+| Worksheet Part 1 (Conventional arm) | Six short answers | K1–K2, P4 | The Conventional arm's whole submission |
 | **Per-student flag** | The `flag` value inside the fetched metadata body from the **vulnerable** app | A2 | Integrity control (also carries marks); the fixed app never emits it |
 
 **Per-student flag.** Mint with `python3 instructor/seed_flags.py env <STUDENT_ID>` — this course's
