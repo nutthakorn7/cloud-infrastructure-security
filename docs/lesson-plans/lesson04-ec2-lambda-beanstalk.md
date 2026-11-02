@@ -95,6 +95,11 @@ it will never fetch, **before** the outbound request — not fetch first and hop
 > commands with the expected output, run and checked). Same concepts, same flag, same point split.
 > Mark the reasoning, not the language. If a curl prints only `HTTP 000`, the apps are still
 > starting: wait a few seconds and rerun.
+>
+> **Answer Sheet (owner, 2026-11-02).** Students answer on the English *Local02 Answer Sheet*, a
+> Google Doc that Classroom copies for each student, and turn that copy in. No PDF is needed. The
+> sheet has both Parts, the 2a fields (request body, flag, fixed-app HTTP code and reason) and an AI-use
+> box.
 
 | Suggested | Task | Student does (exact from lab) | Evidence produced |
 |---|---|---|---|
