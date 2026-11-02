@@ -173,8 +173,9 @@ Marking detail (the point split and the model answers) lives in the instructor-h
 here. The exact weight of this repository's layer within the final grade is ⬚ (specification §4
 and §8).
 
-**Submission** (SUBMISSION.md): worksheet exported to PDF → Google Classroom assignment **Local 01**,
-named `Local01_<StudentID>.pdf`, with an AI-tool usage disclosure; due before the next class session
+**Submission** (SUBMISSION.md): answers on the English **Local 01 Answer Sheet** (a view-only Google Doc
+attached to the assignment: students make a copy, fill it in and download it as PDF) → Google
+Classroom assignment **Local 01**, named `Local01_<StudentID>.pdf`, with the sheet's AI-use box filled in; due before the next class session
 unless told otherwise; late −10% of the earned score per day down to 0, marked only after a viva.
 
 ## 6. Materials

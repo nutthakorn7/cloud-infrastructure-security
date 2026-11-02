@@ -39,11 +39,14 @@ approved sandboxes only — see [ETHICS.md](ETHICS.md).
 **Submit → Google Classroom:**
 | Part | What |
 |------|------|
-| Worksheet | the completed worksheet exported to **PDF** (screenshots embedded) |
+| Worksheet | your answers on that Local's **Answer Sheet** when Classroom gives you a copy of one (from Local 02): fill in the copy and click Turn in, no PDF needed. Otherwise the completed worksheet exported to **PDF** (screenshots embedded) |
 | Flag | the captured `FLAG{…}` for that lesson (LAB/HYBRID lessons) |
 
-**File name:** `LocalNN_StudentID.pdf` (e.g. `Local04_65123456.pdf`). `NN` is the number of the
-**Local** assignment in Classroom, which is not the lesson folder number (see the table below).
+**File name (PDF submissions only):** `LocalNN_StudentID.pdf` (e.g. `Local04_65123456.pdf`). `NN` is
+the number of the **Local** assignment in Classroom, which is not the lesson folder number (see the
+table below). For **Local 01**, make a copy of the attached Answer Sheet, fill it in and download it as
+this PDF. A Local whose Answer Sheet Classroom copies for you needs no PDF. The Answer Sheets are in
+English; you may still answer in Thai or English.
 **Deadline:** before the start of the next week's class. The exact date and time is the due date
 on the Classroom assignment.
 **Grading:** the 6-criterion rubric on each Local assignment in Classroom, worth the points in the
