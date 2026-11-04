@@ -17,15 +17,23 @@
 > **Which arm is this section in today?** This lesson sits in **Block 1** (it moved from Block 2 on
 > 2026-10-31, when blocks started following the half of term). So *in this lesson* **Section A (C5R2)
 > does Part 2 (AIR-Sec)** and **Section B (C5R1) does Part 1 (Conventional)**, the same way round as
-> Lessons 1–3, 4 and 5. Announce it before the worksheet is opened; §8 explains why this cannot be
-> left to the worksheet's own opening line, which points the wrong way for Section B.
+> Lessons 1–3, 4 and 5. Announce it before the worksheet is opened. The worksheet's own opening line
+> said Block 2 until 2026-11-04 and now states Block 1 the same way (§8 item 1).
+>
+> **Plainer worksheet (owner, 2026-11-04).** KOSEN students come through an accelerated high-school
+> track, so the worksheet was reworded into short, concrete questions, and students may answer in
+> Thai or English on the Local04 Answer Sheet. The change applies to both Parts equally: the same
+> four Part 1 questions asking for the same points, the same four Part 2a passages and variant table
+> word for word, 2b and 2c with the same meaning, the same point split. Mark the reasoning, not the
+> language.
 
 > **Naming note.** The lab folder, README, worksheet and the submission filename all call this
 > **Lesson 13** — the *AWS lesson number* it attaches to. The curriculum monorepo
 > (`../KOSEN69 - curriculum/courses/cloud-infrastructure-security.yml`) lists the same lesson at
 > **slot 9** of 11 schedule slots (ten add-ons plus a wrap-up). With students, say "Lesson 13" for
 > the worksheet (its header uses it) and "Local 04" for the submission: that is the Classroom
-> assignment, and the file is `Local04_<StudentID>.pdf` ([SUBMISSION.md](../../SUBMISSION.md)).
+> assignment, and answers go on the Local04 Answer Sheet copy Classroom makes for each student, with
+> no PDF ([SUBMISSION.md](../../SUBMISSION.md)).
 
 ---
 
@@ -55,7 +63,7 @@ By the end of this add-on a student can:
 - P2 — Identify the single planted factual error in their own assigned passage, quote the exact
   sentence(s), and state what actually happens instead.
 - P3 — Write the corrected sentence.
-- P4 — (2b, EiPE) Explain in 3–4 sentences a non-technical stakeholder could follow why switching
+- P4 — (2b, EiPE) Explain in 3–4 short sentences someone without IT knowledge could follow why switching
   on cross-region replication is not an instant, one-time backup of everything already in the
   bucket, and what would actually be needed to protect years of old data the same way as new
   uploads.
@@ -63,7 +71,8 @@ By the end of this add-on a student can:
   when the primary region is lost, and whose assumption was wrong.
 
 *Conventional arm — worksheet Part 1 (Section B, C5R1, in Block 1):*
-- P6 — Answer the four essay questions in their own words: recovering an accidentally overwritten
+- P6 — Answer the four short-answer questions in their own words (2–4 sentences each, Thai or
+  English): recovering an accidentally overwritten
   object in a versioning-enabled bucket (and how the outcome differs without versioning); what a
   30-day transition rule does to the *current* versus *noncurrent* versions and whether those are
   the same action; whether a destination bucket holds two years of pre-existing objects the day
@@ -103,11 +112,12 @@ genuinely believe and act on". Vocabulary alone will not catch it. That is the C
 The AWS Academy lab is the baseline and comes **first**; this add-on assesses the same concepts
 afterwards and does not re-teach them.
 
-- **Before this session** — complete the real AWS Academy Lesson 13 challenge lab in their own
-  Learner Lab sandbox: the challenge lab that exercises S3 versioning, lifecycle rules and
-  cross-region replication (lab README, step 1). That work sits on the AWS side of the course and
-  nothing here alters it — but do not tell students it carries AWS-graded weight until §5's ⬚ is
-  settled.
+- **Before this session** — the AWS Academy Cloud Foundations work the Classroom posts assign:
+  Module 7 (Storage, where S3 is taught) and Module 9 (Cloud Architecture, including reliability),
+  with their Knowledge Checks (lab README, step 1, changed 2026-11-04). Until then step 1 named the
+  Lesson 13 challenge lab, which belongs to a different AWS Academy course (§8 item 5) and is not
+  assigned in this offering's Classroom. That work sits on the AWS side of the course and nothing
+  here alters it.
 - **From Lesson 1's one-time setup** ([SUBMISSION.md](../../SUBMISSION.md)) — joined the Google
   Classroom, accepted the AWS Academy Learner Lab invite, installed Docker Desktop + Git, and
   confirmed they can start their Learner Lab and reach the AWS console. (Docker is not needed
@@ -116,8 +126,8 @@ afterwards and does not re-teach them.
 
 **Instructor, before the session**
 - Confirm and be ready to state which arm this section is in **for Block 1** — see the header note
-  and §8 item 1. This is the lesson where the worksheet's own opening line is most likely to send a
-  student to the wrong Part.
+  and §8 item 1. This lesson moved block on 2026-10-31, so older notes may still say Block 2; the
+  worksheet's opening line was corrected to Block 1 on 2026-11-04.
 - Post the worksheet in Classroom with the arm stated in writing.
 - Have the lab README's References list to hand — the AWS S3 user-guide pages on what live
   replication covers, on S3 Batch Replication, on retaining multiple versions with S3 Versioning,
@@ -139,10 +149,10 @@ afterwards and does not re-teach them.
 
 | Time | Task | Student does | Evidence produced |
 |---|---|---|---|
-| 0:00–0:05 | **Frame the add-on** | Hears which arm this section is in, that the AWS Lesson 13 challenge lab is the prerequisite, and that today assesses those concepts rather than adding AWS content; notes that no Docker and no console access is needed | — |
+| 0:00–0:05 | **Frame the add-on** | Hears which arm this section is in, that Cloud Foundations Modules 7 and 9 are the prerequisite, and that today assesses those concepts rather than adding AWS content; notes that no Docker and no console access is needed | — |
 | 0:05–0:10 | **Find the variant** | Looks up the last digit of their student ID in the worksheet's table; writes the variant number and the ID's last digit at the top of the sheet; reads **only** that passage | Variant number recorded before reading |
 | 0:10–0:25 | **Part 2a — "Audit the Backup Plan" (personalised)** | Finds the single planted error in their own passage; records the exact sentence(s), why it is wrong (what actually happens instead), and the corrected sentence | Variant no. + quoted error sentence + explanation + correction |
-| 0:25–0:35 | **Part 2b — EiPE** | Writes 3–4 sentences for a non-technical stakeholder: why switching on cross-region replication is not an instant backup of everything already in the bucket, and what would actually be needed so years of old data are protected like new uploads | Short written answer |
+| 0:25–0:35 | **Part 2b — EiPE** | Writes 3–4 short sentences someone without IT knowledge could follow: why switching on cross-region replication is not an instant backup of everything already in the bucket, and what would actually be needed so years of old data are protected like new uploads | Short written answer |
 | 0:35–0:45 | **Part 2c — viva spot-check + close** | 3–4 rotating students answer the viva prompt without notes — CRR enabled six months ago, no Batch Replication job ever run for the pre-existing objects, primary region destroyed today: what happens to those older objects, and whose assumption was wrong; the class then closes on *method* — how to test a confident claim against AWS's own documentation | Oral answers noted against the student |
 
 > **Do not walk the four variants' planted errors in this session.** Part 2a is a marked deliverable
@@ -194,7 +204,7 @@ arms.
 | Worksheet Part 2a — "Audit the Backup Plan" (AIR-Sec arm) | Variant number, the exact error sentence(s), why it is wrong, the corrected sentence | K1–K4, P1–P3, CLO4 | Part of the add-on worksheet mark — this layer's share of the grade is ⬚ |
 | Worksheet Part 2b — EiPE (AIR-Sec arm) | 3–4 sentence plain-English explanation | K3–K4, P4, CLO1/CLO4 | Part of the worksheet mark |
 | Worksheet Part 2c — viva spot-check (AIR-Sec arm, in class) | Live answer without notes | P5, CLO4/CLO5 | Pass / flag for follow-up |
-| Worksheet Part 1 — four essay questions (Conventional arm) | Written answers, graded on the writing itself | K1–K4, P6, CLO1 | Part of the worksheet mark |
+| Worksheet Part 1 — four short-answer questions (Conventional arm) | Written answers, graded on the writing itself | K1–K4, P6, CLO1 | Part of the worksheet mark |
 | **Per-student attributable artefact** | **No flag this lesson (CONCEPTUAL)** — the lab README states the attributable artefact is *which planted-error variant the student was assigned*; identifying **their own** variant's specific error is what is attributable, and describing someone else's does not satisfy the task | A3, CLO5 | Integrity control that also carries marks (specification §8) |
 | AWS Academy Lesson 13 challenge lab | Graded inside the Learner Lab | AWS's own objectives | ⬚ — **not** part of this layer either way. Whether this particular lab sits inside the ~40% AWS-graded baseline is **not established by the repository**: `course-plan.md` attributes it to AWS Academy *Cloud Architect*, while specification §1's baseline is Cloud Foundations + Cloud Security Foundations and §2 pins the ~40% to 6 + 7 items from those two. Confirm with the AWS-side gradebook before telling students it counts |
 
@@ -209,8 +219,8 @@ weaker evidence than the same answer on the other three. Mark it on the *explana
 actually happens instead, and what closes the gap — not on the identification alone, and record the
 variant number against the score so the per-variant detection rate stays interpretable (§10).
 
-**Submission** (SUBMISSION.md): worksheet exported to PDF → Google Classroom, named
-`Local04_<StudentID>.pdf`, with an AI-tool usage disclosure; due before the next class session
+**Submission** (SUBMISSION.md): answers written on the **Local04 Answer Sheet** copy that Classroom
+makes for each student, then Turn in (no PDF), with the AI-tool usage disclosure on the sheet; due before the next class session
 unless told otherwise; late −10% of the earned score per day down to 0, marked only after a viva. There is **no flag to submit** — SUBMISSION.md
 asks for a captured flag on LAB/HYBRID lessons only, and this add-on is CONCEPTUAL.
 
@@ -265,15 +275,13 @@ said aloud is this:
 These are defects in student-facing or shared content that this plan deliberately does **not** edit;
 they are reported upward instead. Handle them in delivery.
 
-1. **The worksheet's opening line points the wrong way in this lesson.** `worksheet.md` opens with
-   *"Section is assigned Block 1 = AIR-Sec or Block 2 = Conventional per `course-plan.md`'s block
-   table"*. Read literally that says Block 1 is always the AIR-Sec arm — and this is a **Block
-   1** lesson, so a Section B student self-selecting from that line will do **Part 2 instead of
-   their assigned Part 1**, producing evidence that cannot be graded for their arm and contaminating
-   the block's comparison. The same line was already reported from Lesson 1–3's plan (§8 there); it
-   is a standing worksheet defect, not a new one, but this is the lesson where it does damage. **In
-   delivery:** state the section's arm aloud *and* in Classroom before the worksheet is opened, and
-   do not let students choose their own Part.
+1. **Fixed 2026-11-04 — the worksheet's opening line pointed the wrong way in this lesson.** Until
+   then `worksheet.md` said this lesson was Block 2, with Section A as the Conventional arm and
+   Section B as the AIR-Sec arm: the reverse of the arms above, so a student going by that line
+   would have done the other room's Part, producing evidence that cannot be graded for their arm
+   and contaminating the block's comparison. It now states Block 1 (Section A = AIR-Sec, Section B =
+   Conventional), as Lessons 1–5 do. **In delivery:** still state the section's arm aloud *and* in
+   Classroom before the worksheet is opened, and do not let students choose their own Part.
 2. **The correction to one of the four Part 2a variants is already published to every student.** The
    passage whose planted claim is that switching on cross-region replication auto-backfills a
    bucket's pre-existing objects is contradicted, in plain words, by material students can see
@@ -311,14 +319,14 @@ they are reported upward instead. Handle them in delivery.
 
 | Risk | Mitigation |
 |---|---|
-| **Arm/section mix-up** (§8 item 1) — this lesson was listed as Block 2 until 2026-10-31, so older notes may expect a reversal, and the worksheet's opening line points the wrong way for Section B | Announce the arm before the worksheet opens; the Classroom post's first line states it. Arms are the same as Local 01–03: C5R2 = Part 2, C5R1 = Part 1 |
+| **Arm/section mix-up** (§8 item 1) — this lesson was listed as Block 2 until 2026-10-31, so older notes may expect a reversal; the worksheet's opening line said Block 2 until it was corrected on 2026-11-04 | Announce the arm before the worksheet opens; the Classroom post's first line states it. Arms are the same as Local 01–03: C5R2 = Part 2, C5R1 = Part 1 |
 | **The leaked variant** (§8 item 2) compounds the built-in skew | Apply §5's marking adjustment on that variant; sample it *last* in the viva (§4.3) so the earlier oral answers do not repeat the correction to the room; record variant numbers against scores for §10 |
 | **Variant skew is built into the table.** The worksheet's last-digit table maps three digits to variants 0 and 1 (0/4/8 and 1/5/9) but only two to variants 2 and 3 (2/6 and 3/7) — roughly a 30/30/20/20 split | When choosing viva subjects, deliberately sample across all four variants rather than relying on volunteers, or the two larger buckets dominate the oral evidence. Hold the four-variant walk-through until the following add-on, after the Part 2a deadline (§4.1) |
 | A student reads the wrong row of the variant table, or answers a passage that is not theirs — the lab README states describing someone else's variant's error does not satisfy the task | Have every student write their variant number **and** their ID's last digit at the top of the sheet in the 0:05–0:10 slot, and check them then, not at marking time. A visible mismatch is a viva follow-up, not an automatic accusation — a misread row looks identical to copying at first glance |
 | A student pastes their passage into an AI assistant, which confidently confirms the planted claim — the failure mode this lesson is *about* — or invents a different "error" | Repo policy permits AI use **with disclosure** (SUBMISSION.md), so this is not automatically misconduct; what is graded is the student's own reasoning. Require the corrected sentence to be justified against the AWS pages in the lab README's References, and use the Part 2c viva as the tiebreak. ⬚ — the worksheet does not state whether Part 2a is closed-book on AI; fix that instruction in Classroom before hand-out if you want it closed-book |
 | The four deliberately-false passages sit in a **public** repository and can be screenshotted and later quoted as AWS guidance about backups | Say at hand-out that every passage contains exactly one false claim and none is an AWS statement; make the corrected sentence, not the passage, the thing students keep (§7) |
 | A student proposes to settle a claim by demonstrating it in their Learner Lab — enabling versioning, creating a second-region bucket, running a replication job | The add-on needs no console at all and the whole envelope is 45–60 min. Route them to the README's References for today; a console demonstration is Learner Lab time, not add-on time, and versioning in particular cannot be undone once enabled (the subject of Part 1 Q4) |
-| A student arrives without having completed the AWS Lesson 13 challenge lab, or cannot start their Learner Lab | This add-on needs no console and no Docker, so they can still do it — run the session, and route the Learner Lab problem to the AWS-side channel and Lesson 1's one-time setup list in SUBMISSION.md. Do not spend add-on minutes debugging AWS sandbox access for one student |
+| A student arrives without having completed Cloud Foundations Modules 7 and 9, or cannot start their Learner Lab | This add-on needs no console and no Docker, so they can still do it — run the session, and route the Learner Lab problem to the AWS-side channel and Lesson 1's one-time setup list in SUBMISSION.md. Do not spend add-on minutes debugging AWS sandbox access for one student |
 | Students check their correction against AWS's docs and meet different vocabulary — *live replication*, *S3 Batch Replication* — than the worksheet's "CRR" shorthand, and conclude they have the wrong page | Warn them at hand-out (§7) and mark on substance rather than label. Do not extend the discussion to replication behaviour the README's References do not cover |
 | The temptation to "even things up" by giving the Conventional arm the viva or a variant | Do not. The absence of the personalised artefact and the AI-resilience layer *is* the manipulated variable for this block (`course-plan.md`); adding them contaminates the comparison for the whole block |
 | A 3-hour room or 3-hour expectation is scheduled from the monorepo manifest's `duration_min: 180` (§8 item 3) | Schedule to the README's 45–60 min; if the slot is already long, use §4.3's list in order rather than stretching the worksheet |
