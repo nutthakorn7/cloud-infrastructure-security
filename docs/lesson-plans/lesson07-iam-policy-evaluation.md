@@ -26,6 +26,15 @@ topics are described in our own words only.*
 > write the `Principal`" — not by a graded task. Either say it out loud in the slot or record the
 > gap. Do not fabricate a worksheet question for it.
 
+> **Plainer worksheet and Step-by-step (owner, 2026-11-04).** KOSEN students come through an
+> accelerated high-school track, so the worksheet was reworded into short, concrete questions and
+> students may answer in Thai or English (2–4 sentences each) on the **Local06 Answer Sheet** copy
+> in Classroom, with no PDF. The change applies to both Parts equally: the same five Part 1
+> questions asking for the same points, 2a asking for the same three things, **2b (Audit-the-AI)
+> word for word**, 2c with the same meaning, the same point split. The README gained a copy-paste
+> **Step-by-step** (steps 0–9, each with the output to expect, run as written on 2026-11-04) and
+> its kickoff is now `docker compose up -d --build`. Mark the reasoning, not the language.
+
 ---
 
 ## 1. Session objectives
@@ -91,8 +100,8 @@ actions it may take.
 **Instructor, before the session:**
 - Pre-build the images — `docker compose up -d --build` in the lab folder — so a room of students is
   not pulling `python:3.12-slim` and running `pip install` simultaneously. (The README's own
-  verification transcript was captured with the `--build` form; the student-facing "Run it" block
-  says `docker compose up -d`, which is correct only once an image exists — see §9.)
+  verification transcript was captured with the `--build` form, and since 2026-11-04 the
+  student-facing kickoff, Step-by-step step 1 and "Run it" all use `docker compose up -d --build`.)
 - Mint per-student flags for the cohort (see §6).
 - Confirm host ports **8107** (vulnerable) and **8108** (fixed) are free. Verified: each of
   `8104`–`8117` is published exactly once across `labs/*/docker-compose.yml`, so these two do not
@@ -112,14 +121,14 @@ actions it may take.
 
 | Suggested | Task | Student does (exact from lab) | Evidence produced |
 |---|---|---|---|
-| 0:00–0:08 | **Stand it up** | `cd labs/lesson07-iam-policy-evaluation` → `docker compose up -d`; `pip install requests` (once, on the host). Vulnerable on `:8107`, fixed on `:8108` | Both apps reachable — `/ping` reports `"mode": "vulnerable"` and `"mode": "fixed"` respectively |
+| 0:00–0:08 | **Stand it up** | `cd labs/lesson07-iam-policy-evaluation` → README Step-by-step steps 0–2: save the personal `.env`, `docker compose up -d --build`, then `curl` both `/ping`s. Vulnerable on `:8107`, fixed on `:8108` | Both apps reachable — `/ping` reports `"mode": "vulnerable"` and `"mode": "fixed"` respectively |
 | 0:08–0:20 | **Baseline — assume the role** | `POST /assume-role {"role": "BucketsAccessRole"}` → token. With that token: `PUT bucket2` succeeds (its resource policy allows get and put); `PUT bucket1` is refused `403 AccessDenied` (bucket1's policy is get-only) | The two responses, side by side — the grant came from the *bucket's* policy, not from the role's own |
 | 0:20–0:35 | **The real question — drop the credentials** | `PUT /bucket/bucket3/object/<name>` against `:8107` with **no `Authorization` header at all** — no assumed role, no identity policy, nothing. It succeeds and the response carries the flag | The exact request (method, URL, and the *absence* of the header) + the captured flag |
 | 0:35–0:50 | **Confirm the fix** | The identical anonymous `PUT` against `:8108` → `403`. Then the *same* `PUT` on `:8108` **with** a validly-assumed `BucketsAccessRole` token → also `403`, because fixed bucket3 is get-only | Both rejected requests and their `403 AccessDenied` bodies — the empirical proof that scoping `Principal` is what closed the hole, not "adding auth" |
-| 0:50–0:57 | **One-shot check (optional)** | `python exploit.py` — expect two `PASS` lines and exit `0` (anonymous write + flag on `:8107`; rejection, no flag, on `:8108`) | The two PASS lines |
+| 0:50–0:57 | **One-shot check (optional)** | `python3 exploit.py` (needs `python3 -m pip install requests` once, on the host) — expect two `PASS` lines and exit `0` (anonymous write + flag on `:8107`; rejection, no flag, on `:8108`) | The two PASS lines |
 | 0:57–1:05 | **Read the one-line diff** | Open `policy_engine.py` and compare `BUCKETS_VULNERABLE["bucket3"]` with `BUCKETS_FIXED["bucket3"]`: `principal` goes `"*"` → `"BucketsAccessRole"`, and `actions` goes `["get", "put"]` → `["get"]` | One sentence naming that change as least privilege on *both* dimensions — who, and what |
 | 1:05–1:20 | **Audit-the-AI (2b)** | Work worksheet **2b**: the AI-supplied bucket policy that claims to be "scoped to only our internal application role." Find the planted flaw and say, in plain English, what it actually grants. Use the worksheet's own hint about `Principal: "*"` plus a `Condition` on a tag | Written answer (2b) |
-| 1:20–1:30 | **EiPE (2c) + submit** | Worksheet **2c**: 3–4 sentences a non-technical stakeholder could follow on why scoping `Principal` to `BucketsAccessRole` fixed the vulnerability *without removing any legitimate access*; then submit | Flag + 2a request/response pair + 2b/2c answers → Classroom |
+| 1:20–1:30 | **EiPE (2c) + submit** | Worksheet **2c**: 3–4 short sentences someone without IT knowledge could follow on why scoping `Principal` to `BucketsAccessRole` fixed the vulnerability *without removing any legitimate access*; then submit | Flag + 2a request/response pair + 2b/2c answers on the Local06 Answer Sheet copy → Turn in (no PDF) |
 
 **Formative checkpoints.**
 - A student who reports `403` on the *vulnerable* app's anonymous `bucket3` write has usually sent
@@ -135,7 +144,7 @@ actions it may take.
 ## 5. Conventional-arm variant (same slot, no flag)
 
 The section assigned the **Conventional** arm for Block 2 (Section A, C5R2) does **worksheet Part 1 only** — five
-essay questions on the same concepts: identity-based vs resource-based policy with an example of
+short-answer questions (2–4 sentences each, Thai or English) on the same concepts: identity-based vs resource-based policy with an example of
 each; why `devuser` (via `BucketsAccessRole`) can still read bucket1 and write bucket2 when its
 identity policy grants neither; what `"Principal": "*"` actually grants and whether that equals "any
 AWS user in our account"; one real-world consequence of an over-broad bucket policy; and what least
@@ -149,8 +158,8 @@ discussion of those five; the exploit is not run in this arm.
 |---|---|---|---|
 | Worksheet Part 2a (AIR-Sec arm) | The exact request (method, URL, headers-or-lack-thereof) that got the flag on `:8107`, the captured flag, and the request tried against `:8108` with the response it returned instead | K2, K3, P2, P3, A2 | Part of the worksheet mark |
 | Worksheet Part 2b — **Audit-the-AI** (AI-resilient) | The planted flaw in the supplied bucket policy, and a plain-English statement of what that policy actually grants | K3, A3, CLO4 | The AI-resilient task for this lesson. Model answer and the common wrong answers are in the git-ignored answer key — do not circulate |
-| Worksheet Part 2c — **EiPE** | 3–4 stakeholder-readable sentences on why scoping `Principal` fixed it without removing legitimate access | K4, A3 | Part of the worksheet mark |
-| Worksheet Part 1 (Conventional arm) | Five essays | K1–K4 | The Conventional arm's whole submission |
+| Worksheet Part 2c — **EiPE** | 3–4 short sentences someone without IT knowledge could follow on why scoping `Principal` fixed it without removing legitimate access | K4, A3 | Part of the worksheet mark |
+| Worksheet Part 1 (Conventional arm) | Five short answers | K1–K4 | The Conventional arm's whole submission |
 | **Per-student flag** | The `flag` value returned by the **vulnerable** app's write to bucket3 | A2 | Integrity control that also carries marks; the fixed app never emits it |
 | Viva spot-check (optional) | Verbal, <2 min: which policy granted the access, and why adding authentication alone would not have closed it | P4, A2 | Sourced to `course-plan.md`'s AIR-Sec taxonomy ("+ a viva spot-check"), **not** to the worksheet — this worksheet defines no viva item |
 
@@ -172,7 +181,8 @@ exploited the vulnerable path (SUBMISSION.md integrity rules; [../../CLAUDE.md](
 
 **Deliverable (worksheet).** The captured flag + the exact request that produced it (bucket, method,
 headers-or-lack-thereof) + a one-paragraph explanation of why a wildcard `Principal` on a
-resource-based policy is a different thing from "no authentication."
+resource-based policy is a different thing from "no authentication." Students write all of it on
+the **Local06 Answer Sheet** copy that Classroom makes for each of them and click Turn in (no PDF).
 
 ## 7. Materials
 
@@ -180,7 +190,8 @@ resource-based policy is a different thing from "no authentication."
   `policy_engine.py` (the shared policy tables and `is_allowed`), `vulnerable_app.py` (`:8107`),
   `fixed_app.py` (`:8108`), `exploit.py`, `docker-compose.yml`, `Dockerfile`, `requirements.txt`
   (`flask>=3.1.3`, `requests>=2.33.0`).
-- Docker Desktop; `pip install requests` on the host for `exploit.py`.
+- Docker Desktop. `python3 -m pip install requests` on the host only for the optional `exploit.py`;
+  the README Step-by-step needs only `curl`.
 - Instructor: `instructor/seed_flags.py` and the answer key
   `instructor/lesson07-iam-policy-evaluation-answer-key.md` (both git-ignored).
 - Rules of engagement: [ETHICS.md](../../ETHICS.md) · Submission: [SUBMISSION.md](../../SUBMISSION.md)
@@ -228,7 +239,7 @@ naming in the room, because a student who does not hear them will leave with a w
 |---|---|
 | A student captures the flag from the **role-assumed** `PUT` and believes they performed the anonymous exploit | `vulnerable_app.py`'s `put_object` emits `FLAG_IAM` whenever the bucket is `bucket3`, whatever the principal — verified by running the lab. Grade the 2a **request evidence** (no `Authorization` header), not the flag alone; the viva spot-check in §6 separates the two in about a minute |
 | Assumed-role tokens are held **in memory** (`ISSUED_TOKENS = {}`); a `docker compose` restart or container recreate silently invalidates a student's saved token, producing unexplained `403`s | Re-run `POST /assume-role` after any restart. Tell the class this before the baseline segment, not after the first confused hand goes up |
-| Student runs the README's `docker compose up -d` on a machine with no image built yet | The README's verified transcript used `docker compose up -d --build`; pre-build in class (§3), or have students add `--build` on first run |
+| Student starts the lab on a machine with no image built yet | Fixed 2026-11-04: the README kickoff, Step-by-step step 1 and "Run it" all use `docker compose up -d --build`. Still pre-build in class (§3) so a room is not building at once |
 | Slow/failed pull of `python:3.12-slim`, or `pip install --no-cache-dir -r requirements.txt` failing during the image build, with a room-full of students building at once | Pre-build before the session; keep an offline image copy (`docker save`/`docker load`) |
 | `pip install requests` on the host fails (managed Python / no venv) | `exploit.py` is optional — the whole worksheet flow is reachable by hand with any HTTP client: `POST /assume-role`, then `PUT /bucket/bucket3/object/<name>` with and without an `Authorization` header |
 | Ports `8107`/`8108` already bound by another lesson's containers | `docker compose down` the other lab first; ports 8104–8117 are each published once across the repo's lab compose files, so the only collisions are self-inflicted |
@@ -262,11 +273,14 @@ naming in the room, because a student who does not hear them will leave with a w
 >    with a validly-assumed role token — so the flag is not gated on the exploited (anonymous)
 >    condition the README's Deliverable and worksheet 2a ask for. This is in tension with
 >    `CLAUDE.md`'s own rule, "Gate flags behind the exploited condition."
-> 2. The README's "Verified" transcript shows only 2 of the 4 lines `exploit.py` actually prints for
->    the FIXED target (the `GET bucket1 → 404` and `PUT bucket2 → 200` lines are omitted). Students
->    diffing their output line by line will think something is wrong.
-> 3. The README's student-facing "Run it" block says `docker compose up -d`, while its own verified
->    run used `docker compose up -d --build`; a first run on a clean machine needs the build.
+> 2. **Fixed 2026-11-04:** the README's "Verified" transcript showed only 2 of the 4 lines
+>    `exploit.py` prints for the FIXED target; it now shows all four.
+> 3. **Fixed 2026-11-04:** the README's student-facing "Run it" block said `docker compose up -d`;
+>    it, the kickoff and Step-by-step step 1 now use `docker compose up -d --build`.
+>
+> Item 1 is still open. The Step-by-step never asks students to write to bucket3 on `:8107` with a
+> role token, so a student who follows it gets the flag only from the anonymous request; keep
+> marking 2a's request evidence.
 >
 > Any change to the lab must move together with the curriculum monorepo copy and the git-ignored
 > answer key (`CLAUDE.md`). This plan file lives in `docs/` and is **outside** the parity gate.
