@@ -20,6 +20,16 @@ topics are described in our own words only.*
 > percentage this add-on carries of the non-AWS 60% (course specification §4). The AWS-graded
 > ~40% is scored by AWS and is identical for every student — it is *not* part of this add-on.
 
+> **Plainer worksheet and Step-by-step (owner, 2026-11-04).** KOSEN students come through an
+> accelerated high-school track, so the worksheet was reworded into short, concrete questions and
+> students may answer in Thai or English (2–4 sentences each) on the **Local09 Answer Sheet** copy
+> in Classroom, with no PDF. The change applies to both Parts equally: the same five Part 1
+> questions asking for the same points, 2a asking for the same two things, 2b with the same
+> meaning, the same point split. The README gained a copy-paste **Step-by-step** (steps 0–6: the
+> 20-attempt spray on `:8111` from `203.0.113.20`, the same spray on `:8112`, then the same-username
+> control on `:8111` from `198.51.100.7`), run as written on 2026-11-04; its kickoff is now
+> `docker compose up -d --build`. Mark the reasoning, not the language.
+
 ---
 
 ## 1. Session objectives
@@ -92,8 +102,8 @@ key does not match the threat, the control is decorative.
 - Confirm host ports **8111** (vulnerable) and **8112** (fixed) are free. No other lab in this
   repository binds them; a collision means this lab is already up, or an unrelated host process
   holds the port.
-- Have `requests` available on the host for `exploit.py`, **or** be ready to run the whole flow by
-  hand with `curl` — see §9.
+- Nothing else to install for students: the README Step-by-step runs the whole flow with `curl`.
+  `requests` on the host is needed only for the optional `exploit.py` (§9).
 
 ## 4. Minute-by-minute add-on (AIR-Sec arm — Section B this block)
 
@@ -103,24 +113,20 @@ key does not match the threat, the control is decorative.
 > from the lab. The section assigned the **Conventional** arm this block (Section A) runs §5
 > instead of this table.
 
-Kick-off, exactly as the README's "Run it" block has it:
-
-```bash
-cd labs/lesson07b-cloudtrail-monitoring
-docker compose up -d --build     # vulnerable_app.py on :8111, fixed_app.py on :8112
-pip install requests             # once, on the host
-python3 exploit.py
-```
+Kick-off: students follow the README's **Step-by-step** (steps 0–6), which starts with
+`docker compose up -d --build` and gives every command with the output to expect. The optional
+self-check is the README's "Run it" block (`python3 -m pip install requests`, then
+`docker compose restart vulnerable fixed` and `python3 exploit.py`).
 
 | Suggested | Task | Student does (exact from lab) | Evidence produced |
 |---|---|---|---|
-| 0:00–0:06 | **Stand it up** | `cd labs/lesson07b-cloudtrail-monitoring` → `docker compose up -d --build`. Vulnerable on `:8111`, fixed on `:8112`; both containers listen on `5000` internally | `GET /ping` on both — `{"mode":"vulnerable",…}` and `{"mode":"fixed",…}` |
+| 0:00–0:06 | **Stand it up** | `cd labs/lesson07b-cloudtrail-monitoring` → Step-by-step steps 0–2: save the `.env`, `docker compose up -d --build`. Vulnerable on `:8111`, fixed on `:8112`; both containers listen on `5000` internally | `GET /ping` on both — `{"mode":"vulnerable",…}` and `{"mode":"fixed",…}` |
 | 0:06–0:12 | **Read the endpoint** | One `POST /login-attempt` by hand with the README's documented body `{"username": "admin7", "success": false, "source_ip": "203.0.113.20"}`; note the response fields `alert`, `count_for_key`, `note` and the threshold of 3 | The request/response pair and the value of `note` on each app |
-| 0:12–0:25 | **The spray that never alerts (vulnerable, `:8111`)** | Send the rotating-username spray from **one** `source_ip` — `exploit.py` uses usernames `admin1`…`admin20` and a `source_ip` drawn once per run from `203.0.113.1`–`203.0.113.254`. Watch `count_for_key` stay at **1** on every attempt | Worksheet 2a: the exact request sequence, and confirmation that after **20** attempts the app still had not alerted and returned no flag |
-| 0:25–0:33 | **Negative control (still `:8111`)** | Send the **same** username three times from the same `source_ip`. The vulnerable app *does* alert (`"alert": true`) — but returns **no** flag | The three responses; a one-line statement that the counter works and the *key* is the defect |
-| 0:33–0:42 | **Confirm the fix (`:8112`)** | Replay the identical rotating-username spray against the fixed app. `count_for_key` now climbs 1 → 2 → 3 and the alert fires on the **3rd** attempt, `reason` naming the `source_ip` "(usernames vary)" | Worksheet 2a: the attempt number the alert fired on + the captured flag |
+| 0:12–0:25 | **The spray that never alerts (vulnerable, `:8111`)** | Step-by-step step 3: the 20-attempt loop, usernames `admin1`…`admin20`, all from `203.0.113.20`. (`exploit.py` uses usernames `admin1`…`admin20` and a `source_ip` drawn once per run from `203.0.113.1`–`203.0.113.254`. Watch `count_for_key` stay at **1** on every attempt | Worksheet 2a: the exact request sequence, and confirmation that after **20** attempts the app still had not alerted and returned no flag |
+| 0:25–0:33 | **Negative control (still `:8111`)** | Step-by-step step 5 (students reach it after step 4): the **same** username, `alice`, three times from `198.51.100.7`. The vulnerable app *does* alert (`"alert": true`) — but returns **no** flag | The three responses; a one-line statement that the counter works and the *key* is the defect |
+| 0:33–0:42 | **Confirm the fix (`:8112`)** | Step-by-step step 4: the identical 20-attempt loop against the fixed app. `count_for_key` now climbs 1 → 2 → 3 and the alert fires on the **3rd** attempt, `reason` naming the `source_ip` "(usernames vary)" | Worksheet 2a: the attempt number the alert fired on + the captured flag |
 | 0:42–0:47 | **One-shot check (optional)** | `python3 exploit.py` — expect two `PASS` lines and exit `0`. Read §9 first if the containers have already served this `source_ip` | The two PASS lines |
-| 0:47–0:60 | **EiPE + submit** | Draft worksheet **2b**: 3–4 sentences a non-technical stakeholder could follow on why per-`(source_ip, username)` counting lets a spray attacker hide in plain sight, and the general grouping principle beyond this lab | Worksheet 2a request/response pairs + 2b answer → Classroom |
+| 0:47–0:60 | **EiPE + submit** | Draft worksheet **2b**: 3–4 short sentences someone without IT knowledge could follow on why per-`(source_ip, username)` counting lets a spray attacker hide in plain sight, and the general grouping principle beyond this lab | Worksheet 2a evidence + flag + 2b answer on the Local09 Answer Sheet copy → Turn in (no PDF) |
 
 **Formative checkpoints.**
 - A student whose vulnerable-app run alerts (or whose fixed-app run alerts on attempt 1 or 2) is
@@ -135,7 +141,7 @@ python3 exploit.py
 ## 5. Conventional-arm variant (same slot, no flag) — Section A this block
 
 Per the worksheet header, Block 2 reverses Block 1's assignment: **Section A = Conventional**,
-**Section B = AIR-Sec**. The Conventional arm does **worksheet Part 1 only** — five essay questions
+**Section B = AIR-Sec**. The Conventional arm does **worksheet Part 1 only** — five short-answer questions (2–4 sentences each, Thai or English)
 on the same concepts: the stage-by-stage role of CloudTrail / CloudWatch / EventBridge; what an
 aggregation key is and how two choices over the same log data change what is counted; password
 spray versus classic brute force and why both need different aggregation logic; whether a control
@@ -151,7 +157,7 @@ exploit is not run in this arm.
 |---|---|---|---|
 | Worksheet Part 2a (AIR-Sec arm) | The exact `POST /login-attempt` sequence against `:8111` + confirmation of no alert after 20 attempts; then the `:8112` sequence, the alert attempt number, and the flag | K3, P2, P4, A2 | Part of the worksheet mark |
 | Worksheet Part 2b — **EiPE** (AI-resilient) | 3–4 plain-English sentences on hiding in plain sight + the general grouping principle | K2, K4, A3, CLO4 | The AI-resilient task for this lesson |
-| Worksheet Part 1 (Conventional arm) | Five essays | K1–K4 | The Conventional arm's whole submission |
+| Worksheet Part 1 (Conventional arm) | Five short answers | K1–K4 | The Conventional arm's whole submission |
 | **Per-student flag** | The `flag` value returned once the **fixed** app's alert fires | A2 | Integrity control (also carries marks) — but see the caution below |
 | Live check (optional) | Reproduce the negative control and explain why it alerts while the 20-attempt spray does not | P3, K4 | Under SUBMISSION.md "Random live checks"; there is no worksheet viva part in this lesson |
 
@@ -177,14 +183,16 @@ traceable to the student it was issued to.
 
 **Deliverable (worksheet).** The captured flag + the attempt number it appeared on + a
 one-paragraph explanation of why `(source_ip, username)` is the wrong aggregation key for detecting
-a password spray, while `source_ip` alone correctly catches it.
+a password spray, while `source_ip` alone correctly catches it. Students write it on the **Local09
+Answer Sheet** copy that Classroom makes for each of them and click Turn in (no PDF).
 
 ## 7. Materials
 
 - Lab folder `labs/lesson07b-cloudtrail-monitoring/`: `README.md`, `worksheet.md`,
   `vulnerable_app.py` (`:8111`), `fixed_app.py` (`:8112`), `exploit.py`, `docker-compose.yml`,
   `Dockerfile` (`python:3.12-slim`), `requirements.txt` (`flask>=3.1.3`, `requests>=2.33.0`).
-- Docker Desktop; `pip install requests` on the host for `exploit.py`.
+- Docker Desktop and `curl`. `python3 -m pip install requests` on the host only for the optional
+  `exploit.py`.
 - `exploit.py` knobs, if you want to vary the exercise: `VULN_URL`, `FIXED_URL`, `ATTEMPTS`
   (default `20`), `SOURCE_IP`.
 - Instructor: `instructor/seed_flags.py` (git-ignored) and the answer key
@@ -256,8 +264,10 @@ lesson plan is not an acceptable fix.
    against the same containers don't accumulate state across runs". Reproduced on this machine:
    with a colliding or pinned `SOURCE_IP`, run 2 fails `assert fixed_alerted_at == 3` and run 3
    fails `assert vuln_alerted_at is None`. Until the lab gains a reset route or per-run isolation,
-   teach the tear-down workaround in §9.
-2. **The README's `FLAG_MONITOR` paragraph (≈ lines 119–122) is misleading.** It implies the flag
+   teach the tear-down workaround in §9. Since 2026-11-04 the README tells students to run
+   `docker compose restart vulnerable fixed` before `exploit.py`; the code comment is unchanged.
+2. **Fixed 2026-11-04:** the README now says the fixed service reads `FLAG_MONITOR` from the `.env`
+   (or the compose placeholder), so students need not set it by hand. Earlier note: **The README's `FLAG_MONITOR` paragraph (≈ lines 119–122) is misleading.** It implies the flag
    must be set explicitly to exercise the fixed app's alert-then-flag path; `docker-compose.yml`
    already supplies a public default to the `fixed` service, and the path works with nothing set.
    The two apps' code is identical on this point — the difference is purely which service receives
