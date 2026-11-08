@@ -20,7 +20,8 @@ approved sandboxes only — see [ETHICS.md](ETHICS.md).
    git clone https://github.com/nutthakorn7/cloud-infrastructure-security.git
    cd cloud-infrastructure-security
    ```
-   Each add-on lab is then `docker compose up`.
+   Each add-on lab is then `docker compose up`. Before each lab, run `git pull` in that folder to get
+   the newest version; each lab's README shows the steps.
 3. Confirm you can start your Learner Lab and reach the AWS console.
 
 ---
