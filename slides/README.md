@@ -4,6 +4,8 @@ Each of the 18 teaching weeks has an original **course bridge** in [`weekly-brid
 
 The AWS Academy PPTX/PDF files remain in the authorized Classroom/AWS Academy locations. Their licensing notice prohibits copying them into this repository. No AWS Academy slide or lab instruction is reproduced in these bridges.
 
+Weeks 14 and 16 are local workshop weeks, so their worksheet-specific topics need more than a short bridge. The original [Week 14 NACL and Week 16 KMS workshop supplements](workshop-supplements/README.md) provide seven teaching slides each, with worked examples and a Local 07/08 handoff. Use them after the assigned AWS module/lab and before students answer the worksheet. Weeks 07–08 also use the existing [S3 data-protection supplement](week07-08-s3-data-protection/README.md).
+
 | Week | Editable bridge | PDF | Main AWS / local content |
 |---|---|---|---|
 | 01 | [PPTX](weekly-bridges/output/Week01_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week01_Cloud_Course_Bridge.pdf) | Cloud Foundations Modules 1–3; Local 01 starts |
@@ -19,9 +21,9 @@ The AWS Academy PPTX/PDF files remain in the authorized Classroom/AWS Academy lo
 | 11 | [PPTX](weekly-bridges/output/Week11_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week11_Cloud_Course_Bridge.pdf) | Cloud Security Foundations Modules 1–2; Local 06 starts |
 | 12 | [PPTX](weekly-bridges/output/Week12_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week12_Cloud_Course_Bridge.pdf) | Cloud Security Foundations Module 3 and Lab 3.1; Local 06 |
 | 13 | [PPTX](weekly-bridges/output/Week13_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week13_Cloud_Course_Bridge.pdf) | Cloud Security Foundations Module 4 and Lab 4.1; Local 07 starts |
-| 14 | [PPTX](weekly-bridges/output/Week14_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week14_Cloud_Course_Bridge.pdf) | Local NACL workshop; Local 07 |
+| 14 | [PPTX](weekly-bridges/output/Week14_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week14_Cloud_Course_Bridge.pdf) | Local NACL workshop; [teaching supplement](workshop-supplements/README.md); Local 07 |
 | 15 | [PPTX](weekly-bridges/output/Week15_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week15_Cloud_Course_Bridge.pdf) | Cloud Security Foundations Module 5 and Lab 5.1; Local 08 starts |
-| 16 | [PPTX](weekly-bridges/output/Week16_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week16_Cloud_Course_Bridge.pdf) | Local KMS workshop; Local 08 |
+| 16 | [PPTX](weekly-bridges/output/Week16_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week16_Cloud_Course_Bridge.pdf) | Local KMS workshop; [teaching supplement](workshop-supplements/README.md); Local 08 |
 | 17 | [PPTX](weekly-bridges/output/Week17_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week17_Cloud_Course_Bridge.pdf) | Cloud Security Foundations Module 6 and Lab 6.1; Local 09 |
 | 18 | [PPTX](weekly-bridges/output/Week18_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week18_Cloud_Course_Bridge.pdf) | Cloud Security Foundations Module 7 and Lab 7.1; Local 10 |
 
