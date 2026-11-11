@@ -197,9 +197,9 @@ the monorepo copy carries the documented renumbering substitutions in `tests/tes
 2. **Fixed — block → arm.** This note quoted an older worksheet header that stated the
    block→arm mapping as fixed for every section. The header now reads "Section A = Block 1 AIR-Sec;
    Section B = Block 1 Conventional", which is right for this Block 1 lesson.
-3. **Declared duration.** `lesson.yml` in the monorepo records `duration_min: 180` for this lesson —
-   as it does for all ten cloud lessons, a template default carried over from the 19-week sibling
-   courses. The authoritative figure for teaching is the lab README's 45–60 min.
+3. **Fixed declared duration.** `lesson.yml` in the monorepo now records `duration_min: 60` for
+   this local add-on, matching the lab README's 45–60 minutes. The complete weekly meeting remains
+   100 minutes.
 
 Also noted: spec §6 assigns this row CLO2 and CLO3, while spec §4 maps *EiPE* tasks to CLO1/CLO4 —
 task 2b is an EiPE, so the row understates its own CLO coverage.

@@ -345,12 +345,8 @@ delivery; fix them between cohorts.
    sentence has an interrogative missing. Students will parse it, but read it aloud in its intended
    form ("*why* would that defeat…") so nobody loses time deciding what is being asked, and do not
    penalise an answer that responds to either reading.
-5. **The curriculum monorepo's manifest for this lesson says `duration_min: 180`**
-   (`../KOSEN69 - curriculum/lessons/kms-envelope-encryption/lesson.yml`), contradicting the lab
-   README's *"45–60 min, no Docker"* and `docs/course-specification.md` §1's *"45–60 min each; one
-   60–90 min"*. The same 180 appears across the cloud lessons, so it reads as an unadjusted default
-   inherited from the 3-hour sibling courses. **In delivery:** teach to the README's 45–60 min; do
-   not book a three-hour room from the manifest.
+5. **Fixed in the matching curriculum change:** this lesson's `duration_min` is 60, matching the
+   README's 45–60 minute add-on. The complete weekly meeting remains 100 minutes.
 
 ## 9. Risks and contingencies
 

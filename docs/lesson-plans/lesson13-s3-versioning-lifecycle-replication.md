@@ -296,12 +296,8 @@ they are reported upward instead. Handle them in delivery.
    per-variant planted-error detection rate the research layer measures. **In delivery:** do not
    edit the worksheet mid-term; apply §5's marking adjustment, keep the room on 2a until 0:25, and
    record the variant number against every score.
-3. **The curriculum monorepo's manifest for this lesson says `duration_min: 180`**
-   (`../KOSEN69 - curriculum/lessons/s3-versioning-lifecycle-replication/lesson.yml`), which
-   contradicts the lab README's *"45–60 min, no Docker"* and specification §1's *"45–60 min each;
-   one 60–90 min"*. The same 180 appears on the other cloud lessons, so it reads as an unadjusted
-   default carried over from the 3-hour sibling courses. **In delivery:** teach to the README's
-   45–60 min; do not schedule a 3-hour room from the manifest.
+3. **Fixed in the matching curriculum change:** this lesson's `duration_min` is 60, matching the
+   README's 45–60 minute add-on. The complete weekly meeting remains 100 minutes.
 4. **The specification's schedule row labels this lesson with the AWS Academy scenario name in
    quotes** (`docs/course-specification.md` §6). The lab README's own rule is that no AWS Academy
    scenario or character name is referenced anywhere in this lesson, and `course-plan.md` treats the
@@ -329,7 +325,7 @@ they are reported upward instead. Handle them in delivery.
 | A student arrives without having completed Cloud Foundations Modules 7 and 9, or cannot start their Learner Lab | This add-on needs no console and no Docker, so they can still do it — run the session, and route the Learner Lab problem to the AWS-side channel and Lesson 1's one-time setup list in SUBMISSION.md. Do not spend add-on minutes debugging AWS sandbox access for one student |
 | Students check their correction against AWS's docs and meet different vocabulary — *live replication*, *S3 Batch Replication* — than the worksheet's "CRR" shorthand, and conclude they have the wrong page | Warn them at hand-out (§7) and mark on substance rather than label. Do not extend the discussion to replication behaviour the README's References do not cover |
 | The temptation to "even things up" by giving the Conventional arm the viva or a variant | Do not. The absence of the personalised artefact and the AI-resilience layer *is* the manipulated variable for this block (`course-plan.md`); adding them contaminates the comparison for the whole block |
-| A 3-hour room or 3-hour expectation is scheduled from the monorepo manifest's `duration_min: 180` (§8 item 3) | Schedule to the README's 45–60 min; if the slot is already long, use §4.3's list in order rather than stretching the worksheet |
+| The local add-on is mistaken for the whole weekly meeting | Use the README's 45–60 minutes for this add-on; the weekly AWS lesson and local work together occupy the 100-minute meeting (§8 item 3) |
 | The session runs short — there is nothing to install and nothing to exploit | Use §4.3's list in order: extra viva coverage first (leaked variant last), then the worked method demonstration on a claim from none of the four passages, then the Docker Desktop + Git check that `labs/lesson14-config-lambda-remediation` will need |
 
 ## 10. Post-teaching reflection

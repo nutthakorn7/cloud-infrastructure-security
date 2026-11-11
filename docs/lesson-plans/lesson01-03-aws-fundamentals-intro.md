@@ -218,18 +218,10 @@ target, no stand-in service. What still has to be said aloud is this:
 Both of these are defects in student-facing or shared content that this plan deliberately does not
 edit; they are reported upward instead. Handle them in delivery:
 
-1. **The worksheet's opening line conflates block with arm.** `worksheet.md` opens with *"Section is
-   assigned Block 1 = AIR-Sec or Block 2 = Conventional per `course-plan.md`'s block table"*. Read
-   literally, that says Block 1 is always the AIR-Sec arm — which is false for Section B, and this
-   lesson is Block 1 for **both** sections. A Section B student who self-selects from that line will
-   do the wrong Part. **In delivery:** state the section's arm aloud and in Classroom *before* the
-   worksheet is opened, and do not let students choose their own Part.
-2. **The curriculum monorepo's manifest for this lesson says `duration_min: 180`**
-   (`../KOSEN69 - curriculum/lessons/aws-fundamentals-intro/lesson.yml`), which contradicts the lab
-   README's *"45–60 min, no Docker"* and the course specification §1's *"45–60 min each; one 60–90
-   min"*. The same 180 appears on all ten cloud lessons, so it looks like an unadjusted default
-   carried over from the 3-hour sibling courses rather than a claim about this lesson. **In
-   delivery:** teach to the README's 45–60 min. Do not schedule a 3-hour room from the manifest.
+1. **Fixed:** the worksheet now states which section takes the AIR-Sec or Conventional arm in
+   Block 1. State that assignment aloud and in Classroom before students open the worksheet.
+2. **Fixed in the matching curriculum change:** this lesson's `duration_min` is 60, matching the
+   README's 45–60 minute add-on. The complete weekly meeting remains 100 minutes.
 
 ## 9. Risks and contingencies
 
