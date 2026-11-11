@@ -81,7 +81,7 @@ files themselves) — these are the *topics*, described in our own words:
 | 5–6 | Week 5: Module 6 Lambda/Elastic Beanstalk practice and S3-site concepts; Week 6: Module 7 storage, AWS EBS lab and local S3 public-write investigation | **LAB ✅** | 1 | `lesson05-s3-static-site-lambda-sns` |
 | — | Load balancing & auto-scaling under load (Cloud Foundations Lab 6) | **HYBRID ✅** | 1 | `lesson06-load-balancing-autoscaling` |
 | 7 | IAM privilege escalation — identity-based vs. resource-based policy conflicts (assume-role to reach a bucket the identity policy alone doesn't permit) | **LAB ✅** | 2 *(was 1; see below)* | `lesson07-iam-policy-evaluation` |
-| 7 (same lesson, 2nd topic) | CloudTrail + CloudWatch + EventBridge monitoring/alerting on failed logins | **HYBRID ✅** | 2 | `lesson07b-cloudtrail-monitoring` |
+| 7 (same lesson, 2nd topic) | Week 17 AWS Module 6/Lab 6.1 monitoring (security-group change example); after-class Local 09 failed-login aggregation simulation | **HYBRID ✅** | 2 | `lesson07b-cloudtrail-monitoring` |
 | 10 | VPC networking — public/private subnets, NAT gateway, security groups vs. network ACLs | **HYBRID ✅** | 2 | `lesson10-vpc-networking` |
 | 11 | S3 server-side encryption with KMS — envelope encryption, key-disable blast radius | **CONCEPTUAL ✅** | 2 | `lesson11-kms-envelope-encryption` |
 | 13 | "Cafe" challenge lab — S3 versioning, lifecycle rules, cross-region replication (official AWS Academy Cloud Architect lab; topic only, never the file) | **CONCEPTUAL ✅** | 1 *(was 2; see below)* | `lesson13-s3-versioning-lifecycle-replication` |
