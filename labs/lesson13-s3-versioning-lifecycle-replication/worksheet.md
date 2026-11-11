@@ -55,10 +55,10 @@ writing itself):
 Read *only* the passage for your variant below — each contains exactly one planted factual error
 about how S3 versioning, lifecycle rules, or cross-region replication actually work.
 
-> **Variant 0.** "Once you enable cross-region replication on your S3 bucket, all of your
-> bucket's existing objects are automatically copied to the destination bucket, giving you an
-> instant disaster-recovery backup. From that point forward, both the objects that were already
-> there and any new objects you upload will be kept in sync between the two regions."
+> **Variant 0.** "Our team enabled cross-region replication for eligible new uploads to the
+> second Region. The recovery checklist includes verifying each object's replication status.
+> Because an upload to the source bucket succeeded, its replica is guaranteed to be available
+> in the destination bucket at that same instant."
 
 > **Variant 1.** "A lifecycle rule that transitions objects to a colder storage tier after 30
 > days will also reach back and transition any versions that have already expired or been

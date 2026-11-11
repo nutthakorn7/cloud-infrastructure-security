@@ -23,9 +23,9 @@
 > **Plainer worksheet (owner, 2026-11-04).** KOSEN students come through an accelerated high-school
 > track, so the worksheet was reworded into short, concrete questions, and students may answer in
 > Thai or English on the Local04 Answer Sheet. The change applies to both Parts equally: the same
-> four Part 1 questions asking for the same points, the same four Part 2a passages and variant table
-> word for word, 2b and 2c with the same meaning, the same point split. Mark the reasoning, not the
-> language.
+> four Part 1 questions asking for the same points, the same Part 2a variant table, 2b and 2c
+> with the same meaning, and the same point split. Variant 0 was revised before the Week 08
+> hand-out (§8 item 2). Mark the reasoning, not the language.
 
 > **Naming note.** The lab folder, README, worksheet and the submission filename all call this
 > **Lesson 13** — the *AWS lesson number* it attaches to. The curriculum monorepo
@@ -137,8 +137,8 @@ students to answer the Week 08 questions during Week 07.
   replication covers, on S3 Batch Replication, on retaining multiple versions with S3 Versioning,
   and on lifecycle configuration elements. Those are the authoritative sources a correction has to
   survive.
-- Read §8 item 2 before hand-out: one of the four variants' corrections is already stated in
-  material students can see, which changes how that variant should be marked.
+- Read §8 item 2 before hand-out: verify that the student worksheet and instructor answer key
+  both use the revised Variant 0, and have students refresh any older downloaded copy.
 - Nothing to pull, build or start: this add-on has no Docker target and needs no AWS console.
 
 ## 4. Week 08 completion run sheet — 45–60 min
@@ -146,6 +146,9 @@ students to answer the Week 08 questions during Week 07.
 > The per-row minutes below are **this plan's allocation** inside the 45–60 min envelope the lab
 > README states; the lab states the envelope, not the split. The tables are built to the
 > **45-minute floor** so they still fit on a short day — §4.3 says what the extra 15 minutes buys.
+> Classroom's 100-minute meeting allocates 10 minutes for briefing, 25 for the Module 9/S3
+> scenario, 45 for the assigned worksheet Part and 20 for viva/review. Use up to 15 of those last
+> 20 minutes for §4.3's add-on extension, then close the whole meeting in the final 5 minutes.
 >
 > The two arms are **alternatives, not a sequence**. A student does 4.1 *or* 4.2, never both.
 
@@ -166,9 +169,10 @@ students to answer the Week 08 questions during Week 07.
 > at hand-out is the general instruction in §7: every passage contains exactly one false claim, and
 > none of them is an AWS statement.
 
-> **Sequencing warning.** Part 2b sits *after* 2a in the worksheet, and its question restates the
-> correction to one of the four variants (§8 item 2). Keep the room on 2a until 0:25 and do not
-> preview 2b's wording — a student who reads ahead has been handed that variant's answer.
+> **Sequence Part 2a before 2b.** Variant 0 now checks whether a newly uploaded object is
+> guaranteed to have reached the destination immediately; 2b asks about objects that existed
+> before the rule. Teach both replication timing and coverage in the Week 08 scenario discussion,
+> then let students apply those ideas to their assigned variant and 2b in order (§8 item 2).
 
 ### 4.2 Conventional arm — worksheet Part 1 (Section B, C5R1, in Block 1)
 
@@ -186,8 +190,7 @@ variable (`course-plan.md`), so do not add the viva or a variant to this arm.
 ### 4.3 If the session runs to the full 60 minutes
 
 Spend the extra 15 minutes on, in this order: (1) more viva coverage in the AIR-Sec arm — sample at
-least one student per variant, which the skew in §9 makes non-automatic, and deliberately sample the
-variant identified in §8 item 2 *last*, since its answer is the one already in circulation; (2) a
+least one student per variant, which the skew in §9 makes non-automatic; (2) a
 worked demonstration of the *method* — take one confident-sounding data-protection claim that
 appears in **none** of the four passages and check it against the AWS pages in the lab README's
 References, so nothing is given away; (3) a Docker Desktop + Git check against SUBMISSION.md's
@@ -217,11 +220,10 @@ Marking detail (the point split and the model answers) lives in the instructor-h
 not reproduced here. The exact weight of this repository's layer within the final grade is ⬚
 (specification §4 and §8).
 
-**Marking adjustment required this lesson.** Because the correction to one variant is stated
-verbatim in material every student can read (§8 item 2), a bare correct answer on that variant is
-weaker evidence than the same answer on the other three. Mark it on the *explanation* — what
-actually happens instead, and what closes the gap — not on the identification alone, and record the
-variant number against the score so the per-variant detection rate stays interpretable (§10).
+**Marking across variants.** Require the specific false claim, a correct explanation and a
+corrected sentence for every variant. For Variant 0, distinguish the timing of a newly uploaded
+object's asynchronous replica from Part 2b's separate question about pre-existing objects. Record
+the variant number against the score so per-variant detection remains interpretable (§10).
 
 **Submission** (SUBMISSION.md): answers written on the **Local04 Answer Sheet** copy that Classroom
 makes for each student, then Turn in (no PDF), with the AI-tool usage disclosure on the sheet; due before the next class session
@@ -273,10 +275,11 @@ said aloud is this:
   AWS Academy challenge-lab scenario. The assigned RDS console work remains in the Week 07 AWS
   Academy lab; Local 04 is a separate written analysis.
 
-## 8. Known issues in the source material — do not patch the worksheet mid-term
+## 8. Known issues and Week 08 correction
 
-These are defects in student-facing or shared content that this plan deliberately does **not** edit;
-they are reported upward instead. Handle them in delivery.
+Keep the arm mapping and teaching sequence visible to students. The assessment correction below
+was prepared before Week 08's Draft was posted to students; verify the published worksheet and
+instructor-only key use the same Variant 0 before the hand-out.
 
 1. **Fixed 2026-11-04 — the worksheet's opening line pointed the wrong way in this lesson.** Until
    then `worksheet.md` said this lesson was Block 2, with Section A as the Conventional arm and
@@ -285,20 +288,15 @@ they are reported upward instead. Handle them in delivery.
    and contaminating the block's comparison. It now states Block 1 (Section A = AIR-Sec, Section B =
    Conventional), as Lessons 1–5 do. **In delivery:** still state the section's arm aloud *and* in
    Classroom before the worksheet is opened, and do not let students choose their own Part.
-2. **The correction to one of the four Part 2a variants is already published to every student.** The
-   passage whose planted claim is that switching on cross-region replication auto-backfills a
-   bucket's pre-existing objects is contradicted, in plain words, by material students can see
-   before they start: the lab README's Objectives bullet on why enabling CRR does not back-copy
-   pre-existing objects and what feature closes the gap; the README's "Why it's exciting" paragraph,
-   which names that same claim as its illustrative example; worksheet Part 2b, which asks **all**
-   AIR-Sec students the question whose answer is that correction; and the Part 2c viva prompt, which
-   names the remedy outright. (Naming the affected claim here adds no disclosure: `course-plan.md`
-   already states it in this same public repository.) Two consequences: that variant is materially
-   easier than the other three, and under the worksheet's last-digit table it falls into one of
-   the two *larger* buckets, so the leak lands on roughly 30% of the cohort — which distorts the
-   per-variant planted-error detection rate the research layer measures. **In delivery:** do not
-   edit the worksheet mid-term; apply §5's marking adjustment, keep the room on 2a until 0:25, and
-   record the variant number against every score.
+2. **Variant 0 revised before Week 08 hand-out (2026-11-12).** Its previous planted claim was that
+   enabling CRR auto-backfills pre-existing objects. The README, supplement slide 4, Part 2b and
+   Part 2c all give that correction directly, making Variant 0 easier than the other three. The
+   revised passage instead plants one false claim about an *immediate guarantee* for an eligible
+   new upload. S3 replication is asynchronous; a successful source upload does not prove the
+   destination has the replica at that instant. Teach the distinction between new-write timing
+   and old-object coverage before students answer, using the AWS replication-status and
+   troubleshooting references. Keep Part 2b and the viva focused on pre-existing objects, and
+   update the instructor-only answer key to match the published worksheet.
 3. **Fixed in the matching curriculum change:** this lesson's `duration_min` is 60, matching the
    README's 45–60 minute add-on. The complete weekly meeting remains 100 minutes.
 4. **Older source material names an unassigned AWS Academy challenge lab.** The current
@@ -314,7 +312,7 @@ they are reported upward instead. Handle them in delivery.
 | Risk | Mitigation |
 |---|---|
 | **Arm/section mix-up** (§8 item 1) — this lesson was listed as Block 2 until 2026-10-31, so older notes may expect a reversal; the worksheet's opening line said Block 2 until it was corrected on 2026-11-04 | Announce the arm before the worksheet opens; the Classroom post's first line states it. Arms are the same as Local 01–03: C5R2 = Part 2, C5R1 = Part 1 |
-| **The leaked variant** (§8 item 2) compounds the built-in skew | Apply §5's marking adjustment on that variant; sample it *last* in the viva (§4.3) so the earlier oral answers do not repeat the correction to the room; record variant numbers against scores for §10 |
+| **Variant 0 answer key or cached worksheet remains on the old wording** (§8 item 2) | Before hand-out, verify the public worksheet and instructor-only key both use the new upload-timing claim; tell students to refresh their downloaded copy. Record variant numbers against scores for §10 |
 | **Variant skew is built into the table.** The worksheet's last-digit table maps three digits to variants 0 and 1 (0/4/8 and 1/5/9) but only two to variants 2 and 3 (2/6 and 3/7) — roughly a 30/30/20/20 split | When choosing viva subjects, deliberately sample across all four variants rather than relying on volunteers, or the two larger buckets dominate the oral evidence. Hold the four-variant walk-through until the following add-on, after the Part 2a deadline (§4.1) |
 | A student reads the wrong row of the variant table, or answers a passage that is not theirs — the lab README states describing someone else's variant's error does not satisfy the task | Have every student write their variant number **and** their ID's last digit at the top of the sheet in the 0:05–0:10 slot, and check them then, not at marking time. A visible mismatch is a viva follow-up, not an automatic accusation — a misread row looks identical to copying at first glance |
 | A student pastes their passage into an AI assistant, which confidently confirms the planted claim — the failure mode this lesson is *about* — or invents a different "error" | Repo policy permits AI use **with disclosure** (SUBMISSION.md), so this is not automatically misconduct; what is graded is the student's own reasoning. Require the corrected sentence to be justified against the AWS pages in the lab README's References, and use the Part 2c viva as the tiebreak. ⬚ — the worksheet does not state whether Part 2a is closed-book on AI; fix that instruction in Classroom before hand-out if you want it closed-book |
@@ -324,7 +322,7 @@ they are reported upward instead. Handle them in delivery.
 | Students check their correction against AWS's docs and meet different vocabulary — *live replication*, *S3 Batch Replication* — than the worksheet's "CRR" shorthand, and conclude they have the wrong page | Warn them at hand-out (§7) and mark on substance rather than label. Do not extend the discussion to replication behaviour the README's References do not cover |
 | The temptation to "even things up" by giving the Conventional arm the viva or a variant | Do not. The absence of the personalised artefact and the AI-resilience layer *is* the manipulated variable for this block (`course-plan.md`); adding them contaminates the comparison for the whole block |
 | The local add-on is mistaken for the whole weekly meeting | Use the README's 45–60 minutes for this add-on; the weekly AWS lesson and local work together occupy the 100-minute meeting (§8 item 3) |
-| The session runs short — there is nothing to install and nothing to exploit | Use §4.3's list in order: extra viva coverage first (leaked variant last), then the worked method demonstration on a claim from none of the four passages, then the Docker Desktop + Git check that `labs/lesson14-config-lambda-remediation` will need |
+| The session runs short — there is nothing to install and nothing to exploit | Use §4.3's list in order: extra viva coverage first, then the worked method demonstration on a claim from none of the four passages, then the Docker Desktop + Git check that `labs/lesson14-config-lambda-remediation` will need |
 
 ## 10. Post-teaching reflection
 
@@ -335,9 +333,8 @@ they are reported upward instead. Handle them in delivery.
   2026-10-31 is the specific risk this time): ⬚
 - Time actually taken per task (vs. the 45-minute floor above): ⬚
 - Variant distribution as it fell out in the room, vs. the expected 30/30/20/20: ⬚
-- Detection rate **per variant** — which planted error went uncaught most often, and whether the
-  variant identified in §8 item 2 scored conspicuously higher than the rest (evidence for the
-  leak) or the same (evidence students did not read the README): ⬚
+- Detection rate **per variant** — which planted error went uncaught most often, and whether
+  Variant 0's revised upload-timing claim had a comparable difficulty to the others: ⬚
 - Whether any variant's passage was caught for the wrong reason — implausible phrasing rather than
   the factual claim: ⬚
 - Misconception that showed up in the EiPE answers — especially the difference between "replication

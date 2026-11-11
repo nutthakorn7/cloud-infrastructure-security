@@ -84,9 +84,8 @@ someone else's variant's error does not satisfy the task.
 **Why it's exciting:** each passage reads like a confident, helpful AI assistant summarizing a
 data-protection feature — and each one contains exactly one plausible-sounding but factually
 wrong claim about versioning, lifecycle, or replication. The errors are the kind a rushed
-engineer could genuinely believe and act on — for example, treating CRR as an instant, complete
-backup the moment it's switched on, which would leave a real gap in an actual disaster-recovery
-plan.
+engineer could believe and act on. Check what is actually present in the destination before
+calling a recovery plan complete.
 
 ## Deliverable
 Which variant you were assigned, the exact planted error, why it's wrong, and the corrected
@@ -99,6 +98,9 @@ Classroom and click Turn in (no PDF needed). Full tasks: `worksheet.md`.
   objects created/updated after the replication configuration is added).
 - AWS S3 documentation — *Replicating existing objects with S3 Batch Replication* (the separate,
   one-time job required to replicate objects that existed before a replication rule was created).
+- AWS S3 documentation — [Getting replication status information](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-status.html)
+  and [Troubleshooting replication](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-troubleshoot.html)
+  (check the timing and status of each replica when validating a recovery plan).
 - AWS S3 documentation — *Retaining multiple versions of objects with S3 Versioning* (unversioned
   / versioning-enabled / versioning-suspended states; versioning cannot be reverted to
   unversioned, only suspended).
