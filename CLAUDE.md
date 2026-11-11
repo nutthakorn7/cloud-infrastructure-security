@@ -33,11 +33,17 @@ mental model of the actual AWS service from a convenience in our code.
 - Trivy's `config` scanner does **not** parse standalone IAM policy JSON.
 - A `trivy image` command running inside a container cannot see a locally built image.
 
-## The fixed/control app must never emit a flag
+## Grade the lab behavior, not the demo marker
 
-Evidence flags prove the student exploited the *vulnerable* app. `fixed_app.py` had
-once leaked `FLAG_REMEDIATE` at container startup, which defeated the whole evidence
-model. Gate flags behind the exploited condition, and keep the control app flagless.
+The public Docker labs use shared `FLAG{…}` markers as demonstrations. A marker does
+not identify a student or earn points by itself. Grade the complete vulnerable and
+fixed request/response evidence, the explanation and a viva when needed. See
+`SUBMISSION.md` and the current worksheet; keep instructor answer keys aligned.
+
+Test each app against its intended behavior. A fixed app normally rejects the
+exploit, but the monitoring lab's fixed app deliberately emits an alert and a
+shared marker. A marker at startup or without the required trigger is still a
+bug. Do not reintroduce per-student `.env` distribution or flag verification.
 
 ## Verify by running, not by reading
 

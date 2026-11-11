@@ -8,7 +8,7 @@
 | **Block** | 1 |
 | **Duration** | **45–60 min, no Docker** (the lab README's own figure) — the add-on only; the AWS Academy Learner Lab work is the separate, prior baseline |
 | **Lab folder** | `labs/lesson01-03-aws-fundamentals-intro` (`README.md`, `worksheet.md` — no code files this lesson) |
-| **Slides / quizzes** | None authored here, deliberately — see §6 |
+| **Slides / quizzes** | Original [Week 01–02 course bridges](../../slides/README.md) accompany the AWS Academy decks; Knowledge Checks remain in AWS Academy |
 | **Analogous CWE** | CWE-269 (Improper Privilege Management) / CWE-287 (Improper Authentication) — as categories describing the *misconceptions* this lesson corrects, not a coding bug in any artefact |
 | **CLOs addressed** | **CLO1** shared responsibility · **CLO4** evaluate & communicate (course specification §6) |
 | **Date / section / room** | ⬚ |
@@ -17,6 +17,12 @@
 > (course specification §6, `course-plan.md`), **Section A = Block 1 AIR-Sec** → Part 2;
 > **Section B = the reverse**, so Section B does **Part 1 (Conventional)** in this same lesson.
 > Announce this before the worksheet is opened — see §8 and §9.
+>
+> **Plainer worksheet (owner, 2026-11-02).** KOSEN students come through an accelerated high-school
+> track, so the worksheet was reworded into short, concrete questions, the variant formula became a
+> last-digit table and students may answer in Thai or English. The change applies to both Parts
+> equally: same concepts, same four Part 2a passages word for word, same point split. Mark the
+> reasoning, not the language.
 
 ---
 
@@ -40,17 +46,17 @@ By the end of this add-on a student can:
 **Skills (P)**
 
 *AIR-Sec arm (worksheet Part 2):*
-- P1 — Compute their own variant with `variant = (last digit of your student ID) mod 4` and read
-  only that passage.
+- P1 — Find their own variant from the last digit of their student ID (the table in the worksheet)
+  and read only that passage.
 - P2 — Identify the single planted factual error in their own assigned passage, quote the exact
   sentence, and state what actually happens instead.
 - P3 — Write the corrected sentence.
-- P4 — (2b, EiPE) Explain in 3–4 sentences a non-technical stakeholder could follow why "AWS runs
+- P4 — (2b, EiPE) Explain in 3–4 short sentences someone without IT knowledge could follow why "AWS runs
   the cloud" does not mean AWS keeps your servers patched, using the EC2 guest-OS example.
 - P5 — (2c, viva) Answer the viva prompt without notes.
 
 *Conventional arm (worksheet Part 1):*
-- P6 — Answer the four essay questions in their own words: the EC2 responsibility line; guest-OS
+- P6 — Answer the four short-answer questions in their own words (2–4 sentences each): the EC2 responsibility line; guest-OS
   patching and how the answer changes for a fully-managed service; what IAM "default-deny" means and
   what a brand-new IAM user can do; why routine administration does not use the root user.
 
@@ -113,10 +119,10 @@ afterwards, and does not re-teach it.
 | Time | Task | Student does | Evidence produced |
 |---|---|---|---|
 | 0:00–0:05 | **Frame the add-on** | Hears which arm this section is in, that Modules 1–3 are the prerequisite, and that today assesses that concept rather than adding AWS content; notes that no Docker or console access is needed | — |
-| 0:05–0:10 | **Compute the variant** | `variant = (last digit of your student ID) mod 4`; writes the variant number and the ID's last digit at the top of the sheet; reads **only** that passage | Variant number recorded before reading |
+| 0:05–0:10 | **Find the variant** | Looks up the last digit of their student ID in the worksheet's table; writes the variant number and the ID's last digit at the top of the sheet; reads **only** that passage | Variant number recorded before reading |
 | 0:10–0:25 | **Part 2a — "Audit the AI" (personalized)** | Finds the single planted error in their own passage; records the exact sentence, why it is wrong (what actually happens instead), and the corrected sentence | Variant no. + quoted error sentence + explanation + correction |
-| 0:25–0:35 | **Part 2b — EiPE** | Writes 3–4 sentences for a non-technical stakeholder: why "AWS runs the cloud" ≠ "AWS keeps your servers patched", via the EC2 guest-OS example | Short written answer |
-| 0:35–0:45 | **Part 2c — viva spot-check + close** | 3–4 rotating students answer the viva prompt (what a customer running a deliberately old OS version or custom kernel implies about who needs control) without notes; the class then closes on *method* — how to test a confident claim against AWS's own documentation | Oral answers noted against the student |
+| 0:25–0:35 | **Part 2b — EiPE** | Writes 3–4 short sentences someone without IT knowledge could follow: why "AWS runs the cloud" ≠ "AWS keeps your servers patched", via the EC2 guest-OS example | Short written answer |
+| 0:35–0:45 | **Part 2c — viva spot-check + close** | 3–4 rotating students answer the viva prompt (a company that must keep an old OS version for its app: what automatic AWS updates would do to it, and who should control the updates) without notes; the class then closes on *method* — how to test a confident claim against AWS's own documentation | Oral answers noted against the student |
 
 > **Do not walk the four variants' planted errors in this session.** Part 2a is a marked deliverable
 > and, under SUBMISSION.md, is not due until before the next class session — revealing any variant's
@@ -131,10 +137,10 @@ variable (`course-plan.md`), so do not add the viva or a variant to this arm.
 | Time | Task | Student does | Evidence produced |
 |---|---|---|---|
 | 0:00–0:05 | **Frame the add-on** | As above; confirms this section answers Part 1 only | — |
-| 0:05–0:15 | **Part 1 Q1** | Draws or describes the responsibility line the model draws for an EC2 instance — what specifically is AWS's, what specifically is the customer's | Written answer / diagram |
-| 0:15–0:25 | **Part 1 Q2** | Guest-OS patching on EC2: whose job, and why the answer changes for a fully-managed relational database or a serverless function runtime | Written answer |
-| 0:25–0:35 | **Part 1 Q3** | What "default-deny" means in IAM, and what access a brand-new IAM user has before any policy is attached | Written answer |
-| 0:35–0:45 | **Part 1 Q4** | Why day-to-day administration uses an ordinary IAM identity rather than root, and what root is for instead | Written answer |
+| 0:05–0:15 | **Part 1 Q1** | Lists (or draws) at least two things AWS takes care of and at least two the customer takes care of for an EC2 instance | Written answer / diagram |
+| 0:15–0:25 | **Part 1 Q2** | Guest-OS patching on EC2: whose job, and whether it is the same for Amazon RDS or a Lambda function, with a one- or two-sentence reason | Written answer |
+| 0:25–0:35 | **Part 1 Q3** | What a brand-new IAM user with no policy can do, and what that example shows about "default-deny" | Written answer |
+| 0:35–0:45 | **Part 1 Q4** | Why everyday work does not use the root user, what to use instead, and what root is still needed for | Written answer |
 
 ### 4.3 If the session runs to the full 60 minutes
 
@@ -158,7 +164,7 @@ directly, and is worth collecting even in the Conventional arm.
 | Worksheet Part 2a — "Audit the AI" (AIR-Sec arm) | Variant number, the exact error sentence, why it is wrong, the corrected sentence | K1–K4, P1–P3, CLO4 | Part of the add-on worksheet mark — this layer's share of the grade is ⬚ |
 | Worksheet Part 2b — EiPE (AIR-Sec arm) | 3–4 sentence plain-English explanation | K1–K2, P4, CLO1/CLO4 | Part of the worksheet mark |
 | Worksheet Part 2c — viva spot-check (AIR-Sec arm, in class) | Live answer without notes | P5, CLO4/CLO5 | Pass / flag for follow-up |
-| Worksheet Part 1 — four essay questions (Conventional arm) | Written answers, graded on the writing itself | K1–K4, P6, CLO1 | Part of the worksheet mark |
+| Worksheet Part 1 — four short-answer questions (Conventional arm) | Written answers, graded on the writing itself | K1–K4, P6, CLO1 | Part of the worksheet mark |
 | **Per-student attributable artefact** | **No flag this lesson (CONCEPTUAL)** — the attributable artefact is *which planted-error variant the student was assigned*, and identifying their own variant's error is what is attributable | A3, CLO5 | Integrity control that also carries marks (specification §8) |
 | AWS Academy Modules 1–3 Knowledge Checks | Graded inside the Learner Lab | AWS's own objectives | ~40% shared AWS-graded baseline — **not** part of this layer, and identical for every section |
 
@@ -167,10 +173,10 @@ Marking detail (the point split and the model answers) lives in the instructor-h
 here. The exact weight of this repository's layer within the final grade is ⬚ (specification §4
 and §8).
 
-**Submission** (SUBMISSION.md): worksheet exported to PDF → Google Classroom, named
-`Lesson<NN>_<StudentID>.pdf`, with an AI-tool usage disclosure; due before the next class session
-unless told otherwise; late −10% of the earned score per day down to 0, marked only after a viva. ⬚ — SUBMISSION.md does not state which `NN` a
-single add-on covering Modules 1–3 should use; fix a convention in Classroom before hand-out.
+**Submission** (SUBMISSION.md): answers on the English **Local 01 Answer Sheet** (a view-only Google Doc
+attached to the assignment: students make a copy, fill it in and download it as PDF) → Google
+Classroom assignment **Local 01**, named `Local01_<StudentID>.pdf`, with the sheet's AI-use box filled in; due before the next class session
+unless told otherwise; late −10% of the earned score per day down to 0, marked only after a viva.
 
 ## 6. Materials
 
@@ -179,9 +185,9 @@ single add-on covering Modules 1–3 should use; fix a convention in Classroom b
   add-on.
 - Instructor key: `instructor/lesson01-03-aws-fundamentals-answer-key.md` (git-ignored, never
   committed).
-- **Slides — none, on purpose.** `slides/` is deliberately empty: the lecture baseline is AWS
-  Academy's own licensed modules, delivered through the Learner Lab and never mirrored here
-  (`slides/README.md`). Any original, non-AWS slide would go in `slides/lesson01.md`.
+- **Slides:** Original [Week 01–02 course bridges](../../slides/README.md) connect the AWS
+  modules to Local 01. AWS Academy's licensed modules remain the lecture baseline and are not
+  mirrored in this repository.
 - **Quizzes — none, on purpose.** The weekly knowledge checks run inside the Learner Lab as part of
   the licensed curriculum (`quizzes/README.md`).
 - Public references named by the lab README (publicly available AWS material — no AWS Academy file
@@ -212,25 +218,17 @@ target, no stand-in service. What still has to be said aloud is this:
 Both of these are defects in student-facing or shared content that this plan deliberately does not
 edit; they are reported upward instead. Handle them in delivery:
 
-1. **The worksheet's opening line conflates block with arm.** `worksheet.md` opens with *"Section is
-   assigned Block 1 = AIR-Sec or Block 2 = Conventional per `course-plan.md`'s block table"*. Read
-   literally, that says Block 1 is always the AIR-Sec arm — which is false for Section B, and this
-   lesson is Block 1 for **both** sections. A Section B student who self-selects from that line will
-   do the wrong Part. **In delivery:** state the section's arm aloud and in Classroom *before* the
-   worksheet is opened, and do not let students choose their own Part.
-2. **The curriculum monorepo's manifest for this lesson says `duration_min: 180`**
-   (`../KOSEN69 - curriculum/lessons/aws-fundamentals-intro/lesson.yml`), which contradicts the lab
-   README's *"45–60 min, no Docker"* and the course specification §1's *"45–60 min each; one 60–90
-   min"*. The same 180 appears on all ten cloud lessons, so it looks like an unadjusted default
-   carried over from the 3-hour sibling courses rather than a claim about this lesson. **In
-   delivery:** teach to the README's 45–60 min. Do not schedule a 3-hour room from the manifest.
+1. **Fixed:** the worksheet now states which section takes the AIR-Sec or Conventional arm in
+   Block 1. State that assignment aloud and in Classroom before students open the worksheet.
+2. **Fixed in the matching curriculum change:** this lesson's `duration_min` is 60, matching the
+   README's 45–60 minute add-on. The complete weekly meeting remains 100 minutes.
 
 ## 9. Risks and contingencies
 
 | Risk | Mitigation |
 |---|---|
-| **Variant skew is built into the formula.** `(last digit of student ID) mod 4` maps three digits to variants 0 and 1 (0/4/8 and 1/5/9) but only two to variants 2 and 3 (2/6 and 3/7) — roughly a 30/30/20/20 split. Fewer students will have actually worked variants 2 and 3 | When choosing viva subjects, deliberately sample across all four variants rather than relying on volunteers, or variants 0 and 1 dominate the oral evidence. Hold the four-variant walk-through until the following add-on, after the Part 2a deadline — see §4.1 |
-| A student computes the wrong variant, or answers a passage that is not theirs — the lab README states describing someone else's variant's error does not satisfy the task | Have every student write their variant number **and** their ID's last digit at the top of the sheet in the 0:05–0:10 slot, and check them then, not at marking time. A visible mismatch is a viva follow-up, not an automatic accusation — arithmetic slips look identical to copying at first glance |
+| **Variant skew is built into the table.** The worksheet's last-digit table maps three digits to variants 0 and 1 (0/4/8 and 1/5/9) but only two to variants 2 and 3 (2/6 and 3/7) — roughly a 30/30/20/20 split. Fewer students will have actually worked variants 2 and 3 | When choosing viva subjects, deliberately sample across all four variants rather than relying on volunteers, or variants 0 and 1 dominate the oral evidence. Hold the four-variant walk-through until the following add-on, after the Part 2a deadline — see §4.1 |
+| A student reads the wrong row of the variant table, or answers a passage that is not theirs — the lab README states describing someone else's variant's error does not satisfy the task | Have every student write their variant number **and** their ID's last digit at the top of the sheet in the 0:05–0:10 slot, and check them then, not at marking time. A visible mismatch is a viva follow-up, not an automatic accusation — a misread row looks identical to copying at first glance |
 | A student pastes their passage into an AI assistant, which confidently confirms the planted claim, or invents a different "error" | Repo policy permits AI use **with disclosure** (SUBMISSION.md), so this is not automatically misconduct — but what is graded is the student's own reasoning. Require the corrected sentence to be justified against the AWS pages in the lab README's References, and use the Part 2c viva as the tiebreak. ⬚ — the worksheet does not state whether Part 2a is closed-book on AI; fix that instruction in Classroom before hand-out if you want it closed-book |
 | The passages are deliberately-false text sitting in a **public** repository; one can be screenshotted and later quoted as AWS guidance | Say at hand-out that every passage contains exactly one false claim and none of them is an AWS statement; make the corrected sentence, not the passage, the thing students keep |
 | A student arrives without having completed Modules 1–3, or cannot start their Learner Lab | This add-on needs no console and no Docker, so they can still do it — run the session, and route the Learner Lab problem to the AWS-side channel and Lesson 1's one-time setup list in SUBMISSION.md. Do not spend add-on minutes debugging AWS sandbox access for one student |

@@ -1,18 +1,23 @@
-# Lesson Plan — Lesson 4: EC2 Instance Roles, Lambda Basics, Elastic Beanstalk
+# Lesson Plan — Lesson 4: EC2 Instance Roles and SSRF
 
-*CLOUD add-on. The AWS Academy Learner Lab is the baseline students do first; this is the
+> **Current delivery policy (2026-11-11):** Students update the public repo and run this lab
+> without a personal `.env`. Any `FLAG{…}` is a shared demo marker. Grade complete
+> request/response evidence, explanation, and viva. Older per-student flag and seeding notes
+> below document the original design and are not instructions for this cohort.
+
+*CLOUD add-on. The AWS Academy EC2 lab is the baseline students do first in Week 4; this is the
 add-on that attacks and fixes the same idea locally. No AWS Academy material is reproduced here —
 topics are described in our own words only.*
 
 | | |
 |---|---|
 | **Course** | Cloud Infrastructure & Security (02005097) |
-| **Attaches to (AWS lesson)** | AWS Academy Cloud Foundations — EC2 instance management, Lambda basics, Elastic Beanstalk (course spec "AWS lesson 4") |
-| **Kind** | HYBRID — small Docker lab for the EC2 instance-role / SSRF concept; Lambda and Elastic Beanstalk stay conceptual (worksheet Part 1) |
+| **Attaches to (AWS lesson)** | AWS Academy Cloud Foundations Module 6 — EC2 portion and *Introduction to Amazon EC2* lab; Lambda and Elastic Beanstalk follow in Week 5 |
+| **Kind** | HYBRID — small Docker lab and worksheet on the EC2 instance-role / SSRF concept |
 | **Block** | 1 |
 | **Add-on duration** | 45–60 min (per the lab's own `README.md`) |
 | **Lab folder** | `labs/lesson04-ec2-lambda-beanstalk` |
-| **Slides** | ⬚ (no `slides/week04`/`lesson04` deck in the repo — `slides/` holds only `README.md`) |
+| **Slides** | Original [Week 04 course bridge](../../slides/weekly-bridges/output/Week04_Cloud_Course_Bridge.pptx); AWS Academy Module 6 EC2 slides remain primary |
 | **Analogous CWE** | CWE-918 (Server-Side Request Forgery) |
 | **CLOs addressed** | **CLO2** demonstrate the misconfiguration · **CLO3** apply the correct control and verify the attack fails |
 
@@ -36,6 +41,8 @@ By the end of this add-on a student can:
 - K3 — Explain why the bug lives in `/fetch-preview`, **not** in the metadata endpoint — the
   metadata route behaves exactly as an instance's IMDS is supposed to for on-instance callers
   (worksheet 2c).
+- K4 — Explain why temporary role credentials still need protection and how least privilege
+  limits the impact of a leak (worksheet Q5).
 
 **Skills (P)**
 - P1 — Stand the vulnerable/fixed pair up and run the **benign baseline** fetch, showing the
@@ -47,6 +54,8 @@ By the end of this add-on a student can:
   block, not a blanket failure (README signature step 4).
 - P4 — Name at least **two concrete defences** beyond blocking the literal string
   `169.254.169.254` (worksheet Q4).
+- P5 — Explain why both an intended-request success and a metadata-shaped rejection are needed
+  to verify the fixed feature (worksheet Q6).
 
 **Attitude (A)**
 - A1 — Attack only the two approved targets — the local Docker lab and the student's own assigned
@@ -69,10 +78,11 @@ it will never fetch, **before** the outbound request — not fetch first and hop
 ## 3. Prerequisites — before this add-on runs
 
 **Students must have completed, in order:**
-1. The real **AWS Academy EC2 / Lambda / Elastic Beanstalk lab content** in their own Learner Lab
-   sandbox (this is where the AWS console and its guard-rails are learned), and its Knowledge
-   Check — that portion is AWS-graded (README step 1; [SUBMISSION.md](../../SUBMISSION.md)).
-2. **Docker Desktop** working on their own machine.
+1. Before class, prepare the EC2 portion of Cloud Foundations Module 6 and check that **Docker
+   Desktop** works on their own machine.
+2. In class, complete the real AWS Academy *Introduction to Amazon EC2* lab in their own Learner
+   Lab sandbox before this add-on. The remaining Module 6 topics and its Knowledge Check follow
+   in Week 5 (README step 1; [SUBMISSION.md](../../SUBMISSION.md)).
 
 **Instructor, before the session:**
 - Pre-build the images (`docker compose up -d --build` in the lab folder) so a room of students is
@@ -88,6 +98,20 @@ it will never fetch, **before** the outbound request — not fetch first and hop
 > per-segment minutes below are *suggested instructor pacing* within that envelope, not budgets
 > prescribed by the worksheet; adjust freely. Task names, payloads, ports and commands are copied
 > from the lab. Section assigned the **Conventional** arm this block runs §5 instead of this table.
+> The Week 4 AWS EC2 lab is estimated at 35 minutes, leaving 65 minutes of the 100-minute class
+> for this add-on, transitions and feedback.
+>
+> **Plainer worksheet (owner, 2026-11-02).** KOSEN students come through an accelerated high-school
+> track, so the worksheet was reworded into short, concrete questions in both Parts, students may
+> answer in Thai or English, and the lab README now has a copy-paste **Step-by-step** (curl
+> commands with the expected output, run and checked). Same concepts, same flag, same point split.
+> Mark the reasoning, not the language. If a curl prints only `HTTP 000`, the apps are still
+> starting: wait a few seconds and rerun.
+>
+> **Answer Sheet (owner, 2026-11-02).** Students answer on the English *Local02 Answer Sheet*, a
+> Google Doc that Classroom copies for each student, and turn that copy in. No PDF is needed. The
+> sheet has both Parts, the 2a fields (request body, flag, fixed-app HTTP code and reason) and an AI-use
+> box.
 
 | Suggested | Task | Student does (exact from lab) | Evidence produced |
 |---|---|---|---|
@@ -95,7 +119,7 @@ it will never fetch, **before** the outbound request — not fetch first and hop
 | 0:08–0:15 | **Baseline (benign)** | `POST /fetch-preview {"url": "http://vulnerable:5000/ping"}` — works on both apps; the feature is legitimate, the bug is the *lack of restriction* | Note that the benign fetch succeeds |
 | 0:15–0:30 | **The self-SSRF (capture)** | `POST /fetch-preview {"url": "http://localhost:5000/latest/meta-data/iam/security-credentials/AppRole"}` against `:8104` — the app fetches its own metadata route on your behalf and returns the fake `AccessKeyId`/`SecretAccessKey`/`Token` **and the flag** in the fetched body | The exact request body + the captured flag from the vulnerable app's response |
 | 0:30–0:40 | **Confirm the fix** | The identical request against `:8117` → `403` *before* any outbound fetch; so is the literal `http://169.254.169.254/latest/meta-data/iam/security-credentials/AppRole`; an ordinary URL still returns `200` | The rejected request + its `403` response; note the ordinary URL still works |
-| 0:40–0:45 | **One-shot check (optional)** | `python exploit.py` — expect two `PASS` lines and exit `0` (leak on `:8104`, rejection on `:8117`) | The two PASS lines |
+| 0:40–0:45 | **One-shot check (optional)** | `python exploit.py` — expect five `PASS` lines and exit `0` (leak on `:8104`; on `:8117` the self-SSRF, the literal `169.254.169.254` form and a redirect bypass are rejected, an ordinary URL still fetches) | The five PASS lines |
 | 0:45–0:60 | **EiPE + viva prep + submit** | Draft worksheet **2b** (plain-English: why "fetch a URL for me" leaks cloud credentials, and why blocking the literal `169.254.169.254` string is not a full fix — think `localhost`); ready the **2c** viva answers; submit | Worksheet 2a request/response pair + 2b answer → Classroom; 2c is a live spot-check |
 
 **Formative checkpoints.**
@@ -108,11 +132,11 @@ it will never fetch, **before** the outbound request — not fetch first and hop
 
 ## 5. Conventional-arm variant (same slot, no flag)
 
-The section assigned the **Conventional** arm for Block 1 does **worksheet Part 1 only** — six essay
+The section assigned the **Conventional** arm for Block 1 does **worksheet Part 1 only** — six short-answer
 questions on the same concepts (instance role vs long-lived key; what IMDS is and why it is
 on-instance-only; how the URL-fetch feature is abused and what the class is called; ≥2 defences
-beyond the literal-string block; the EC2→Lambda operational/security shift; why the
-misconfiguration is *more* consequential across an auto-scaling group). No Docker target, no
+beyond the literal-string block; why temporary credentials still need protection and least
+privilege; and positive and negative checks of the fixed URL-fetch feature). No Docker target, no
 per-student flag, no AI-resilience layer — graded on the writing itself (worksheet Part 1). Use the
 slot for guided discussion of those questions; the exploit is not run in this arm.
 
@@ -123,7 +147,7 @@ slot for guided discussion of those questions; the exploit is not run in this ar
 | Worksheet Part 2a (AIR-Sec arm) | The `POST /fetch-preview` body that leaked the flag, the captured flag, and the fixed-app request/response | K2, P2, P3, A2 | Part of the worksheet mark |
 | Worksheet Part 2b — **EiPE** (AI-resilient) | 3–4 plain-English sentences on the credential-theft path and why a literal-string block is insufficient | K2, A3, CLO4 | The AI-resilient task for this lesson |
 | Worksheet Part 2c — **viva** spot-check | Verbal, <2 min: why the metadata route "works correctly"; the one-line fix and its check category (allowlist vs blocklist vs auth); why adding login alone would not fix it | K3, P4 | Live during lab/office hours, not a written submission |
-| Worksheet Part 1 (Conventional arm) | Six essays | K1–K2, P4 | The Conventional arm's whole submission |
+| Worksheet Part 1 (Conventional arm) | Six short answers | K1–K2, K4, P4–P5 | The Conventional arm's whole submission |
 | **Per-student flag** | The `flag` value inside the fetched metadata body from the **vulnerable** app | A2 | Integrity control (also carries marks); the fixed app never emits it |
 
 **Per-student flag.** Mint with `python3 instructor/seed_flags.py env <STUDENT_ID>` — this course's
@@ -147,7 +171,7 @@ it + a one-paragraph explanation of why this is SSRF and not "a bug in the metad
 - Instructor: `instructor/seed_flags.py` (git-ignored) and its answer key
   `instructor/lesson04-ec2-lambda-beanstalk-answer-key.md`.
 - Rules of engagement: [ETHICS.md](../../ETHICS.md) · Submission: [SUBMISSION.md](../../SUBMISSION.md)
-- Slides: ⬚ (none in repo).
+- Slides: [Week 04 course bridge](../../slides/weekly-bridges/output/Week04_Cloud_Course_Bridge.pptx), after the primary AWS Academy EC2 slides.
 - References the lab cites (all publicly available, no AWS Academy file used): AWS EC2 docs
   *Instance metadata and user data* / *IAM roles for Amazon EC2*; OWASP *SSRF Prevention Cheat
   Sheet*; public SSRF-to-cloud-metadata incident write-ups.

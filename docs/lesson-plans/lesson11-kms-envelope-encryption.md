@@ -11,23 +11,32 @@
 | **Signature exercise** | **"Audit the Envelope"** (lab README) |
 | **Standards** | **CWE-320** (Key Management Errors) — named by the lab README and by the curriculum manifest as a *category* describing correct KMS use, not a coding bug in any artefact |
 | **CLOs addressed** | **CLO1** shared responsibility · **CLO4** evaluate & communicate (`docs/course-specification.md` §6). Via §4's alignment table the *Audit-the-AI* / *EiPE* tasks carry CLO1 and CLO4, and the per-student **variant** carries **CLO5**. CLO2/CLO3 are **not** claimed here — there is nothing to exploit or remediate in this lesson |
-| **Slides / quizzes** | ⬚ — none, deliberately. `slides/` and `quizzes/` are intentionally empty in this course (`slides/README.md`, `quizzes/README.md`) |
+| **Slides / quizzes** | Original [Week 15–16 course bridges](../../slides/README.md); AWS Module 5 slides and Knowledge Check remain primary |
 | **Session date / section / room** | ⬚ |
 
 > **Which arm is this section in today? Check before the worksheet is opened.**
 > This lesson sits in **Block 2**. Under the block table (`docs/course-specification.md` §6,
 > `course-plan.md`): **Section A = Block 1 AIR-Sec / Block 2 Conventional**, **Section B = the
 > reverse**. So in *this* lesson **Section A does Part 1 (Conventional)** and **Section B does
-> Part 2 (AIR-Sec)** — the opposite assignment to the Lessons 1–3 add-on. The worksheet's own
-> opening line will mislead a Section B student here; see §8 item 1 and §9 risk 1.
+> Part 2 (AIR-Sec)** — the opposite assignment to the Lessons 1–3 add-on. The worksheet's opening
+> line now states this per section (§8 item 1); still announce it (§9 risk 1).
 
 > **Naming note.** The lab folder, README and worksheet call this **Lesson 11** — the *AWS lesson
 > number* it attaches to. The curriculum monorepo (`courses/cloud-infrastructure-security.yml`)
 > lists the same lesson at **slot 8** of the monorepo's **11 schedule entries** (10 add-on lessons
 > plus a final non-add-on "review" slot, Reflection & Wrap-up) — the offset between "Lesson 11" and
 > "slot 8" exists because only ten of the AWS lessons carry an add-on. Both labels refer to the same
-> material; use "Lesson 11" with students, since that is what the worksheet header and the
-> `Lesson<NN>_<StudentID>.pdf` submission convention use.
+> material. With students, say "Lesson 11" for the worksheet (its header uses it) and "Local 08"
+> for the submission: that is the Classroom assignment, and answers go on the **Local08 Answer
+> Sheet** copy that Classroom makes for each student, with no PDF ([SUBMISSION.md](../../SUBMISSION.md)).
+
+> **Plainer worksheet (owner, 2026-11-04).** KOSEN students come through an accelerated high-school
+> track, so the worksheet was reworded into short, concrete questions and students may answer in
+> Thai or English (2–4 sentences each) on the Local08 Answer Sheet. The change applies to both Parts
+> equally: the same four Part 1 questions (Q3 now also asks outright whether disabling differs from
+> deleting, the distinction the key already requires for full credit and 2b already asks for), the
+> same four Part 2a passages and variant table word for word, 2b with the same meaning, 2c's prompt
+> repaired (§8 item 4), the same point split. Mark the reasoning, not the language.
 
 ---
 
@@ -56,12 +65,12 @@ By the end of this add-on a student can:
 
 *AIR-Sec arm — worksheet Part 2 (Section B in Block 2):*
 
-- P1 — Compute their own variant with `variant = (last digit of your student ID) mod 4` and read
+- P1 — Find their own variant from the last digit of their student ID (the worksheet's table) and read
   **only** that passage.
 - P2 — Identify the single planted factual error in their own assigned passage and quote the exact
   sentence containing it.
 - P3 — State why it is wrong — what actually happens instead — and write the corrected sentence.
-- P4 — (2b, EiPE) Write 3–4 sentences a non-technical stakeholder could follow on why disabling a
+- P4 — (2b, EiPE) Write 3–4 short sentences someone without IT knowledge could follow on why disabling a
   KMS key makes old data unreadable *until the key is re-enabled* even though the encrypted objects
   are still sitting in the bucket; contrast that with disabling one database user account; and say
   how *deleting* the key differs from disabling it.
@@ -70,7 +79,7 @@ By the end of this add-on a student can:
 
 *Conventional arm — worksheet Part 1 (Section A in Block 2):*
 
-- P6 — Answer the four essay questions in their own words: the step-by-step path from "click Upload
+- P6 — Answer the four short-answer questions in their own words (2–4 sentences each, Thai or English): the step-by-step path from "click Upload
   on an object in an SSE-KMS bucket" to "the object is stored encrypted"; what S3 stores in the
   object's metadata and what it deliberately discards; what happens to objects already stored when
   the KMS key is disabled or scheduled for deletion, and why; and why a separate data key is used
@@ -95,11 +104,16 @@ symmetric data key, and what travels with the ciphertext is not that key but a *
 locked under a key that never leaves KMS. The ciphertext and its own wrapped key sit together in the
 bucket, and neither is any use without a service call to the one place that can unwrap it.
 
+For this worksheet, assume per-object SSE-KMS without S3 Bucket Keys and no retained plaintext
+data key between object requests. AWS also offers [S3 Bucket Keys](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html),
+which reduce the number of KMS API requests; do not present the per-object call pattern as a rule
+for every S3 configuration.
+
 Two consequences follow, and both are what the worksheet actually assesses. First, **what is kept
 and what is thrown away is the entire security property.** If the plaintext data key were retained
 next to the object "for speed", anyone who could read the object's metadata could decrypt it with no
 call to KMS, no permission check and no audit record — which is the viva prompt in 2c. Second,
-**revocability is the feature, and it cuts both ways.** Because every read needs KMS to unwrap the
+**revocability is the feature, and it cuts both ways.** In this scenario, every read needs KMS to unwrap the
 stored data key, control over that key is control over the data — so disabling the key locks
 *existing* data, not just new writes. That is the property an organisation buys, and it is the same
 property that turns a key deletion into permanent data loss. The pedagogically important line is the
@@ -138,8 +152,8 @@ second).
 **Instructor, before the session:**
 
 - Confirm, and be ready to state aloud, which arm this section is in for **Block 2** — Section A
-  Conventional, Section B AIR-Sec. §8 item 1 explains why this cannot be left to the worksheet's own
-  opening line.
+  Conventional, Section B AIR-Sec. The worksheet's opening line now says the same (§8 item 1), but
+  still say it aloud.
 - Post the worksheet in Classroom with the assigned Part named **in writing**.
 - Re-read the instructor-held key `instructor/lesson11-kms-envelope-encryption-answer-key.md`
   (git-ignored, never committed, not reproduced here) against the current worksheet.
@@ -165,9 +179,9 @@ second).
 | Time | Task | Student does | Evidence produced |
 |---|---|---|---|
 | 0:00–0:05 | **Frame the add-on** | Hears which arm this section is in; that Lab 5.1 is the prerequisite and today assesses that concept rather than adding AWS content; notes that no Docker, no console and no credentials are needed | — |
-| 0:05–0:10 | **Compute the variant** | `variant = (last digit of your student ID) mod 4`; writes the variant number **and** the ID's last digit at the top of the sheet; reads **only** that passage | Variant number recorded before reading |
+| 0:05–0:10 | **Find the variant** | Looks up the last digit of their student ID in the worksheet's table; writes the variant number **and** the ID's last digit at the top of the sheet; reads **only** that passage | Variant number recorded before reading |
 | 0:10–0:27 | **Part 2a — "Audit the Envelope" (personalised)** | Finds the single planted error in their own passage; records the exact sentence, why it is wrong (what actually happens instead), and the corrected sentence | Variant no. + quoted error sentence + explanation + corrected sentence |
-| 0:27–0:37 | **Part 2b — EiPE** | Writes 3–4 sentences for a non-technical stakeholder: why disabling the KMS key makes objects still sitting in the bucket unreadable, why disabling one database user account does not do the same thing to a database, and how *deleting* the key differs from disabling it | Short written answer covering all three halves of the question |
+| 0:27–0:37 | **Part 2b — EiPE** | Writes 3–4 short sentences someone without IT knowledge could follow: why disabling the KMS key makes objects still sitting in the bucket unreadable, why disabling one database user account does not do the same thing to a database, and how *deleting* the key differs from disabling it | Short written answer covering all three halves of the question |
 | 0:37–0:45 | **Part 2c — viva spot-check + close** | 3–4 rotating students answer the viva prompt without notes — what keeping the plaintext data key around after encrypting would defeat; the class then closes on *method*: how to test a confident claim against AWS's own documentation | Oral answers noted against the student |
 
 > **Do not walk the four variants' planted errors in this session.** Part 2a is a marked deliverable
@@ -250,9 +264,9 @@ app, no Docker target, no stand-in service. What still has to be said aloud is t
 | Instrument | Evidence | Outcome | Weight |
 |---|---|---|---|
 | Worksheet Part 2a — *"Audit the Envelope"* (AIR-Sec arm) | Variant number, the exact sentence containing the error, why it is wrong, the corrected sentence | K1–K3, P1–P3 · CLO4 | Part of the add-on worksheet mark — this layer's share of the final grade is ⬚ |
-| Worksheet Part 2b — *EiPE* (AIR-Sec arm) | 3–4 sentences a non-technical stakeholder could follow, covering unreadability, the database-account contrast, and disable vs. delete | K2–K3, P4 · CLO1/CLO4 | Part of the worksheet mark |
+| Worksheet Part 2b — *EiPE* (AIR-Sec arm) | 3–4 short sentences someone without IT knowledge could follow, covering unreadability, the database-account contrast, and disable vs. delete | K2–K3, P4 · CLO1/CLO4 | Part of the worksheet mark |
 | Worksheet Part 2c — viva spot-check (AIR-Sec arm, in class) | Live answer without notes | K2, P5 · CLO4/CLO5 | Pass / flag for follow-up |
-| Worksheet Part 1 — four essay questions (Conventional arm) | Written answers, graded on the writing itself | K1–K4, P6 · CLO1 | Part of the worksheet mark |
+| Worksheet Part 1 — four short-answer questions (Conventional arm) | Written answers, graded on the writing itself | K1–K4, P6 · CLO1 | Part of the worksheet mark |
 | **Per-student attributable artefact** | **No flag this lesson (CONCEPTUAL).** The attributable artefact is *which planted-error variant the student was assigned* — correctly identifying **their own** variant's specific error is what is attributable; describing someone else's variant's error does not satisfy the task (lab README) | A3 · CLO5 | Integrity control that also carries marks (`docs/course-specification.md` §8) |
 | AWS Academy Lab 5.1 + its Knowledge Check | Graded inside the Learner Lab | AWS's own objectives | part of the ~40% AWS-graded aggregate across all ~13 Learner Lab / Knowledge-Check items course-wide (`docs/course-specification.md` §2: 6 Cloud Foundations + 7 Cloud Security Foundations items) — this one lab's individual share is not broken out anywhere in this repository; **not** part of this layer, and identical for every section |
 
@@ -266,8 +280,9 @@ manifest for this lesson carries `flag_keys: []`
 `instructor/lesson11-kms-envelope-encryption-answer-key.md`, which is git-ignored and is deliberately
 **not** reproduced here: this repository is public.
 
-**Submission** ([SUBMISSION.md](../../SUBMISSION.md)): worksheet exported to PDF → Google Classroom,
-named `Lesson11_<StudentID>.pdf`, with Name + Student ID on the file and an AI-tool usage disclosure
+**Submission** ([SUBMISSION.md](../../SUBMISSION.md)): answers written on the **Local08 Answer
+Sheet** copy that Classroom makes for each student, then Turn in (no PDF), with Name + Student ID on
+the sheet and an AI-tool usage disclosure
 ("None" is a valid disclosure); due before the next class session unless told otherwise; late
 −10% of the earned score per day down to 0, marked only after a viva. The worksheet's own Submit line asks the AIR-Sec arm for variant + error +
 correction + Parts 2b/2c, and the Conventional arm for Part 1 only.
@@ -284,9 +299,8 @@ nowhere in this repository (`docs/course-specification.md` §4, §8).
   (`instructor/research/pre-post-test.md`) and the H2 planted-error bank
   (`instructor/research/planted-error-bank.md`) both carry items drawn from this lesson's content.
   Neither is reproduced or summarised here — see §9 risk 10.
-- **Slides — none, on purpose.** `slides/` is deliberately empty: the lecture baseline is AWS
-  Academy's own licensed modules, delivered through the Learner Lab and never mirrored here
-  (`slides/README.md`). Any original, non-AWS slide would go in `slides/lesson11.md`.
+- **Slides:** Original [Week 15–16 course bridges](../../slides/README.md) connect the AWS
+  KMS module and lab to Local 08. The licensed AWS Academy slides are not mirrored here.
 - **Quizzes — none, on purpose.** Knowledge checks run inside the Learner Lab as part of the licensed
   curriculum (`quizzes/README.md`).
 - **Public references named by the lab README** (publicly available AWS material — no AWS Academy
@@ -306,7 +320,8 @@ Lab content and its curriculum-monorepo copy are parity-gated, and editing grade
 lesson plan reads tidily is exactly the failure mode that gate exists to catch. Handle them in
 delivery; fix them between cohorts.
 
-1. **The worksheet's opening line conflates block with arm, and this lesson is where it bites.**
+1. **Fixed:** the worksheet's opening line now says this lesson is Block 2 with Section A =
+   Conventional and Section B = AIR-Sec "(reversed from Block 1)". Earlier note: **The worksheet's opening line conflates block with arm, and this lesson is where it bites.**
    `worksheet.md` opens with *"Section is assigned Block 1 = AIR-Sec or Block 2 = Conventional per
    `course-plan.md`'s block table"*. Read literally, that says Block 2 is always the Conventional
    arm — which is true for Section A and **false for Section B**, whose Block 2 is AIR-Sec. This
@@ -316,35 +331,34 @@ delivery; fix them between cohorts.
    the worksheet is opened; do not let students choose their own Part. (The same line is flagged in
    the Lessons 1–3 plan §8; there it was a latent risk, here it points the wrong way for a whole
    section.)
-2. **The README undercounts the Conventional questions.** The lab README's Deliverable says *"plus
+2. **Fixed 2026-11-04:** the README Deliverable now says "the four Part 1 short-answer questions".
+   Earlier note: **The README undercounts the Conventional questions.** The lab README's Deliverable says *"plus
    the two Part 1 essay-style questions if you're in the Conventional block instead"* — the worksheet
    Part 1 has **four** numbered questions, and the instructor key marks four. A Section A student who
    reads only the README will answer half the paper. **In delivery:** hand out the worksheet, not the
    README, as the authoritative task list, and say "four questions" out loud.
-3. **The README's Deliverable omits Parts 2b and 2c**, which the worksheet's own Submit line requires
+3. **Fixed 2026-11-04:** the README Deliverable now names the Part 2b answer and says the 2c viva is
+   oral. Earlier note: **The README's Deliverable omits Parts 2b and 2c**, which the worksheet's own Submit line requires
    ("Your variant + error + correction + Part 2b/2c"). Same mitigation: the worksheet is the
    authoritative list. Related: the Learner Lab scenario the README names as part of the source topic
    — a workload that stops once its KMS key is disabled — is not asked about in writing in either
    Part, so do not claim it as assessed; cover it verbally (§4.3 item 3).
-4. **The 2c viva prompt is malformed.** The worksheet asks: *"If S3 kept the plaintext data key
+4. **Fixed 2026-11-04:** 2c now reads "...why would that defeat the *whole point* of envelope
+   encryption?". Earlier note: **The 2c viva prompt is malformed.** The worksheet asks: *"If S3 kept the plaintext data key
    around after encrypting, what would that defeat the entire point of envelope encryption?"* — the
    sentence has an interrogative missing. Students will parse it, but read it aloud in its intended
    form ("*why* would that defeat…") so nobody loses time deciding what is being asked, and do not
    penalise an answer that responds to either reading.
-5. **The curriculum monorepo's manifest for this lesson says `duration_min: 180`**
-   (`../KOSEN69 - curriculum/lessons/kms-envelope-encryption/lesson.yml`), contradicting the lab
-   README's *"45–60 min, no Docker"* and `docs/course-specification.md` §1's *"45–60 min each; one
-   60–90 min"*. The same 180 appears across the cloud lessons, so it reads as an unadjusted default
-   inherited from the 3-hour sibling courses. **In delivery:** teach to the README's 45–60 min; do
-   not book a three-hour room from the manifest.
+5. **Fixed in the matching curriculum change:** this lesson's `duration_min` is 60, matching the
+   README's 45–60 minute add-on. The complete weekly meeting remains 100 minutes.
 
 ## 9. Risks and contingencies
 
 | Risk | Mitigation |
 |---|---|
 | **1. Arm inversion in Block 2 (see §8 item 1).** Section B is AIR-Sec here, but the worksheet's first line reads as "Block 2 = Conventional". A whole section can do the wrong Part, which is unmarkable for their arm *and* contaminates the study data | Announce the arm before the worksheet opens and post it in writing in Classroom so a late arrival cannot guess wrong. Spot-check in the first five minutes that Section B students have written a variant number at the top of the sheet — that is the visible tell that they are on the right Part |
-| **2. Variant skew is built into the formula.** `(last digit of student ID) mod 4` maps three digits to variants 0 and 1 (0/4/8 and 1/5/9) but only two to variants 2 and 3 (2/6 and 3/7) — roughly a 30/30/20/20 split, so fewer students will actually have worked variants 2 and 3 | Choose viva subjects by deliberately sampling across all four variants rather than taking volunteers, or variants 0 and 1 dominate the oral evidence — and the two under-represented variants are not interchangeable with the other two, so a skewed viva sample leaves part of the concept unexamined |
-| **3. A student computes the wrong variant, or answers a passage that is not theirs** — the README states that describing someone else's variant's error does not satisfy the task | Have every student write the variant number **and** their ID's last digit at the top of the sheet in the 0:05–0:10 slot, and check them then, not at marking time. A visible mismatch is a viva follow-up, not an accusation — an arithmetic slip and a copied answer look identical at first glance |
+| **2. Variant skew is built into the table.** The worksheet's last-digit table maps three digits to variants 0 and 1 (0/4/8 and 1/5/9) but only two to variants 2 and 3 (2/6 and 3/7) — roughly a 30/30/20/20 split, so fewer students will actually have worked variants 2 and 3 | Choose viva subjects by deliberately sampling across all four variants rather than taking volunteers, or variants 0 and 1 dominate the oral evidence — and the two under-represented variants are not interchangeable with the other two, so a skewed viva sample leaves part of the concept unexamined |
+| **3. A student reads the wrong row of the variant table, or answers a passage that is not theirs** — the README states that describing someone else's variant's error does not satisfy the task | Have every student write the variant number **and** their ID's last digit at the top of the sheet in the 0:05–0:10 slot, and check them then, not at marking time. A visible mismatch is a viva follow-up, not an accusation — a misread row and a copied answer look identical at first glance |
 | **4. AI assistants are unusually fluent on this exact topic.** "Envelope encryption" is heavily represented in general-purpose model training data, so pasting a passage in may produce a confident confirmation of the planted claim, or the invention of a different "error" | Repo policy permits AI use **with disclosure** (SUBMISSION.md), so this is not automatically misconduct — what is graded is the student's own reasoning. Require the corrected sentence to be defensible against the AWS pages in the README's References, and use the 2c viva as the tiebreak. ⬚ — the worksheet does not state whether Part 2a is closed-book on AI; fix that instruction in Classroom before hand-out if you want it closed-book |
 | **5. The deliberately-false passages sit in a public repository** and can be screenshotted and later quoted as AWS guidance about how SSE-KMS works | Say at hand-out that every passage contains exactly one false claim and none of them is an AWS statement; make the *corrected* sentence, not the passage, the artefact students keep (§5 item 3) |
 | **6. Disable-vs-delete collapse — the predictable wrong answer.** One of the four passages concerns the effect of disabling a key, and a student who over-corrects from it lands on "disabling destroys your data forever", which is equally wrong. Part 1 Q3 and Part 2b both hinge on this distinction | Use the one-minute paper in §4 (*disabled Monday, re-enabled Friday — what state are Tuesday's objects in on Saturday?*) in both arms; it forces the reversibility answer out into the open before marking. Part 2b already asks for the disable-vs-delete difference explicitly — grade it as a required half, not a bonus |

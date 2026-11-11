@@ -1,5 +1,10 @@
 # Lesson Plan — Lesson 10 add-on: VPC Networking (Public/Private Subnets, NAT Gateway, Security Groups vs. NACLs)
 
+> **Current delivery policy (2026-11-11):** Students update the public repo and run this lab
+> without a personal `.env`. Any `FLAG{…}` is a shared demo marker. Grade complete
+> request/response evidence, explanation, and viva. Older per-student flag and seeding notes
+> below document the original design and are not instructions for this cohort.
+
 *CLOUD add-on. The AWS Academy Learner Lab is the baseline students do **first**; this is the
 add-on that attacks and fixes one idea from it locally. **No AWS Academy material is reproduced
 anywhere in this plan or in the lab** — the topic is described in our own words only.*
@@ -16,7 +21,7 @@ anywhere in this plan or in the lab** — the topic is described in our own word
 | **Signature exercise** | "The Deny Rule That Never Runs" |
 | **Standards** | **CWE-863** (Incorrect Authorization) · **CWE-284** (Improper Access Control) — the lab README's and `lesson.yml`'s own classification |
 | **CLOs addressed** | **CLO2** demonstrate · **CLO3** apply the control (schedule row, `docs/course-specification.md` §6). Via §4's alignment table the per-student flag also carries **CLO5**, and the *Audit-the-AI* / *EiPE* tasks carry **CLO1** and **CLO4** |
-| **Slides** | ⬚ — `slides/` in this course is deliberately empty (`slides/README.md`); no original deck exists for this lesson |
+| **Slides** | Original [Week 13–14 course bridges](../../slides/README.md); AWS Module 4 slides remain primary |
 | **Weekly quiz** | ⬚ — none authored here; knowledge checks for this topic run inside the AWS Learner Lab (`quizzes/README.md`) |
 | **Session date / room / section roster / grading scale / PLO list** | ⬚ — institution-specific, recorded nowhere in this repository (`docs/course-specification.md` header, §5, §8) |
 
@@ -24,8 +29,19 @@ anywhere in this plan or in the lab** — the topic is described in our own word
 > number* it attaches to. The curriculum monorepo (`courses/cloud-infrastructure-security.yml`)
 > lists the same lesson at **slot 7** of 11 total schedule slots — only 10 of which carry an add-on
 > (slot 11 is the AWS-graded "Reflection & Wrap-up" review, not an add-on lesson). Both labels refer
-> to the same material; use "Lesson 10" with students, since that is what the worksheet header and
-> the `Lesson<NN>_<StudentID>.pdf` submission convention use.
+> to the same material. With students, say "Lesson 10" for the worksheet (its header uses it) and
+> "Local 07" for the submission: that is the Classroom assignment, and answers go on the
+> **Local07 Answer Sheet** copy that Classroom makes for each student, with no PDF
+> ([SUBMISSION.md](../../SUBMISSION.md)).
+
+> **Plainer worksheet and Step-by-step (owner, 2026-11-04).** KOSEN students come through an
+> accelerated high-school track, so the worksheet was reworded into short, concrete questions and
+> students may answer in Thai or English (2–4 sentences each) on the Local07 Answer Sheet. The
+> change applies to both Parts equally: the same five Part 1 questions asking for the same points,
+> 2a asking for the same four things, **2b (Audit-the-AI) word for word**, 2c with the same
+> meaning, the same point split. The README gained a copy-paste **Step-by-step** (steps 0–7, each
+> with the output to expect, run as written on 2026-11-04), and its kickoff is now
+> `docker compose up -d --build`. Mark the reasoning, not the language.
 
 ---
 
@@ -118,8 +134,8 @@ specific rule is decoration.
 
 **On their own machine:**
 - Docker Desktop working.
-- A working host Python for `exploit.py`, plus the `requests` package — see §7 risk 1 before the
-  room types the README's command block.
+- Only for the optional `exploit.py`: a host Python 3 with `requests`
+  (`python3 -m pip install requests`). The README Step-by-step needs only `curl`.
 
 **Instructor, before the session:**
 - Pre-build the images so a whole room is not pulling `python:3.12-slim` and running
@@ -141,33 +157,25 @@ specific rule is decoration.
 > README states. Neither the README, the worksheet nor the code carries a per-task budget — do not
 > treat these numbers as fixed course material, and do not "correct" the lab to match them.
 
-**Kickoff commands, exactly as the lab README's "Run it" block has them:**
-
-```bash
-cd labs/lesson10-vpc-networking
-docker compose up -d --build   # vulnerable_app.py on :8113, fixed_app.py on :8114
-pip install requests           # once, on the host
-python exploit.py
-```
-
-(The README's step 2 gives the shorter kickoff `docker compose up -d`; use the `--build` form above
-on a first run. See §7 risk 1 before the class types the last two lines — on a host with only
-`python3`/`pip3` they fail as written.)
+**Kickoff:** students follow the README's **Step-by-step** (steps 0–7): save the `.env`,
+`docker compose up -d --build`, `curl` both `/ping`s and both `/rules`, then the three
+`POST /check-access` calls, each with the output to expect. The optional self-check is the README's
+"Run it" block (`python3 -m pip install requests`, then `python3 exploit.py`).
 
 ### 4a. AIR-Sec arm — Block 2 = **Section B** — 60-minute plan
 
 | Time | Task | Student does | Evidence produced |
 |---|---|---|---|
 | 0:00–0:05 | **Framing** | Recall what the Learner Lab exercise already built (subnets, NAT gateway, security groups, a custom NACL); hear today's question — *not* "is this rule right?", but "which rule gets to decide?" | — |
-| 0:05–0:10 | **Stand the target up** | `cd labs/lesson10-vpc-networking` then `docker compose up -d --build`; confirm both services answer on `/ping` (`mode` is `vulnerable` on :8113, `fixed` on :8114) | Screenshot of both `/ping` responses |
+| 0:05–0:10 | **Stand the target up** | `cd labs/lesson10-vpc-networking` then Step-by-step steps 0–2: save the `.env`, `docker compose up -d --build`, and confirm both services answer on `/ping` (`mode` is `vulnerable` on :8113, `fixed` on :8114) | Screenshot of both `/ping` responses |
 | 0:10–0:18 | **Worksheet 2a, baseline** | `GET /rules` on **both** apps (worksheet 2a; the README's own signature-exercise step 1 only calls for either app) — write down each rule list in ascending order and note that both apps carry a `deny 0.0.0.0/0` at **#100** | Two rule lists side by side — the deny-all is present on *both* |
 | 0:18–0:30 | **Worksheet 2a, the capture** | `POST /check-access` with `source_ip` `203.0.113.55` (a public documentation-range address) and `port` `5432` against **:8113** → `{"action": "allow", …}`, `matched_rule_number` **90**, plus the flag | The exact request (`source_ip`, `port`), the captured flag, and the matched rule number |
 | 0:30–0:38 | **Worksheet 2a, confirm the fix** | The **identical** request against **:8114** → `{"action": "deny", …}`, `matched_rule_number` **100**, no flag; then name the one difference between the two `#90` rules | The 2nd response + which rule number matched first in each case, in the student's own words |
 | 0:38–0:48 | **Worksheet 2b — Audit-the-AI** | Walk the AI's three-rule summary (#10 / #20 / #30) in ascending order for an external IP **and** for a request from the CIDR the AI claims is the real app tier; decide whether rule #30 ever runs for either | Written answer (start in class, finish as homework) |
-| 0:48–0:56 | **Worksheet 2c — EiPE + simplification debrief** | 3–4 sentences a non-technical stakeholder could follow, plus the one-sentence rule of thumb about where a narrow rule goes relative to a broad one; then the instructor walks §5 out loud (what this simulation is *not*) | Written answer + nobody leaves with a wrong model of NACLs or security groups |
-| 0:56–1:00 | **Submit + tear down** | Confirm the submission bundle; `docker compose down` | `Lesson10_<StudentID>.pdf` + the flag → Google Classroom |
+| 0:48–0:56 | **Worksheet 2c — EiPE + simplification debrief** | 3–4 short sentences someone without IT knowledge could follow, plus the one-sentence rule of thumb about where a narrow rule goes relative to a broad one; then the instructor walks §5 out loud (what this simulation is *not*) | Written answer + nobody leaves with a wrong model of NACLs or security groups |
+| 0:56–1:00 | **Submit + tear down** | Confirm the submission bundle; `docker compose down` | Answers and the flag on the Local07 Answer Sheet copy → Turn in (no PDF) |
 
-**Optional one-shot check.** `python exploit.py` (host, `requests` installed) runs `GET /rules` and
+**Optional one-shot check.** `python3 exploit.py` (host, `requests` installed) runs `GET /rules` and
 the external-IP `POST /check-access` against both targets and prints two `PASS` lines, exiting `0`.
 It is a convenience, not the assessment: worksheet 2a asks for *the exact request the student sent*,
 so anyone who takes that route must still be able to state and repeat it by hand.
@@ -192,7 +200,7 @@ fixed-app comparison are the assessed core and the only part that needs the cont
 ### 4b. Conventional arm — Block 2 = **Section A**
 
 The worksheet's own instruction is *"complete only the part assigned to you this block"*, and Part 1
-— five essay questions on security groups vs. network ACLs, the allow/deny expressive-power
+— five short-answer questions (2–4 sentences each, Thai or English) on security groups vs. network ACLs, the allow/deny expressive-power
 difference, why first-match-in-ascending-order evaluation is the rule, the NAT gateway's purpose and
 "outbound only", and a real-world consequence of an internal service reachable from the internet —
 carries **no flag and no AI-resilience layer**, which is exactly the manipulation `course-plan.md`
@@ -254,8 +262,8 @@ exercise. Everything below is visible in the lab's own source.
 |---|---|---|---|
 | Worksheet Part 2a (AIR-Sec arm) | The exact request (`source_ip`, `port`) that produced the flag on `:8113`; the captured flag; the identical request against `:8114` and its response; `GET /rules` on both apps with the rule number that matched first in each case | K3, K5, P1–P4, A2 | Part of the worksheet mark (`docs/course-specification.md` §4) |
 | Worksheet Part 2b — *Audit-the-AI* | The planted flaw in the three-rule AI summary, named, with what actually happens to an external IP **and** to the CIDR the AI claims is allowed | K3, P5, A3 · CLO1/CLO4 per §4 | Part of the worksheet mark |
-| Worksheet Part 2c — *EiPE* | 3–4 sentences a non-technical stakeholder could follow + the one-sentence rule of thumb on placing a narrow rule relative to a broad one | K3, K5 · CLO4 | Part of the worksheet mark |
-| Worksheet Part 1 (Conventional arm) | Five essay answers — graded on the writing itself | K1, K2, K3, K4 | The Conventional arm's whole submission |
+| Worksheet Part 2c — *EiPE* | 3–4 short sentences someone without IT knowledge could follow + the one-sentence rule of thumb on placing a narrow rule relative to a broad one | K3, K5 · CLO4 | Part of the worksheet mark |
+| Worksheet Part 1 (Conventional arm) | Five short answers — graded on the writing itself | K1, K2, K3, K4 | The Conventional arm's whole submission |
 | **Per-student flag** — challenge key `nacl`, injected as `FLAG_NACL` | The flag value returned by the **vulnerable** app's `/check-access` response for an external IP on port 5432 | A2 · CLO5 | Integrity control that also carries marks (spec §8) |
 | Viva / random live check | Live reproduction of the capture and an explanation of why the deny-all at #100 never ran | P1–P4, A2 | Pass / flag for follow-up ([SUBMISSION.md](../../SUBMISSION.md)) |
 
@@ -285,8 +293,8 @@ produced it + a one-paragraph explanation of why a visibly-present "deny all" ru
 number can still be completely unreachable — it is not that the deny rule is wrong, it is that a
 broader rule ahead of it already decided the outcome.
 
-**Submission.** Worksheet exported to PDF with screenshots embedded, named
-`Lesson10_<StudentID>.pdf`, plus the captured flag → Google Classroom, before the next class session;
+**Submission.** Answers and the captured flag written on the **Local07 Answer Sheet** copy that
+Classroom makes for each student, then Turn in (no PDF), before the next class session;
 AI-tool disclosure required; late −10% of the earned score per day down to 0, marked only after a viva ([SUBMISSION.md](../../SUBMISSION.md)).
 Evidence must show the student's own `whoami` / login / student ID and a timestamp.
 
@@ -298,10 +306,10 @@ AWS and is identical for every student; it is not part of this add-on.
 
 | Risk | Mitigation |
 |---|---|
-| **1. The README's host commands assume `python`/`pip` are on PATH.** Verified on this machine: only `python3` and `pip3` exist, so `pip install requests` and `python exploit.py` both fail as written | Have students use `python3 -m pip install requests` / `python3 exploit.py`, or a virtual environment if the host Python refuses a global install. Announce it before the room types the block. **Do not edit the lab to fit the room** — escalated in §9(2) |
-| **2. Hand-crafted `POST /check-access` without a JSON content type returns `400`.** Verified: `curl -d 'source_ip=…&port=5432'` (form encoding) yields `{"error":"source_ip and port are required"}`, because the app reads `request.get_json(silent=True)`. Students conclude the lab is broken | Show the working shape once on the projector: an explicit `Content-Type: application/json` header (or `curl --json`) with a JSON body. `exploit.py` already sends JSON |
-| **3. `"port": "5432"` as a JSON *string* silently denies on the vulnerable app.** Verified: the engine compares `rule["port"] == port`, so a quoted port matches nothing and returns `action: deny`, `matched_rule_number: null`. A student reads that as "the vulnerable app isn't vulnerable" and stops | If a student's request denies on `:8113`, check the payload types first — `5432` unquoted, `"203.0.113.55"` quoted. Escalated as a lab-hardening suggestion in §9(6) |
-| **4. The fixed app *does* return the flag** for an internal-CIDR request on port 5432 (verified), so a student can obtain a flag from `:8114` without ever exercising the vulnerable path — and the README's own text tells them `10.0.1.25` is allowed there | Grade the triple described in §6: flag **plus** an external `source_ip` in the same response body **plus** the `#90 allow 0.0.0.0/0` rule listing. `matched_rule_number` is 90 in both cases and cannot be used to tell them apart. Escalated in §9(1) |
+| **1. The README's host commands assume `python`/`pip` are on PATH.** Verified on this machine: only `python3` and `pip3` exist, so `pip install requests` and `python exploit.py` both fail as written | **Fixed:** the README's "Run it" uses `python3 -m pip install requests` / `python3 exploit.py`, and since 2026-11-04 the Step-by-step needs no Python at all. A virtual environment helps if the host Python refuses a global install |
+| **2. Hand-crafted `POST /check-access` without a JSON content type returns `400`.** Verified: `curl -d 'source_ip=…&port=5432'` (form encoding) yields `{"error":"source_ip and port are required"}`, because the app reads `request.get_json(silent=True)`. Students conclude the lab is broken | Since 2026-11-04 every Step-by-step request sends `-H 'Content-Type: application/json'` with a JSON body; point a student who hand-crafts a request back to those lines. `exploit.py` already sends JSON |
+| **3. `"port": "5432"` as a JSON *string* silently denies on the vulnerable app.** Verified: the engine compares `rule["port"] == port`, so a quoted port matches nothing and returns `action: deny`, `matched_rule_number: null`. A student reads that as "the vulnerable app isn't vulnerable" and stops | If a student's request denies on `:8113`, check the payload types first — `5432` unquoted, `"203.0.113.55"` quoted, as in Step-by-step step 4. Escalated as a lab-hardening suggestion in §9(6) |
+| **4. Fixed (checked 2026-11-04): the fixed app no longer returns a flag.** It used to return one for an internal-CIDR request on port 5432; `fixed_app.py` now has no flag branch, and Step-by-step step 6 (`10.0.1.25` on `:8114`) returns `allow` with no flag | Grade the triple described in §6: flag **plus** an external `source_ip` in the same response body **plus** the `#90 allow 0.0.0.0/0` rule listing. `matched_rule_number` is 90 in both cases and cannot be used to tell them apart. Escalated in §9(1) |
 | **5. `exploit.py` cannot be run inside the container.** The `Dockerfile` copies only `nacl_engine.py vulnerable_app.py fixed_app.py`, so the script is not in the image even though `requests` is installed there | Run it from the host as the README says, or skip it — the two requests are short enough to make by hand, and worksheet 2a wants the student's own request anyway |
 | **6. Ports 8113/8114 already bound** — usually another of this course's labs still running (`course-plan.md` allocates 8104–8117 across the labs) | `docker compose down` in the other lab folder before starting; or a student republishes the ports in their own working copy |
 | **7. Everyone submits the same flag.** `docker-compose.yml` bakes a public default `FLAG_NACL` that is also printed in the lab README's captured output, so an unseeded cohort produces one identical flag class-wide and the attributability control silently does nothing | Seed per student before the session (`python3 instructor/seed_flags.py env <STUDENT_ID>`); the README also documents the inline override form `FLAG_NACL=FLAG{...} docker compose up`. Spot-check two submissions for distinct values |
@@ -321,8 +329,8 @@ AWS and is identical for every student; it is not part of this add-on.
 - **Course documents:** [course-specification.md](../course-specification.md) ·
   [course-plan.md](../../course-plan.md) · [SUBMISSION.md](../../SUBMISSION.md) ·
   [ETHICS.md](../../ETHICS.md) · [CLAUDE.md](../../CLAUDE.md)
-- **Student machine:** Docker Desktop; `requests` on the host Python for `exploit.py`
-- **Slides:** ⬚ — none; `slides/` is intentionally empty for this course
+- **Student machine:** Docker Desktop and `curl`; `requests` on the host Python only for the optional `exploit.py`
+- **Slides:** [Week 13–14 course bridges](../../slides/README.md) connect the AWS lab and local NACL workshop.
 - **Reference, as listed in the lab README (all publicly available AWS documentation — no AWS
   Academy file is used, quoted or copied):** AWS VPC documentation *Control subnet traffic with
   network access control lists* (ascending-order, first-match evaluation); *Compare security groups
@@ -336,7 +344,9 @@ AWS and is identical for every student; it is not part of this add-on.
 Recorded here rather than fixed: student-facing lab material and its curriculum-monorepo copy are
 parity-gated, and editing graded material so a plan reads tidily is exactly what must not happen.
 
-1. **The fixed app emits the flag — the control app is not flagless.** Verified on the running
+1. **Fixed (checked 2026-11-04 on the running containers):** `fixed_app.py` has no flag branch any
+   more, and `10.0.1.25` on port 5432 against `:8114` returns `allow` with no flag. The earlier
+   note follows. **The fixed app emits the flag — the control app is not flagless.** Verified on the running
    containers: `POST /check-access {"source_ip": "10.0.1.25", "port": 5432}` against **:8114**
    returns `action: allow` with the flag attached, because both apps gate the flag on
    `action == "allow" and port == 5432` (`fixed_app.py` lines 28–29, identical to
@@ -354,24 +364,21 @@ parity-gated, and editing graded material so a plan reads tidily is exactly what
    honest fix: gate the flag in `fixed_app.py` on something the fixed rule set can never satisfy, or
    remove the flag branch from `fixed_app.py` entirely. Until that lands, the §6 triple plus the
    viva is the grading workaround — the workaround does not remove the need for the lab-side fix.
-2. **Host command forms.** The README's `pip install requests` / `python exploit.py` fail on a host
+2. **Fixed:** the README's "Run it" now uses the `python3` forms, and the Step-by-step needs no
+   Python. Earlier note: **Host command forms.** The README's `pip install requests` / `python exploit.py` fail on a host
    that has only `python3`/`pip3` (verified on this machine — `python` and `pip` are absent from
    PATH). The `python3 -m pip install requests` / `python3 exploit.py` forms work everywhere the
    current ones do. Identical to the finding already escalated in the Lesson 5 plan.
-3. **Duration conflict — course-wide, verified.** The lab README states this add-on is
-   **45–60 min**; the curriculum monorepo's `lessons/vpc-networking/lesson.yml` carries
-   `duration_min: 180`, which is the sibling courses' full-lab length, not this course's add-on
-   length. This plan follows the README. Checked directly: **all ten** of this course's lessons in
-   the monorepo (`aws-fundamentals-intro`, `ec2-lambda-beanstalk`, `s3-static-site-lambda-sns`,
-   `load-balancing-autoscaling`, `iam-policy-evaluation`, `cloudtrail-monitoring`, `vpc-networking`,
-   `kms-envelope-encryption`, `s3-versioning-lifecycle-replication`, `config-lambda-remediation`)
-   carry `duration_min: 180`. It is a course-wide default, not a per-lesson slip, and it means the
-   monorepo would schedule three-hour blocks for 45–60-minute add-ons. Worth one fix across all ten
-   manifests rather than ten separate ones.
-4. **Kickoff command inconsistency.** README step 2 gives `docker compose up -d` while the "Run it"
+3. **Fixed duration conflict.** The lab README states this add-on is **45–60 min**, and the
+   curriculum monorepo's `lessons/vpc-networking/lesson.yml` now records `duration_min: 60`.
+   The complete weekly meeting remains 100 minutes. The Cloud course manifests now use
+   per-lesson durations instead of a shared three-hour default.
+4. **Fixed 2026-11-04:** the kickoff, Step-by-step step 1 and "Run it" all use
+   `docker compose up -d --build`. Earlier note: **Kickoff command inconsistency.** README step 2 gives `docker compose up -d` while the "Run it"
    block gives `docker compose up -d --build`; on a first run only the second builds the images.
    Same inconsistency as Lesson 5's README.
-5. **The worksheet header does not state the Block 2 reversal.** `labs/lesson10-vpc-networking/
+5. **Fixed:** the worksheet header now states Block 2 with Section A = Conventional and Section B =
+   AIR-Sec "(reversed from Block 1)". Earlier note: **The worksheet header does not state the Block 2 reversal.** `labs/lesson10-vpc-networking/
    worksheet.md` opens with the generic line "Section is assigned Block 1 = AIR-Sec or Block 2 =
    Conventional per `course-plan.md`'s block table", which describes Section A's assignment only —
    for Section B, Block 2 is the AIR-Sec arm. The other two Block 2 lessons handle this better:

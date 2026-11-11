@@ -33,8 +33,8 @@ baseline*: AWS teaches it, AWS grades it, and nothing in this repository alters 
 What this repository adds is an **assessment layer bolted onto specific lesson topics**, written
 entirely from scratch:
 
-- a per-student attributable artefact — a flag, a seeded misconfiguration, or a personalised
-  parameter, and
+- a reproducible request/response or configuration artefact submitted through the student's
+  Classroom account and checked in a live viva, and
 - at least one AI-resilient task (*Audit the AI*, *Explain-in-Plain-English*, or *Prompt Problem*).
 
 **Licensing constraint (confirmed, not inferred).** The AWS Academy materials carry an explicit
@@ -67,7 +67,7 @@ objectives, which this specification does not restate or claim.
 |---|---|---|:--:|:--:|:--:|:--:|:--:|
 | AWS Academy graded items (Knowledge Checks, labs, exams) | AWS | ~40% | ● | | ● | | |
 | Add-on lesson worksheets (this repository, 10 lessons) | Us | ⬚ | ● | ● | ● | ● | ● |
-| Per-student artefact — flag / seeded misconfiguration / personalised variant | Us | part of the worksheet mark | | ● | ● | | ● |
+| Reproducible lab evidence and viva | Us | part of the worksheet mark | | ● | ● | | ● |
 | *Audit the AI* / *EiPE* / *Prompt Problem* | Us | part of the worksheet mark | ● | | | ● | |
 
 ⬚ The split between the AWS-graded 40% and this layer's share of the remaining 60% is an
@@ -88,8 +88,8 @@ institutional decision and is not fixed anywhere in this repository — record i
 ## 6. Lesson schedule
 
 Each row is an add-on session that follows the corresponding AWS Academy lesson. **Kind** follows
-the repository's own classification: LAB = runnable vulnerable/fixed pair with a flag; HYBRID =
-smaller demonstrable exploit plus conceptual material; CONCEPTUAL = analysis, no flag.
+the repository's own classification: LAB = runnable vulnerable/fixed pair; HYBRID =
+smaller demonstrable exploit plus conceptual material; CONCEPTUAL = analysis without Docker.
 
 | AWS lesson | Add-on topic | Kind | Block | Lab folder | CLOs |
 |---|---|---|:--:|---|---|
@@ -107,7 +107,8 @@ smaller demonstrable exploit plus conceptual material; CONCEPTUAL = analysis, no
 
 Block assignment follows the preregistration: **Section A** = Block 1 AIR-Sec / Block 2
 Conventional; **Section B** = the reverse. Blocks follow the half of term (2026-10-31): Block 1 = Weeks 1–10,
-Block 2 = Weeks 11–20, which puts Lesson 13 in Block 1 and Lesson 7 (IAM) in Block 2. Section A = C5R2,
+Block 2 = Weeks 11–18 (the term has 18 meetings; the planned Weeks 19–20 fold into Weeks 17–18,
+2026-11-01), which puts Lesson 13 in Block 1 and Lesson 7 (IAM) in Block 2. Section A = C5R2,
 Section B = C5R1 (random draw, `course-plan.md`).
 
 ## 7. Teaching and learning methods
@@ -116,8 +117,10 @@ Section B = C5R1 (random draw, `course-plan.md`).
   the AWS console, its UI and its guard-rails are learned. The add-on then attacks and fixes the
   same idea locally, without an account, so the security reasoning is exercised rather than the
   click-path.
-- **Per-student attributable artefacts.** Flags are minted per student (`instructor/seed_flags.py`),
-  and CONCEPTUAL lessons issue per-student planted-error variants instead of flags.
+- **Attributable evidence.** Public Docker labs use shared demonstration markers. The student's
+  Classroom submission contains the complete commands, before/after results, and explanation;
+  a live spot-check tests whether the student can reproduce and explain the result. Conceptual
+  lessons may still use assigned planted-error variants.
 - **AI-resilient assessment.** Every add-on carries at least one of *Audit the AI*, *EiPE* or
   *Prompt Problem* — cloud security is a domain where AI answers are fluent and frequently wrong
   about specifics such as policy-evaluation order or what a scanner can actually parse.
@@ -126,18 +129,23 @@ Section B = C5R1 (random draw, `course-plan.md`).
 
 ## 8. Assessment criteria and grading
 
-The AWS-graded portion is scored by AWS. This layer's worksheets are graded against the rubric in
-each lesson's worksheet; the per-student artefact is an integrity control that also carries marks.
-Grading scale and the exact weight of this layer: ⬚.
+The AWS-graded portion (40 of 100 points) is scored by AWS. This layer is the other 60 points,
+split as in the syllabus: Basic 5 / Technical 45 / Interdisciplinary 10. Each Local is marked on
+the syllabus's 6-criterion rubric, attached to its Classroom assignment, at Very Good = 1,
+Good = 0.75, Fail = 0. Criterion 1 gives Basic, the mean of criteria 2–4 gives Technical and the
+mean of criteria 5–6 gives Interdisciplinary, each multiplied by that Local's weight (table in
+[SUBMISSION.md](../SUBMISSION.md); instructor-approved 2026-11-01), then the late rule applies.
+The lab evidence and viva are integrity controls and count as evidence when the rubric is applied.
+Letter-grade bands follow the institution's scale: ⬚.
 
 ## 9. Verification of student achievement
 
 - Every add-on lesson has an instructor-held answer key, reviewed against the published worksheet
   whenever lesson content changes.
-- Flags and planted-error variants are per student, so duplicate submissions are detectable rather
-  than a matter of judgement.
-- The control ("fixed") application in each lab never emits a flag — evidence of a flag is evidence
-  the student exploited the vulnerable path themselves.
+- Public Docker flags are shared demonstration markers and never prove who ran a lab. Compare the
+  full request/response pair and use a live spot-check where attribution is in doubt.
+- The control ("fixed") application's behavior must be assessed by its response and state, not
+  by the presence or absence of a marker; the monitoring lab intentionally emits one on alert.
 - Attainment is reviewed at the end of term by mapping this layer's scores back to §4; the
   AWS-graded 40% is reported separately, as it is identical for all sections by construction.
 
@@ -151,8 +159,8 @@ Grading scale and the exact weight of this layer: ⬚.
 ## 11. Academic integrity and AI policy
 
 AI assistants are permitted and are assessed directly through the *Audit the AI* tasks. What is
-graded is the student's own understanding, which is why artefacts are per-student and why the
-control app is flagless. Submitting a configuration or explanation a student cannot reproduce is an
+graded is the student's own understanding, checked through evidence and viva. Submitting a
+configuration or explanation a student cannot reproduce is an
 academic-integrity matter under ⬚ (institutional policy).
 
 ---

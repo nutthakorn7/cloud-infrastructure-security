@@ -1,5 +1,10 @@
 # Lesson Plan — Lesson 6: Load Balancing & Auto-Scaling Under Load
 
+> **Current delivery policy (2026-11-11):** Students update the public repo and run this lab
+> without a personal `.env`. Any `FLAG{…}` is a shared demo marker. Grade complete
+> request/response evidence, explanation, and viva. Older per-student flag and seeding notes
+> below document the original design and are not instructions for this cohort.
+
 | | |
 |---|---|
 | **Course** | Cloud Infrastructure & Security · 02005097 (`README.md`, `course-plan.md`) |
@@ -8,7 +13,7 @@
 | **Block** | Block 1 (`docs/course-specification.md` §6) |
 | **Duration** | **45–60 min add-on**, run *after* the AWS Learner Lab (lab README, "This lesson — what to do") |
 | **Lab folder** | `labs/lesson06-load-balancing-autoscaling` |
-| **Slides / quiz** | None, by design — `slides/README.md` and `quizzes/README.md` are deliberately empty; the lecture baseline and the Knowledge Check are AWS's |
+| **Slides / quiz** | Original [Week 09 course bridge](../../slides/weekly-bridges/output/Week09_Cloud_Course_Bridge.pptx); AWS Module 10 slides and Knowledge Check remain primary |
 | **Standards** | **CWE-400** (Uncontrolled Resource Consumption) · OWASP **API4:2023 Unrestricted Resource Consumption** (both named in the lab README) |
 | **CLOs addressed** | **CLO2** demonstrate · **CLO3** apply the control (spec §6 row). Task 2b is an *EiPE*, which spec §4 maps to **CLO1/CLO4** — see §9 note |
 | **Semester / section / room / grading scale / PLOs** | ⬚ |
@@ -17,6 +22,14 @@
 > **slot 4** (`courses/cloud-infrastructure-security.yml`), rendered "Lesson 4". The renumbering is
 > deliberate and documented in `tests/test_parity_cis.py`. In *this* repository it is Lesson 6, after
 > the AWS lab it attaches to.
+
+> **Plainer worksheet and Step-by-step (owner, 2026-11-04).** KOSEN students come through an
+> accelerated high-school track, so the worksheet was reworded into short, concrete questions, and
+> students may answer in Thai or English on the Local05 Answer Sheet (no PDF). The lab README gained
+> a copy-paste **Step-by-step** (steps 0–9, every command run as written on 2026-11-04). The change
+> applies to both Parts equally: the same five Part 1 questions asking for the same points, 2a
+> asking for the same evidence in labelled pieces, 2b and 2c with the same meaning, the same point
+> split. Mark the reasoning, not the language.
 
 ---
 
@@ -90,12 +103,12 @@ its configured maximum. That makes the interesting question not "where is the fl
 | Time | Task | Student does | Evidence produced |
 |---|---|---|---|
 | 0:00–0:05 | **Bridge from the AWS lab** | Recall from the Learner Lab: what the target group held, where min/max/desired capacity was set. Frame today's question: who may trigger scaling, and how often? | — |
-| 0:05–0:12 | **Stand up the targets** | `cd labs/lesson06-load-balancing-autoscaling` → `docker compose up -d` (vulnerable on `:8109`, fixed on `:8110`); `GET /status` on both — `current_instances` 2, `load_units` 0 | Baseline screenshot |
-| 0:12–0:27 | **Worksheet 2a (i) — the attack** | Loop anonymous `POST /generate-load` against the vulnerable app until `current_instances` reaches the simulated maximum; the response then carries the flag. Either `python exploit.py` or a hand-rolled loop | Request pattern + approximate call count + **the flag** |
-| 0:27–0:37 | **Worksheet 2a (ii) — the control** | Same anonymous request against `:8110` → `401`. Then repeat with the correct `X-Api-Key` (value is in the lab's own `docker-compose.yml`) until the response changes to `429`, and re-check `GET /status` | Both responses + the fixed app's `/status` afterwards |
-| 0:37–0:47 | **Worksheet 2b — EiPE** | Answer the teammate who says an API key alone is enough, in 3–4 sentences a non-technical stakeholder would follow; and why "just add more instances" is not a security fix | Written answer |
+| 0:05–0:12 | **Stand up the targets** | README Step-by-step steps 0–3: `.env` in place, `docker compose up -d --build` (vulnerable on `:8109`, fixed on `:8110`); `GET /status` on both — `current_instances` 2, `load_units` 0 | Baseline screenshot |
+| 0:12–0:27 | **Worksheet 2a (i) — the attack** | Loop anonymous `POST /generate-load` against the vulnerable app until `current_instances` reaches the simulated maximum; the response then carries the flag. Step-by-step step 4: a 40-call `curl` loop (`exploit.py` is an optional self-check) | Request pattern + approximate call count + **the flag** |
+| 0:27–0:37 | **Worksheet 2a (ii) — the control** | Same anonymous request against `:8110` → `401`. Then repeat with the correct `X-Api-Key` (value is in the lab's own `docker-compose.yml`; Step-by-step steps 6–8) until the response changes to `429`, and re-check `GET /status` | Both responses + the fixed app's `/status` afterwards |
+| 0:37–0:47 | **Worksheet 2b — EiPE** | Answer the teammate who says an API key alone is enough, in 3–4 short sentences someone without IT knowledge could follow; and why "just add more instances" is not a security fix | Written answer |
 | 0:47–0:53 | **Worksheet 2c — blast radius** | One valid key leaks to a public repository: worst-case scaling-relevant calls before cut-off, and why that number bounds the damage | Written answer |
-| 0:53–0:55 | **Submit + tear down** | Export the worksheet to PDF as `Lesson06_<StudentID>.pdf`, submit worksheet + flag to Classroom; `docker compose down` | Submission |
+| 0:53–0:55 | **Submit + tear down** | Fill in the Local05 Answer Sheet copy in Classroom (flag included) and Turn in, no PDF; `docker compose down` | Submission |
 
 **Checks for understanding**
 - After 2a(i), cold-call: *"nothing crashed and no error was returned — so what exactly did the
@@ -110,7 +123,8 @@ after 2c is written, or answer it for them.
 
 ## 5. Conventional delivery of the same slot
 
-The counterbalanced section does **Part 1 only** — five essay questions, no container, no flag
+The counterbalanced section does **Part 1 only** — five short-answer questions (2–4 sentences each,
+Thai or English), no container, no flag
 (worksheet, "Submit"). Same 45–60 min envelope:
 
 - 0:00–0:10 — bridge from the AWS lab; the load balancer / target group / ASG relationship (Q1) and
@@ -144,7 +158,7 @@ model of the real service.
 | Worksheet Part 2a (AIR-Sec) | Request pattern, call count, captured flag, both fixed-app responses | P1–P4, K4 | Part of this layer's worksheet mark — ⬚ (spec §4) |
 | Worksheet Part 2b — *EiPE* | Written 3–4 sentence explanation | K4, CLO4 | as above |
 | Worksheet Part 2c — blast radius | Written answer | P5, K4 | as above |
-| Worksheet Part 1 (Conventional arm) | Five essay answers | K1–K4 | as above |
+| Worksheet Part 1 (Conventional arm) | Five short answers | K1–K4 | as above |
 | **Per-student flag** | The `scaling` flag returned by the *vulnerable* app once the fleet reaches maximum | A2 | Integrity control that also carries marks (spec §8) |
 | Viva / random live check | Live reproduction and explanation | P1–P4, A2 | Pass / flag for follow-up (SUBMISSION.md) |
 
@@ -164,11 +178,11 @@ where the mechanism is explained correctly but the run was not completed.
 
 | Risk | Mitigation |
 |---|---|
-| **Arm confusion.** The worksheet tells the student to complete only their assigned Part, but its block→arm sentence does not hold for the counterbalanced section, and the lab README says something different again (see §9). A student can do the wrong Part in good faith. | Announce, in class and in the Classroom post, which Part **this section** is doing today. Do not let students infer it from the worksheet header. |
+| **Arm confusion.** The worksheet header now states the Block 1 arms both ways (Section A = AIR-Sec, Section B = Conventional) and the README's "This lesson" step 3 now agrees (fixed 2026-11-04, §9 notes 1–2), but a student can still do the wrong Part in good faith. | Announce, in class and in the Classroom post, which Part **this section** is doing today. Do not let students infer it from the worksheet header. |
 | **Scaler state is cumulative and in-process.** Any exploration before the timed run inflates `load_units`, and a second run returns the flag on call 1 rather than ~40. Nothing resets it from outside. | Verified on this machine: `docker compose restart vulnerable` returns `/status` to `current_instances` 2, `load_units` 0. Restart before a demo or a re-attempt, and mark the *reasoning*, not the exact call count. |
 | **The fixed app's key budget is a lifetime counter.** A student who spends it while poking about gets `429` on every later keyed call, including the one they meant to screenshot. | `docker compose restart fixed` (same mechanism as above). |
-| **`pip install requests` is refused** with *externally-managed-environment* (PEP 668) on Homebrew and Debian-packaged Python — the README's host-side install then fails. | Verified fallback: `python3 -m venv .venv && .venv/bin/pip install requests && .venv/bin/python exploit.py` (`.venv/` is already git-ignored). Or skip `exploit.py` and drive the endpoint with `curl` — the exercise needs no Python. |
-| **`python exploit.py` fails** on machines where only `python3` exists. | Run `python3 exploit.py`; that is what was used to reproduce the README's captured output. |
+| **`pip install requests` is refused** with *externally-managed-environment* (PEP 668) on Homebrew and Debian-packaged Python — the README's host-side install then fails. | Verified fallback: `python3 -m venv .venv && .venv/bin/pip install requests && .venv/bin/python exploit.py` (`.venv/` is already git-ignored). Or skip `exploit.py`: the README's Step-by-step drives the endpoint with `curl` only, and `exploit.py` is labelled optional. |
+| **`python exploit.py` fails** on machines where only `python3` exists. | Run `python3 exploit.py`, as the README's Run it block now says; that is what was used to reproduce its captured output. |
 | **Host ports 8109 / 8110 already bound.** | `exploit.py` reads `VULN_URL` and `FIXED_URL` from the environment, so a student who remaps published ports can point it at the new ones without editing the script. Prefer that to editing `docker-compose.yml` — the lab files are covered by the monorepo parity gate. |
 | **First-time image build inside a 45–60 min slot** (`python:3.12-slim` pull + Flask install) eats the lab. | Pre-build during the AWS Learner Lab portion, or ask students to run `docker compose up -d --build` the night before. |
 | **The AWS Learner Lab overruns** and swallows the add-on. | Fall back to the §5 shape: demonstrate the anonymous hammer at the front, set 2b and 2c as homework, and have students run 2a on their own machines before the next session. |
@@ -177,26 +191,20 @@ where the mechanism is explained correctly but the run was not completed.
 
 ## 9. Instructor notes on lab-content issues (do not fix inside a worksheet mid-term)
 
-Three inconsistencies in this lesson's own materials are flagged rather than edited — any change has
+Three inconsistencies in this lesson's own materials were flagged rather than edited (notes 1 and 2 were fixed on 2026-11-04, with the plainer worksheet) — any change has
 to move `labs/`, the curriculum monorepo copy and the instructor key together (repo CLAUDE.md), and
 the monorepo copy carries the documented renumbering substitutions in `tests/test_parity_cis.py`.
 
-1. **Who does Part 1.** The lab README says "Part 1 essay for everyone; Part 2 AIR-Sec students also
-   submit the flag"; the worksheet says "complete only the part assigned to you this block" and its
-   Submit line reads "Part 1 (Conventional) or Part 2a/2b/2c (AIR-Sec)". These cannot both hold.
-   Teach the worksheet's version and say so explicitly.
-2. **Block → arm.** The worksheet's opening line ("Section is assigned Block 1 = AIR-Sec or Block 2
-   = Conventional per `course-plan.md`'s block table") is byte-identical boilerplate copied into
-   every lesson worksheet, not conditioned on section — so it states the mapping as fixed. It holds
-   for Section A but is reversed for Section B (`course-plan.md`: "Section A = Block 1 AIR-Sec /
-   Block 2 Conventional; Section B = reversed"; `docs/course-specification.md` §6: "Section B = the
-   reverse"). The citation is also imprecise: `course-plan.md`'s actual "Lesson topic map" table
-   gives only lesson→block (1 or 2); the block→arm rule is the section-conditional prose sentence
-   beneath that table, not the table itself. This is a Block-1 lesson, so a Section B student
-   following the worksheet header verbatim would join the wrong arm.
-3. **Declared duration.** `lesson.yml` in the monorepo records `duration_min: 180` for this lesson —
-   as it does for all ten cloud lessons, a template default carried over from the 19-week sibling
-   courses. The authoritative figure for teaching is the lab README's 45–60 min.
+1. **Fixed 2026-11-04 — who does Part 1.** The lab README said "Part 1 essay for everyone; Part 2
+   AIR-Sec students also submit the flag", which contradicted the worksheet's "complete only the
+   part assigned to you this block". README step 3 now says the Conventional room does Part 1 and
+   the AIR-Sec room does Part 2 plus the flag, matching the worksheet.
+2. **Fixed — block → arm.** This note quoted an older worksheet header that stated the
+   block→arm mapping as fixed for every section. The header now reads "Section A = Block 1 AIR-Sec;
+   Section B = Block 1 Conventional", which is right for this Block 1 lesson.
+3. **Fixed declared duration.** `lesson.yml` in the monorepo now records `duration_min: 60` for
+   this local add-on, matching the lab README's 45–60 minutes. The complete weekly meeting remains
+   100 minutes.
 
 Also noted: spec §6 assigns this row CLO2 and CLO3, while spec §4 maps *EiPE* tasks to CLO1/CLO4 —
 task 2b is an EiPE, so the row understates its own CLO coverage.
@@ -208,12 +216,12 @@ task 2b is an EiPE, so the row understates its own CLO coverage.
   `requirements.txt`
 - Instructor key: `instructor/lesson06-load-balancing-autoscaling-answer-key.md` (git-ignored)
 - Flag tooling: `instructor/seed_flags.py` (challenge key `scaling`, salt env `CIS_FLAG_SALT`)
-- Run block, quoted from the lab README:
+- Run block, quoted from the lab README (students follow its Step-by-step; this block is the optional self-check):
   ```bash
   cd labs/lesson06-load-balancing-autoscaling
-  docker compose up -d          # vulnerable_app.py on :8109, fixed_app.py on :8110
-  pip install requests          # once, on the host
-  python exploit.py
+  docker compose up -d --build   # vulnerable_app.py on :8109, fixed_app.py on :8110
+  python3 -m pip install requests           # once, on the host
+  python3 exploit.py
   ```
 - References the lab itself cites: AWS Elastic Load Balancing documentation (*What is a target
   group?*, *Application Load Balancer components*); AWS Auto Scaling documentation (*Auto Scaling

@@ -1,5 +1,10 @@
 # Lesson Plan — Lesson 14 add-on: AWS Config + Lambda Auto-Remediation (Inverted Allowlist)
 
+> **Current delivery policy (2026-11-11):** Students update the public repo and run this lab
+> without a personal `.env`. Any `FLAG{…}` is a shared demo marker. Grade complete
+> request/response evidence, explanation, and viva. Older per-student flag and seeding notes
+> below document the original design and are not instructions for this cohort.
+
 *CLOUD add-on. The AWS Academy Learner Lab is the baseline students do first; this is the add-on
 that attacks and fixes the same idea locally. **No AWS Academy material is reproduced, quoted or
 paraphrased from a file anywhere in this plan or in the lab** — the topics are described in our own
@@ -17,7 +22,7 @@ words only (`course-plan.md` §"Licensing"; `docs/course-specification.md` §2).
 | **Signature exercise** | "The Inverted Allowlist" (`README.md`) |
 | **Standards** | Analogous **CWE-697** (Incorrect Comparison) · **CWE-284** (Improper Access Control) (`README.md`; `lessons/config-lambda-remediation/lesson.yml` in the curriculum monorepo) |
 | **CLOs addressed** | **CLO2** demonstrate the misconfiguration · **CLO3** apply the correct control and verify empirically (schedule row, `docs/course-specification.md` §6). Via §4's alignment table the per-student flag also carries **CLO5**, and the *Audit-the-AI* / *EiPE* tasks carry **CLO1** and **CLO4** |
-| **Slides** | ⬚ — none. `slides/` in this course is deliberately empty (`slides/README.md`) |
+| **Slides** | Original [Week 18 course bridge](../../slides/weekly-bridges/output/Week18_Cloud_Course_Bridge.pptx); AWS Module 7 slides remain primary |
 | **Session date / room / section** | ⬚ |
 
 > **⬚ institution-specific, recorded nowhere in this repository:** semester, section, room, date,
@@ -28,9 +33,19 @@ words only (`course-plan.md` §"Licensing"; `docs/course-specification.md` §2).
 > **Naming note.** The lab folder, README and worksheet call this **Lesson 14** — the *AWS lesson
 > number* it attaches to. The curriculum monorepo (`courses/cloud-infrastructure-security.yml`)
 > lists the same lesson at **slot 10** of 11 slots, because only ten AWS lessons carry an add-on.
-> Both labels refer to the same material; use "Lesson 14" with students, since that is what the
-> worksheet header and the `Lesson<NN>_<StudentID>.pdf` submission convention use
+> Both labels refer to the same material. With students, say "Lesson 14" for the worksheet (its
+> header uses it) and "Local 10" for the submission: that is the Classroom assignment, and answers
+> go on the **Local10 Answer Sheet** copy that Classroom makes for each student, with no PDF
 > ([SUBMISSION.md](../../SUBMISSION.md)).
+
+> **Plainer worksheet and Step-by-step (owner, 2026-11-04).** KOSEN students come through an
+> accelerated high-school track, so the worksheet was reworded into short, concrete questions and
+> students may answer in Thai or English (2–4 sentences each) on the Local10 Answer Sheet. The
+> change applies to both Parts equally: the same five Part 1 questions asking for the same points,
+> 2a asking for the same three things, **2b (Audit-the-AI) word for word**, 2c with the same
+> meaning, the same point split. The README gained a copy-paste **Step-by-step** (steps 0–7: reset,
+> remediate and check on `:8115`, then the same three on `:8116`), run as written on 2026-11-04,
+> and its kickoff is now `docker compose up -d --build`. Mark the reasoning, not the language.
 
 ---
 
@@ -137,41 +152,34 @@ the default one.
 > README states. Neither the README, the worksheet nor the code carries a per-task budget — do not
 > treat these numbers as fixed course material, and do not edit the lab to make them add up.
 
-**Kickoff commands, exactly as the lab README has them:**
-
-```bash
-cd labs/lesson14-config-lambda-remediation
-docker compose up -d --build       # vulnerable_app.py on :8115, fixed_app.py on :8116
-pip install requests               # once, on the host
-python exploit.py
-```
-
-(The README's step 2 gives the shorter kickoff `docker compose up -d`; use the `--build` form above
-on first run. See §8 risk 1 before the class types the last two lines.)
+**Kickoff:** students follow the README's **Step-by-step** (steps 0–7), which starts with
+`docker compose up -d --build` and gives every `curl` with the output to expect. The optional
+self-check is the README's "Run it" block (`python3 -m pip install requests`, then
+`python3 exploit.py`).
 
 ### 4a. AIR-Sec section (Block 2 = Section B) — 60-minute plan
 
 | Suggested | Task | Student does (task names and content from the lab) | Evidence produced |
 |---|---|---|---|
 | 0:00–0:05 | **Framing** | Recall what the Learner Lab exercise already did — a Config rule found a non-compliant security group and a remediation function was supposed to fix it. Today's question is not "did it run?" but "what did it actually leave behind?" | — |
-| 0:05–0:12 | **Stand the targets up** | `cd labs/lesson14-config-lambda-remediation` → `docker compose up -d --build`; confirm both services answer on `/ping` (`mode` is `vulnerable` on :8115, `fixed` on :8116) | Screenshot of both `/ping` responses |
+| 0:05–0:12 | **Stand the targets up** | `cd labs/lesson14-config-lambda-remediation` → Step-by-step steps 0–2: save the `.env`, `docker compose up -d --build`; confirm both services answer on `/ping` (`mode` is `vulnerable` on :8115, `fixed` on :8116) | Screenshot of both `/ping` responses |
 | 0:12–0:20 | **Baseline (worksheet 2a, step 1)** | `POST /reset` on **:8115** to seed the security group: port 80 (`0.0.0.0/0`), port 443 (`0.0.0.0/0`), port 22 (`0.0.0.0/0`). Name which of the three a Config rule would flag NON_COMPLIANT, and why | The seeded rule list, with the SSH-from-anywhere rule identified |
 | 0:20–0:32 | **Run the remediation and read the damage (worksheet 2a, steps 2–3)** | `POST /remediate` then `GET /security-group` on **:8115**. Note **both** halves of the failure: `dangerous_rules_present` is still true (port 22 survived) *and* 80/443 are gone. Capture the flag the response now carries | The exact `/reset` → `/remediate` → `/security-group` sequence, the surviving rule set, and the captured flag |
 | 0:32–0:40 | **Confirm the fix (worksheet 2a, step 4)** | The identical sequence against **:8116** → only 80/443 remain, `dangerous_rules_present` is false, and **no flag** appears. Then open `remediation_engine.py` and point at the one-token difference between `remediate_correct` and `remediate_inverted` | The fixed app's post-remediation state + the named comparison (`in` vs `not in` the allowed set `{80, 443}`) |
 | 0:40–0:50 | **Worksheet 2b — Audit-the-AI** | Trace the AI-supplied `remediate()` in the worksheet by hand with `allowed_ports = {80, 443}` and rules on 80, 443 and 22; state which ports end up in `remaining_rules` and what the function is really doing | Written answer — the planted flaw named, plus what the function actually returns (start in class, finish as homework) |
-| 0:50–0:57 | **Worksheet 2c — EiPE + simplification debrief** | 3–4 sentences a non-technical stakeholder could follow on why a "successful" remediation left the network exposed, and why that is scarier than loud failure; then the instructor walks §6 (where this simulation is *not* AWS Config or Lambda) | Written answer + no one leaves with a wrong model of the real services |
-| 0:57–1:00 | **Submit + tear down** | Confirm the submission bundle; `docker compose down` | `Lesson14_<StudentID>.pdf` + the flag → Google Classroom |
+| 0:50–0:57 | **Worksheet 2c — EiPE + simplification debrief** | 3–4 short sentences someone without IT knowledge could follow on why a "successful" remediation left the network exposed, and why that is scarier than loud failure; then the instructor walks §6 (where this simulation is *not* AWS Config or Lambda) | Written answer + no one leaves with a wrong model of the real services |
+| 0:57–1:00 | **Submit + tear down** | Confirm the submission bundle; `docker compose down` | Answers and the flag on the Local10 Answer Sheet copy → Turn in (no PDF) |
 
 **Compressing to 45 minutes.** Keep 0:00–0:40 intact — the 2a sequence against both targets and the
 `remediation_engine.py` comparison are the assessed core and the only part that needs the running
 containers. Send 2b and 2c home as written work, and replace the 0:50–0:57 debrief with the
 two-minute version of §6 (rules are a Python list in process memory; no Config, no Lambda, no AWS
-API calls anywhere). If the room is short on time, `python exploit.py` performs the whole
+API calls anywhere). If the room is short on time, `python3 exploit.py` performs the whole
 three-request sequence against both targets in one shot and prints two `PASS` lines — but worksheet
 2a asks for *the exact request sequence the student ran*, so anyone taking that route must still be
 able to state it and reproduce it.
 
-**Optional one-shot check.** `python exploit.py` — expect two `PASS` lines and exit `0`: the
+**Optional one-shot check.** `python3 exploit.py` — expect two `PASS` lines and exit `0`: the
 dangerous rule plus flag surviving remediation on :8115, and the dangerous rule correctly removed
 with no flag on :8116. *(Re-verified on this machine on 2026-07-26: `docker compose up -d --build`
 then `python3 exploit.py` reproduced the README's captured output exactly, exit code 0.)*
@@ -188,8 +196,8 @@ then `python3 exploit.py` reproduced the README's captured output exactly, exit 
 ### 4b. Conventional section (Block 2 = Section A)
 
 The worksheet's own instruction is *"complete only the part assigned to you this block"*, and Part 1
-— five essay questions on what a Config rule does and what COMPLIANT vs NON_COMPLIANT means; how a
-Lambda-based auto-remediation fits the detect → decide → act flow; allowlist vs denylist thinking for
+— five short-answer questions (2–4 sentences each, Thai or English) on what a Config rule does and what COMPLIANT vs NON_COMPLIANT means; how a
+Lambda-based remediation fits a configured detect → decide → act → verify flow, including the explicit route or automation that invokes the action; allowlist vs denylist thinking for
 security group rules; why an inverted-logic bug is more dangerous than a crash or a no-op; and a
 real-world consequence of SSH/RDP open to `0.0.0.0/0` — carries **no flag and no AI-resilience
 layer**. That is exactly the manipulation `course-plan.md` describes: a standard take-home worksheet
@@ -266,8 +274,8 @@ Everything below is visible in the lab's own source.
 |---|---|---|---|
 | Worksheet Part 2a (AIR-Sec sections) | The exact `/reset` → `/remediate` → `/security-group` sequence run against the vulnerable app, the captured flag, the surviving rule set it came from, and the same sequence plus resulting state against the fixed app | K3, P1–P4, A2 | Part of the worksheet mark (`docs/course-specification.md` §4) |
 | Worksheet Part 2b — *Audit-the-AI* | The planted flaw in the AI-supplied `remediate()` named, with what the function actually returns when traced by hand | K2, K3, P5, A3 · CLO1/CLO4 per §4 | Part of the worksheet mark |
-| Worksheet Part 2c — *EiPE* | 3–4 sentences a non-technical stakeholder could follow on why a "successful" run still left the network exposed | K4 · CLO4 | Part of the worksheet mark |
-| Worksheet Part 1 (Conventional sections) | Five essay answers — graded on the writing itself | K1, K2, K4, K5 | The Conventional arm's whole submission |
+| Worksheet Part 2c — *EiPE* | 3–4 short sentences someone without IT knowledge could follow on why a "successful" run still left the network exposed | K4 · CLO4 | Part of the worksheet mark |
+| Worksheet Part 1 (Conventional sections) | Five short answers — graded on the writing itself | K1, K2, K4, K5 | The Conventional arm's whole submission |
 | **Per-student flag** — challenge key `remediate`, injected as `FLAG_REMEDIATE` | The `flag` value the **vulnerable** app returns from `GET /security-group` once `/remediate` has run | A2 · CLO5 | Integrity control that also carries marks (`docs/course-specification.md` §9) |
 | Viva / random live check | Live reproduction of the sequence and explanation of the inverted comparison | P2–P4, A2 | Pass / flag for follow-up |
 
@@ -287,10 +295,10 @@ another student's flag is a violation for both parties
 `/remediate`, `/security-group`) that produced it + a one-paragraph explanation of why an inverted
 allowlist condition is more dangerous than a rule that simply does nothing.
 
-**Submission.** Worksheet exported to PDF with screenshots embedded, named
-`Lesson14_<StudentID>.pdf`, plus the captured flag → Google Classroom, before the next class
-session; AI-tool disclosure required; late −10% of the earned score per day down to 0, marked only after a viva
-([SUBMISSION.md](../../SUBMISSION.md)).
+**Submission.** Answers and the captured flag written on the **Local10 Answer Sheet** copy that
+Classroom makes for each student, then Turn in (no PDF) by **Mon 8 Mar 2027, 23:59
+(Asia/Bangkok)**. Classroom closes submissions at that time, with no late window. AI-tool
+disclosure is required ([SUBMISSION.md](../../SUBMISSION.md)).
 
 **Grading scale, and this layer's share of the final grade: ⬚** — an institutional decision,
 recorded nowhere in this repository (`docs/course-specification.md` §4, §8).
@@ -299,7 +307,7 @@ recorded nowhere in this repository (`docs/course-specification.md` §4, §8).
 
 | Risk | Mitigation |
 |---|---|
-| **1. The README's host commands assume `python` and `pip` are on PATH.** Verified on this machine: `python3` and `pip3` exist; `python` and `pip` do not — so `pip install requests` and `python exploit.py` both fail exactly as written | Have students use `python3 -m pip install requests` / `python3 exploit.py`, or a virtual environment if the host Python refuses a global install. Announce this before the class types the block. **Do not edit the lab to fit the room** — escalated as lab content in §9 |
+| **1. The README's host commands assume `python` and `pip` are on PATH.** Verified on this machine: `python3` and `pip3` exist; `python` and `pip` do not — so `pip install requests` and `python exploit.py` both fail exactly as written | **Fixed:** the README's "Run it" uses `python3 -m pip install requests` / `python3 exploit.py`, and since 2026-11-04 the Step-by-step needs no Python at all. A virtual environment helps if the host Python refuses a global install. Earlier note: **Do not edit the lab to fit the room** — escalated as lab content in §9 |
 | **2. `exploit.py` cannot be run inside the container.** The `Dockerfile` copies only `remediation_engine.py vulnerable_app.py fixed_app.py`, so the exploit script is not in the image even though `requests` is installed there | Run it from the host as the README says, or skip it — the three requests are short enough to make by hand with `curl` or any HTTP client, and worksheet 2a wants the student's own sequence anyway |
 | **3. Ports 8115/8116 already bound** — usually another of this course's labs still running (`course-plan.md` allocates 8104–8117 across the labs; 8115/8116 belong to this one) | `docker compose down` in the other lab folder before starting; or republish the ports in the student's own working copy |
 | **4. The flag is captured before `/remediate`, or after a `/reset`, and nothing appears.** The vulnerable app gates the flag on `remediation_attempted`, which `/reset` sets back to false | Enforce the order: `/reset` → `/remediate` → `/security-group`. A student seeing `dangerous_rules_present: true` with no `flag` field has almost always re-`/reset` after remediating |
@@ -317,20 +325,20 @@ Recorded here rather than fixed. Student-facing lab material and its curriculum-
 parity-gated and graded, and must not be edited to make this plan tidy
 ([../../CLAUDE.md](../../CLAUDE.md)).
 
-1. **Host commands.** The README's `pip install requests` / `python exploit.py` fail on a host that
+1. **Fixed:** the README's "Run it" now uses the `python3` forms, and the Step-by-step needs no
+   Python. Earlier note: **Host commands.** The README's `pip install requests` / `python exploit.py` fail on a host that
    has only `python3` (verified here — `python` and `pip` are absent from PATH). The
    `python3 -m pip` / `python3` forms would work everywhere the current ones do. This is the same
    defect already escalated in the Lesson 5 plan.
-2. **Kickoff command inconsistency.** README step 2 gives `docker compose up -d` while the "Run it"
+2. **Fixed 2026-11-04:** the kickoff, Step-by-step step 1 and "Run it" all use
+   `docker compose up -d --build`. Earlier note: **Kickoff command inconsistency.** README step 2 gives `docker compose up -d` while the "Run it"
    block gives `docker compose up -d --build`; on a first run only the second builds the image.
-3. **Duration conflict.** The lab README states this add-on is **45–60 min**; the curriculum
-   monorepo's `lessons/config-lambda-remediation/lesson.yml` carries `duration_min: 180`. That is not
-   a value borrowed from a sibling course — every `lesson.yml` in the monorepo (all three courses,
-   including this course's own other lessons) carries the identical unfilled `duration_min: 180`
-   default; it was never customized per lesson. This plan follows the README. The real fix is
-   populating this course's per-lesson durations in the manifest, not chasing a value that leaked in
-   from elsewhere.
-4. **The worksheet's arm-assignment line is ambiguous for Section B.** `worksheet.md` opens with
+3. **Fixed duration conflict.** The lab README states this add-on is **45–60 min**, and the
+   curriculum monorepo's `lessons/config-lambda-remediation/lesson.yml` now records
+   `duration_min: 60`. The complete weekly meeting remains 100 minutes. The Cloud course
+   manifests now use per-lesson durations instead of a shared three-hour default.
+4. **Fixed:** the worksheet header now says Section A = Block 2 Conventional and Section B = Block 2
+   AIR-Sec "(reversed from Block 1)". Earlier note: **The worksheet's arm-assignment line is ambiguous for Section B.** `worksheet.md` opens with
    *"Section is assigned Block 1 = AIR-Sec or Block 2 = Conventional … (Lesson 14 falls in Block 2.)"*
    — which reads as though Block 2 is Conventional for everyone. The design is counterbalanced:
    Section A = Block 1 AIR-Sec / Block 2 Conventional, **Section B is the reverse**
@@ -360,7 +368,7 @@ parity-gated and graded, and must not be edited to make this plan tidy
 - **Course documents:** [course-specification.md](../course-specification.md) ·
   [course-plan.md](../../course-plan.md) · [SUBMISSION.md](../../SUBMISSION.md) ·
   [ETHICS.md](../../ETHICS.md) · [CLAUDE.md](../../CLAUDE.md).
-- **Slides:** ⬚ — none; `slides/` is intentionally empty for this course (`slides/README.md`).
+- **Slides:** [Week 18 course bridge](../../slides/weekly-bridges/output/Week18_Cloud_Course_Bridge.pptx), after the primary AWS Academy slides.
 - **Reference, as listed in the lab README** (all publicly available; **no AWS Academy file is used,
   quoted or copied**): AWS Config documentation on evaluating resources with rules and remediating
   noncompliant resources; AWS Lambda documentation on the event-driven remediation pattern; AWS EC2

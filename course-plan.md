@@ -49,11 +49,11 @@ manipulated variable — it's identical for every student in every section alrea
 - **The manipulated layer (this is what AIR-Sec vs Conventional actually varies):** an
   **assessment artifact bolted onto specific lesson topics**, built entirely by us, never touching
   an AWS file:
-  - **AIR-Sec condition:** a per-student attributable artifact (flag, seeded misconfiguration
-    instance, or personalized parameter) + at least one of Audit-the-AI / EiPE / Prompt Problem +
-    a viva spot-check — same taxonomy as the other two courses.
+  - **AIR-Sec condition (delivery revision 2026-11-11):** a reproducible lab trace or other
+    evidence submitted through Classroom + at least one of Audit-the-AI / EiPE / Prompt Problem +
+    a viva spot-check. Public Docker flags are shared demonstration markers, not personal tokens.
   - **Conventional condition:** a standard take-home worksheet question on the same topic, no
-    per-student flag, no AI-resilience layer.
+    flag requirement, no AI-resilience layer.
   - Both arms assess the **same underlying concept** the AWS lab already taught that lesson —
     we are not re-teaching AWS's content, we are adding an assessment layer on top of it.
 
@@ -63,6 +63,12 @@ the IV. Worth flagging explicitly in the paper/analysis as a documented deviatio
 fully-authored course (see `preregistration.md` §8 — anything not preregistered in this much
 detail is exploratory unless amended).
 
+**Research change to resolve before analysis/publication:** removing per-student lab flags changes
+the AIR-Sec assessment artifact described in the original study plan. Record the effective date,
+check the approved protocol and consent materials, and obtain any required amendment before
+treating data from this version as the originally specified intervention. Classroom submissions
+and viva remain the attribution evidence; the public marker alone never counts as proof.
+
 ## Lesson topic map (confirmed from source material, not copied)
 
 Read directly from Shinya's own troubleshooting/correction notes for each AWS lab (not the AWS
@@ -71,8 +77,8 @@ files themselves) — these are the *topics*, described in our own words:
 | Lesson | AWS topic (ours to assess, not to copy) | Kind | Block | Dir |
 |---|---|---|---|---|
 | 1–3 | AWS Academy Modules 1–3 (Intro, security fundamentals, IAM/access-securing concepts) + Knowledge Checks | **CONCEPTUAL ✅** | 1 | `lesson01-03-aws-fundamentals-intro` |
-| 4 | EC2 instance roles, Lambda basics, Elastic Beanstalk (SSRF → instance-role credential theft) | **HYBRID ✅** | 1 | `lesson04-ec2-lambda-beanstalk` |
-| 5 | S3 static website hosting; Lambda + SNS (public-write bucket-policy misconfig) | **LAB ✅** | 1 | `lesson05-s3-static-site-lambda-sns` |
+| 4 | Cloud Foundations Module 6 EC2 portion and AWS EC2 lab; local SSRF → instance-role credential theft | **HYBRID ✅** | 1 | `lesson04-ec2-lambda-beanstalk` |
+| 5–6 | Week 5: Module 6 Lambda/Elastic Beanstalk practice and S3-site concepts; Week 6: Module 7 storage, AWS EBS lab and local S3 public-write investigation | **LAB ✅** | 1 | `lesson05-s3-static-site-lambda-sns` |
 | — | Load balancing & auto-scaling under load (Cloud Foundations Lab 6) | **HYBRID ✅** | 1 | `lesson06-load-balancing-autoscaling` |
 | 7 | IAM privilege escalation — identity-based vs. resource-based policy conflicts (assume-role to reach a bucket the identity policy alone doesn't permit) | **LAB ✅** | 2 *(was 1; see below)* | `lesson07-iam-policy-evaluation` |
 | 7 (same lesson, 2nd topic) | CloudTrail + CloudWatch + EventBridge monitoring/alerting on failed logins | **HYBRID ✅** | 2 | `lesson07b-cloudtrail-monitoring` |
@@ -103,13 +109,23 @@ deliberately — the IAM topic anchors Block 1's LAB week, the monitoring topic 
 | **C5R1** | **B** | Conventional | AIR-Sec |
 
 **Blocks follow the half of term (owner decision, 2026-10-31).** Block 1 = Local 01–05 (Weeks 1–10),
-Block 2 = Local 06–10 (Weeks 11–20), so the arms switch once, at Week 11. The Classroom runs the
+Block 2 = Local 06–10 (Weeks 11–18), so the arms switch once, at Week 11. The Classroom runs the
 lessons in AWS Academy order, which puts two of them in the other half from the lesson list above:
 Lesson 13 (S3 versioning/replication, Local 04, Weeks 7–8) is now **Block 1**, and Lesson 7's IAM
 topic (Local 06, Weeks 11–12) is now **Block 2**, so Block 1's LAB anchor is Lesson 5 alone.
 `preregistration.md` §3 defines a block as "a set of topics/weeks (e.g., first vs second half)";
 the move of these two lessons still goes in the OSF amendment, with the dose note. Each Local post
 in Classroom opens with the Part each room does.
+
+**The term has 18 Tuesdays, not 20 (owner decision, 2026-11-01).** Both rooms' calendar runs
+3 Nov 2026–2 Mar 2027 with no gaps, so the planned Weeks 19–20 fold into Weeks 17–18: Local 09 is
+due Mon 1 Mar 2027 and Local 10 closes Mon 8 Mar 2027, with their local parts done outside class,
+and the course closes in the Week 18 class. Late work for Local 09 also stops at Mon 8 Mar 2027
+23:59 (owner, 2026-11-01): Classroom cannot close an assignment after its due date on its own, so
+the instructor turns on "Close submissions" for Local 09 at that time, and late-work vivas after
+the last class are arranged outside class. Block 2 is therefore 8 meetings (Weeks 11–18) against
+Block 1's 10; add this dose imbalance to the OSF amendment as well. The institutional syllabus
+still plans 20 weeks (2,000 minutes); class time is now 18 × 100 minutes.
 
 ## All 10 lesson topics — built and verified
 
@@ -118,8 +134,8 @@ in Classroom opens with the Part each room does.
   root-user hygiene / MFA, each fact-checked against AWS's own public docs.
 - **HYBRID — "SSRF → Instance-Role Credential Theft"** (`lesson04-ec2-lambda-beanstalk/`): a
   simulated EC2 instance-metadata endpoint leaked via an unrestricted URL-fetch feature
-  (CWE-918); fixed version blocks internal/metadata-shaped URLs. Elastic Beanstalk
-  auto-scaling stays conceptual (worksheet only).
+  (CWE-918); fixed version blocks internal/metadata-shaped URLs. Lambda and Elastic Beanstalk
+  are taught in Week 5; Local 02 does not assess them.
 - **LAB — "Public-Write Bucket Policy"** (`lesson05-s3-static-site-lambda-sns/`): a static-site
   bucket policy that mistakenly grants `PutObject` to `Principal: "*"` alongside the intended
   `GetObject`, letting anonymous callers deface the site. Lambda+SNS stays conceptual.
