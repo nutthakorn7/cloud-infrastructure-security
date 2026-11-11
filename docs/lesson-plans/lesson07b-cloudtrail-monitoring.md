@@ -1,5 +1,10 @@
 # Lesson Plan — Lesson 7 (2nd topic): CloudTrail + CloudWatch + EventBridge Monitoring
 
+> **Current delivery policy (2026-11-11):** Students update the public repo and run this lab
+> without a personal `.env`. Any `FLAG{…}` is a shared demo marker. Grade complete
+> request/response evidence, explanation, and viva. Older per-student flag and seeding notes
+> below document the original design and are not instructions for this cohort.
+
 *CLOUD add-on. The AWS Academy Learner Lab is the baseline students do first; this is the
 add-on that attacks and fixes the same idea locally. No AWS Academy material is reproduced here —
 topics are described in our own words only.*

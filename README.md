@@ -7,10 +7,10 @@ Shinya Oyama. Third arm of the same preregistered study as
 [`security-cryptography`](../KOSEN69%20-%20security-cryptography/) — same pedagogy, same
 research design, structurally different course (see below).
 
-> ⚠️ **Status: DRAFT.** All 10 lesson topics built and Docker-verified (see
-> [course-plan.md](course-plan.md)). `seed_flags.py`/CTFd wiring and the research instruments
-> (H1–H4, adapted to this course's shared-AWS-baseline structure) are done. Not yet built: the
-> third challenge-host and the deployable Docker images — do not use this for a live course yet.
+> **Delivery:** AWS Academy modules and labs stay in its LMS; this public repo supplies the
+> original local worksheets and Docker simulations referenced from Classroom. The older
+> per-student flag/CTFd plan is not the delivery path for these local labs. The research impact
+> of this assessment change is recorded in [course-plan.md](course-plan.md).
 
 > ⚠️ **This repo never contains AWS Academy's official material.** The underlying curriculum
 > (Cloud Foundations, Cloud Security Foundations, all Learner Lab instructions) is Shinya's own
@@ -25,12 +25,17 @@ research design, structurally different course (see below).
 ## Quick start
 
 ```bash
-git clone <this-repo-url>
+git clone https://github.com/nutthakorn7/cloud-infrastructure-security.git
 cd cloud-infrastructure-security
 cd labs/lesson07-iam-policy-evaluation
 cat README.md
 docker compose up
 ```
+
+Before each lab, run `git pull` in the course folder. If you use a GitHub fork, select **Sync
+fork** on GitHub and then run `git pull` in your local copy; do not make a new fork for every
+week. Public Docker labs require no personal `.env`. Their `FLAG{…}` responses are shared demo
+markers. Grading uses the request/response evidence, explanation, and viva in the Classroom task.
 
 **Base requirements:** Docker Desktop, Git. The AWS-side hands-on labs themselves run in AWS
 Academy's own Learner Lab sandboxes (separate from this repo, provided through Classroom) — this

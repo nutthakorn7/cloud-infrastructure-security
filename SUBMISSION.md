@@ -1,7 +1,7 @@
 # How to Do & Submit Work
 
 **Platforms:** **AWS Academy Learner Lab** (the AWS modules + Knowledge Checks — provided through
-Classroom) + **Google Classroom** (our worksheets, flags, grades). All offensive work is on the two
+Classroom) + **Google Classroom** (our worksheets, evidence, grades). All offensive work is on the two
 approved sandboxes only — see [ETHICS.md](ETHICS.md).
 
 > **How this course is graded (read once):** ~40% of your grade is AWS Academy's own auto-graded
@@ -21,7 +21,9 @@ approved sandboxes only — see [ETHICS.md](ETHICS.md).
    cd cloud-infrastructure-security
    ```
    Each add-on lab is then `docker compose up`. Before each lab, run `git pull` in that folder to get
-   the newest version; each lab's README shows the steps.
+   the newest version; each lab's README shows the steps. If you already made a GitHub fork, use
+   GitHub's **Sync fork** button and then `git pull` in your local fork. You do not need to fork
+   again. Keep answers in the Classroom Answer Sheet, not in the course repository.
 3. Confirm you can start your Learner Lab and reach the AWS console.
 
 ---
@@ -35,13 +37,14 @@ approved sandboxes only — see [ETHICS.md](ETHICS.md).
    up`, per that lab's README) and work the **worksheet** (`labs/lesson<NN>…/worksheet.md`): for each
    task record the **payload/command**, a **screenshot** of the result, and a short **mitigation**.
    Conceptual lessons (no Docker target) center the **Audit-the-AI** exercise instead of an exploit.
-3. Capture your lab's **flag** where the lab mints one (LAB/HYBRID lessons).
+3. Record the exact request or command and the vulnerable and fixed results. A `FLAG{…}` in a
+   local simulation is a shared demonstration marker, not a personal token or graded proof.
 
 **Submit → Google Classroom:**
 | Part | What |
 |------|------|
 | Worksheet | your answers on that Local's **Answer Sheet** when Classroom gives you a copy of one (from Local 02): fill in the copy and click Turn in, no PDF needed. Otherwise the completed worksheet exported to **PDF** (screenshots embedded) |
-| Flag | the captured `FLAG{…}` for that lesson (LAB/HYBRID lessons) |
+| Evidence | the complete request/response pair, relevant state before and after, and your own explanation; follow that Local's worksheet |
 
 **File name (PDF submissions only):** `LocalNN_StudentID.pdf` (e.g. `Local04_65123456.pdf`). `NN` is
 the number of the **Local** assignment in Classroom, which is not the lesson folder number (see the
@@ -112,9 +115,8 @@ applied to the points you earn.
 
 This is a security course — we practice the same rigor on your own work. Assume your submission is checked.
 
-- **Your flags are unique to you.** Each student receives **personalized lab flags** derived from
-  your student ID. A flag is traceable to the person it was issued to — submitting someone else's
-  flag is detected automatically and counts as a violation for **both** parties.
+- **Local lab markers are shared.** A `FLAG{…}` shown by a public Docker lab is a demonstration
+  marker. It does not establish who ran the lab and is never sufficient evidence by itself.
 - **Your screenshots must show you.** Evidence must include a terminal running `printf '%s | %s | ' "$(whoami)" '<YOUR-STUDENT-ID>'; date '+%F %T %Z'` **in
   the same image as the evidence**. When the evidence is a browser page, a DevTools panel or a
   rendered response, put that terminal **beside the browser and capture the whole screen** — a
@@ -127,7 +129,7 @@ This is a security course — we practice the same rigor on your own work. Assum
   *your* results.
 
 **Allowed:** discussing concepts, helping a classmate debug their *own* setup, using AI tools **if disclosed**.
-**Not allowed:** sharing flags/answers/screenshots, copying a write-up, touching anyone else's Learner Lab.
+**Not allowed:** sharing answers/screenshots, copying a write-up, touching anyone else's Learner Lab.
 
 Violations follow the [ethics & academic-integrity policy](ETHICS.md), the AWS Academy terms, and
 KOSEN's conduct process.
