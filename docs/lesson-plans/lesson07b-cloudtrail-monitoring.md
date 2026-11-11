@@ -2,8 +2,8 @@
 
 > **Current delivery policy (2026-11-11):** Students update the public repo and run this lab
 > without a personal `.env`. Any `FLAG{…}` is a shared demo marker. Grade complete
-> request/response evidence, explanation, and viva. Older per-student flag and seeding notes
-> below document the original design and are not instructions for this cohort.
+> request/response evidence, explanation, and viva. Local 09 follows the Week 17 AWS lab;
+> its 45–60 minute add-on is outside the 100-minute class and is due 1 March 2027.
 
 *CLOUD add-on. The AWS Academy Learner Lab is the baseline students do first; this is the
 add-on that attacks and fixes the same idea locally. No AWS Academy material is reproduced here —
@@ -15,7 +15,7 @@ topics are described in our own words only.*
 | **Attaches to (AWS lesson)** | AWS Academy Cloud Security Foundations — failed-console-login alerting: CloudTrail event recording → CloudWatch metric filter/alarm → EventBridge rule → SNS notification (course spec "AWS lesson 7 (2nd topic)"; the lab README places it as Lab 3.2-class material) |
 | **Kind** | HYBRID — small Docker lab for the aggregation-key concept; EventBridge/SNS subscription mechanics stay conceptual (`course-plan.md`) |
 | **Block** | 2 |
-| **Add-on duration** | 45–60 min (per the lab's own `README.md`) |
+| **Add-on duration** | 45–60 min outside the Week 17 class (per the lab's own `README.md`) |
 | **Lab folder** | `labs/lesson07b-cloudtrail-monitoring` |
 | **Slides** | Original [Week 17 course bridge](../../slides/weekly-bridges/output/Week17_Cloud_Course_Bridge.pptx); AWS Module 6 slides remain primary |
 | **Analogous bug class** | CWE-778 (Insufficient Logging) **adjacent** / detective-control logic error — "the control exists and runs, but its aggregation key silently excludes the real attack shape" (lab README) |
@@ -94,16 +94,16 @@ key does not match the threat, the control is decorative.
 ## 3. Prerequisites — before this add-on runs
 
 **Students must have completed, in order:**
-1. The real **AWS Academy failed-console-login alerting lab content** (CloudTrail → CloudWatch
-   metric filter/alarm → EventBridge → SNS) in their own Learner Lab sandbox — that is where the
-   AWS console UI, the actual metric-filter syntax and EventBridge rule configuration are learned,
-   and that portion is AWS-graded (lab README step 1; [SUBMISSION.md](../../SUBMISSION.md)).
+1. **Week 17 AWS Academy Lab 6.1** in their own Learner Lab sandbox during the 75-minute
+   class block. It uses security-group changes for alerting; Local 09 applies the same monitoring
+   ideas to a different, failed-login scenario after class. Use the Week 17 course bridge for the
+   aggregation-key and password-spray examples before starting the local worksheet.
 2. **Docker Desktop** working on their own machine.
 
 **Instructor, before the session:**
 - Pre-build the images (`docker compose up -d --build` in the lab folder) so a room of students is
   not pulling `python:3.12-slim` and running `pip install` at once.
-- Mint per-student flags for the cohort (see §6).
+- Check that the public lab runs without a personal `.env`; the shared demo `flag` is not a grade.
 - Confirm host ports **8111** (vulnerable) and **8112** (fixed) are free. No other lab in this
   repository binds them; a collision means this lab is already up, or an unrelated host process
   holds the port.
@@ -129,9 +129,9 @@ self-check is the README's "Run it" block (`python3 -m pip install requests`, th
 | 0:06–0:12 | **Read the endpoint** | One `POST /login-attempt` by hand with the README's documented body `{"username": "admin7", "success": false, "source_ip": "203.0.113.20"}`; note the response fields `alert`, `count_for_key`, `note` and the threshold of 3 | The request/response pair and the value of `note` on each app |
 | 0:12–0:25 | **The spray that never alerts (vulnerable, `:8111`)** | Step-by-step step 3: the 20-attempt loop, usernames `admin1`…`admin20`, all from `203.0.113.20`. (`exploit.py` uses usernames `admin1`…`admin20` and a `source_ip` drawn once per run from `203.0.113.1`–`203.0.113.254`. Watch `count_for_key` stay at **1** on every attempt | Worksheet 2a: the exact request sequence, and confirmation that after **20** attempts the app still had not alerted and returned no flag |
 | 0:25–0:33 | **Negative control (still `:8111`)** | Step-by-step step 5 (students reach it after step 4): the **same** username, `alice`, three times from `198.51.100.7`. The vulnerable app *does* alert (`"alert": true`) — but returns **no** flag | The three responses; a one-line statement that the counter works and the *key* is the defect |
-| 0:33–0:42 | **Confirm the fix (`:8112`)** | Step-by-step step 4: the identical 20-attempt loop against the fixed app. `count_for_key` now climbs 1 → 2 → 3 and the alert fires on the **3rd** attempt, `reason` naming the `source_ip` "(usernames vary)" | Worksheet 2a: the attempt number the alert fired on + the captured flag |
+| 0:33–0:42 | **Confirm the fix (`:8112`)** | Step-by-step step 4: the identical 20-attempt loop against the fixed app. `count_for_key` now climbs 1 → 2 → 3 and the alert fires on the **3rd** attempt, `reason` naming the `source_ip` "(usernames vary)" | Worksheet 2a: the attempt number and complete response when the alert first fired |
 | 0:42–0:47 | **One-shot check (optional)** | `python3 exploit.py` — expect two `PASS` lines and exit `0`. Read §9 first if the containers have already served this `source_ip` | The two PASS lines |
-| 0:47–0:60 | **EiPE + submit** | Draft worksheet **2b**: 3–4 short sentences someone without IT knowledge could follow on why per-`(source_ip, username)` counting lets a spray attacker hide in plain sight, and the general grouping principle beyond this lab | Worksheet 2a evidence + flag + 2b answer on the Local09 Answer Sheet copy → Turn in (no PDF) |
+| 0:47–0:60 | **EiPE + submit** | Draft worksheet **2b**: 3–4 short sentences someone without IT knowledge could follow on why per-`(source_ip, username)` counting lets a spray attacker hide in plain sight, and the general grouping principle beyond this lab | Worksheet 2a evidence + 2b answer on the Local09 Answer Sheet copy → Turn in (no PDF) |
 
 **Formative checkpoints.**
 - A student whose vulnerable-app run alerts (or whose fixed-app run alerts on attempt 1 or 2) is
@@ -160,36 +160,20 @@ exploit is not run in this arm.
 
 | Instrument | Evidence | Outcome | Notes |
 |---|---|---|---|
-| Worksheet Part 2a (AIR-Sec arm) | The exact `POST /login-attempt` sequence against `:8111` + confirmation of no alert after 20 attempts; then the `:8112` sequence, the alert attempt number, and the flag | K3, P2, P4, A2 | Part of the worksheet mark |
+| Worksheet Part 2a (AIR-Sec arm) | The complete request and response evidence against `:8111` and `:8112`, including no alert after 20 spray attempts and the first fixed-app alert on attempt 3 | K3, P2, P4, A2 | Part of the worksheet mark; the shared demo flag is not identity evidence |
 | Worksheet Part 2b — **EiPE** (AI-resilient) | 3–4 plain-English sentences on hiding in plain sight + the general grouping principle | K2, K4, A3, CLO4 | The AI-resilient task for this lesson |
 | Worksheet Part 1 (Conventional arm) | Five short answers | K1–K4 | The Conventional arm's whole submission |
-| **Per-student flag** | The `flag` value returned once the **fixed** app's alert fires | A2 | Integrity control (also carries marks) — but see the caution below |
-| Live check (optional) | Reproduce the negative control and explain why it alerts while the 20-attempt spray does not | P3, K4 | Under SUBMISSION.md "Random live checks"; there is no worksheet viva part in this lesson |
+| Live check | Reproduce or explain the negative control and why the 20-attempt spray does not alert | P3, K4 | Short viva checks understanding and evidence; there is no separate written viva report |
 
-**Per-student flag.** Mint with `python3 instructor/seed_flags.py env <STUDENT_ID>` — verified
-working from this repo; this course's shim forwards to the curriculum monorepo's shared
-`tools/seed_flags.py`, whose challenge-key vocabulary comes from the course manifest rather than a
-hand-maintained list, and it emits this lesson's `FLAG_MONITOR`. Without a mint, `docker-compose.yml`
-supplies a public default placeholder to the **fixed** service only, overridable per build
-(`FLAG_MONITOR=FLAG{...} docker compose up`). Flags are per student and salted, so a copied flag is
-traceable to the student it was issued to.
+**Shared demonstration marker.** The `flag` returned by the fixed app is public and can be
+obtained without running the vulnerable-side exercise. It carries no identity or score. Assess
+the complete request/response sequence, the difference between the two counters, the student's
+explanation, and the viva. Do not seed or distribute personal `.env` files.
 
-> **⚠ Instructor caution — the flag is weaker evidence here than in the other labs.** Unlike every
-> other lab in this course, the flag in lesson 07b is emitted by **`fixed_app.py`**, and
-> `vulnerable_app.py` never emits one (the vulnerable service simply receives no `FLAG_MONITOR` in
-> `docker-compose.yml`; both files read the same `os.environ.get("FLAG_MONITOR")`). That inverts
-> the convention asserted in course specification §9 and in this repo's `CLAUDE.md`. The practical
-> consequence: any three `success: false` POSTs sharing one self-chosen `source_ip` (any value, any
-> usernames) sent to `:8112` yield the flag, without the student ever touching the vulnerable app —
-> the fixed app keys its counter by `source_ip` alone, so three POSTs spread across *different*
-> `source_ip` values each stay at `count_for_key: 1` and never alert. **Grade the vulnerable-side
-> evidence** — the 20-attempt sequence with `count_for_key` pinned at 1, and the negative control —
-> not the flag on its own. See §11.
-
-**Deliverable (worksheet).** The captured flag + the attempt number it appeared on + a
-one-paragraph explanation of why `(source_ip, username)` is the wrong aggregation key for detecting
-a password spray, while `source_ip` alone correctly catches it. Students write it on the **Local09
-Answer Sheet** copy that Classroom makes for each of them and click Turn in (no PDF).
+**Deliverable (worksheet).** The request/response evidence, the attempt number of the first
+fixed-app alert, and an explanation of why `(source_ip, username)` misses the spray while
+`source_ip` catches it. Students write on the **Local09 Answer Sheet** copy in Classroom and click
+Turn in (no PDF).
 
 ## 7. Materials
 
@@ -200,8 +184,8 @@ Answer Sheet** copy that Classroom makes for each of them and click Turn in (no 
   `exploit.py`.
 - `exploit.py` knobs, if you want to vary the exercise: `VULN_URL`, `FIXED_URL`, `ATTEMPTS`
   (default `20`), `SOURCE_IP`.
-- Instructor: `instructor/seed_flags.py` (git-ignored) and the answer key
-  `instructor/lesson07b-cloudtrail-monitoring-answer-key.md`.
+- Instructor answer key: `instructor/lesson07b-cloudtrail-monitoring-answer-key.md` (if available
+  in the instructor's private materials). No per-student flag setup is needed.
 - Rules of engagement: [ETHICS.md](../../ETHICS.md) · Submission: [SUBMISSION.md](../../SUBMISSION.md)
 - Slides: [Week 17 course bridge](../../slides/weekly-bridges/output/Week17_Cloud_Course_Bridge.pptx), after the primary AWS Academy slides.
 - References the lab cites (all publicly available, no AWS Academy file used or copied): AWS
@@ -244,7 +228,7 @@ Answer Sheet** copy that Classroom makes for each of them and click Turn in (no 
 | `pip install requests` fails on an externally-managed host Python (no venv) | `exploit.py` is optional. The whole worksheet flow is reachable by hand — `curl -s -X POST http://localhost:8111/login-attempt -H 'Content-Type: application/json' -d '{"username":"admin7","success":false,"source_ip":"203.0.113.20"}'` — verified working against both ports |
 | Slow/failed pull of `python:3.12-slim` or `pip install` during `docker compose up -d --build` in class | Pre-build before the session; keep an offline image copy (`docker save`/`docker load`) |
 | Ports `8111`/`8112` already bound | Nothing else in `labs/` uses them; `docker compose down` this lab if it is already up, or free the unrelated host process |
-| A student "captures" the flag without doing the exercise — three failed POSTs to `:8112` sharing one self-chosen `source_ip` suffice | Grade the **vulnerable**-side evidence (20 attempts, `count_for_key` never above 1) plus the negative control; per-student salted flags still make a *shared* flag traceable. See §6's caution and §11 |
+| A student obtains the shared demo flag without doing the exercise — three failed POSTs to `:8112` sharing one self-chosen `source_ip` suffice | Grade the **vulnerable**-side evidence (20 attempts, `count_for_key` never above 1), the fixed response, explanation, and viva. The shared flag alone earns no credit. |
 | A student concludes the vulnerable app's detection code is simply broken | Run the negative control with them: same username ×3 from one IP on `:8111` returns `"alert": true`. The mechanics are sound; the key is wrong |
 | A student mistakes the lab's reset-on-success for real CloudWatch behaviour | Address it explicitly at the point it is observed — §8, first bullet |
 | A student wants to test spray detection against real infrastructure | Out of bounds — only the local lab and the student's own Learner Lab are approved targets (ETHICS.md). Attempted logins against real AWS endpoints can suspend the whole class's Learner Lab access |

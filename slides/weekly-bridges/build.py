@@ -117,8 +117,8 @@ WEEKS = [
         ("Record", "CloudTrail records the relevant API change."),
         ("Detect", "EventBridge or a CloudWatch metric filter matches the event."),
         ("Notify", "SNS delivery needs a confirmed subscription; inspect alarm and log evidence.")),
-        check="Does a CloudTrail trail by itself send an email alert?", before="Open Module 6 and confirm access to an email inbox for the SNS step.", during="Complete Lab 6.1; capture the event, rule and alert evidence.", after="Submit Local 09 by 1 Mar; do Module 8 bridging outside class.",
-        extra=("Outside the Week 17 class", (("Module 8", "Bridge work", "Use the assigned LMS material to finish the security course sequence."), ("AWS Academy", "Course Assessment", "Take the CSF Course Assessment under its LMS instructions."), ("Local 09", "Submission", "Turn in by 1 Mar; late submissions close 8 Mar at 23:59.")), "This is homework, not an extra 100-minute meeting.")),
+        check="Does a CloudTrail trail by itself send an email alert?", before="Open Module 6 and confirm access to an email inbox for the SNS step.", during="Complete Lab 6.1; capture the event, rule and alert evidence.", after="Use the Local 09 slides and lab outside class; submit by 1 Mar.",
+        extra=("Outside the Week 17 class", (("Local 09", "Apply the detector model", "Study slides 5–7, then complete only your assigned Part outside class."), ("Module 8", "Bridge work", "Use the assigned LMS material to finish the security course sequence."), ("AWS Academy", "Course Assessment", "Take it under LMS instructions; check the deadline in Classroom.")), "Local 09 due 1 Mar; late submissions close 8 Mar at 23:59.")),
     dict(n=18, title="Config and Lambda remediation", aws="Cloud Security Foundations · Module 7", practice="Lab 7.1 · Config / Lambda (75 min)", local="Local 10 · C5R1 Part 2 / C5R2 Part 1", due="Local 10 closes 8 Mar", concept=(
         ("Observe", "AWS Config records the security-group configuration change."),
         ("Remediate", "A custom rule invokes Lambda to restore the intended inbound rules."),
@@ -274,6 +274,21 @@ def build_week(week):
         for i, (kicker, headline, body) in enumerate(items):
             card(slide, .58 + i * 4.19, 3.78, kicker, headline, body, ORANGE if i == 1 else BLUE)
         band(slide, message)
+        notes(slide, week)
+
+    if number == 17:
+        slide = base(prs, week, "LOCAL 09 · EVENT PATHS", "Two ways to turn an event into an alert", len(prs.slides) + 1)
+        card(slide, .58, 3.78, "Event route", "CloudTrail → EventBridge", "A rule matches a relevant event and sends it to a target such as SNS.")
+        card(slide, 4.77, 3.78, "Metric route", "Logs → metric → alarm", "A CloudWatch Logs filter counts matching events; an alarm evaluates the metric and can notify.", ORANGE)
+        card(slide, 8.96, 3.78, "Compare", "Separate paths", "CloudTrail records the action. EventBridge and a metric alarm need not be one serial pipeline.")
+        band(slide, "Use the AWS lab for the real service setup; Local 09 studies the counting choice.")
+        notes(slide, week)
+
+        slide = base(prs, week, "LOCAL 09 · COUNTING", "The same events, different counts", len(prs.slides) + 1)
+        card(slide, .58, 3.78, "Spray", "20 names · one IP", "One failure per name: pair and username counters stay at 1; a source-IP counter reaches 20.")
+        card(slide, 4.77, 3.78, "Distributed guesses", "One name · 20 IPs", "One failure per IP: pair and source-IP counters stay at 1; a username counter reaches 20.", ORANGE)
+        card(slide, 8.96, 3.78, "Scope", "A simulation", "The local app resets a streak on success. A real metric filter counts matching events in an alarm window.")
+        band(slide, "A running detector can miss an attack when its grouping key does not match the threat.")
         notes(slide, week)
 
     OUT.mkdir(exist_ok=True)
