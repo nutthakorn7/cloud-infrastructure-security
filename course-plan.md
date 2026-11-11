@@ -71,8 +71,8 @@ files themselves) — these are the *topics*, described in our own words:
 | Lesson | AWS topic (ours to assess, not to copy) | Kind | Block | Dir |
 |---|---|---|---|---|
 | 1–3 | AWS Academy Modules 1–3 (Intro, security fundamentals, IAM/access-securing concepts) + Knowledge Checks | **CONCEPTUAL ✅** | 1 | `lesson01-03-aws-fundamentals-intro` |
-| 4 | EC2 instance roles, Lambda basics, Elastic Beanstalk (SSRF → instance-role credential theft) | **HYBRID ✅** | 1 | `lesson04-ec2-lambda-beanstalk` |
-| 5 | S3 static website hosting; Lambda + SNS (public-write bucket-policy misconfig) | **LAB ✅** | 1 | `lesson05-s3-static-site-lambda-sns` |
+| 4 | Cloud Foundations Module 6 EC2 portion and AWS EC2 lab; local SSRF → instance-role credential theft | **HYBRID ✅** | 1 | `lesson04-ec2-lambda-beanstalk` |
+| 5–6 | Week 5: Module 6 Lambda/Elastic Beanstalk practice and S3-site concepts; Week 6: Module 7 storage, AWS EBS lab and local S3 public-write investigation | **LAB ✅** | 1 | `lesson05-s3-static-site-lambda-sns` |
 | — | Load balancing & auto-scaling under load (Cloud Foundations Lab 6) | **HYBRID ✅** | 1 | `lesson06-load-balancing-autoscaling` |
 | 7 | IAM privilege escalation — identity-based vs. resource-based policy conflicts (assume-role to reach a bucket the identity policy alone doesn't permit) | **LAB ✅** | 2 *(was 1; see below)* | `lesson07-iam-policy-evaluation` |
 | 7 (same lesson, 2nd topic) | CloudTrail + CloudWatch + EventBridge monitoring/alerting on failed logins | **HYBRID ✅** | 2 | `lesson07b-cloudtrail-monitoring` |
@@ -128,8 +128,8 @@ still plans 20 weeks (2,000 minutes); class time is now 18 × 100 minutes.
   root-user hygiene / MFA, each fact-checked against AWS's own public docs.
 - **HYBRID — "SSRF → Instance-Role Credential Theft"** (`lesson04-ec2-lambda-beanstalk/`): a
   simulated EC2 instance-metadata endpoint leaked via an unrestricted URL-fetch feature
-  (CWE-918); fixed version blocks internal/metadata-shaped URLs. Elastic Beanstalk
-  auto-scaling stays conceptual (worksheet only).
+  (CWE-918); fixed version blocks internal/metadata-shaped URLs. Lambda and Elastic Beanstalk
+  are taught in Week 5; Local 02 does not assess them.
 - **LAB — "Public-Write Bucket Policy"** (`lesson05-s3-static-site-lambda-sns/`): a static-site
   bucket policy that mistakenly grants `PutObject` to `Principal: "*"` alongside the intended
   `GetObject`, letting anonymous callers deface the site. Lambda+SNS stays conceptual.
