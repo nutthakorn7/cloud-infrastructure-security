@@ -93,16 +93,16 @@ WEEKS = [
         ("Role", "Trust and assumption determine which role session can make the next request."),
         ("Resource", "A bucket policy can grant resource access; an applicable explicit Deny wins.")),
         check="Can a bucket policy change the result of an implicit identity-policy deny?", before="Open Module 3 and the Week 02 lab-entry guide.", during="Complete Lab 3.1 and trace the user-to-role-to-bucket path.", after="Submit your assigned Local 06 Part with the final permission evidence."),
-    dict(n=13, title="VPC security controls", aws="Cloud Security Foundations · Module 4", practice="Lab 4.1 · security groups (90 min)", local="Local 07 starts · C5R1 Part 2 / C5R2 Part 1", due="Local 07 due 8 Feb", concept=(
+    dict(n=13, title="VPC security controls", aws="Cloud Security Foundations · Module 4", practice="Lab 4.1 · security groups (90 min)", local="Local 07 preview · C5R1 Part 2 / C5R2 Part 1", due="Local 07 due 8 Feb", concept=(
         ("Security group", "Apply instance-level traffic rules; return traffic is stateful."),
         ("Network ACL", "Apply ordered subnet-level rules in both directions."),
         ("Admin path", "Compare bastion access with Session Manager in the lab.")),
-        check="Which control is attached to the subnet, and which to the instance?", before="Open Module 4 and the lab before class; check console access.", during="Use 5 minutes to orient, 90 for the AWS lab and 5 to capture results.", after="Start your assigned Local 07 Part outside the lab slot."),
+        check="Which control is attached to the subnet, and which to the instance?", before="Open Module 4 and the lab before class; check console access.", during="Use 5 minutes to orient, 90 for the AWS lab and 5 to capture results.", after="Keep your lab notes; begin Local 07 in the Week 14 workshop."),
     dict(n=14, title="NACL first-match reasoning", aws="Local workshop · CSF Module 4 recap", practice="NACL rule-order simulation", local="Local 07 · C5R1 Part 2 / C5R2 Part 1", due="Local 07 due 8 Feb", concept=(
         ("Order", "Read NACL rules from the lowest rule number upward."),
         ("Match", "The first matching allow or deny decides the packet."),
         ("Verify", "Test both the blocked path and an intended permitted path.")),
-        check="Can a later deny undo an earlier broad allow?", before="Bring the Week 03 VPC diagram and Week 13 lab notes.", during="Run the local rule-order case and explain each decision.", after="Submit your assigned Local 07 Part and its traffic-path evidence."),
+        check="Can a later deny undo an earlier broad allow?", before="Bring the Week 03 VPC diagram and Week 13 lab notes.", during="Run the local rule-order case and explain each decision.", after="Submit only your assigned Local 07 Part and its requested evidence."),
     dict(n=15, title="KMS and data protection", aws="Cloud Security Foundations · Module 5", practice="Lab 5.1 · KMS (75 min)", local="Local 08 starts · C5R1 Part 2 / C5R2 Part 1", due="Local 08 due 22 Feb", concept=(
         ("Key", "Create and authorize a KMS key for the data-protection workflow."),
         ("Object", "Use the lab to observe S3 server-side encryption with KMS."),
