@@ -18,7 +18,7 @@ Weeks 14 and 16 are local workshop weeks, so their worksheet-specific topics nee
 | 08 | [PPTX](weekly-bridges/output/Week08_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week08_Cloud_Course_Bridge.pdf) | Cloud Foundations Module 9; [S3 supplement](week07-08-s3-data-protection/README.md) slide 4; Local 04 |
 | 09 | [PPTX](weekly-bridges/output/Week09_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week09_Cloud_Course_Bridge.pdf) | Cloud Foundations Module 10 and Lab 6; Local 05 starts |
 | 10 | [PPTX](weekly-bridges/output/Week10_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week10_Cloud_Course_Bridge.pdf) | Foundations completion and Course Assessment; Local 05 |
-| 11 | [PPTX](weekly-bridges/output/Week11_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week11_Cloud_Course_Bridge.pdf) | Cloud Security Foundations Modules 1–2; Local 06 starts |
+| 11 | [PPTX](weekly-bridges/output/Week11_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week11_Cloud_Course_Bridge.pdf) | Cloud Security Foundations Modules 1–2; Local 06 preview |
 | 12 | [PPTX](weekly-bridges/output/Week12_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week12_Cloud_Course_Bridge.pdf) | Cloud Security Foundations Module 3 and Lab 3.1; Local 06 |
 | 13 | [PPTX](weekly-bridges/output/Week13_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week13_Cloud_Course_Bridge.pdf) | Cloud Security Foundations Module 4 and Lab 4.1; Local 07 starts |
 | 14 | [PPTX](weekly-bridges/output/Week14_Cloud_Course_Bridge.pptx) | [PDF](weekly-bridges/output/Week14_Cloud_Course_Bridge.pdf) | Local NACL workshop; [teaching supplement](workshop-supplements/README.md); Local 07 |
