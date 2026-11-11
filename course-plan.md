@@ -132,7 +132,10 @@ still plans 20 weeks (2,000 minutes); class time is now 18 × 100 minutes.
 do not add two make-up classes or present the after-class Local work as 200 supervised minutes.
 Week 17 uses 10 minutes of briefing, 75 minutes for AWS Lab 6.1, and 15 minutes for
 event/alert verification and debrief. After class, students study Security Module 8,
-complete its Course Assessment by the LMS deadline, and spend about 45–60 minutes on Local 09.
+complete its Course Assessment by the course's 2 March 2027 deadline shown in Classroom,
+and spend about 45–60 minutes on Local 09. The accessible AWS Academy teaching view did not
+display a due date for that assessment on 11 November 2026; check the current LMS availability
+and any learner-specific deadline before the Week 17 Draft is posted.
 Week 18 uses 10 minutes of briefing, 75 minutes for AWS Lab 7.1, 10 minutes for
 security-group verification and key misconceptions, and 5 minutes for verbal feedback and
 closure. After class, students spend

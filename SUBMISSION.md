@@ -105,9 +105,11 @@ applied to the points you earn.
   last class is arranged with the instructor outside class.
 - **Extensions:** for illness or a documented technical failure, tell the instructor (before the
   deadline if you can). Extensions are decided case by case.
-- These rules cover the local worksheets only. AWS Academy items follow the LMS due dates:
-  **Knowledge Checks** use the highest LMS-recorded score, **labs** use the latest LMS-recorded
-  submission, and **Course Assessments** use the first assessed attempt.
+- These rules cover the local worksheets only. For AWS Academy items, check the course deadline
+  in Classroom and any due date shown in the LMS. If the LMS shows no due date, follow Classroom;
+  if the two dates differ, ask the instructor before the deadline. **Knowledge Checks** use the
+  highest LMS-recorded score, **labs** use the latest LMS-recorded submission, and **Course
+  Assessments** use the first assessed attempt.
 
 ---
 
