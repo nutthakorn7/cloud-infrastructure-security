@@ -112,7 +112,7 @@ WEEKS = [
         ("Data key", "Use a data key to encrypt the object data."),
         ("KMS key", "Protect the data key with a KMS key and control its use."),
         ("Access", "A later decrypt depends on policy and key state, not only stored ciphertext.")),
-        check="Why can ciphertext exist while decryption is unavailable?", before="Bring Week 15 KMS lab notes and your assigned worksheet Part.", during="Trace encrypt, store and decrypt in the local scenario.", after="Submit your assigned Local 08 Part with a reasoned key-state check."),
+        check="Why can ciphertext exist while decryption is unavailable?", before="Bring the Week 15 KMS lab notes; check which Local 08 Part your class does.", during="Trace encrypt, store and decrypt before answering your assigned Part.", after="Submit your assigned Local 08 Part with a reasoned key-state check."),
     dict(n=17, title="Monitoring and alerting", aws="Cloud Security Foundations · Module 6", practice="Lab 6.1 · CloudTrail / CloudWatch (75 min)", local="Local 09 · C5R1 Part 2 / C5R2 Part 1", due="Local 09 due 1 Mar", concept=(
         ("Record", "CloudTrail records the relevant API change."),
         ("Detect", "EventBridge or a CloudWatch metric filter matches the event."),

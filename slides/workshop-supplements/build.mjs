@@ -145,7 +145,7 @@ async function build(deck){
   band(slide,'Use the assigned AWS module and lab first; work on only your assigned Local Part.');
   deck.slides.forEach((s,i)=>{slide=pres.slides.add();chrome(slide,deck,s.k,s.t,i+2);render(slide,s);});
   await fs.mkdir(staging,{recursive:true});await fs.mkdir(out,{recursive:true});
-  const stem=`Week${deck.n}_Cloud_Workshop_Supplement_v${deck.n===14?3:2}`;
+  const stem=`Week${deck.n}_Cloud_Workshop_Supplement_v${deck.n===16?4:3}`;
   const candidate=path.join(staging,`${stem}.candidate.pptx`);
   await (await PresentationFile.exportPptx(pres)).save(candidate);
   const {finalizePresentation}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')).href);
