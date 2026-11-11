@@ -17,7 +17,7 @@ words only (`course-plan.md` §"Licensing"; `docs/course-specification.md` §2).
 | **Signature exercise** | "The Inverted Allowlist" (`README.md`) |
 | **Standards** | Analogous **CWE-697** (Incorrect Comparison) · **CWE-284** (Improper Access Control) (`README.md`; `lessons/config-lambda-remediation/lesson.yml` in the curriculum monorepo) |
 | **CLOs addressed** | **CLO2** demonstrate the misconfiguration · **CLO3** apply the correct control and verify empirically (schedule row, `docs/course-specification.md` §6). Via §4's alignment table the per-student flag also carries **CLO5**, and the *Audit-the-AI* / *EiPE* tasks carry **CLO1** and **CLO4** |
-| **Slides** | ⬚ — none. `slides/` in this course is deliberately empty (`slides/README.md`) |
+| **Slides** | Original [Week 18 course bridge](../../slides/weekly-bridges/output/Week18_Cloud_Course_Bridge.pptx); AWS Module 7 slides remain primary |
 | **Session date / room / section** | ⬚ |
 
 > **⬚ institution-specific, recorded nowhere in this repository:** semester, section, room, date,
@@ -362,7 +362,7 @@ parity-gated and graded, and must not be edited to make this plan tidy
 - **Course documents:** [course-specification.md](../course-specification.md) ·
   [course-plan.md](../../course-plan.md) · [SUBMISSION.md](../../SUBMISSION.md) ·
   [ETHICS.md](../../ETHICS.md) · [CLAUDE.md](../../CLAUDE.md).
-- **Slides:** ⬚ — none; `slides/` is intentionally empty for this course (`slides/README.md`).
+- **Slides:** [Week 18 course bridge](../../slides/weekly-bridges/output/Week18_Cloud_Course_Bridge.pptx), after the primary AWS Academy slides.
 - **Reference, as listed in the lab README** (all publicly available; **no AWS Academy file is used,
   quoted or copied**): AWS Config documentation on evaluating resources with rules and remediating
   noncompliant resources; AWS Lambda documentation on the event-driven remediation pattern; AWS EC2

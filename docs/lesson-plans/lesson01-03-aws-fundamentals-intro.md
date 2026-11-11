@@ -8,7 +8,7 @@
 | **Block** | 1 |
 | **Duration** | **45–60 min, no Docker** (the lab README's own figure) — the add-on only; the AWS Academy Learner Lab work is the separate, prior baseline |
 | **Lab folder** | `labs/lesson01-03-aws-fundamentals-intro` (`README.md`, `worksheet.md` — no code files this lesson) |
-| **Slides / quizzes** | None authored here, deliberately — see §6 |
+| **Slides / quizzes** | Original [Week 01–02 course bridges](../../slides/README.md) accompany the AWS Academy decks; Knowledge Checks remain in AWS Academy |
 | **Analogous CWE** | CWE-269 (Improper Privilege Management) / CWE-287 (Improper Authentication) — as categories describing the *misconceptions* this lesson corrects, not a coding bug in any artefact |
 | **CLOs addressed** | **CLO1** shared responsibility · **CLO4** evaluate & communicate (course specification §6) |
 | **Date / section / room** | ⬚ |
@@ -185,9 +185,9 @@ unless told otherwise; late −10% of the earned score per day down to 0, marked
   add-on.
 - Instructor key: `instructor/lesson01-03-aws-fundamentals-answer-key.md` (git-ignored, never
   committed).
-- **Slides — none, on purpose.** `slides/` is deliberately empty: the lecture baseline is AWS
-  Academy's own licensed modules, delivered through the Learner Lab and never mirrored here
-  (`slides/README.md`). Any original, non-AWS slide would go in `slides/lesson01.md`.
+- **Slides:** Original [Week 01–02 course bridges](../../slides/README.md) connect the AWS
+  modules to Local 01. AWS Academy's licensed modules remain the lecture baseline and are not
+  mirrored in this repository.
 - **Quizzes — none, on purpose.** The weekly knowledge checks run inside the Learner Lab as part of
   the licensed curriculum (`quizzes/README.md`).
 - Public references named by the lab README (publicly available AWS material — no AWS Academy file

@@ -12,7 +12,7 @@
 | **Signature exercise** | "Deface the Site" |
 | **Standards** | **CWE-284** (Improper Access Control) · **CWE-668** (Exposure of Resource to Wrong Sphere) |
 | **CLOs addressed** | **CLO2** demonstrate · **CLO3** apply the control (schedule row, `docs/course-specification.md` §6). Via §4's alignment table the per-student flag also carries **CLO5**, and the *Audit-the-AI* / *EiPE* tasks carry **CLO1** and **CLO4** |
-| **Slides** | AWS Cloud Foundations Module 6 (Week 5) and Module 7 (Week 6) decks are primary; the instructor's Week 5 Lambda/SNS and Week 6 S3 website reference decks support the local case. The repo `slides/` directory has no copy of these decks. |
+| **Slides** | AWS Cloud Foundations Module 6 (Week 5) and Module 7 (Week 6) decks are primary; the instructor's Lambda/SNS and S3 website references support the local case. Original [Week 05–06 course bridges](../../slides/README.md) connect them to Local 03. AWS files are not copied into this repo. |
 | **Session date / room / section** | ⬚ |
 
 > **Naming note.** The folder and worksheet retain the existing **Lesson 5** label. In the current syllabus, Local 03 starts with Week 5 concepts and is completed and submitted after the Week 6 S3 investigation. Do not treat the folder number as an AWS Academy lab number.
