@@ -2,8 +2,7 @@
 
 > **Current delivery policy (2026-11-11):** Students update the public repo and run this lab
 > without a personal `.env`. Any `FLAG{…}` is a shared demo marker. Grade complete
-> request/response evidence, explanation, and viva. Older per-student flag and seeding notes
-> below document the original design and are not instructions for this cohort.
+> request/response evidence, explanation, and viva. Do not issue personal flags.
 
 *CLOUD add-on. The AWS Academy EC2 lab is the baseline students do first in Week 4; this is the
 add-on that attacks and fixes the same idea locally. No AWS Academy material is reproduced here —
@@ -48,7 +47,7 @@ By the end of this add-on a student can:
 - P1 — Stand the vulnerable/fixed pair up and run the **benign baseline** fetch, showing the
   feature itself is legitimate (README signature step 1).
 - P2 — Execute the **self-SSRF** against the vulnerable app and capture the leaked instance-role
-  credentials and flag from the fetched metadata body (worksheet 2a).
+  credential simulation and complete response from the fetched metadata body (worksheet 2a).
 - P3 — Show the **fixed** app rejects the identical request (`403`) and the literal
   `169.254.169.254` IMDS form, while an ordinary URL still fetches — proof the fix is a targeted
   block, not a blanket failure (README signature step 4).
@@ -60,8 +59,9 @@ By the end of this add-on a student can:
 **Attitude (A)**
 - A1 — Attack only the two approved targets — the local Docker lab and the student's own assigned
   Learner Lab sandbox ([ETHICS.md](../../ETHICS.md)).
-- A2 — Submit **attributable, reproducible** evidence: the student's own flag, with `whoami` /
-  student ID / timestamp visible ([SUBMISSION.md](../../SUBMISSION.md)).
+- A2 — Submit **reproducible** evidence: the exact request, vulnerable and fixed responses,
+  explanation, and a live spot-check. The shared flag does not identify a student
+  ([SUBMISSION.md](../../SUBMISSION.md)).
 - A3 — Treat AI-generated cloud-security explanations as something to verify, not trust
   (worksheet 2b, course spec CLO4).
 
@@ -88,7 +88,8 @@ it will never fetch, **before** the outbound request — not fetch first and hop
 - Pre-build the images (`docker compose up -d --build` in the lab folder) so a room of students is
   not pulling `python:3.12-slim` and running `pip install` at once — the single most common way to
   lose the first 15 minutes.
-- Mint per-student flags for the cohort (see §6).
+- Check that Classroom's Local02 Answer Sheet is set to **Make a copy for each student** and
+  that C5R1 is assigned Part 1 while C5R2 is assigned Part 2.
 - Confirm host ports **8104** (vulnerable) and **8117** (fixed) are free — the lab uses these two
   because `:8105` is taken by `lesson05` (README "Port note").
 
@@ -104,20 +105,21 @@ it will never fetch, **before** the outbound request — not fetch first and hop
 > **Plainer worksheet (owner, 2026-11-02).** KOSEN students come through an accelerated high-school
 > track, so the worksheet was reworded into short, concrete questions in both Parts, students may
 > answer in Thai or English, and the lab README now has a copy-paste **Step-by-step** (curl
-> commands with the expected output, run and checked). Same concepts, same flag, same point split.
+> commands with the expected output, run and checked). Same concepts and point split; the flag is
+> now a shared demonstration marker and carries no marks.
 > Mark the reasoning, not the language. If a curl prints only `HTTP 000`, the apps are still
 > starting: wait a few seconds and rerun.
 >
 > **Answer Sheet (owner, 2026-11-02).** Students answer on the English *Local02 Answer Sheet*, a
 > Google Doc that Classroom copies for each student, and turn that copy in. No PDF is needed. The
-> sheet has both Parts, the 2a fields (request body, flag, fixed-app HTTP code and reason) and an AI-use
-> box.
+> sheet has both Parts, the 2a fields (request body, vulnerable response, fixed-app HTTP code and
+> reason) and an AI-use box.
 
 | Suggested | Task | Student does (exact from lab) | Evidence produced |
 |---|---|---|---|
 | 0:00–0:08 | **Stand it up** | `cd labs/lesson04-ec2-lambda-beanstalk` → `docker compose up -d --build`; `pip install requests` (once, on host). Vulnerable on `:8104`, fixed on `:8117` | Both apps reachable |
 | 0:08–0:15 | **Baseline (benign)** | `POST /fetch-preview {"url": "http://vulnerable:5000/ping"}` — works on both apps; the feature is legitimate, the bug is the *lack of restriction* | Note that the benign fetch succeeds |
-| 0:15–0:30 | **The self-SSRF (capture)** | `POST /fetch-preview {"url": "http://localhost:5000/latest/meta-data/iam/security-credentials/AppRole"}` against `:8104` — the app fetches its own metadata route on your behalf and returns the fake `AccessKeyId`/`SecretAccessKey`/`Token` **and the flag** in the fetched body | The exact request body + the captured flag from the vulnerable app's response |
+| 0:15–0:30 | **The self-SSRF (capture)** | `POST /fetch-preview {"url": "http://localhost:5000/latest/meta-data/iam/security-credentials/AppRole"}` against `:8104` — the app fetches its own metadata route on your behalf and returns fake `AccessKeyId`/`SecretAccessKey`/`Token` values and a shared demo flag in the fetched body | The exact request body + complete vulnerable response, including HTTP status |
 | 0:30–0:40 | **Confirm the fix** | The identical request against `:8117` → `403` *before* any outbound fetch; so is the literal `http://169.254.169.254/latest/meta-data/iam/security-credentials/AppRole`; an ordinary URL still returns `200` | The rejected request + its `403` response; note the ordinary URL still works |
 | 0:40–0:45 | **One-shot check (optional)** | `python exploit.py` — expect five `PASS` lines and exit `0` (leak on `:8104`; on `:8117` the self-SSRF, the literal `169.254.169.254` form and a redirect bypass are rejected, an ordinary URL still fetches) | The five PASS lines |
 | 0:45–0:60 | **EiPE + viva prep + submit** | Draft worksheet **2b** (plain-English: why "fetch a URL for me" leaks cloud credentials, and why blocking the literal `169.254.169.254` string is not a full fix — think `localhost`); ready the **2c** viva answers; submit | Worksheet 2a request/response pair + 2b answer → Classroom; 2c is a live spot-check |
@@ -130,37 +132,32 @@ it will never fetch, **before** the outbound request — not fetch first and hop
   `fixed_app.py`: the block is on the *host* (`localhost`/`127.0.0.1`/`0.0.0.0`/`169.254.169.254`)
   and on any path under `/latest/meta-data`, decided before the outbound call.
 
-## 5. Conventional-arm variant (same slot, no flag)
+## 5. Conventional-arm variant (same slot, no Docker lab)
 
 The section assigned the **Conventional** arm for Block 1 does **worksheet Part 1 only** — six short-answer
 questions on the same concepts (instance role vs long-lived key; what IMDS is and why it is
 on-instance-only; how the URL-fetch feature is abused and what the class is called; ≥2 defences
 beyond the literal-string block; why temporary credentials still need protection and least
 privilege; and positive and negative checks of the fixed URL-fetch feature). No Docker target, no
-per-student flag, no AI-resilience layer — graded on the writing itself (worksheet Part 1). Use the
+simulation, no AI-resilience layer — graded on the writing itself (worksheet Part 1). Use the
 slot for guided discussion of those questions; the exploit is not run in this arm.
 
 ## 6. Assessment
 
 | Instrument | Evidence | Outcome | Notes |
 |---|---|---|---|
-| Worksheet Part 2a (AIR-Sec arm) | The `POST /fetch-preview` body that leaked the flag, the captured flag, and the fixed-app request/response | K2, P2, P3, A2 | Part of the worksheet mark |
+| Worksheet Part 2a (AIR-Sec arm) | Exact `POST /fetch-preview` body, complete vulnerable and fixed responses with HTTP status, and explanation of the vulnerable path | K2, P2, P3, A2 | Part of the worksheet mark; demo flag alone earns no marks |
 | Worksheet Part 2b — **EiPE** (AI-resilient) | 3–4 plain-English sentences on the credential-theft path and why a literal-string block is insufficient | K2, A3, CLO4 | The AI-resilient task for this lesson |
 | Worksheet Part 2c — **viva** spot-check | Verbal, <2 min: why the metadata route "works correctly"; the one-line fix and its check category (allowlist vs blocklist vs auth); why adding login alone would not fix it | K3, P4 | Live during lab/office hours, not a written submission |
 | Worksheet Part 1 (Conventional arm) | Six short answers | K1–K2, K4, P4–P5 | The Conventional arm's whole submission |
-| **Per-student flag** | The `flag` value inside the fetched metadata body from the **vulnerable** app | A2 | Integrity control (also carries marks); the fixed app never emits it |
 
-**Per-student flag.** Mint with `python3 instructor/seed_flags.py env <STUDENT_ID>` — this course's
-`seed_flags.py` already mints this lesson's `ec2` flag (its vocabulary now comes from the
-curriculum monorepo's course manifest, not a hand-maintained list). Without a mint, `FLAG_EC2`
-falls back to a public default placeholder that can be overridden per build
-(`FLAG_EC2=FLAG{...} docker compose up`). Flags are per student and salted, so a copied flag is
-traceable to the student it was issued to; the control app is deliberately flagless, so possession
-of a flag *is* evidence the student exploited the vulnerable path (SUBMISSION.md integrity rules;
-[../../CLAUDE.md](../../CLAUDE.md) "fixed/control app must never emit a flag").
+**Shared demonstration marker.** The vulnerable app may include a public `FLAG{…}` value in its
+response; the fixed app must not emit it. This value is neither identity evidence nor a separate
+grading item. Use the request/response pair and the viva to check understanding and provenance.
 
-**Deliverable (worksheet).** The captured flag + the exact `POST /fetch-preview` body that produced
-it + a one-paragraph explanation of why this is SSRF and not "a bug in the metadata endpoint."
+**Deliverable (worksheet).** The exact `POST /fetch-preview` body, complete vulnerable and fixed
+responses with status codes, and a one-paragraph explanation of why this is SSRF rather than a
+bug in the metadata endpoint.
 
 ## 7. Materials
 
@@ -168,8 +165,8 @@ it + a one-paragraph explanation of why this is SSRF and not "a bug in the metad
   `vulnerable_app.py` (`:8104`), `fixed_app.py` (`:8117`), `exploit.py`, `docker-compose.yml`,
   `Dockerfile`, `requirements.txt` (`flask>=3.1.3`, `requests>=2.33.0`).
 - Docker Desktop; `pip install requests` on the host for `exploit.py`.
-- Instructor: `instructor/seed_flags.py` (git-ignored) and its answer key
-  `instructor/lesson04-ec2-lambda-beanstalk-answer-key.md`.
+- Instructor: `instructor/lesson04-ec2-lambda-beanstalk-answer-key.md` (git-ignored); check its
+  assessment notes against the current shared-marker policy before using it.
 - Rules of engagement: [ETHICS.md](../../ETHICS.md) · Submission: [SUBMISSION.md](../../SUBMISSION.md)
 - Slides: [Week 04 course bridge](../../slides/weekly-bridges/output/Week04_Cloud_Course_Bridge.pptx), after the primary AWS Academy EC2 slides.
 - References the lab cites (all publicly available, no AWS Academy file used): AWS EC2 docs
@@ -202,7 +199,7 @@ it + a one-paragraph explanation of why this is SSRF and not "a bug in the metad
 | Slow/failed pull of `python:3.12-slim` or `pip install` during `docker compose up -d --build` in class | Pre-build before the session; keep an offline image copy (`docker save`/`docker load`) |
 | `pip install requests` on the host fails (managed Python / no venv) | `exploit.py` is optional — the worksheet flow is reachable by hand with `curl`/an HTTP client; run the request/response manually |
 | Ports `8104`/`8117` already bound by another lesson's containers | `docker compose down` the other lab first; these two ports are confirmed non-colliding across the repo (README "Port note") |
-| A student "captures" the flag from the **fixed** app or a classmate | The fixed app never returns the flag; per-student salted flags make a shared flag traceable to its issuee — viva-spot-check the pair (SUBMISSION.md) |
+| A student submits only a shared flag or copies a classmate's response | A shared flag cannot establish provenance. Require the exact request, complete vulnerable/fixed responses, explanation, and a short viva spot-check (SUBMISSION.md) |
 | A student wants to try the real IMDS string against real infrastructure | Out of bounds — only the local lab and the student's own Learner Lab are approved targets (ETHICS.md); the literal `169.254.169.254` form is exercised **only** against the local `:8117`/`:8104` apps |
 
 ## 10. Post-teaching reflection
