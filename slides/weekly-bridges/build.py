@@ -103,11 +103,11 @@ WEEKS = [
         ("Match", "The first matching allow or deny decides the packet."),
         ("Verify", "Test both the blocked path and an intended permitted path.")),
         check="Can a later deny undo an earlier broad allow?", before="Bring the Week 03 VPC diagram and Week 13 lab notes.", during="Run the local rule-order case and explain each decision.", after="Submit only your assigned Local 07 Part and its requested evidence."),
-    dict(n=15, title="KMS and data protection", aws="Cloud Security Foundations · Module 5", practice="Lab 5.1 · KMS (75 min)", local="Local 08 starts · C5R1 Part 2 / C5R2 Part 1", due="Local 08 due 22 Feb", concept=(
+    dict(n=15, title="KMS and data protection", aws="Cloud Security Foundations · Module 5", practice="Lab 5.1 · KMS (75 min)", local="Local 08 preview · C5R1 Part 2 / C5R2 Part 1", due="Local 08 due 22 Feb", concept=(
         ("Key", "Create and authorize a KMS key for the data-protection workflow."),
         ("Object", "Use the lab to observe S3 server-side encryption with KMS."),
         ("Evidence", "Inspect CloudTrail KMS events and the effect of disabling the key.")),
-        check="What evidence distinguishes an encrypted object from usable access to it?", before="Open Module 5 and the KMS lab.", during="Complete Lab 5.1, including S3 and EBS encryption checks.", after="Begin your assigned Local 08 Part using the lab observations."),
+        check="What evidence distinguishes an encrypted object from usable access to it?", before="Open Module 5 and the KMS lab; check console access.", during="Use 10 minutes to orient, 75 for Lab 5.1 and 15 to capture results.", after="Keep your lab notes; begin Local 08 in the Week 16 workshop."),
     dict(n=16, title="Envelope encryption analysis", aws="CSF Module 5 recap · local workshop", practice="Data-key and key-access reasoning", local="Local 08 · C5R1 Part 2 / C5R2 Part 1", due="Local 08 due 22 Feb", concept=(
         ("Data key", "Use a data key to encrypt the object data."),
         ("KMS key", "Protect the data key with a KMS key and control its use."),
@@ -285,13 +285,20 @@ def build_week(week):
 def main():
     if not LOGO.exists():
         raise SystemExit(f"Missing template logo: {LOGO}")
-    for week in WEEKS:
+    import sys
+    requested = {int(arg) for arg in sys.argv[1:]}
+    selected = [week for week in WEEKS if not requested or week["n"] in requested]
+    if requested and len(selected) != len(requested):
+        raise SystemExit(f"Unknown week number: {sorted(requested - {week['n'] for week in selected})}")
+    paths = []
+    for week in selected:
         path = build_week(week)
+        paths.append(path)
         print(path)
     subprocess.run([
         "soffice", "-env:UserInstallation=file:///tmp/lo-cloud-weekly-bridges", "--headless",
         "--convert-to", "pdf", "--outdir", str(OUT),
-        *[str(p) for p in sorted(OUT.glob("Week??_Cloud_Course_Bridge.pptx"))],
+        *[str(p) for p in paths],
     ], check=True)
 
 
