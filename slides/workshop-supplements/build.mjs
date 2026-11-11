@@ -39,7 +39,7 @@ const decks = [
       {k:'FAILURE MODE',t:'A visible deny may never run',kind:'rules',rules:[
         ['#70','ALLOW','0.0.0.0/0','5432'],['#90','DENY','0.0.0.0/0','5432']],
        probes:[['External source','Matches broad #70 → allow'],['Internal source','Also matches #70 → allow']],
-       band:'Fix both scope and order: narrow the allow to the intended CIDR, then put it before the catch-all deny.'},
+       band:'Narrow the earlier allow to the intended CIDR; keep it before the catch-all deny.'},
       {k:'NETWORK PATH',t:'What the NAT gateway changes',kind:'flow',steps:[
         ['Private instance','Initiates an update request'],['Private route','Default route → NAT gateway'],['Public subnet','NAT gateway → internet gateway'],['Internet','Response returns to the initiated flow']],
        callouts:[['Allowed direction','The private instance can initiate outbound traffic when routes and rules permit.'],['Boundary','An unsolicited inbound internet connection is not forwarded to that private instance by NAT.']],
@@ -48,7 +48,7 @@ const decks = [
         ['1 · Identify','Packet and boundary','State source IP, destination port, direction and the control being checked.'],
         ['2 · Walk','Rule order','Read each NACL rule in ascending order; stop at the first match.'],
         ['3 · Verify','Before and after','Compare vulnerable and fixed results, including an intended path that still works.']],
-       band:'Section A: Part 1 · Section B: Part 2 · Submit only the assigned Part in Classroom.'},
+       band:'C5R1: Part 2 · C5R2: Part 1 · Submit only your assigned Part in Classroom.'},
     ]
   },
   {
@@ -145,7 +145,7 @@ async function build(deck){
   band(slide,'Use the assigned AWS module and lab first; work on only your assigned Local Part.');
   deck.slides.forEach((s,i)=>{slide=pres.slides.add();chrome(slide,deck,s.k,s.t,i+2);render(slide,s);});
   await fs.mkdir(staging,{recursive:true});await fs.mkdir(out,{recursive:true});
-  const stem=`Week${deck.n}_Cloud_Workshop_Supplement_v2`;
+  const stem=`Week${deck.n}_Cloud_Workshop_Supplement_v${deck.n===14?3:2}`;
   const candidate=path.join(staging,`${stem}.candidate.pptx`);
   await (await PresentationFile.exportPptx(pres)).save(candidate);
   const {finalizePresentation}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')).href);
@@ -158,4 +158,4 @@ async function build(deck){
     receiptPath:path.join(staging,`${stem}.validation.json`)});
   console.log(JSON.stringify({deck:stem,slides:pres.slides.items.length,result}));
 }
-for(const d of decks)await build(d);
+for(const d of decks.filter(d=>!process.env.CLOUD_WORKSHOP_WEEK || String(d.n)===process.env.CLOUD_WORKSHOP_WEEK))await build(d);
