@@ -102,7 +102,7 @@ smaller demonstrable exploit plus conceptual material; CONCEPTUAL = analysis wit
 | 7 (2nd topic) | Week 17 AWS Module 6/Lab 6.1 monitoring; local failed-login aggregation case after class | HYBRID | 2 | `labs/lesson07b-cloudtrail-monitoring` | 2, 3 |
 | 10 | VPC networking — subnets, NAT, security groups vs. network ACLs | HYBRID | 2 | `labs/lesson10-vpc-networking` | 2, 3 |
 | 11 | S3 SSE-KMS — envelope encryption and key-disable blast radius | CONCEPTUAL | 2 | `labs/lesson11-kms-envelope-encryption` | 1, 4 |
-| 13 | "Cafe" challenge — S3 versioning, lifecycle, cross-region replication | CONCEPTUAL | 1 | `labs/lesson13-s3-versioning-lifecycle-replication` | 1, 4 |
+| 13 | Weeks 7–8: Cloud Foundations Module 8/RDS lab, then Module 9; original S3 supplement for Local 04 versioning, lifecycle and replication (older “Cafe” challenge is not assigned) | CONCEPTUAL | 1 | `labs/lesson13-s3-versioning-lifecycle-replication` | 1, 4 |
 | 14 | AWS Config + Lambda auto-remediation of a non-compliant security group | HYBRID | 2 | `labs/lesson14-config-lambda-remediation` | 2, 3 |
 | 15 | AWS-graded reflection / wrap-up | — | — | *(no add-on)* | — |
 

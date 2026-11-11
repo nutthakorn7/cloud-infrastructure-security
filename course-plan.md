@@ -84,7 +84,7 @@ files themselves) — these are the *topics*, described in our own words:
 | 7 (same lesson, 2nd topic) | Week 17 AWS Module 6/Lab 6.1 monitoring (security-group change example); after-class Local 09 failed-login aggregation simulation | **HYBRID ✅** | 2 | `lesson07b-cloudtrail-monitoring` |
 | 10 | VPC networking — public/private subnets, NAT gateway, security groups vs. network ACLs | **HYBRID ✅** | 2 | `lesson10-vpc-networking` |
 | 11 | S3 server-side encryption with KMS — envelope encryption, key-disable blast radius | **CONCEPTUAL ✅** | 2 | `lesson11-kms-envelope-encryption` |
-| 13 | "Cafe" challenge lab — S3 versioning, lifecycle rules, cross-region replication (official AWS Academy Cloud Architect lab; topic only, never the file) | **CONCEPTUAL ✅** | 1 *(was 2; see below)* | `lesson13-s3-versioning-lifecycle-replication` |
+| 13 | Weeks 7–8: Cloud Foundations Module 8/RDS lab, then Module 9; original S3 supplement teaches versioning, lifecycle and replication for Local 04. The older Cloud Architect “Cafe” challenge lab is source context only and is not assigned. | **CONCEPTUAL ✅** | 1 *(was 2; see below)* | `lesson13-s3-versioning-lifecycle-replication` |
 | 14 | AWS Config + Lambda auto-remediation of a non-compliant security group | **HYBRID ✅** | 2 | `lesson14-config-lambda-remediation` |
 | 15 | Reflection / wrap-up (existing AWS-graded mock exams) | — | — | n/a |
 

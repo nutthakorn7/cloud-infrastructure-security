@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Course** | Cloud Infrastructure & Security · subject code **02005097** (`course-plan.md` line 1; `docs/course-specification.md` §1 still records the course code as ⬚) |
+| **Course** | Cloud Infrastructure & Security · subject code **02005097** (`course-plan.md` line 1; `docs/course-specification.md` §1) |
 | **AWS teaching sequence** | Cloud Foundations Module 8 and its RDS lab in Week 07, then Module 9 in Week 08. Module 7 supplied the earlier S3 foundation. Our original S3 supplement teaches the extra versioning, lifecycle and replication detail needed for Local 04; no AWS Academy challenge lab is assigned for this local task. |
 | **Add-on kind** | **CONCEPTUAL** — no exploitable target, no Docker, no flag (`docs/course-specification.md` §6; lab `README.md`) |
 | **Block** | **1** — blocks follow the half of term since 2026-10-31, and this add-on runs in Weeks 7–8 (Local 04). Block 1 = **AIR-Sec for Section A (C5R2)**, **Conventional for Section B (C5R1)**, the same way round as Lessons 1–3, 4 and 5 (`course-plan.md`; specification §6) |
@@ -301,11 +301,10 @@ they are reported upward instead. Handle them in delivery.
    record the variant number against every score.
 3. **Fixed in the matching curriculum change:** this lesson's `duration_min` is 60, matching the
    README's 45–60 minute add-on. The complete weekly meeting remains 100 minutes.
-4. **Older specifications name an unassigned AWS Academy challenge lab.** The specification's
-   schedule row and `course-plan.md` still refer to the Cloud Architect Lesson 13 scenario. The
-   current Classroom assigns Cloud Foundations Module 8/RDS in Week 07 and Module 9 in Week 08,
-   with our S3 supplement for Local 04. **In delivery:** use the current Classroom sequence and
-   do not direct students to the older challenge lab.
+4. **Older source material names an unassigned AWS Academy challenge lab.** The current
+   specification, `course-plan.md`, and Classroom assign Cloud Foundations Module 8/RDS in
+   Week 07 and Module 9 in Week 08, with our S3 supplement for Local 04. **In delivery:** use
+   that sequence and do not direct students to the older Cloud Architect challenge lab.
 5. **AWS grading is separate.** The RDS lab is recorded in AWS Academy, while Local 04 is marked
    from the Classroom Answer Sheet. Check the AWS-side gradebook before saying which specific lab
    contributes to the 40% AWS component; do not count the unassigned challenge lab.
