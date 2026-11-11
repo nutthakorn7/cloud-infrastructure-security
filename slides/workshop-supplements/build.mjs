@@ -78,11 +78,11 @@ const decks = [
         ['Data key','Encrypts content','A fresh per-operation data key handles object data efficiently.'],
         ['Stored copy','Supports future reads','Only the encrypted data key is retained with the object.']],
        band:'Do not confuse one KMS key with one reusable plaintext data key for every object.'},
-      {k:'LOCAL 08',t:'Audit a claim by tracing the flow',kind:'cards',cards:[
+      {k:'LOCAL 08',t:'Use the key flow to support your answer',kind:'cards',cards:[
         ['1 · Name','Which key?','Identify whether the claim concerns the KMS key or a data key.'],
         ['2 · Trace','Upload or read?','Walk through the actual request and note what is stored or discarded.'],
-        ['3 · Correct','One precise sentence','Explain the key state and replace the false claim in your own words.']],
-       band:'Section A: Part 1 · Section B: Part 2 · No flag is required for this conceptual task.'},
+        ['3 · Explain','One precise answer','Use the key state to justify your answer. For Part 2, correct the planted claim.']],
+       band:'C5R1: Part 2 · C5R2: Part 1 · No flag is required for this conceptual task.'},
     ]
   }
 ];
@@ -145,7 +145,7 @@ async function build(deck){
   band(slide,'Use the assigned AWS module and lab first; work on only your assigned Local Part.');
   deck.slides.forEach((s,i)=>{slide=pres.slides.add();chrome(slide,deck,s.k,s.t,i+2);render(slide,s);});
   await fs.mkdir(staging,{recursive:true});await fs.mkdir(out,{recursive:true});
-  const stem=`Week${deck.n}_Cloud_Workshop_Supplement_v${deck.n===14?3:2}`;
+  const stem=`Week${deck.n}_Cloud_Workshop_Supplement_v${deck.n===16?4:3}`;
   const candidate=path.join(staging,`${stem}.candidate.pptx`);
   await (await PresentationFile.exportPptx(pres)).save(candidate);
   const {finalizePresentation}=await import(pathToFileURL(path.join(skill,'container_tools/artifact_tool_utils.mjs')).href);
