@@ -206,6 +206,11 @@ Answer Sheet** copy that Classroom makes for each of them and click Turn in (no 
 
 ## 8. Where the simulation departs from real AWS (say this out loud)
 
+- **Per-IP or per-username dimensions can be costly in CloudWatch Logs.** The local lab teaches
+  the threat-model choice of what to group. In production, CloudWatch Logs warns against
+  high-cardinality fields such as IP address as metric-filter dimensions because each distinct
+  value creates a separate custom metric and can incur charges; choose an implementation and
+  cost guardrails for the actual traffic volume. See [AWS metric-filter dimension guidance](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntaxForMetricFilters.html).
 - **Reset-on-success is a lab simplification, and it is the one most likely to mislead.** Here a
   `{"success": true}` POST clears that key's failure streak. A real CloudWatch metric filter is a
   *stateless* counter of matching failure events, and its alarm sums those over a fixed evaluation

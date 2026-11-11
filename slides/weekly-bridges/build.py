@@ -127,6 +127,41 @@ WEEKS = [
         extra=("Course closure", (("Lab evidence", "Verify", "Capture the final security-group rules and relevant CloudWatch log events."), ("Local 10", "Submit", "Turn in by 8 Mar at 23:59; Classroom closes this work at that time."), ("Reflection", "Explain", "State what failed, what the control changed, and how the final state was checked.")), "Local 09 late submissions also close 8 Mar at 23:59.")),
 ]
 
+# Worksheet-specific topics that need explicit teaching before the local
+# assessment. Keep these in the teaching week.
+SUPPLEMENTS = {
+    4: ("Instance role and unsafe fetch", (
+        ("Metadata", "On the instance", "The EC2 metadata endpoint is reachable from the instance; an outside caller cannot fetch it directly."),
+        ("SSRF", "Borrowed access", "An attacker-controlled URL makes the app fetch an internal target using the instance's network access."),
+        ("Fix", "Check destinations", "Allow intended hosts; validate resolved addresses and redirects before each request. Keep the role least-privileged.")),
+        "Local 02: a login check alone does not make an unsafe URL safe."),
+    9: ("Scaling and the local abuse case", (
+        ("Traffic path", "LB → target group → ASG", "The load balancer routes to healthy targets; the Auto Scaling Group adds or removes instances within its limits."),
+        ("Cost bound", "Minimum and maximum", "Minimum preserves baseline capacity; maximum limits scale and cost, but a high maximum still permits costly abuse."),
+        ("Two controls", "Key + rate limit", "An API key identifies an allowed caller; a rate limit bounds calls even if a valid key is leaked.")),
+        "Local 05: check that normal requests still succeed after both controls are applied."),
+    12: ("Who a bucket policy can admit", (
+        ("Wildcard", "Principal: *", "The policy names every principal, including anonymous callers, before any conditions are evaluated."),
+        ("Tag condition", "A narrower match", "A PrincipalTag condition excludes anonymous callers without that tag, but does not name one intended role."),
+        ("Scope", "Name the role", "Use the intended role as Principal and check its assumption and resource permissions.")),
+        "Local 06: a tag condition is not the same as scoping access to BucketsAccessRole."),
+    16: ("SSE-KMS envelope and key states", (
+        ("Upload", "Two data-key copies", "S3 requests a data key, uses the plaintext copy for object encryption, and keeps the encrypted copy with the object."),
+        ("Read", "KMS on later read", "S3 discards the plaintext data key. In the worksheet's per-object SSE-KMS flow, a later read calls KMS to decrypt its stored copy."),
+        ("Key state", "Recover or lose access", "Disabled can be re-enabled; cancelled pending deletion leaves the key disabled; completed deletion is irreversible.")),
+        "Local 08 uses per-object SSE-KMS without S3 Bucket Keys; ciphertext alone is not enough."),
+    17: ("Choose what the detector counts", (
+        ("Pair", "IP + username", "A threshold on each pair can miss a spray that tries many usernames once from one IP."),
+        ("Spray", "Group by source", "The local detector groups by source IP to see many usernames from the same origin."),
+        ("Brute force", "Group by username", "Counting attempts for one username detects a different pattern. Test both patterns against the rule.")),
+        "Local 09 simulates grouping; avoid high-cardinality CloudWatch metric dimensions in production."),
+    18: ("Detect, remediate, verify", (
+        ("Config", "Evaluate", "A Config rule marks a resource compliant or noncompliant; that result does not itself change the resource."),
+        ("Lambda", "Enforce allowlist", "A configured route invokes remediation. Keep ports 80 and 443; remove disallowed inbound rules such as port 22."),
+        ("Check", "Inspect final rules", "A successful function run does not prove the rule set is safe. Compare before and after, then inspect logs.")),
+        "Local 10: trace each rule through the allowlist code before calling it a fix."),
+}
+
 
 def rect(slide, x, y, w, h, fill=WHITE, line=BORDER, line_pt=0.8):
     shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h))
@@ -228,6 +263,14 @@ def build_week(week):
     if extra := week.get("extra"):
         title, items, message = extra
         slide = base(prs, week, "OUTSIDE CLASS / CLOSURE", title, 4)
+        for i, (kicker, headline, body) in enumerate(items):
+            card(slide, .58 + i * 4.19, 3.78, kicker, headline, body, ORANGE if i == 1 else BLUE)
+        band(slide, message)
+        notes(slide, week)
+
+    if supplement := SUPPLEMENTS.get(number):
+        title, items, message = supplement
+        slide = base(prs, week, "LOCAL WORKSHEET LINK", title, len(prs.slides) + 1)
         for i, (kicker, headline, body) in enumerate(items):
             card(slide, .58 + i * 4.19, 3.78, kicker, headline, body, ORANGE if i == 1 else BLUE)
         band(slide, message)

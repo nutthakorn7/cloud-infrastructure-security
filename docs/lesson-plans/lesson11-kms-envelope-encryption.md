@@ -104,11 +104,16 @@ symmetric data key, and what travels with the ciphertext is not that key but a *
 locked under a key that never leaves KMS. The ciphertext and its own wrapped key sit together in the
 bucket, and neither is any use without a service call to the one place that can unwrap it.
 
+For this worksheet, assume per-object SSE-KMS without S3 Bucket Keys and no retained plaintext
+data key between object requests. AWS also offers [S3 Bucket Keys](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html),
+which reduce the number of KMS API requests; do not present the per-object call pattern as a rule
+for every S3 configuration.
+
 Two consequences follow, and both are what the worksheet actually assesses. First, **what is kept
 and what is thrown away is the entire security property.** If the plaintext data key were retained
 next to the object "for speed", anyone who could read the object's metadata could decrypt it with no
 call to KMS, no permission check and no audit record — which is the viva prompt in 2c. Second,
-**revocability is the feature, and it cuts both ways.** Because every read needs KMS to unwrap the
+**revocability is the feature, and it cuts both ways.** In this scenario, every read needs KMS to unwrap the
 stored data key, control over that key is control over the data — so disabling the key locks
 *existing* data, not just new writes. That is the property an organisation buys, and it is the same
 property that turns a key deletion into permanent data loss. The pedagogically important line is the
