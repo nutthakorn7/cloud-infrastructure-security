@@ -121,7 +121,7 @@ WEEKS = [
         extra=("Outside the Week 17 class", (("Local 09", "Apply the detector model", "Study slides 5–7, then complete only your assigned Part outside class."), ("Module 8", "Bridge work", "Use the assigned LMS material to finish the security course sequence."), ("AWS Academy", "Course Assessment", "Take it under LMS instructions; check the deadline in Classroom.")), "Local 09 due 1 Mar; late submissions close 8 Mar at 23:59.")),
     dict(n=18, title="Config and Lambda remediation", aws="Cloud Security Foundations · Module 7", practice="Lab 7.1 · Config / Lambda (75 min)", local="Local 10 · C5R1 Part 2 / C5R2 Part 1", due="Local 10 closes 8 Mar", concept=(
         ("Observe", "AWS Config records the security-group configuration change."),
-        ("Remediate", "A custom rule invokes Lambda to restore the intended inbound rules."),
+        ("Remediate", "A separately configured response invokes Lambda to restore intended inbound rules."),
         ("Prove", "Check the final security group and CloudWatch Logs, not only function success.")),
         check="What proves the dangerous rule was removed?", before="Open Module 7 and the remediation lab.", during="Complete Lab 7.1 and compare before-and-after rules.", after="Use slides 5–7 and complete Local 10 outside class by 8 Mar.",
         extra=("Outside class / course closure", (("Lab evidence", "Verify", "Keep final security-group rules and relevant CloudWatch log events."), ("Local 10", "Submit", "Use the local lab and assigned Part; turn in by 8 Mar at 23:59."), ("Reflection", "Explain", "State what failed, what changed, and how the final state was checked.")), "Local 09 late submissions also close 8 Mar at 23:59.")),
