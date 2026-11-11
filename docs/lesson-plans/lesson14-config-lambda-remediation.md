@@ -290,9 +290,10 @@ another student's flag is a violation for both parties
 `/remediate`, `/security-group`) that produced it + a one-paragraph explanation of why an inverted
 allowlist condition is more dangerous than a rule that simply does nothing.
 
-**Submission.** Answers and the captured flag written on the **Local10 Answer Sheet** copy that
-Classroom makes for each student, then Turn in (no PDF), before the next class session; AI-tool disclosure required; late −10% of the earned score per day down to 0, marked only after a viva
-([SUBMISSION.md](../../SUBMISSION.md)).
+**Submission.** Answers and the captured flag go on the **Local10 Answer Sheet** copy that
+Classroom makes for each student, then Turn in (no PDF) by Monday 8 March 2027 at 23:59 Bangkok
+time. There is no following class and Classroom closes submissions at that deadline; Local 10 has
+no late-submission window. AI-tool disclosure is required ([SUBMISSION.md](../../SUBMISSION.md)).
 
 **Grading scale, and this layer's share of the final grade: ⬚** — an institutional decision,
 recorded nowhere in this repository (`docs/course-specification.md` §4, §8).
