@@ -291,8 +291,9 @@ another student's flag is a violation for both parties
 allowlist condition is more dangerous than a rule that simply does nothing.
 
 **Submission.** Answers and the captured flag written on the **Local10 Answer Sheet** copy that
-Classroom makes for each student, then Turn in (no PDF), before the next class session; AI-tool disclosure required; late −10% of the earned score per day down to 0, marked only after a viva
-([SUBMISSION.md](../../SUBMISSION.md)).
+Classroom makes for each student, then Turn in (no PDF) by **Mon 8 Mar 2027, 23:59
+(Asia/Bangkok)**. Classroom closes submissions at that time, with no late window. AI-tool
+disclosure is required ([SUBMISSION.md](../../SUBMISSION.md)).
 
 **Grading scale, and this layer's share of the final grade: ⬚** — an institutional decision,
 recorded nowhere in this repository (`docs/course-specification.md` §4, §8).

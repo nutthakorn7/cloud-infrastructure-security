@@ -48,8 +48,10 @@ the number of the **Local** assignment in Classroom, which is not the lesson fol
 table below). For **Local 01**, make a copy of the attached Answer Sheet, fill it in and download it as
 this PDF. A Local whose Answer Sheet Classroom copies for you needs no PDF. The Answer Sheets are in
 English; you may still answer in Thai or English.
-**Deadline:** before the start of the next week's class. The exact date and time is the due date
-on the Classroom assignment.
+**Deadline:** use the date and time on the Classroom assignment (Asia/Bangkok). Local 01–08 are
+due before the next week's class. Local 09 is due **Mon 1 Mar 2027, 23:59**, with late submissions
+accepted only through **Mon 8 Mar 2027, 23:59**. Local 10 is due and closes **Mon 8 Mar 2027,
+23:59**; there is no next class or late-submission window for Local 10.
 **Grading:** the 6-criterion rubric on each Local assignment in Classroom, worth the points in the
 table below; the AWS Knowledge Checks are graded by AWS.
 
@@ -89,18 +91,20 @@ applied to the points you earn.
 ## Rules for every submission
 - **Name + Student ID** on every file; labs are individual unless a task says otherwise.
 - **AI-tool disclosure** on worksheets/reports.
-- **Late:** 10% of the score you earned is taken off for every 24 hours (or part of 24 hours)
-  after the due time, down to 0 after 10 days. Submit what you have.
+- **Late (Local 01–09):** 10% of the score you earned is taken off for every 24 hours (or part of
+  24 hours) after the due time, down to 0 after 10 days. Submit what you have. For Local 09, the
+  earlier final cutoff of **Mon 8 Mar 2027, 23:59** applies.
 - **Late work needs a viva:** the answers are walked through in the class right after the
   deadline, so a late worksheet is marked only after you explain it to the instructor in a short
   viva.
-- **Local 10**, the last worksheet, and late work for **Local 09** close on the date the
-  instructor announces; nothing is accepted after it. A viva for work handed in late after the
+- **Local 10** closes at its due time, **Mon 8 Mar 2027, 23:59**, with no late submissions. Late
+  work for **Local 09** also stops at that time. A viva for Local 09 work handed in late after the
   last class is arranged with the instructor outside class.
 - **Extensions:** for illness or a documented technical failure, tell the instructor (before the
   deadline if you can). Extensions are decided case by case.
-- These rules cover the local worksheets only. AWS Academy items follow the LMS due dates and the
-  first-attempt rule.
+- These rules cover the local worksheets only. AWS Academy items follow the LMS due dates:
+  **Knowledge Checks** use the highest LMS-recorded score, **labs** use the latest LMS-recorded
+  submission, and **Course Assessments** use the first assessed attempt.
 
 ---
 
