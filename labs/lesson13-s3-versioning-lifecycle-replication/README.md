@@ -1,9 +1,9 @@
 # Lesson 13 — S3 Data Protection: Versioning, Lifecycle, and Cross-Region Replication
 
-**Topic (source):** S3 data protection strategies — versioning, lifecycle rules, and cross-region
-replication (CRR) — same general concept as AWS Academy's static-website challenge lab, described
-here in original words, **not copied**. No AWS Academy file, scenario, character name, or exact
-lab wording is referenced anywhere in this lesson. **Kind:** CONCEPTUAL (no exploitable target —
+**Topic:** S3 data protection strategies — versioning, lifecycle rules, and cross-region
+replication (CRR), described here in original words. No AWS Academy file, scenario, character
+name, or exact lab wording is referenced anywhere in this lesson. **Kind:** CONCEPTUAL (no
+exploitable target —
 architecture/analysis lesson, same precedent as Lesson 11).
 **Concepts:** object versioning (accidental delete/overwrite protection), lifecycle rules
 (storage-tier transitions and expiration of old versions), cross-region replication as a
