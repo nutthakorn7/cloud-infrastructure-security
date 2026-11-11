@@ -6,7 +6,7 @@
 
 | | |
 |---|---|
-| **Course** | Cloud Infrastructure & Security · subject code **02005097** (`README.md`, `course-plan.md`; `docs/course-specification.md` still records the course code as ⬚) |
+| **Course** | Cloud Infrastructure & Security · subject code **02005097** (`README.md`, `course-plan.md`, `docs/course-specification.md`) |
 | **AWS lessons this attaches to** | **Week 5:** Cloud Foundations Module 6 Lambda/Elastic Beanstalk activities, plus the instructor's Lambda/SNS notification reference. **Week 6:** Module 7 storage and the AWS EBS lab, plus the instructor's S3 website reference. No AWS Academy material is reproduced here. |
 | **Add-on kind** | **LAB** — runnable vulnerable/fixed pair with a shared demonstration marker (`docs/course-specification.md` §6) |
 | **Block** | **1** (`docs/course-specification.md` §6). Block 1 = AIR-Sec for Section A, Conventional for Section B (`course-plan.md`) |
@@ -57,12 +57,12 @@ The Week 5 instructor notification scenario shows Lambda publishing to an SNS St
 - **Week 5:** prepare Module 6 theory, complete the assigned Lambda and Elastic Beanstalk activities (formative, zero course points), then discuss the instructor's Lambda/SNS reference and introduce S3 website read/write permissions. Complete the Module 6 Knowledge Check after the module work.
 - **Week 6:** prepare Module 7 storage theory, complete the assigned AWS EBS lab, then use the instructor's S3 website reference and this local README before answering the S3 policy questions and performing the local Docker investigation. Local 03 is due after Week 6. The syllabus does not assign a separate AWS Academy S3 website or SNS email lab for these weeks.
 
-**On their own machine:**
-- Docker Desktop working.
-- A working host Python for the optional `exploit.py` — see §7 risk 1. The README's Step-by-step uses only `curl`, so a student without a working Python can still do the whole lab.
+**AIR-Sec students, on their own machine for Week 6:**
+- Docker Desktop working and the public repo updated before the local lab where possible.
+- A working host Python for the optional `exploit.py` — see §7 risk 1. The README's Step-by-step uses only `curl`, so a student without a working Python can still do the whole lab. Conventional students answer Part 1 without Docker.
 
 **Instructor, before the session:**
-- Build the images ahead of time so a whole room is not pulling `python:3.12-slim` and pip-installing at once.
+- Ask AIR-Sec students to build the images on their own machines before the Week 6 session when possible. An instructor smoke test does not prepare student machines; there is no instructor-hosted target.
 - Check that Classroom's Local03 Answer Sheet is set to **Make a copy for each student**, and that C5R1 is assigned Part 1 while C5R2 is assigned Part 2.
 - Re-read `instructor/lesson05-s3-static-site-lambda-sns-answer-key.md` (git-ignored, instructor-held) against the current worksheet.
 
@@ -115,7 +115,7 @@ python3 exploit.py
 
 The worksheet's own instruction is *"complete only the part assigned to you this block"*, and Part 1 — five short-answer questions on the intended public-read pattern, the `PutObject` escalation, least privilege on a deliberately public resource, a real-world defacement consequence, and the Week 5 Lambda/SNS Standard-topic scenario — carries **no flag and no AI-resilience layer**, which is exactly the manipulation `course-plan.md` describes. Q5 requires subscription confirmation, delivery-vs-publish distinction and the absence of built-in replay; teach these from the local README before asking it. Submit the worksheet after Week 6.
 
-⬚ **Not fixed anywhere in this repository:** whether the Conventional section also stands the local Docker target up in class. Running the exploit for them would import part of the AIR-Sec treatment into the control arm; leaving it out means the concept is assessed by writing only. Decide this once, apply it to every Conventional-block lesson, and record it here — it is a study-design decision, not a per-lesson one.
+The Conventional section answers Part 1 without standing up the Docker target. This follows the worksheet's assigned-Part rule and the Block 1 treatment split in `course-plan.md`; the local simulation and its request/response evidence belong to the AIR-Sec arm.
 
 **Checks for understanding**
 - After the baseline GETs: cold-call — *"both apps just returned 200 to an anonymous request. Which one is misconfigured, and why can this request not tell you?"*
@@ -162,7 +162,7 @@ The lab is a small local Flask pair standing in for S3 behaviour, and the course
 | **4. Order-of-operations wrecks the baseline evidence.** The bucket is an in-memory dict that the `PUT` mutates, so a student who defaces before capturing the baseline `GET` will screenshot "PWNED" as the site's homepage | Baseline `GET` on both apps first — it is step 1 of the worksheet for this reason. To reset, restart the vulnerable service |
 | **5. A `PUT` sent without a JSON body still returns the marker.** `request.get_json(silent=True)` yields nothing when the request is not JSON, so `content` becomes empty — status `200`, marker returned, but the "defacement" is a blank page | Grade the **re-`GET`** and complete request/response pair: the evidence must show the attacker's HTML being served back. Worksheet 2a asks for it (Step-by-step step 5), and the Step-by-step `curl` sends the body as JSON, as `exploit.py` does |
 | **6. Shared marker is copied as proof.** Every public clone can produce the same marker; possession alone cannot show who ran the request | Require the full evidence bundle and spot-check the student's explanation or live reproduction |
-| **8. First `docker compose up -d --build` builds `python:3.12-slim` and pip-installs for the whole room at once** | Pre-build before the session; students on a shared link should build in advance as homework |
+| **8. First `docker compose up -d --build` builds `python:3.12-slim` and installs dependencies for the whole room at once** | Ask AIR-Sec students to build on their own machines before class when possible; reserve the first lab minutes for health checks and help with pull failures |
 | **9. Ethics drift into the Learner Lab.** A student with the AWS console open in the next tab is one step from trying an anonymous `PUT` against a real bucket to "see if it works" | Restate ETHICS.md rules 1–2 at the start and again before students switch back to AWS: the local labs and their own sandbox are the only approved targets, and probing real AWS can suspend the whole class's accounts |
 | **10. Arm mix-up between sections.** In Block 1, Section A runs AIR-Sec (Part 2) and Section B runs Conventional (Part 1); a student who completes the wrong part has produced evidence that cannot be graded for their arm — and contaminates the study data | State the assigned part on the board and in the Classroom post at the start of the session; the worksheet's first line already says to complete only the assigned part |
 
