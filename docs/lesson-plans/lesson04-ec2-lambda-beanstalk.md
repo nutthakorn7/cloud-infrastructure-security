@@ -78,16 +78,17 @@ it will never fetch, **before** the outbound request — not fetch first and hop
 ## 3. Prerequisites — before this add-on runs
 
 **Students must have completed, in order:**
-1. Before class, prepare the EC2 portion of Cloud Foundations Module 6 and check that **Docker
-   Desktop** works on their own machine.
+1. Before class, prepare the EC2 portion of Cloud Foundations Module 6. Only the AIR-Sec arm
+   needs **Docker Desktop** working on each student's own machine and an updated public repo.
 2. In class, complete the real AWS Academy *Introduction to Amazon EC2* lab in their own Learner
    Lab sandbox before this add-on. The remaining Module 6 topics and its Knowledge Check follow
    in Week 5 (README step 1; [SUBMISSION.md](../../SUBMISSION.md)).
 
 **Instructor, before the session:**
-- Pre-build the images (`docker compose up -d --build` in the lab folder) so a room of students is
-  not pulling `python:3.12-slim` and running `pip install` at once — the single most common way to
-  lose the first 15 minutes.
+- Ask AIR-Sec students to download/update the public repo and build the two images on their own
+  machines before class when possible. The instructor can run a smoke test locally, but that does
+  not prepare student machines; there is no instructor-hosted target. The manual `curl` steps do
+  not need host-side `pip install`; only the optional `exploit.py` self-check needs `requests`.
 - Check that Classroom's Local02 Answer Sheet is set to **Make a copy for each student** and
   that C5R1 is assigned Part 1 while C5R2 is assigned Part 2.
 - Confirm host ports **8104** (vulnerable) and **8117** (fixed) are free — the lab uses these two
@@ -164,7 +165,8 @@ bug in the metadata endpoint.
 - Lab folder `labs/lesson04-ec2-lambda-beanstalk/`: `README.md`, `worksheet.md`,
   `vulnerable_app.py` (`:8104`), `fixed_app.py` (`:8117`), `exploit.py`, `docker-compose.yml`,
   `Dockerfile`, `requirements.txt` (`flask>=3.1.3`, `requests>=2.33.0`).
-- Docker Desktop; `pip install requests` on the host for `exploit.py`.
+- For the AIR-Sec arm only: Docker Desktop on each student's machine; host-side `requests` is
+  needed only for the optional `exploit.py` self-check.
 - Instructor: `instructor/lesson04-ec2-lambda-beanstalk-answer-key.md` (git-ignored); check its
   assessment notes against the current shared-marker policy before using it.
 - Rules of engagement: [ETHICS.md](../../ETHICS.md) · Submission: [SUBMISSION.md](../../SUBMISSION.md)

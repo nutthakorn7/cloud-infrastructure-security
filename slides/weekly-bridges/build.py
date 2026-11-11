@@ -52,7 +52,7 @@ WEEKS = [
         ("Instance role", "An EC2 app can receive temporary credentials without a key in its code."),
         ("Unsafe fetch", "A server that fetches any user URL can be asked to reach its own metadata path."),
         ("Control check", "Reject internal targets and confirm an intended fetch still works.")),
-        check="Why is blocking only the literal metadata IP insufficient?", before="Open the EC2 slides and prepare Docker if you are assigned Part 2.", during="Complete the EC2 lab, then compare vulnerable and fixed local URL fetching.", after="Submit the assigned Part in Local 02. Keep credentials out of the sheet."),
+        check="Why is blocking only the literal metadata IP insufficient?", before="Open the EC2 slides and prepare Docker if you are assigned Part 2.", during="Complete the EC2 lab. C5R1: discuss Part 1. C5R2: run the local SSRF lab.", after="Submit the assigned Part in Local 02. Keep credentials out of the sheet."),
     dict(n=5, title="Lambda, Beanstalk and events", aws="Cloud Foundations · Module 6 remaining topics", practice="Lambda and Beanstalk formative activities", local="Local 03 preview · S3 lab in Week 06", due="Local 03 due 14 Dec", concept=(
         ("Trigger", "An event invokes a Lambda function when the configured condition occurs."),
         ("Publish", "The function can publish a message to an SNS topic."),
