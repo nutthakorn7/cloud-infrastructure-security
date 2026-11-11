@@ -3,10 +3,10 @@
 | | |
 |---|---|
 | **Course** | Cloud Infrastructure & Security · subject code **02005097** (`course-plan.md` line 1; `docs/course-specification.md` §1 still records the course code as ⬚) |
-| **AWS lesson this attaches to** | **AWS Academy Lesson 13** — the challenge lab that exercises S3 versioning, lifecycle rules and cross-region replication (topic named in our own words; **no AWS Academy file, scenario, character name or lab wording is reproduced in this plan or in the lab** — lab `README.md`) |
+| **AWS teaching sequence** | Cloud Foundations Module 8 and its RDS lab in Week 07, then Module 9 in Week 08. Module 7 supplied the earlier S3 foundation. Our original S3 supplement teaches the extra versioning, lifecycle and replication detail needed for Local 04; no AWS Academy challenge lab is assigned for this local task. |
 | **Add-on kind** | **CONCEPTUAL** — no exploitable target, no Docker, no flag (`docs/course-specification.md` §6; lab `README.md`) |
 | **Block** | **1** — blocks follow the half of term since 2026-10-31, and this add-on runs in Weeks 7–8 (Local 04). Block 1 = **AIR-Sec for Section A (C5R2)**, **Conventional for Section B (C5R1)**, the same way round as Lessons 1–3, 4 and 5 (`course-plan.md`; specification §6) |
-| **Duration of this add-on** | **45–60 min, no Docker** — the figure the lab's own README states. This is *not* a full contact session: the AWS Academy Learner Lab is the baseline and comes first |
+| **Duration of this add-on** | **45–60 min, no Docker** for the Week 08 completion workshop. This is part of the 100-minute meeting; the Week 07 RDS lab and S3 introduction come first. |
 | **Lab folder** | `labs/lesson13-s3-versioning-lifecycle-replication` (`README.md`, `worksheet.md` — no code files this lesson) |
 | **Signature exercise** | "Audit the Backup Plan" (lab `README.md`) |
 | **Analogous CWE** | **CWE-1188-adjacent** (Insecure Default Initialization of a Resource), *applied loosely* — the lab README is explicit that this lesson is about correct configuration assumptions, not a coding bug; general data-protection misconfiguration category |
@@ -109,15 +109,18 @@ genuinely believe and act on". Vocabulary alone will not catch it. That is the C
 
 ## 3. What students must have done first (AWS Learner Lab baseline)
 
-The AWS Academy lab is the baseline and comes **first**; this add-on assesses the same concepts
-afterwards and does not re-teach them.
+The weekly AWS Academy modules and assigned RDS lab are primary. Module 8 covers databases, not
+the S3 data-protection detail in Local 04, so teach that detail with the original supplement:
+versioning and lifecycle in Week 07, then replication and recovery in Week 08. Do not require
+students to answer the Week 08 questions during Week 07.
 
-- **Before this session** — the AWS Academy Cloud Foundations work the Classroom posts assign:
-  Module 7 (Storage, where S3 is taught) and Module 9 (Cloud Architecture, including reliability),
-  with their Knowledge Checks (lab README, step 1, changed 2026-11-04). Until then step 1 named the
-  Lesson 13 challenge lab, which belongs to a different AWS Academy course (§8 item 5) and is not
-  assigned in this offering's Classroom. That work sits on the AWS side of the course and nothing
-  here alters it.
+- **Before Week 07** — complete the previously assigned Module 7 storage work; prepare Module 8
+  databases and its RDS lab as the Week 07 Classroom Material directs. Teach S3 versioning and
+  lifecycle with supplement slides 1–3 during the local workshop.
+- **Before Week 08** — study Module 9 and its Knowledge Check as the Week 08 Classroom Material
+  directs. Use supplement slide 4 to teach replication and recovery before students finish the
+  corresponding Local 04 questions. The Lesson 13 challenge lab mentioned in older source
+  material is not assigned in this offering's Classroom.
 - **From Lesson 1's one-time setup** ([SUBMISSION.md](../../SUBMISSION.md)) — joined the Google
   Classroom, accepted the AWS Academy Learner Lab invite, installed Docker Desktop + Git, and
   confirmed they can start their Learner Lab and reach the AWS console. (Docker is not needed
@@ -128,7 +131,8 @@ afterwards and does not re-teach them.
 - Confirm and be ready to state which arm this section is in **for Block 1** — see the header note
   and §8 item 1. This lesson moved block on 2026-10-31, so older notes may still say Block 2; the
   worksheet's opening line was corrected to Block 1 on 2026-11-04.
-- Post the worksheet in Classroom with the arm stated in writing.
+- Keep the Week 07 worksheet link and the Week 08 Local04 Assignment in Classroom; state the arm
+  for each section in writing. The Assignment opens in Week 08 and is due 28 Dec 2026, 23:59.
 - Have the lab README's References list to hand — the AWS S3 user-guide pages on what live
   replication covers, on S3 Batch Replication, on retaining multiple versions with S3 Versioning,
   and on lifecycle configuration elements. Those are the authoritative sources a correction has to
@@ -137,7 +141,7 @@ afterwards and does not re-teach them.
   material students can see, which changes how that variant should be marked.
 - Nothing to pull, build or start: this add-on has no Docker target and needs no AWS console.
 
-## 4. Add-on run sheet — 45–60 min
+## 4. Week 08 completion run sheet — 45–60 min
 
 > The per-row minutes below are **this plan's allocation** inside the 45–60 min envelope the lab
 > README states; the lab states the envelope, not the split. The tables are built to the
@@ -149,7 +153,7 @@ afterwards and does not re-teach them.
 
 | Time | Task | Student does | Evidence produced |
 |---|---|---|---|
-| 0:00–0:05 | **Frame the add-on** | Hears which arm this section is in, that Cloud Foundations Modules 7 and 9 are the prerequisite, and that today assesses those concepts rather than adding AWS content; notes that no Docker and no console access is needed | — |
+| 0:00–0:05 | **Frame the add-on** | Hears which arm this section is in; recalls the Week 07 versioning/lifecycle workshop and today's Module 9 and replication/recovery supplement; notes that no extra AWS lab or Docker is needed for Local 04 | — |
 | 0:05–0:10 | **Find the variant** | Looks up the last digit of their student ID in the worksheet's table; writes the variant number and the ID's last digit at the top of the sheet; reads **only** that passage | Variant number recorded before reading |
 | 0:10–0:25 | **Part 2a — "Audit the Backup Plan" (personalised)** | Finds the single planted error in their own passage; records the exact sentence(s), why it is wrong (what actually happens instead), and the corrected sentence | Variant no. + quoted error sentence + explanation + correction |
 | 0:25–0:35 | **Part 2b — EiPE** | Writes 3–4 short sentences someone without IT knowledge could follow: why switching on cross-region replication is not an instant backup of everything already in the bucket, and what would actually be needed so years of old data are protected like new uploads | Short written answer |
@@ -206,7 +210,7 @@ arms.
 | Worksheet Part 2c — viva spot-check (AIR-Sec arm, in class) | Live answer without notes | P5, CLO4/CLO5 | Pass / flag for follow-up |
 | Worksheet Part 1 — four short-answer questions (Conventional arm) | Written answers, graded on the writing itself | K1–K4, P6, CLO1 | Part of the worksheet mark |
 | **Per-student attributable artefact** | **No flag this lesson (CONCEPTUAL)** — the lab README states the attributable artefact is *which planted-error variant the student was assigned*; identifying **their own** variant's specific error is what is attributable, and describing someone else's does not satisfy the task | A3, CLO5 | Integrity control that also carries marks (specification §8) |
-| AWS Academy Lesson 13 challenge lab | Graded inside the Learner Lab | AWS's own objectives | ⬚ — **not** part of this layer either way. Whether this particular lab sits inside the ~40% AWS-graded baseline is **not established by the repository**: `course-plan.md` attributes it to AWS Academy *Cloud Architect*, while specification §1's baseline is Cloud Foundations + Cloud Security Foundations and §2 pins the ~40% to 6 + 7 items from those two. Confirm with the AWS-side gradebook before telling students it counts |
+| Cloud Foundations Module 8 RDS Lab 5 | Recorded separately in AWS Academy | AWS's own objectives | Not part of the Local 04 mark; check the AWS-side gradebook for its place in the 40% AWS component. The older Lesson 13 challenge lab is not assigned in Classroom. |
 
 Marking detail (the point split and the model answers) lives in the instructor-held key,
 `instructor/lesson13-s3-versioning-lifecycle-replication-answer-key.md`, which is git-ignored and is
@@ -265,9 +269,9 @@ said aloud is this:
   A student checking their correction will meet that vocabulary, not the worksheet's shorthand; mark
   the substance, not the label. Nothing beyond what the README's References describe should be
   asserted in class about replication behaviour.
-- The lesson describes AWS's topics in our own words throughout, and never by the AWS Academy lab's
-  own scenario name. Nothing here is a substitute for the Learner Lab challenge lab, which remains
-  the place the actual console and its guard-rails are learnt.
+- The lesson describes AWS's topics in our own words throughout, without copying the historical
+  AWS Academy challenge-lab scenario. The assigned RDS console work remains in the Week 07 AWS
+  Academy lab; Local 04 is a separate written analysis.
 
 ## 8. Known issues in the source material — do not patch the worksheet mid-term
 
@@ -297,18 +301,14 @@ they are reported upward instead. Handle them in delivery.
    record the variant number against every score.
 3. **Fixed in the matching curriculum change:** this lesson's `duration_min` is 60, matching the
    README's 45–60 minute add-on. The complete weekly meeting remains 100 minutes.
-4. **The specification's schedule row labels this lesson with the AWS Academy scenario name in
-   quotes** (`docs/course-specification.md` §6). The lab README's own rule is that no AWS Academy
-   scenario or character name is referenced anywhere in this lesson, and `course-plan.md` treats the
-   licensing boundary as legal rather than stylistic. **In delivery:** refer to it only as the AWS
-   Academy Lesson 13 challenge lab, in class and in Classroom, as this plan does.
-5. **Which AWS course this lab belongs to is inconsistent across shared content.** `course-plan.md`'s
-   lesson map calls it an official AWS Academy **Cloud Architect** lab, but specification §1 states
-   the baseline curriculum as Cloud Foundations + Cloud Security Foundations, and §2 pins the ~40%
-   AWS-graded share to 6 Cloud Foundations items + 7 Cloud Security Foundations items. Nothing in
-   the repository says whether this lab is one of those 13. **In delivery:** do not assert to
-   students that this challenge lab carries AWS-graded weight; check the AWS-side gradebook and
-   record the answer in §5 (see also §10).
+4. **Older specifications name an unassigned AWS Academy challenge lab.** The specification's
+   schedule row and `course-plan.md` still refer to the Cloud Architect Lesson 13 scenario. The
+   current Classroom assigns Cloud Foundations Module 8/RDS in Week 07 and Module 9 in Week 08,
+   with our S3 supplement for Local 04. **In delivery:** use the current Classroom sequence and
+   do not direct students to the older challenge lab.
+5. **AWS grading is separate.** The RDS lab is recorded in AWS Academy, while Local 04 is marked
+   from the Classroom Answer Sheet. Check the AWS-side gradebook before saying which specific lab
+   contributes to the 40% AWS component; do not count the unassigned challenge lab.
 
 ## 9. Risks and contingencies
 
@@ -321,7 +321,7 @@ they are reported upward instead. Handle them in delivery.
 | A student pastes their passage into an AI assistant, which confidently confirms the planted claim — the failure mode this lesson is *about* — or invents a different "error" | Repo policy permits AI use **with disclosure** (SUBMISSION.md), so this is not automatically misconduct; what is graded is the student's own reasoning. Require the corrected sentence to be justified against the AWS pages in the lab README's References, and use the Part 2c viva as the tiebreak. ⬚ — the worksheet does not state whether Part 2a is closed-book on AI; fix that instruction in Classroom before hand-out if you want it closed-book |
 | The four deliberately-false passages sit in a **public** repository and can be screenshotted and later quoted as AWS guidance about backups | Say at hand-out that every passage contains exactly one false claim and none is an AWS statement; make the corrected sentence, not the passage, the thing students keep (§7) |
 | A student proposes to settle a claim by demonstrating it in their Learner Lab — enabling versioning, creating a second-region bucket, running a replication job | The add-on needs no console at all and the whole envelope is 45–60 min. Route them to the README's References for today; a console demonstration is Learner Lab time, not add-on time, and versioning in particular cannot be undone once enabled (the subject of Part 1 Q4) |
-| A student arrives without having completed Cloud Foundations Modules 7 and 9, or cannot start their Learner Lab | This add-on needs no console and no Docker, so they can still do it — run the session, and route the Learner Lab problem to the AWS-side channel and Lesson 1's one-time setup list in SUBMISSION.md. Do not spend add-on minutes debugging AWS sandbox access for one student |
+| A student arrives in Week 08 without completing the assigned Module 9 work, or cannot start their Learner Lab | Teach the S3 recovery supplement before the Local 04 questions; this add-on needs no console or Docker. Route Learner Lab problems to the AWS-side channel and Lesson 1's setup list in SUBMISSION.md. |
 | Students check their correction against AWS's docs and meet different vocabulary — *live replication*, *S3 Batch Replication* — than the worksheet's "CRR" shorthand, and conclude they have the wrong page | Warn them at hand-out (§7) and mark on substance rather than label. Do not extend the discussion to replication behaviour the README's References do not cover |
 | The temptation to "even things up" by giving the Conventional arm the viva or a variant | Do not. The absence of the personalised artefact and the AI-resilience layer *is* the manipulated variable for this block (`course-plan.md`); adding them contaminates the comparison for the whole block |
 | The local add-on is mistaken for the whole weekly meeting | Use the README's 45–60 minutes for this add-on; the weekly AWS lesson and local work together occupy the 100-minute meeting (§8 item 3) |
@@ -344,6 +344,6 @@ they are reported upward instead. Handle them in delivery.
 - Misconception that showed up in the EiPE answers — especially the difference between "replication
   is on" and "the old objects are there": ⬚
 - Whether any student justified a correction from an AI answer rather than AWS documentation: ⬚
-- Settled from the AWS-side gradebook: does this challenge lab carry AWS-graded weight (§5, §8 item
-  5)? Record it here so the next run of this plan can drop the ⬚: ⬚
+- Settled from the AWS-side gradebook: does the assigned Week 07 RDS lab contribute to the 40%
+  AWS component (§5, §8 item 5)? ⬚
 - Anything to change before this add-on runs again: ⬚
