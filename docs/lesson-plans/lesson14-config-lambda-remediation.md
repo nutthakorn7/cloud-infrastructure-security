@@ -192,7 +192,7 @@ then `python3 exploit.py` reproduced the README's captured output exactly, exit 
 
 The worksheet's own instruction is *"complete only the part assigned to you this block"*, and Part 1
 — five short-answer questions (2–4 sentences each, Thai or English) on what a Config rule does and what COMPLIANT vs NON_COMPLIANT means; how a
-Lambda-based auto-remediation fits the detect → decide → act flow; allowlist vs denylist thinking for
+Lambda-based remediation fits a configured detect → decide → act → verify flow, including the explicit route or automation that invokes the action; allowlist vs denylist thinking for
 security group rules; why an inverted-logic bug is more dangerous than a crash or a no-op; and a
 real-world consequence of SSH/RDP open to `0.0.0.0/0` — carries **no flag and no AI-resilience
 layer**. That is exactly the manipulation `course-plan.md` describes: a standard take-home worksheet

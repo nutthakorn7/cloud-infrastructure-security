@@ -142,11 +142,11 @@ self-check is the README's "Run it" block (`python3 -m pip install requests`, th
 
 Per the worksheet header, Block 2 reverses Block 1's assignment: **Section A = Conventional**,
 **Section B = AIR-Sec**. The Conventional arm does **worksheet Part 1 only** — five short-answer questions (2–4 sentences each, Thai or English)
-on the same concepts: the stage-by-stage role of CloudTrail / CloudWatch / EventBridge; what an
+on the same concepts: the roles of CloudTrail, CloudWatch Logs metric filters and alarms, and EventBridge across log-to-metric and event-routing paths; what an
 aggregation key is and how two choices over the same log data change what is counted; password
 spray versus classic brute force and why both need different aggregation logic; whether a control
 keyed on *username* alone would catch a one-IP/20-username spray and whether it would catch
-credential stuffing of one username from 20 IPs; and why an aggregation-key choice is a security
+20 failed attempts for one username from 20 IPs (without inferring stolen credentials); and why an aggregation-key choice is a security
 bug rather than a tuning issue. No Docker target, no per-student flag, no AI-resilience layer —
 graded on the writing itself. Use the slot for guided discussion of those five questions; the
 exploit is not run in this arm.
