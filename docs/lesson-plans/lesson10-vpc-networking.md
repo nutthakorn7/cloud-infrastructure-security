@@ -364,16 +364,10 @@ parity-gated, and editing graded material so a plan reads tidily is exactly what
    that has only `python3`/`pip3` (verified on this machine — `python` and `pip` are absent from
    PATH). The `python3 -m pip install requests` / `python3 exploit.py` forms work everywhere the
    current ones do. Identical to the finding already escalated in the Lesson 5 plan.
-3. **Duration conflict — course-wide, verified.** The lab README states this add-on is
-   **45–60 min**; the curriculum monorepo's `lessons/vpc-networking/lesson.yml` carries
-   `duration_min: 180`, which is the sibling courses' full-lab length, not this course's add-on
-   length. This plan follows the README. Checked directly: **all ten** of this course's lessons in
-   the monorepo (`aws-fundamentals-intro`, `ec2-lambda-beanstalk`, `s3-static-site-lambda-sns`,
-   `load-balancing-autoscaling`, `iam-policy-evaluation`, `cloudtrail-monitoring`, `vpc-networking`,
-   `kms-envelope-encryption`, `s3-versioning-lifecycle-replication`, `config-lambda-remediation`)
-   carry `duration_min: 180`. It is a course-wide default, not a per-lesson slip, and it means the
-   monorepo would schedule three-hour blocks for 45–60-minute add-ons. Worth one fix across all ten
-   manifests rather than ten separate ones.
+3. **Fixed duration conflict.** The lab README states this add-on is **45–60 min**, and the
+   curriculum monorepo's `lessons/vpc-networking/lesson.yml` now records `duration_min: 60`.
+   The complete weekly meeting remains 100 minutes. The Cloud course manifests now use
+   per-lesson durations instead of a shared three-hour default.
 4. **Fixed 2026-11-04:** the kickoff, Step-by-step step 1 and "Run it" all use
    `docker compose up -d --build`. Earlier note: **Kickoff command inconsistency.** README step 2 gives `docker compose up -d` while the "Run it"
    block gives `docker compose up -d --build`; on a first run only the second builds the images.

@@ -327,13 +327,10 @@ parity-gated and graded, and must not be edited to make this plan tidy
 2. **Fixed 2026-11-04:** the kickoff, Step-by-step step 1 and "Run it" all use
    `docker compose up -d --build`. Earlier note: **Kickoff command inconsistency.** README step 2 gives `docker compose up -d` while the "Run it"
    block gives `docker compose up -d --build`; on a first run only the second builds the image.
-3. **Duration conflict.** The lab README states this add-on is **45–60 min**; the curriculum
-   monorepo's `lessons/config-lambda-remediation/lesson.yml` carries `duration_min: 180`. That is not
-   a value borrowed from a sibling course — every `lesson.yml` in the monorepo (all three courses,
-   including this course's own other lessons) carries the identical unfilled `duration_min: 180`
-   default; it was never customized per lesson. This plan follows the README. The real fix is
-   populating this course's per-lesson durations in the manifest, not chasing a value that leaked in
-   from elsewhere.
+3. **Fixed duration conflict.** The lab README states this add-on is **45–60 min**, and the
+   curriculum monorepo's `lessons/config-lambda-remediation/lesson.yml` now records
+   `duration_min: 60`. The complete weekly meeting remains 100 minutes. The Cloud course
+   manifests now use per-lesson durations instead of a shared three-hour default.
 4. **Fixed:** the worksheet header now says Section A = Block 2 Conventional and Section B = Block 2
    AIR-Sec "(reversed from Block 1)". Earlier note: **The worksheet's arm-assignment line is ambiguous for Section B.** `worksheet.md` opens with
    *"Section is assigned Block 1 = AIR-Sec or Block 2 = Conventional … (Lesson 14 falls in Block 2.)"*
