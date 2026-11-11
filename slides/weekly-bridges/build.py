@@ -53,11 +53,11 @@ WEEKS = [
         ("Unsafe fetch", "A server that fetches any user URL can be asked to reach its own metadata path."),
         ("Control check", "Reject internal targets and confirm an intended fetch still works.")),
         check="Why is blocking only the literal metadata IP insufficient?", before="Open the EC2 slides and prepare Docker if you are assigned Part 2.", during="Complete the EC2 lab, then compare vulnerable and fixed local URL fetching.", after="Submit the assigned Part in Local 02. Keep credentials out of the sheet."),
-    dict(n=5, title="Lambda, Beanstalk and events", aws="Cloud Foundations · Module 6 remaining topics", practice="Lambda and Beanstalk formative activities", local="Local 03 starts · C5R1 Part 1 / C5R2 Part 2", due="Local 03 due 14 Dec", concept=(
+    dict(n=5, title="Lambda, Beanstalk and events", aws="Cloud Foundations · Module 6 remaining topics", practice="Lambda and Beanstalk formative activities", local="Local 03 preview · S3 lab in Week 06", due="Local 03 due 14 Dec", concept=(
         ("Trigger", "An event invokes a Lambda function when the configured condition occurs."),
         ("Publish", "The function can publish a message to an SNS topic."),
         ("Delivery", "Email subscription must be confirmed; Publish success alone does not prove receipt.")),
-        check="Will a subscriber confirmed later receive an earlier SNS message?", before="Open the Lambda and Elastic Beanstalk sections of Module 6.", during="Try the formative activities and trace the Lambda-to-SNS path.", after="Start your assigned Local 03 Part. Continue its S3 work in Week 06."),
+        check="Will a subscriber confirmed later receive an earlier SNS message?", before="Open the Lambda and Elastic Beanstalk sections of Module 6.", during="Try the formative activities and trace the Lambda-to-SNS path.", after="Review the Lambda/SNS example. Do the S3 lab and submit Local 03 after Week 06."),
     dict(n=6, title="Storage and S3 public write", aws="Cloud Foundations · Module 7", practice="Lab 4 · EBS", local="Local 03 · C5R1 Part 1 / C5R2 Part 2", due="Local 03 due 14 Dec", concept=(
         ("EBS", "A volume gives an EC2 instance block storage; use the AWS lab for the workflow."),
         ("Public read", "A website policy may permit anonymous reads of intended objects."),
