@@ -33,11 +33,14 @@ Answer in your own words (no AI-resilience layer, no flag — graded on the writ
 
 ## Part 2 — AIR-Sec arm
 
+The Docker lab needs no personal `.env`. Any `FLAG{…}` shown is a shared demo marker. Grading
+uses your complete commands, before/after responses, explanation, and a live spot-check.
+
 ### 2a. The lab
 Do the lab with the **Step-by-step** section of `README.md` ("The Inverted Allowlist"). Write down:
 - The request sequence you ran against the vulnerable app (`:8115`, steps 3–5: `/reset`,
   `/remediate`, `/security-group`).
-- Your flag, and the security-group state it came from: which rules survived and which were
+- The complete response and resulting security-group state: which rules survived and which were
   removed.
 - The same sequence on the fixed app (`:8116`, step 6), and the security-group state you got
   instead.
@@ -73,7 +76,7 @@ network exposed? And why is that scarier than the automation simply failing loud
 ## Submit
 Write your answers on the **Local10 Answer Sheet** that Classroom copies for you, then click
 **Turn in** on Local 10 (no PDF needed). AIR-Sec-arm students fill in Part 2: the 2a lab evidence
-and the flag, plus the 2b and 2c answers. Conventional-arm students fill in Part 1 only.
+plus the 2b and 2c answers. Conventional-arm students fill in Part 1 only.
 
 - **Due and close:** Mon 8 Mar 2027, 23:59 (Asia/Bangkok), as on the Classroom assignment.
   This is the last worksheet; there is no next class or late-submission window. For a documented

@@ -49,11 +49,11 @@ manipulated variable — it's identical for every student in every section alrea
 - **The manipulated layer (this is what AIR-Sec vs Conventional actually varies):** an
   **assessment artifact bolted onto specific lesson topics**, built entirely by us, never touching
   an AWS file:
-  - **AIR-Sec condition:** a per-student attributable artifact (flag, seeded misconfiguration
-    instance, or personalized parameter) + at least one of Audit-the-AI / EiPE / Prompt Problem +
-    a viva spot-check — same taxonomy as the other two courses.
+  - **AIR-Sec condition (delivery revision 2026-11-11):** a reproducible lab trace or other
+    evidence submitted through Classroom + at least one of Audit-the-AI / EiPE / Prompt Problem +
+    a viva spot-check. Public Docker flags are shared demonstration markers, not personal tokens.
   - **Conventional condition:** a standard take-home worksheet question on the same topic, no
-    per-student flag, no AI-resilience layer.
+    flag requirement, no AI-resilience layer.
   - Both arms assess the **same underlying concept** the AWS lab already taught that lesson —
     we are not re-teaching AWS's content, we are adding an assessment layer on top of it.
 
@@ -62,6 +62,12 @@ against **our** layer, and the shared AWS-graded 40% is a controlled-equal covar
 the IV. Worth flagging explicitly in the paper/analysis as a documented deviation from a
 fully-authored course (see `preregistration.md` §8 — anything not preregistered in this much
 detail is exploratory unless amended).
+
+**Research change to resolve before analysis/publication:** removing per-student lab flags changes
+the AIR-Sec assessment artifact described in the original study plan. Record the effective date,
+check the approved protocol and consent materials, and obtain any required amendment before
+treating data from this version as the originally specified intervention. Classroom submissions
+and viva remain the attribution evidence; the public marker alone never counts as proof.
 
 ## Lesson topic map (confirmed from source material, not copied)
 

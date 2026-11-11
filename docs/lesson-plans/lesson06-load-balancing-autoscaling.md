@@ -1,5 +1,10 @@
 # Lesson Plan — Lesson 6: Load Balancing & Auto-Scaling Under Load
 
+> **Current delivery policy (2026-11-11):** Students update the public repo and run this lab
+> without a personal `.env`. Any `FLAG{…}` is a shared demo marker. Grade complete
+> request/response evidence, explanation, and viva. Older per-student flag and seeding notes
+> below document the original design and are not instructions for this cohort.
+
 | | |
 |---|---|
 | **Course** | Cloud Infrastructure & Security · 02005097 (`README.md`, `course-plan.md`) |
