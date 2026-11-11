@@ -1,5 +1,19 @@
 # Lesson Plan — Lesson 11 add-on: S3 Server-Side Encryption with KMS (Envelope Encryption)
 
+## Current Week 15–16 sequence
+
+Week 15 (9 February 2027) uses Cloud Security Foundations Module 5 and Lab 5.1
+as the primary lesson: 10 minutes briefing, 75 minutes in the AWS lab and
+15 minutes debrief. Students keep their S3, KMS and EBS observations and
+preview Local 08. The worksheet is not answered or submitted in this class.
+
+Week 16 (16 February 2027) is the local conceptual workshop described below.
+Teach the envelope-encryption and key-state reasoning before students answer
+their assigned Part. C5R1 completes Part 2 (AIR-Sec), and C5R2 completes
+Part 1 (Conventional). Local 08 is due Monday 22 February 2027 at 23:59
+Bangkok time in the Week 16 Classroom Assignment. The 45–60 minute add-on
+budget below belongs to Week 16, not the Week 15 AWS lab.
+
 | | |
 |---|---|
 | **Course** | Cloud Infrastructure & Security · subject code **02005097** (`README.md`, `course-plan.md`; `docs/course-specification.md` still records the course code as ⬚) |
