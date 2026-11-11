@@ -78,11 +78,11 @@ const decks = [
         ['Data key','Encrypts content','A fresh per-operation data key handles object data efficiently.'],
         ['Stored copy','Supports future reads','Only the encrypted data key is retained with the object.']],
        band:'Do not confuse one KMS key with one reusable plaintext data key for every object.'},
-      {k:'LOCAL 08',t:'Use the key flow to support your answer',kind:'cards',cards:[
-        ['1 · Name','Which key?','Identify whether the claim concerns the KMS key or a data key.'],
-        ['2 · Trace','Upload or read?','Walk through the actual request and note what is stored or discarded.'],
-        ['3 · Explain','One precise answer','Use the key state to justify your answer. For Part 2, correct the planted claim.']],
-       band:'C5R1: Part 2 · C5R2: Part 1 · No flag is required for this conceptual task.'},
+      {k:'LOCAL 08',t:'Complete only your assigned Part',kind:'cards',cards:[
+        ['C5R2','Part 1 · Conventional','Answer Q1–Q4 on upload, stored keys, key states and data keys.'],
+        ['C5R1','Part 2 · AIR-Sec','Correct your assigned variant and explain disable versus delete.'],
+        ['Submit','Answer Sheet','Write the assigned Part in Classroom; the viva is oral, with no extra diagram.']],
+       band:'C5R2: Part 1 · C5R1: Part 2 · No flag is required for this conceptual task.'},
     ]
   }
 ];

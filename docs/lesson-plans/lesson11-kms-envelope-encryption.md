@@ -20,7 +20,7 @@ budget below belongs to Week 16, not the Week 15 AWS lab.
 | **AWS lesson this attaches to** | **Lesson 11** — S3 server-side encryption with KMS. The lab README names the source topic as Shinya's own notes for the AWS Academy Cloud Security Foundations **Lab 5.1** material (SSE-KMS setup, the CloudTrail `GenerateDataKey` event, and the "instance won't start after the KMS key is disabled" scenario), **described in our own words — no AWS Academy file is copied, quoted or paraphrased into this plan or into the lab** |
 | **Add-on kind** | **CONCEPTUAL** — no exploitable target, no Docker, no flag (`docs/course-specification.md` §6; lab README: *"CONCEPTUAL (no exploitable target — this is an architecture/analysis lesson…)"*) |
 | **Block** | **2** (`docs/course-specification.md` §6, `course-plan.md`). Block 2 = **Conventional for Section A**, **AIR-Sec for Section B** — the reverse of Block 1. See the callout below |
-| **Duration of this add-on** | **45–60 min, no Docker** — the figure the lab's own README states. This is *not* a full contact session: the AWS Academy Learner Lab is the baseline and comes first |
+| **Duration of this add-on** | **45–60 min, no Docker** within the Week 16 workshop; the 100-minute weekly sequence and due date are stated above. |
 | **Lab folder** | `labs/lesson11-kms-envelope-encryption` — `README.md`, `worksheet.md` only. No code, no `docker-compose.yml`, no `exploit.py`; that is expected for a CONCEPTUAL add-on |
 | **Signature exercise** | **"Audit the Envelope"** (lab README) |
 | **Standards** | **CWE-320** (Key Management Errors) — named by the lab README and by the curriculum manifest as a *category* describing correct KMS use, not a coding bug in any artefact |
@@ -66,12 +66,12 @@ By the end of this add-on a student can:
 - K2 — State precisely what S3 **keeps** and what it **discards** after encrypting an object with
   SSE-KMS: the encrypted data key goes into the object's metadata; the plaintext copy does not
   persist.
-- K3 — Distinguish the **blast radius** of *disabling* a KMS key from *deleting* it. Disabling makes
-  every object ever encrypted under that key unreadable **while it stays disabled**, and is
-  *reversible* — re-enabling restores access. Deleting it, after the mandatory **7–30-day waiting
-  period**, is irreversible and makes those objects **permanently** unreadable, because the
-  encrypted data key stored in each object's metadata can then never be decrypted (lab README,
-  Objectives).
+- K3 — Under the worksheet's per-object SSE-KMS assumptions, distinguish the **blast radius** of
+  *disabling* a KMS key from *deleting* it. Reads requiring a new KMS decrypt fail while the key is
+  disabled or pending deletion; disabling and scheduling deletion can be reversed. Completed
+  deletion after the mandatory **7–30-day waiting period** is irreversible for objects that still
+  depend on that key. An already usable data key or an S3 Bucket Key can change when a failure is
+  observed; do not apply this simplified timing to every AWS service (lab README, Objectives).
 - K4 — Explain why envelope encryption uses a separate data key per object/operation rather than
   encrypting every object directly with the customer master key (CMK) itself (worksheet Part 1 Q4).
 
@@ -142,9 +142,11 @@ internalised the *data flow* will. That is the point of the exercise, and it is 
 
 ## 3. What students must have completed before this add-on
 
-The AWS Academy lab is the baseline and comes **first**; this add-on assesses the same concept
-afterwards and does not re-teach it ([SUBMISSION.md](../../SUBMISSION.md) — AWS first, add-on
-second).
+The AWS Academy lab is the baseline and comes **first in Week 15**; the local analysis follows in
+**Week 16** and does not replace the lab ([SUBMISSION.md](../../SUBMISSION.md) — AWS first, add-on
+second). Week 15's 100-minute meeting allocates 10 minutes briefing, 75 minutes Lab 5.1 and
+15 minutes debrief. Week 16's 100-minute meeting allocates 10 minutes recap, 25 minutes key-flow
+trace, 45 minutes assigned-Part work and 20 minutes reference check and feedback.
 
 **In the AWS Academy Learner Lab (graded by AWS):**
 
@@ -277,7 +279,7 @@ app, no Docker target, no stand-in service. What still has to be said aloud is t
 
 | Instrument | Evidence | Outcome | Weight |
 |---|---|---|---|
-| Worksheet Part 2a — *"Audit the Envelope"* (AIR-Sec arm) | Variant number, the exact sentence containing the error, why it is wrong, the corrected sentence | K1–K3, P1–P3 · CLO4 | Part of the add-on worksheet mark — this layer's share of the final grade is ⬚ |
+| Worksheet Part 2a — *"Audit the Envelope"* (AIR-Sec arm) | Variant number, the exact sentence containing the error, why it is wrong, the corrected sentence | K1–K3, P1–P3 · CLO4 | Part of Local 08's 4-point mark; each student completes only the assigned arm |
 | Worksheet Part 2b — *EiPE* (AIR-Sec arm) | 3–4 short sentences someone without IT knowledge could follow, covering unreadability, the database-account contrast, and disable vs. delete | K2–K3, P4 · CLO1/CLO4 | Part of the worksheet mark |
 | Worksheet Part 2c — viva spot-check (AIR-Sec arm, in class) | Live answer without notes | K2, P5 · CLO4/CLO5 | Pass / flag for follow-up |
 | Worksheet Part 1 — four short-answer questions (Conventional arm) | Written answers, graded on the writing itself | K1–K4, P6 · CLO1 | Part of the worksheet mark |
@@ -380,7 +382,7 @@ delivery; fix them between cohorts.
 | **8. Someone looks for the flag that does not exist.** Every LAB/HYBRID lesson in this course mints one; the three CONCEPTUAL lessons (Lessons 1–3, this lesson, and Lesson 13) do not | State at the start that this lesson has no flag and nothing to seed — this lesson's manifest carries `flag_keys: []` and `instructor/seed_flags.py` has no key for it. A submission with no `FLAG{…}` is complete. Do not "add" one for parity: the variant *is* the attributable artefact |
 | **9. Pattern-matching across two Audit-the-AI lessons.** Students already met the same four-variant CONCEPTUAL Audit-the-AI format in Lesson 13 (Local 04, Weeks 7–8); students start hunting for the *shape* of a planted error ("the boldest sentence") instead of reasoning about the mechanism | Grade the *explanation* and the corrected sentence, not the underline. The 2c viva is the check that separates a student who found the swapped clause from one who understands the data flow — it is worth running even if the room is short on time |
 | **10. Contaminating the research instruments.** Both the H3 pre/post test and the H2 planted-error bank carry items drawn from this lesson's content (`instructor/research/`, git-ignored) | Teach the concept, not the item wording, and never project or hand out either instrument. In particular, do not drill the four variants' sentences verbatim as a revision exercise; the four-variant walk-through belongs in the following session (§4.1 callout) and should be run on the *mechanism*, not on the phrasing |
-| **11. Ethics drift back into the Learner Lab.** A student with the AWS console open in the next tab is one step from disabling or scheduling deletion of a KMS key "to see what happens" — and in a sandbox with real objects, the deletion path is the one this lesson has just described as irreversible | Restate ETHICS.md rules 1–2 before students switch back to AWS: their own sandbox is an approved target, but a scheduled key deletion is not a reversible experiment, and probing anything outside the two approved targets can suspend the whole class's accounts |
+| **11. Ethics drift back into the Learner Lab.** A student might disable or schedule deletion of a KMS key "to see what happens". Scheduling deletion is cancellable during the waiting period, but changes key availability and can disrupt resources; completed deletion is irreversible | Week 16 requires reasoning only, with no real key-state changes. If students return to AWS, use only the current lab's authorized steps and never schedule deletion as an extra experiment. |
 | **12. The temptation to "even things up"** by giving the Conventional arm the viva or a variant so nobody misses out | Do not. The absence of the personalised artefact and the AI-resilience layer *is* the manipulated variable for this block (`course-plan.md`); adding them contaminates the comparison for the entire block, not just this lesson |
 | **13. The session runs short — there is nothing to install, stand up or exploit** | Use §4.3's list in order: viva coverage across all four variants, then the worked method demonstration on a claim that appears in none of the passages, then the verbal close-back to the Learner Lab key-disable scenario |
 
@@ -397,5 +399,5 @@ delivery; fix them between cohorts.
   two (§9 risk 6): ⬚
 - Whether any student justified a correction from an AI answer rather than from AWS documentation: ⬚
 - Did anyone leave believing the worksheet had replaced Lab 5.1 (§5 item 2): ⬚
-- Did the 45–60 min envelope hold, or did the AWS Learner Lab work overrun into it: ⬚
+- Did the Week 15 lab fit its 75-minute allocation, and did Week 16's local work fit its 100-minute meeting: ⬚
 - Anything to change before this add-on runs again: ⬚
