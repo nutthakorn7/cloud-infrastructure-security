@@ -62,7 +62,7 @@ WEEKS = [
         ("EBS", "A volume gives an EC2 instance block storage; use the AWS lab for the workflow."),
         ("Public read", "A website policy may permit anonymous reads of intended objects."),
         ("Public write", "An unintended PutObject permission lets an anonymous caller change content.")),
-        check="Does a public website need anonymous PutObject?", before="Open Module 7 and the EBS lab.", during="Complete the AWS lab, then compare local S3-policy outcomes.", after="Submit the assigned Local 03 Part with before-and-after evidence."),
+        check="Does a public website need anonymous PutObject?", before="Open Module 7 and the EBS lab. C5R2: prepare Docker.", during="Finish the EBS lab. C5R1: analyze Part 1. C5R2: test S3 policies locally.", after="Submit your Part in Local 03. C5R2 includes GET/PUT results."),
     dict(n=7, title="Databases and object history", aws="Cloud Foundations · Module 8", practice="Lab 5 · RDS; S3 supplement slides 1–3", local="Local 04 starts · C5R1 Part 1 / C5R2 Part 2", due="Local 04 due 28 Dec", concept=(
         ("RDS", "Use the AWS lab to distinguish database service tasks from customer tasks."),
         ("Versioning", "An overwrite creates a new full object version; the old one stays noncurrent."),
