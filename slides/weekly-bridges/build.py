@@ -78,7 +78,7 @@ WEEKS = [
         ("Scale", "Unrestricted expensive requests can keep adding capacity up to the configured limit."),
         ("Control", "Limit abusive demand, then verify ordinary requests still succeed.")),
         check="What evidence shows the fix limits load without breaking legitimate use?", before="Open Module 10 and the scaling lab.", during="Run the AWS lab, then compare local load and cost outcomes.", after="Begin your assigned Local 05 Part; keep request and response evidence."),
-    dict(n=10, title="Foundations completion", aws="Cloud Foundations · course assessment", practice="Review and assessment in AWS Academy", local="Local 05 · C5R1 Part 1 / C5R2 Part 2", due="Local 05 due 11 Jan", concept=(
+    dict(n=10, title="Foundations completion", aws="Cloud Foundations · course assessment", practice="Foundations review; assessment outside class", local="Local 05 · C5R1 Part 1 / C5R2 Part 2", due="Local 05 due 11 Jan", concept=(
         ("Review", "Use the AWS modules and graded-lab feedback to find weak topics."),
         ("Assessment", "Complete the Course Assessment in AWS Academy under its LMS rules."),
         ("Record", "Keep the LMS result and submit Local 05 only in Classroom.")),
