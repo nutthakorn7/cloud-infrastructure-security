@@ -113,8 +113,11 @@ Block 2 = Weeks 11–18 (the term has 18 meetings; the planned Weeks 19–20 fol
 Section B = C5R1 (random draw, `course-plan.md`).
 
 The institutional syllabus still describes 20 × 100 minutes. The approved delivery calendar has
-18 × 100-minute Tuesday meetings; Local 09 and Local 10 finish after the last class. See
-[course-plan.md](../course-plan.md) for the delivery decision and final submission dates.
+18 × 100-minute Tuesday meetings, with no make-up meetings planned. Security Module 8 and its
+Course Assessment are outside-class Academy work; Local 09 and Local 10 each take about 45–60
+minutes outside class after Weeks 17 and 18. These activities are not counted as additional
+class minutes. See [course-plan.md](../course-plan.md) for the reduced-time delivery decision
+and final submission dates. The institutional workbook is read-only in this project.
 
 ## 7. Teaching and learning methods
 

@@ -128,6 +128,18 @@ therefore 8 meetings (Weeks 11–18) against Block 1's 10; include this dose imb
 protocol review. The institutional syllabus
 still plans 20 weeks (2,000 minutes); class time is now 18 × 100 minutes.
 
+**Time reduction (owner decision, 2026-11-11).** Deliver the course in those 18 meetings;
+do not add two make-up classes or present the after-class Local work as 200 supervised minutes.
+Week 17 uses 10 minutes of briefing, 75 minutes for AWS Lab 6.1, and 15 minutes for
+event/alert verification and debrief. After class, students study Security Module 8,
+complete its Course Assessment by the LMS deadline, and spend about 45–60 minutes on Local 09.
+Week 18 uses 10 minutes of briefing, 75 minutes for AWS Lab 7.1, 10 minutes for
+security-group verification and key misconceptions, and 5 minutes for verbal feedback and
+closure. After class, students spend
+about 45–60 minutes on Local 10. The official Excel syllabus remains read-only and still
+describes the earlier 20-meeting plan; the 18-meeting delivery should be recorded through the
+institution's own syllabus process, without claiming the outside-class work as class time.
+
 ## All 10 lesson topics — built and verified
 
 - **CONCEPTUAL — "AWS Fundamentals Audit-the-AI"** (`lesson01-03-aws-fundamentals-intro/`):
