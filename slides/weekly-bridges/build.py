@@ -123,8 +123,8 @@ WEEKS = [
         ("Observe", "AWS Config records the security-group configuration change."),
         ("Remediate", "A custom rule invokes Lambda to restore the intended inbound rules."),
         ("Prove", "Check the final security group and CloudWatch Logs, not only function success.")),
-        check="What proves the dangerous rule was removed?", before="Open Module 7 and the remediation lab.", during="Complete Lab 7.1 and compare before-and-after rules.", after="Submit Local 10 before its 8 Mar close; check the CSF assessment status.",
-        extra=("Course closure", (("Lab evidence", "Verify", "Capture the final security-group rules and relevant CloudWatch log events."), ("Local 10", "Submit", "Turn in by 8 Mar at 23:59; Classroom closes this work at that time."), ("Reflection", "Explain", "State what failed, what the control changed, and how the final state was checked.")), "Local 09 late submissions also close 8 Mar at 23:59.")),
+        check="What proves the dangerous rule was removed?", before="Open Module 7 and the remediation lab.", during="Complete Lab 7.1 and compare before-and-after rules.", after="Use slides 5–7 and complete Local 10 outside class by 8 Mar.",
+        extra=("Outside class / course closure", (("Lab evidence", "Verify", "Keep final security-group rules and relevant CloudWatch log events."), ("Local 10", "Submit", "Use the local lab and assigned Part; turn in by 8 Mar at 23:59."), ("Reflection", "Explain", "State what failed, what changed, and how the final state was checked.")), "Local 09 late submissions also close 8 Mar at 23:59.")),
 ]
 
 # Worksheet-specific topics that need explicit teaching before the local
@@ -289,6 +289,21 @@ def build_week(week):
         card(slide, 4.77, 3.78, "Distributed guesses", "One name · 20 IPs", "One failure per IP: pair and source-IP counters stay at 1; a username counter reaches 20.", ORANGE)
         card(slide, 8.96, 3.78, "Scope", "A simulation", "The local app resets a streak on success. A real metric filter counts matching events in an alarm window.")
         band(slide, "A running detector can miss an attack when its grouping key does not match the threat.")
+        notes(slide, week)
+
+    if number == 18:
+        slide = base(prs, week, "LOCAL 10 · TRACE", "Which rules survive the condition?", len(prs.slides) + 1)
+        card(slide, .58, 3.78, "Input", "80 · 443 · 22", "The intended allowlist is {80, 443}; port 22 is open to everyone in the local starting state.")
+        card(slide, 4.77, 3.78, "Inverted test", "Keep port NOT in list", "The vulnerable function keeps 22 and removes 80/443. It can report success while leaving danger.", ORANGE)
+        card(slide, 8.96, 3.78, "Correct test", "Keep port IN list", "The fixed function keeps 80/443 and removes 22. Compare actual rules after the run.")
+        band(slide, "Trace the worksheet's supplied code by hand before answering Part 2b.")
+        notes(slide, week)
+
+        slide = base(prs, week, "LOCAL 10 · VERIFY", "A successful run is only one signal", len(prs.slides) + 1)
+        card(slide, .58, 3.78, "Detection", "Config evaluation", "A NON_COMPLIANT result reports a state; a separately configured path must invoke remediation.")
+        card(slide, 4.77, 3.78, "Safety", "Port 22 removed?", "Inspect the final security-group rules; a 200 response or Lambda log alone cannot prove this.", ORANGE)
+        card(slide, 8.96, 3.78, "Service", "80/443 still work?", "Check the intended access too. Removing safe rules while retaining SSH is a failed security outcome.")
+        band(slide, "Local Flask targets model rule logic; AWS Config inventory and timing are not simulated.")
         notes(slide, week)
 
     OUT.mkdir(exist_ok=True)
