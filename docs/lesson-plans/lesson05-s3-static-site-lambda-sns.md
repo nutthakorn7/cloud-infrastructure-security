@@ -1,21 +1,21 @@
-# Lesson Plan — Lesson 5 add-on: S3 Static Website Hosting + Lambda/SNS Event-Driven Email
+# Lesson Plan — Local 03 across Weeks 5–6: Lambda/SNS concept and S3 public-write investigation
 
 | | |
 |---|---|
 | **Course** | Cloud Infrastructure & Security · subject code **02005097** (`README.md`, `course-plan.md`; `docs/course-specification.md` still records the course code as ⬚) |
-| **AWS lesson this attaches to** | **Lesson 5** — S3 static website hosting, plus the Lambda + SNS event-driven email pattern (topic named in our own words; **no AWS Academy material is reproduced anywhere in this plan or in the lab**) |
+| **AWS lessons this attaches to** | **Week 5:** Cloud Foundations Module 6 Lambda/Elastic Beanstalk activities, plus the instructor's Lambda/SNS notification reference. **Week 6:** Module 7 storage and the AWS EBS lab, plus the instructor's S3 website reference. No AWS Academy material is reproduced here. |
 | **Add-on kind** | **LAB** — runnable vulnerable/fixed pair with a flag (`docs/course-specification.md` §6) |
 | **Block** | **1** (`docs/course-specification.md` §6). Block 1 = AIR-Sec for Section A, Conventional for Section B (`course-plan.md`) |
-| **Duration of this add-on** | **45–60 min** — the figure the lab's own README states. This is *not* a full contact session; the AWS Academy Learner Lab is the baseline and comes first |
+| **Duration of this add-on** | **45–60 min in Week 6**, after the estimated 30-minute AWS EBS lab. The S3-site case and notification scenario are introduced in Week 5. |
 | **Lab folder** | `labs/lesson05-s3-static-site-lambda-sns` |
 | **Targets** | `vulnerable_app.py` on **:8105** · `fixed_app.py` on **:8106** |
 | **Signature exercise** | "Deface the Site" |
 | **Standards** | **CWE-284** (Improper Access Control) · **CWE-668** (Exposure of Resource to Wrong Sphere) |
 | **CLOs addressed** | **CLO2** demonstrate · **CLO3** apply the control (schedule row, `docs/course-specification.md` §6). Via §4's alignment table the per-student flag also carries **CLO5**, and the *Audit-the-AI* / *EiPE* tasks carry **CLO1** and **CLO4** |
-| **Slides** | ⬚ — `slides/` in this course is deliberately empty (`slides/README.md`); no original deck exists for this lesson |
+| **Slides** | AWS Cloud Foundations Module 6 (Week 5) and Module 7 (Week 6) decks are primary; the instructor's Week 5 Lambda/SNS and Week 6 S3 website reference decks support the local case. The repo `slides/` directory has no copy of these decks. |
 | **Session date / room / section** | ⬚ |
 
-> **Naming note.** The lab folder, README and worksheet call this **Lesson 5** — the *AWS lesson number* it attaches to. The curriculum monorepo (`courses/cloud-infrastructure-security.yml`) lists the same lesson at **slot 3** of 11 schedule slots (10 of which carry an add-on; slot 11 is a non-add-on "Reflection & Wrap-up" review entry). Both labels refer to the same material; use "Lesson 5" with students, since that is what the worksheet header and the submission filename convention use.
+> **Naming note.** The folder and worksheet retain the existing **Lesson 5** label. In the current syllabus, Local 03 starts with Week 5 concepts and is completed and submitted after the Week 6 S3 investigation. Do not treat the folder number as an AWS Academy lab number.
 
 ---
 
@@ -27,7 +27,7 @@ By the end of this add-on a student can:
 - K1 — State why a bucket policy granting `Principal: "*"` the `s3:GetObject` action is the **correct, intended** configuration for static website hosting, not a security mistake in itself.
 - K2 — Explain what changes when that same public statement **also** lists `s3:PutObject`: any anonymous caller, with no credentials and no assumed role, can overwrite objects in the hosted site, including `index.html`.
 - K3 — State what least privilege means for a resource policy whose entire purpose is to be publicly readable — precision about *which actions* are public, not the absence of public access.
-- K4 — Explain why a Lambda function publishing to an SNS topic can complete and return without the subscriber's inbox being reachable, read, or even subscribed yet, and how that differs from a synchronous request-response call.
+- K4 — Explain Lambda, SNS Standard topic and confirmed email-subscription roles; why confirmation is required, why `Publish` success does not prove email delivery, and why a later subscriber does not receive old messages by replay.
 
 **Skills (P)**
 - P1 — Issue an anonymous `GET /bucket/website/index.html` against **both** targets and show that public read works identically on `:8105` and `:8106`.
@@ -45,13 +45,13 @@ By the end of this add-on a student can:
 
 Public read and public write are not two points on one scale — they are different kinds of decision. Static website hosting *requires* that anonymous browsers can read the objects, so `Principal: "*"` on `GetObject` is the feature working as designed. The bug this lab teaches sits on top of that correct pattern: someone widened the same public statement to `PutObject` as well, most plausibly by reusing a read/write template written for an authenticated deploy role. From that moment the bucket's own policy hands write access to the entire internet, and there is no credential, password or role for an attacker to obtain first. Least privilege on a deliberately public resource therefore means being exact about *which actions* the wildcard principal gets — not refusing to have a wildcard principal at all.
 
-The second topic of this AWS lesson — Lambda publishing to an SNS topic that fans a message out to a subscribed email address — carries the complementary idea: in a pub/sub architecture the publisher's job is finished once the message is accepted by the topic, whatever the subscriber is doing. That decoupling is the whole point, and it is why the two topics sit in one lesson.
+The Week 5 instructor notification scenario shows Lambda publishing to an SNS Standard topic with a confirmed email subscription. The publisher can receive a successful `Publish` response without proof of inbox delivery; an unconfirmed or later subscriber does not receive previous messages. SNS Standard has no built-in replay. This concept is introduced before the Week 6 S3 policy investigation, and neither the notification scenario nor a real S3 bucket is simulated in the Docker lab.
 
 ## 3. What students must have completed before this add-on
 
-**In the AWS Academy Learner Lab (first, and graded by AWS):**
-- That lesson's AWS Academy module and its Knowledge Check ([SUBMISSION.md](../../SUBMISSION.md) — AWS first, add-on second).
-- The real Learner Lab exercise on **S3 static website hosting**, and the **Lambda + SNS email exercise** — the lab README is explicit that this is still where the actual console UI, bucket creation and SNS topic wiring are learned. Nothing in this add-on re-teaches or replaces it.
+**Assigned weekly sequence:**
+- **Week 5:** prepare Module 6 theory, complete the assigned Lambda and Elastic Beanstalk activities (formative, zero course points), then discuss the instructor's Lambda/SNS reference and introduce S3 website read/write permissions. Complete the Module 6 Knowledge Check after the module work.
+- **Week 6:** prepare Module 7 storage theory, complete the assigned AWS EBS lab, then use the instructor's S3 website reference and this local README before answering the S3 policy questions and performing the local Docker investigation. Local 03 is due after Week 6. The syllabus does not assign a separate AWS Academy S3 website or SNS email lab for these weeks.
 
 **On their own machine:**
 - Docker Desktop working.
@@ -95,7 +95,7 @@ python3 exploit.py
 
 | Time | Task | Student does | Evidence produced |
 |---|---|---|---|
-| 0:00–0:05 | **Framing** | Recall what the Learner Lab exercise already did; hear today's question — *not* "is a public bucket bad", but "which actions did the public statement grant" | — |
+| 0:00–0:05 | **Framing** | Recall the Week 5 S3-site case and Week 6 storage/reference material; ask which actions the public statement grants | — |
 | 0:05–0:12 | **Stand the target up** | `cd labs/lesson05-s3-static-site-lambda-sns` then `docker compose up -d --build`; confirm both services answer on `/ping` (`mode` is `vulnerable` on :8105, `fixed` on :8106) | Screenshot of both `/ping` responses |
 | 0:12–0:20 | **Worksheet 2a, baseline** | Anonymous `GET /bucket/website/index.html` on **both** :8105 and :8106, with no headers at all; confirm both return the site homepage | Two `200` responses — public read is identical on both apps |
 | 0:20–0:32 | **Worksheet 2a, the defacement** | Anonymous `PUT /bucket/website/index.html` with **no `Authorization` header at all** against :8105; capture the flag from the response; re-`GET` the object to prove the overwrite persisted | Exact request (method, URL, headers-or-lack-thereof, body) + captured flag + the re-`GET` showing attacker HTML |
@@ -108,7 +108,7 @@ python3 exploit.py
 
 ### 4b. Conventional section (Block 1 = Section B)
 
-The worksheet's own instruction is *"complete only the part assigned to you this block"*, and Part 1 — five short-answer questions on the intended public-read pattern, the `PutObject` escalation, least privilege on a deliberately public resource, a real-world defacement consequence, and the Lambda/SNS decoupling question — carries **no flag and no AI-resilience layer**, which is exactly the manipulation `course-plan.md` describes. Part 1 is a take-home worksheet question on the same concept.
+The worksheet's own instruction is *"complete only the part assigned to you this block"*, and Part 1 — five short-answer questions on the intended public-read pattern, the `PutObject` escalation, least privilege on a deliberately public resource, a real-world defacement consequence, and the Week 5 Lambda/SNS Standard-topic scenario — carries **no flag and no AI-resilience layer**, which is exactly the manipulation `course-plan.md` describes. Q5 requires subscription confirmation, delivery-vs-publish distinction and the absence of built-in replay; teach these from the local README before asking it. Submit the worksheet after Week 6.
 
 ⬚ **Not fixed anywhere in this repository:** whether the Conventional section also stands the local Docker target up in class. Running the exploit for them would import part of the AIR-Sec treatment into the control arm; leaving it out means the concept is assessed by writing only. Decide this once, apply it to every Conventional-block lesson, and record it here — it is a study-design decision, not a per-lesson one.
 
@@ -116,7 +116,7 @@ The worksheet's own instruction is *"complete only the part assigned to you this
 - After the baseline GETs: cold-call — *"both apps just returned 200 to an anonymous request. Which one is misconfigured, and why can this request not tell you?"*
 - After the 403: *"point at the one line that differs between the two apps."*
 - Exit ticket (one sentence): *"why does the fix not break the website?"*
-- For the pub/sub topic, which the AIR-Sec arm's Part 2 never asks about (see §9): a 2-minute verbal cold-call — *"the Lambda returned successfully. Has anyone received the email yet? Do you know?"*
+- For the pub/sub topic, which the AIR-Sec arm's Part 2 never asks about (see §9): a Week 5 verbal check — *"The Lambda got a successful Publish response. Has the email arrived? Would a subscriber added tomorrow receive this message?"*
 
 ## 5. Where this simulation departs from real AWS — say this out loud
 
@@ -168,16 +168,16 @@ The lab is a small local Flask pair standing in for S3 behaviour, and the course
 - **Lab:** `labs/lesson05-s3-static-site-lambda-sns/` — `README.md`, `worksheet.md`, `vulnerable_app.py`, `fixed_app.py`, `exploit.py`, `docker-compose.yml`, `Dockerfile`, `requirements.txt`
 - **Instructor-held (git-ignored):** `instructor/lesson05-s3-static-site-lambda-sns-answer-key.md` · `instructor/seed_flags.py` · `instructor/check_flag_keys.py`
 - **Course documents:** [course-specification.md](../course-specification.md) · [course-plan.md](../../course-plan.md) · [SUBMISSION.md](../../SUBMISSION.md) · [ETHICS.md](../../ETHICS.md)
-- **Slides:** ⬚ — none; `slides/` is intentionally empty for this course
+- **Slides:** Assigned AWS Module 6 and 7 decks and the instructor's Week 5 Lambda/SNS and Week 6 S3 website reference decks (held in the course Drive; not copied into this repo).
 - **Reference, as listed in the lab README:** AWS's own public S3 documentation on hosting a static website, bucket policy examples, and the difference between `s3:GetObject` and `s3:PutObject` in a public `Principal: "*"` statement; AWS's public SNS and Lambda-with-S3 documentation for the event-driven concepts. **No AWS Academy file is used, quoted or copied.**
 - **Baseline curriculum:** the AWS Academy Learner Lab itself — accessed through AWS, never mirrored here
 
 ## 9. Instructor notes escalated from lab content
 
-Recorded here rather than fixed, because student-facing lab material and the curriculum monorepo copy are byte-parity-gated and must not be edited to make this plan tidy.
+Maintain these notes against the paired student-facing lab and curriculum copy; rendered parity is checked before publication.
 
 1. **Host commands.** *Fixed:* the README now uses the `python3 -m pip` / `python3` forms, and the Step-by-step (2026-11-02) needs no host Python at all.
-2. **Duration conflict.** The lab README states this add-on is **45–60 min**; the curriculum monorepo's `lessons/s3-static-site-lambda-sns/lesson.yml` carries `duration_min: 180`, which is the sibling-course lab length, not this course's. This plan follows the README. One of the two needs correcting so the monorepo does not schedule a three-hour block.
+2. **Duration alignment.** The lab README states **45–60 min** and the current curriculum `lesson.yml` states `duration_min: 60`. Week 6 allocates this within the 70 minutes after the estimated AWS EBS lab.
 3. **The Lambda/SNS topic is unassessed for the AIR-Sec arm.** The README says the pub/sub topic is *"covered in Worksheet Part 1 as an essay question"*, but the worksheet tells each student to complete only their assigned part — so an AIR-Sec-block section never answers a Lambda/SNS question at all, while the specification's schedule row pairs the S3 and Lambda/SNS topics in this lesson. Until the worksheet is amended, cover it verbally (see the §4 check-for-understanding) and do not claim it as assessed.
 4. **Kickoff command inconsistency.** *Fixed 2026-11-02:* README step 2 and the Step-by-step both use `docker compose up -d --build`.
 5. **Flag capture is weaker than the defacement claim.** Because the vulnerable app returns the flag for `index.html` regardless of whether a usable body was parsed (risk 5), the flag on its own does not evidence a real overwrite. *Addressed 2026-11-02:* worksheet 2a now asks for the re-`GET` (Step-by-step step 5), so grade it together with the flag.
