@@ -83,11 +83,11 @@ WEEKS = [
         ("Assessment", "Complete the Course Assessment in AWS Academy under its LMS rules."),
         ("Record", "Keep the LMS result and submit Local 05 only in Classroom.")),
         check="Which work belongs in AWS Academy, and which belongs in Classroom?", before="Check the LMS assessment window and Local 05 evidence.", during="Use class time for targeted Foundations review.", after="Complete the AWS assessment and submit Local 05 by its due date."),
-    dict(n=11, title="Security principles and IAM", aws="Cloud Security Foundations · Modules 1–2", practice="Policy and role reasoning", local="Local 06 starts · C5R1 Part 2 / C5R2 Part 1", due="Local 06 due 25 Jan", concept=(
+    dict(n=11, title="Security principles and IAM", aws="Cloud Security Foundations · Modules 1–2", practice="Policy and role reasoning", local="Local 06 preview · C5R1 Part 2 / C5R2 Part 1", due="Local 06 due 25 Jan", concept=(
         ("Principal", "Identify who makes the request and which role session they use."),
         ("Action", "Name the requested operation and resource precisely."),
         ("Decision", "Evaluate applicable Allow and Deny statements in context.")),
-        check="What changes when the request runs under an assumed role?", before="Open CSF Modules 1–2 and the Module 3 policy/role introduction.", during="Trace an IAM request before opening the full Week 12 lab.", after="Begin your assigned Local 06 Part; retain the policy trace."),
+        check="What changes when the request runs under an assumed role?", before="Open CSF Modules 1–2; bring one access-control question.", during="Trace an IAM request with the instructor's Module 3 introduction.", after="Keep your policy trace. Complete Local 06 after the Week 12 lab."),
     dict(n=12, title="Effective permissions", aws="Cloud Security Foundations · Module 3", practice="Lab 3.1 · S3 resource policies (60 min)", local="Local 06 · C5R1 Part 2 / C5R2 Part 1", due="Local 06 due 25 Jan", concept=(
         ("Identity", "The user or role policy grants actions to the requesting identity."),
         ("Role", "Trust and assumption determine which role session can make the next request."),
