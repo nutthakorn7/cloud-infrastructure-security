@@ -1,13 +1,13 @@
 # Cloud Infrastructure & Security (02005097) — Course Plan
 
-> **Status: DRAFT — all 10 lesson topics built and Docker-verified.** This is the third arm of the
-> preregistered study (`software-security/instructor/research/preregistration.md` §3, where this
-> course is named "Cloud Infra & Security"). Read this whole file before touching any lesson —
-> the shape of this course is genuinely different from its two sibling repos and the usual
-> 19-week LAB/HYBRID/CONCEPTUAL template does not transfer directly. `seed_flags.py`/CTFd wiring
-> and the research instruments (H1–H4) are done; remaining before this is usable for a live
-> course: the third challenge-host, the Docker images, and the OSF amendment decision — see
-> [Open / not yet done](#open--not-yet-done).
+> **Teaching status: prepared for the 18-week Classroom delivery. Research status: protocol
+> review pending before data from the revised assessment is used in confirmatory analysis.**
+> This is the third arm of the preregistered study
+> (`software-security/instructor/research/preregistration.md` §3, where this course is named
+> "Cloud Infra & Security"). Read this whole file before touching any lesson: the AWS Academy
+> baseline and original local assessment make this course different from its two sibling repos.
+> The old per-student flag/CTFd deployment is retained as historical work, not a prerequisite
+> for teaching. See [Open / not yet done](#open--not-yet-done) for research follow-up.
 
 ## Why this course is structurally different from its two siblings
 
@@ -121,10 +121,11 @@ in Classroom opens with the Part each room does.
 3 Nov 2026–2 Mar 2027 with no gaps, so the planned Weeks 19–20 fold into Weeks 17–18: Local 09 is
 due Mon 1 Mar 2027 and Local 10 closes Mon 8 Mar 2027, with their local parts done outside class,
 and the course closes in the Week 18 class. Late work for Local 09 also stops at Mon 8 Mar 2027
-23:59 (owner, 2026-11-01): Classroom cannot close an assignment after its due date on its own, so
-the instructor turns on "Close submissions" for Local 09 at that time, and late-work vivas after
-the last class are arranged outside class. Block 2 is therefore 8 meetings (Weeks 11–18) against
-Block 1's 10; add this dose imbalance to the OSF amendment as well. The institutional syllabus
+23:59 (owner, 2026-11-01). Its automatic "Close submissions after due date" option is off so
+students can use the late window; the scheduled task closes submissions at the final cutoff after
+checking its state. Late-work vivas after the last class are arranged outside class. Block 2 is
+therefore 8 meetings (Weeks 11–18) against Block 1's 10; include this dose imbalance in the
+protocol review. The institutional syllabus
 still plans 20 weeks (2,000 minutes); class time is now 18 × 100 minutes.
 
 ## All 10 lesson topics — built and verified
@@ -175,17 +176,17 @@ copied in any of the ten.
 
 ## Research instruments — status
 
-- **`instructor/seed_flags.py` + `check_flag_keys.py` + `platform-build/` wiring — done and
-  verified.** 7 challenge keys, own `FLAG_SALT`, drift guard passes, a generated flag confirmed
-  to flow through a real lab end-to-end. Carries over the sibling repo's recommendation for a
-  **third, separate challenge-host** (not yet provisioned — needs the user's budget sign-off).
+- **Legacy per-student flag/CTFd work:** `instructor/seed_flags.py`, `check_flag_keys.py`, and
+  `platform-build/` were built and verified for the earlier design. The current public-repo labs
+  use shared demonstration markers and grade request/response evidence, explanation, and viva;
+  they do not require a challenge host, personal `.env`, or published challenge images.
 - **`instructor/research/pre-post-test.md` (H3) and `planted-error-bank.md` (H2) — built.** Same
   methodology as the sibling instruments (parallel forms, proctoring protocol, scoring formulas)
   ported verbatim; only item content differs, mapped to this course's 10 lesson topics. Every
   technical claim in every item was verified against AWS's own public documentation (see each
-  file's own Verification log) — not one is untested assertion. Still needs, before OSF lock: a
-  pilot (3–5 students), Shinya's review, item statistics, and a cross-course difficulty-
-  equivalence check (flagged in both files' verification logs as an open risk unique to having
+  file's own Verification log) — not one is untested assertion. Before confirmatory use, run a
+  pilot (3–5 students), obtain Shinya's review, inspect item statistics, and check cross-course
+  difficulty equivalence (flagged in both files' verification logs as an open risk unique to having
   three parallel instruments).
 - **H4 (engagement/motivation) survey + engagement telemetry + integrity instrument — reused
   as-is from `software-security/instructor/research/{surveys.md, engagement-telemetry.md,
@@ -206,23 +207,26 @@ the assessment layer this repo builds varies. That means:
 2. **This is currently undocumented in the actual preregistration** — it's a note in this file,
    not an amendment to `preregistration.md` itself. If this arm is meant to be a full confirmatory
    arm (as agreed), the OSF registration needs an explicit amendment describing the shared-baseline
-   structure *before* data collection — otherwise it's an undisclosed deviation discovered after
-   the fact, which is exactly what §8's confirmatory/exploratory distinction exists to prevent.
+   structure and its effective date. The term has started, so do not describe a future
+   amendment as prospective for data already collected. Check the approved protocol and consent,
+   document the timing, and classify affected analyses accordingly.
 
-**This does not block anything already built** — the instruments and lessons are correct
-regardless of how this gets resolved. It changes the *analysis framing* for this arm's results,
-not their content. **Not resolved here — the user's call.**
+This does not block teaching. It changes the analysis framing for this arm's results. The owner
+chose to continue teaching with evidence and viva while pausing research use until the approved
+protocol and any amendment requirements are checked.
 
 ## Open / not yet done
 
-- The third challenge-host itself (provisioning, not the wiring) — needs budget/approval.
-- The OSF amendment for the dose problem above — needs the user's decision.
-- The Docker images (`airsec-cloud/*:dev`) referenced by the now-built
-  `challenges-import.csv`/`ctfd/challenges.yml` deployment catalog aren't built/pushed yet.
+- Check the approved research protocol and consent against the revised evidence/viva assessment,
+  shared AWS baseline, and 10-week/8-week block doses; record the effective dates and complete
+  any required amendment before using affected data for confirmatory analysis.
+- Pilot and review the H2/H3 instruments as described above before making confirmatory claims.
 
-## Repo visibility — decided: public
+The legacy third challenge host and CTFd image catalog are outside the current teaching path.
+
+## Repo visibility — public
 
 Same as `software-security` and `security-cryptography` — no AWS content will ever be in this
 repo (see the licensing section above), so there's no blocker to matching the other two courses'
-convention. **Not yet actually created on GitHub** — this repo exists only locally so far; making
-it public is the user's own action once a remote is created.
+convention. The repository is public at
+<https://github.com/nutthakorn7/cloud-infrastructure-security>. Keep AWS Academy files out of it.
