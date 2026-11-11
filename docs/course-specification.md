@@ -6,7 +6,7 @@ its two sibling courses, and the specification has to be honest about which part
 repository actually controls.
 
 > **Fill before submission.** Fields marked ⬚ are institution-specific and are not recorded here:
-> course code, semester/academic year, section, room, grading scale, and the programme's PLO list.
+> programme, room, grading scale, and the programme's PLO list.
 
 ---
 
@@ -15,13 +15,13 @@ repository actually controls.
 | Field | Value |
 |---|---|
 | Course title | Cloud Infrastructure & Security |
-| Course code | ⬚ |
+| Course code | 02005097 |
 | Credits | 1 |
 | Level | Undergraduate |
 | Baseline curriculum | AWS Academy **Cloud Foundations** + **Cloud Security Foundations** (~15 lessons), delivered through AWS's own Learner Lab sandboxes, Knowledge Checks and auto-graded assessments |
 | This repository | 10 original add-on lessons (45–60 min each; one 60–90 min) layered onto specific AWS lesson topics |
 | Instructors | Nutthakorn Chalaemwongwan · Shinya Oyama (co-taught) |
-| Semester / Year | ⬚ |
+| Semester / Year | AY2026S2 |
 | Programme | ⬚ |
 
 ## 2. How this course is put together — and what this specification covers
@@ -65,13 +65,14 @@ objectives, which this specification does not restate or claim.
 
 | Assessment | Owner | Weight | CLO1 | CLO2 | CLO3 | CLO4 | CLO5 |
 |---|---|---|:--:|:--:|:--:|:--:|:--:|
-| AWS Academy graded items (Knowledge Checks, labs, exams) | AWS | ~40% | ● | | ● | | |
-| Add-on lesson worksheets (this repository, 10 lessons) | Us | ⬚ | ● | ● | ● | ● | ● |
+| AWS Academy graded items (Knowledge Checks, labs, exams) | AWS | 40% | ● | | ● | | |
+| Add-on lesson worksheets (this repository, Local 01–10) | Us | 60% | ● | ● | ● | ● | ● |
 | Reproducible lab evidence and viva | Us | part of the worksheet mark | | ● | ● | | ● |
 | *Audit the AI* / *EiPE* / *Prompt Problem* | Us | part of the worksheet mark | ● | | | ● | |
 
-⬚ The split between the AWS-graded 40% and this layer's share of the remaining 60% is an
-institutional decision and is not fixed anywhere in this repository — record it here once set.
+The 40/60 split and the Local 01–10 point values are recorded in
+[SUBMISSION.md](../SUBMISSION.md). The 60-point Local layer uses Basic 5 / Technical 45 /
+Interdisciplinary 10, as detailed in §8.
 
 ## 5. CLO → PLO mapping
 
@@ -110,6 +111,10 @@ Conventional; **Section B** = the reverse. Blocks follow the half of term (2026-
 Block 2 = Weeks 11–18 (the term has 18 meetings; the planned Weeks 19–20 fold into Weeks 17–18,
 2026-11-01), which puts Lesson 13 in Block 1 and Lesson 7 (IAM) in Block 2. Section A = C5R2,
 Section B = C5R1 (random draw, `course-plan.md`).
+
+The institutional syllabus still describes 20 × 100 minutes. The approved delivery calendar has
+18 × 100-minute Tuesday meetings; Local 09 and Local 10 finish after the last class. See
+[course-plan.md](../course-plan.md) for the delivery decision and final submission dates.
 
 ## 7. Teaching and learning methods
 
