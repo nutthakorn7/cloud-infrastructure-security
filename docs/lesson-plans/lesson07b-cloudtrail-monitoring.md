@@ -12,7 +12,7 @@ topics are described in our own words only.*
 | **Block** | 2 |
 | **Add-on duration** | 45–60 min (per the lab's own `README.md`) |
 | **Lab folder** | `labs/lesson07b-cloudtrail-monitoring` |
-| **Slides** | ⬚ (no `lesson07b` deck in the repo — `slides/` holds only `README.md`) |
+| **Slides** | Original [Week 17 course bridge](../../slides/weekly-bridges/output/Week17_Cloud_Course_Bridge.pptx); AWS Module 6 slides remain primary |
 | **Analogous bug class** | CWE-778 (Insufficient Logging) **adjacent** / detective-control logic error — "the control exists and runs, but its aggregation key silently excludes the real attack shape" (lab README) |
 | **CLOs addressed** | **CLO2** demonstrate the misconfiguration · **CLO3** apply the correct control and verify empirically (course spec §6 row for this lesson) |
 
@@ -198,7 +198,7 @@ Answer Sheet** copy that Classroom makes for each of them and click Turn in (no 
 - Instructor: `instructor/seed_flags.py` (git-ignored) and the answer key
   `instructor/lesson07b-cloudtrail-monitoring-answer-key.md`.
 - Rules of engagement: [ETHICS.md](../../ETHICS.md) · Submission: [SUBMISSION.md](../../SUBMISSION.md)
-- Slides: ⬚ (none in repo).
+- Slides: [Week 17 course bridge](../../slides/weekly-bridges/output/Week17_Cloud_Course_Bridge.pptx), after the primary AWS Academy slides.
 - References the lab cites (all publicly available, no AWS Academy file used or copied): AWS
   CloudTrail docs *Logging AWS API and console sign-in events*; AWS CloudWatch docs *Creating
   metric filters and alarms for log data* (specifically the aggregation/dimension-key concept for a

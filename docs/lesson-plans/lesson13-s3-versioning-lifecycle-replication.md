@@ -11,7 +11,7 @@
 | **Signature exercise** | "Audit the Backup Plan" (lab `README.md`) |
 | **Analogous CWE** | **CWE-1188-adjacent** (Insecure Default Initialization of a Resource), *applied loosely* — the lab README is explicit that this lesson is about correct configuration assumptions, not a coding bug; general data-protection misconfiguration category |
 | **CLOs addressed** | **CLO1** shared responsibility · **CLO4** evaluate & communicate (schedule row, `docs/course-specification.md` §6). Via §4 of the specification the per-student planted-error variant also carries **CLO5** |
-| **Slides / quizzes** | ⬚ — none authored, deliberately; `slides/` and `quizzes/` in this course are intentionally empty (`slides/README.md`, `quizzes/README.md`) |
+| **Slides / quizzes** | Original [Week 07–08 course bridges and S3 supplement](../../slides/README.md); AWS modules and Knowledge Checks remain primary |
 | **Date / section / room** | ⬚ |
 
 > **Which arm is this section in today?** This lesson sits in **Block 1** (it moved from Block 2 on
@@ -231,9 +231,8 @@ asks for a captured flag on LAB/HYBRID lessons only, and this add-on is CONCEPTU
   CONCEPTUAL add-on.
 - Instructor key: `instructor/lesson13-s3-versioning-lifecycle-replication-answer-key.md`
   (git-ignored, never committed).
-- **Slides — none, on purpose.** `slides/` is deliberately empty: the lecture baseline is AWS
-  Academy's own licensed curriculum, delivered through the Learner Lab and never mirrored here
-  (`slides/README.md`). Any original, non-AWS slide would go in `slides/lesson13.md`.
+- **Slides:** Original [Week 07–08 course bridges and S3 supplement](../../slides/README.md)
+  address Local 04. The licensed AWS Academy curriculum remains primary and is not mirrored here.
 - **Quizzes — none, on purpose.** The knowledge checks run inside the Learner Lab as part of the
   licensed curriculum (`quizzes/README.md`).
 - Public references named by the lab README (publicly available AWS S3 user-guide material — no AWS

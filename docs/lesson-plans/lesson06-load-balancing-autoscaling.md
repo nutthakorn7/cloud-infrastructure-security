@@ -8,7 +8,7 @@
 | **Block** | Block 1 (`docs/course-specification.md` §6) |
 | **Duration** | **45–60 min add-on**, run *after* the AWS Learner Lab (lab README, "This lesson — what to do") |
 | **Lab folder** | `labs/lesson06-load-balancing-autoscaling` |
-| **Slides / quiz** | None, by design — `slides/README.md` and `quizzes/README.md` are deliberately empty; the lecture baseline and the Knowledge Check are AWS's |
+| **Slides / quiz** | Original [Week 09 course bridge](../../slides/weekly-bridges/output/Week09_Cloud_Course_Bridge.pptx); AWS Module 10 slides and Knowledge Check remain primary |
 | **Standards** | **CWE-400** (Uncontrolled Resource Consumption) · OWASP **API4:2023 Unrestricted Resource Consumption** (both named in the lab README) |
 | **CLOs addressed** | **CLO2** demonstrate · **CLO3** apply the control (spec §6 row). Task 2b is an *EiPE*, which spec §4 maps to **CLO1/CLO4** — see §9 note |
 | **Semester / section / room / grading scale / PLOs** | ⬚ |

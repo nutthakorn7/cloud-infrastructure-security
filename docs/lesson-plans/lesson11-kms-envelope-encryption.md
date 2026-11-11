@@ -11,7 +11,7 @@
 | **Signature exercise** | **"Audit the Envelope"** (lab README) |
 | **Standards** | **CWE-320** (Key Management Errors) — named by the lab README and by the curriculum manifest as a *category* describing correct KMS use, not a coding bug in any artefact |
 | **CLOs addressed** | **CLO1** shared responsibility · **CLO4** evaluate & communicate (`docs/course-specification.md` §6). Via §4's alignment table the *Audit-the-AI* / *EiPE* tasks carry CLO1 and CLO4, and the per-student **variant** carries **CLO5**. CLO2/CLO3 are **not** claimed here — there is nothing to exploit or remediate in this lesson |
-| **Slides / quizzes** | ⬚ — none, deliberately. `slides/` and `quizzes/` are intentionally empty in this course (`slides/README.md`, `quizzes/README.md`) |
+| **Slides / quizzes** | Original [Week 15–16 course bridges](../../slides/README.md); AWS Module 5 slides and Knowledge Check remain primary |
 | **Session date / section / room** | ⬚ |
 
 > **Which arm is this section in today? Check before the worksheet is opened.**
@@ -294,9 +294,8 @@ nowhere in this repository (`docs/course-specification.md` §4, §8).
   (`instructor/research/pre-post-test.md`) and the H2 planted-error bank
   (`instructor/research/planted-error-bank.md`) both carry items drawn from this lesson's content.
   Neither is reproduced or summarised here — see §9 risk 10.
-- **Slides — none, on purpose.** `slides/` is deliberately empty: the lecture baseline is AWS
-  Academy's own licensed modules, delivered through the Learner Lab and never mirrored here
-  (`slides/README.md`). Any original, non-AWS slide would go in `slides/lesson11.md`.
+- **Slides:** Original [Week 15–16 course bridges](../../slides/README.md) connect the AWS
+  KMS module and lab to Local 08. The licensed AWS Academy slides are not mirrored here.
 - **Quizzes — none, on purpose.** Knowledge checks run inside the Learner Lab as part of the licensed
   curriculum (`quizzes/README.md`).
 - **Public references named by the lab README** (publicly available AWS material — no AWS Academy

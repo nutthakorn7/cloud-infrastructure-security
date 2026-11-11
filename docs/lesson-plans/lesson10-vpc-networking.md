@@ -16,7 +16,7 @@ anywhere in this plan or in the lab** — the topic is described in our own word
 | **Signature exercise** | "The Deny Rule That Never Runs" |
 | **Standards** | **CWE-863** (Incorrect Authorization) · **CWE-284** (Improper Access Control) — the lab README's and `lesson.yml`'s own classification |
 | **CLOs addressed** | **CLO2** demonstrate · **CLO3** apply the control (schedule row, `docs/course-specification.md` §6). Via §4's alignment table the per-student flag also carries **CLO5**, and the *Audit-the-AI* / *EiPE* tasks carry **CLO1** and **CLO4** |
-| **Slides** | ⬚ — `slides/` in this course is deliberately empty (`slides/README.md`); no original deck exists for this lesson |
+| **Slides** | Original [Week 13–14 course bridges](../../slides/README.md); AWS Module 4 slides remain primary |
 | **Weekly quiz** | ⬚ — none authored here; knowledge checks for this topic run inside the AWS Learner Lab (`quizzes/README.md`) |
 | **Session date / room / section roster / grading scale / PLO list** | ⬚ — institution-specific, recorded nowhere in this repository (`docs/course-specification.md` header, §5, §8) |
 
@@ -325,7 +325,7 @@ AWS and is identical for every student; it is not part of this add-on.
   [course-plan.md](../../course-plan.md) · [SUBMISSION.md](../../SUBMISSION.md) ·
   [ETHICS.md](../../ETHICS.md) · [CLAUDE.md](../../CLAUDE.md)
 - **Student machine:** Docker Desktop and `curl`; `requests` on the host Python only for the optional `exploit.py`
-- **Slides:** ⬚ — none; `slides/` is intentionally empty for this course
+- **Slides:** [Week 13–14 course bridges](../../slides/README.md) connect the AWS lab and local NACL workshop.
 - **Reference, as listed in the lab README (all publicly available AWS documentation — no AWS
   Academy file is used, quoted or copied):** AWS VPC documentation *Control subnet traffic with
   network access control lists* (ascending-order, first-match evaluation); *Compare security groups

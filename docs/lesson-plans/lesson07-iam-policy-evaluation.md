@@ -12,7 +12,7 @@ topics are described in our own words only.*
 | **Block** | **2** — blocks follow the half of term since 2026-10-31, and this lab runs in Weeks 11–12 (Local 06), the first week after the switch. **Section A (C5R2) = Conventional, Section B (C5R1) = AIR-Sec** (`course-plan.md`) |
 | **Add-on duration** | **60–90 min** (per the lab's own `README.md`) — this is the single 60–90 min add-on the course specification §1 refers to; every other add-on is 45–60 min |
 | **Lab folder** | `labs/lesson07-iam-policy-evaluation` |
-| **Slides** | ⬚ (no deck in the repo — `slides/` holds only `README.md`; so does `quizzes/`) |
+| **Slides** | Original [Week 11–12 course bridges](../../slides/README.md); AWS Security Foundations modules remain primary |
 | **Analogous CWE** | CWE-284 (Improper Access Control) · CWE-668 (Exposure of Resource to Wrong Sphere) |
 | **CLOs addressed** | **CLO1** shared responsibility · **CLO2** demonstrate the misconfiguration · **CLO3** apply the correct control and verify the attack fails (course specification §6) |
 
@@ -195,7 +195,7 @@ the **Local06 Answer Sheet** copy that Classroom makes for each of them and clic
 - Instructor: `instructor/seed_flags.py` and the answer key
   `instructor/lesson07-iam-policy-evaluation-answer-key.md` (both git-ignored).
 - Rules of engagement: [ETHICS.md](../../ETHICS.md) · Submission: [SUBMISSION.md](../../SUBMISSION.md)
-- Slides: ⬚ (none in repo). Weekly quiz item: ⬚ (`quizzes/` holds only `README.md`).
+- Slides: [Week 11–12 course bridges](../../slides/README.md). Knowledge Checks remain in AWS Academy.
 - References the lab cites (all publicly available, no AWS Academy file used or copied): AWS IAM
   documentation — *Identity-based policies and resource-based policies*, *Policy evaluation logic*;
   AWS S3 documentation — *Bucket policy examples*, specifically why `"Principal": "*"` should almost

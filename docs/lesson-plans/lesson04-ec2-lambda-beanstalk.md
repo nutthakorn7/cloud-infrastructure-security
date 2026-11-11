@@ -12,7 +12,7 @@ topics are described in our own words only.*
 | **Block** | 1 |
 | **Add-on duration** | 45–60 min (per the lab's own `README.md`) |
 | **Lab folder** | `labs/lesson04-ec2-lambda-beanstalk` |
-| **Slides** | ⬚ (no `slides/week04`/`lesson04` deck in the repo — `slides/` holds only `README.md`) |
+| **Slides** | Original [Week 04 course bridge](../../slides/weekly-bridges/output/Week04_Cloud_Course_Bridge.pptx); AWS Academy Module 6 EC2 slides remain primary |
 | **Analogous CWE** | CWE-918 (Server-Side Request Forgery) |
 | **CLOs addressed** | **CLO2** demonstrate the misconfiguration · **CLO3** apply the correct control and verify the attack fails |
 
@@ -166,7 +166,7 @@ it + a one-paragraph explanation of why this is SSRF and not "a bug in the metad
 - Instructor: `instructor/seed_flags.py` (git-ignored) and its answer key
   `instructor/lesson04-ec2-lambda-beanstalk-answer-key.md`.
 - Rules of engagement: [ETHICS.md](../../ETHICS.md) · Submission: [SUBMISSION.md](../../SUBMISSION.md)
-- Slides: ⬚ (none in repo).
+- Slides: [Week 04 course bridge](../../slides/weekly-bridges/output/Week04_Cloud_Course_Bridge.pptx), after the primary AWS Academy EC2 slides.
 - References the lab cites (all publicly available, no AWS Academy file used): AWS EC2 docs
   *Instance metadata and user data* / *IAM roles for Amazon EC2*; OWASP *SSRF Prevention Cheat
   Sheet*; public SSRF-to-cloud-metadata incident write-ups.
