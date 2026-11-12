@@ -179,8 +179,7 @@ where the mechanism is explained correctly but the run was not completed.
 | **Arm confusion.** The worksheet header now states the Block 1 arms both ways (Section A = AIR-Sec, Section B = Conventional) and the README's "This lesson" step 3 now agrees (fixed 2026-11-04, §9 notes 1–2), but a student can still do the wrong Part in good faith. | Announce, in class and in the Classroom post, which Part **this section** is doing today. Do not let students infer it from the worksheet header. |
 | **Scaler state is cumulative and in-process.** Any exploration before the timed run inflates `load_units`, and a second run returns the shared marker on call 1 rather than ~40. Nothing resets it from outside. | Verified on this machine: `docker compose restart vulnerable` returns `/status` to `current_instances` 2, `load_units` 0. Restart before a demo or a re-attempt, and mark the *reasoning*, not the exact call count. |
 | **The fixed app's key budget is a lifetime counter.** A student who spends it while poking about gets `429` on every later keyed call, including the one they meant to screenshot. | `docker compose restart fixed` (same mechanism as above). |
-| **`pip install requests` is refused** with *externally-managed-environment* (PEP 668) on Homebrew and Debian-packaged Python — the README's host-side install then fails. | Verified fallback: `python3 -m venv .venv && .venv/bin/pip install requests && .venv/bin/python exploit.py` (`.venv/` is already git-ignored). Or skip `exploit.py`: the README's Step-by-step drives the endpoint with `curl` only, and `exploit.py` is labelled optional. |
-| **`python exploit.py` fails** on machines where only `python3` exists. | Run `python3 exploit.py`, as the README's Run it block now says; that is what was used to reproduce its captured output. |
+| **Optional Python self-check needs `requests`.** Installing it into the host Python can fail under PEP 668. | The README now uses a Git-ignored `.venv/` for macOS/Linux and Windows Git Bash. The required Step-by-step uses only Docker and `curl`; skip `exploit.py` if Python setup is unavailable. |
 | **Host ports 8109 / 8110 already bound.** | `exploit.py` reads `VULN_URL` and `FIXED_URL` from the environment, so a student who remaps published ports can point it at the new ones without editing the script. Prefer that to editing `docker-compose.yml` — the lab files are covered by the monorepo parity gate. |
 | **First-time image build inside a 45–60 min slot** (`python:3.12-slim` pull + Flask install) eats the lab. | Pre-build during the AWS Learner Lab portion, or ask students to run `docker compose up -d --build` the night before. |
 | **The AWS Learner Lab overruns** and swallows the add-on. | Fall back to the §5 shape: demonstrate the anonymous hammer at the front, set 2b and 2c as homework, and have students run 2a on their own machines before the next session. |
@@ -189,9 +188,10 @@ where the mechanism is explained correctly but the run was not completed.
 
 ## 9. Instructor notes on lab-content issues (do not fix inside a worksheet mid-term)
 
-Three inconsistencies in this lesson's own materials were flagged rather than edited (notes 1 and 2 were fixed on 2026-11-04, with the plainer worksheet) — any change has
-to move `labs/`, the curriculum monorepo copy and the instructor key together (repo CLAUDE.md), and
-the monorepo copy carries the documented renumbering substitutions in `tests/test_parity_cis.py`.
+Three inconsistencies in this lesson's own materials were flagged rather than edited (notes 1 and 2 were fixed on 2026-11-04, with the plainer worksheet). Keep any student-facing lab edit aligned
+with the curriculum monorepo copy; changes to assessed answers also require the instructor key
+to be updated (repo CLAUDE.md). The monorepo copy carries the documented renumbering substitutions
+in `tests/test_parity_cis.py`.
 
 1. **Fixed 2026-11-04 — who does Part 1.** The lab README said "Part 1 essay for everyone; Part 2
    AIR-Sec students also submit the flag", which contradicted the worksheet's "complete only the
@@ -215,12 +215,13 @@ task 2b is an EiPE, so the row understates its own CLO coverage.
 - Instructor key: `instructor/lesson06-load-balancing-autoscaling-answer-key.md` (git-ignored)
 - Shared demonstration marker: `FLAG_SCALING` in the public `docker-compose.yml`; no personal
   `.env` is distributed or needed for Local 05.
-- Run block, quoted from the lab README (students follow its Step-by-step; this block is the optional self-check):
+- Optional macOS/Linux self-check after standing up the targets (students follow the README's Step-by-step; Windows Git Bash commands are in that README):
   ```bash
   cd labs/lesson06-load-balancing-autoscaling
-  docker compose up -d --build   # vulnerable_app.py on :8109, fixed_app.py on :8110
-  python3 -m pip install requests           # once, on the host
-  python3 exploit.py
+  docker compose up -d --build
+  python3 -m venv .venv
+  .venv/bin/python -m pip install requests
+  .venv/bin/python exploit.py
   ```
 - References the lab itself cites: AWS Elastic Load Balancing documentation (*What is a target
   group?*, *Application Load Balancer components*); AWS Auto Scaling documentation (*Auto Scaling
