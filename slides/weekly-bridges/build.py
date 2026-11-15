@@ -195,6 +195,43 @@ WEEK3_PLAIN = (
 )
 
 
+# Plain-language add-on for Week 04 (original wording; no AWS Academy material).
+# Teacher notes hold the answers and link to Local 02 Part 1 Q1, Q2, Q4, Q5 and Q6.
+WEEK4_PLAIN = (
+    ("PLAIN WORDS", "What does an instance role do?", (
+        ("Think of", "Role = a visitor badge", "The server gets a temporary badge from AWS. No password is written in the code."),
+        ("Where from", "Metadata = the badge desk", "Only the server itself can ask the desk (169.254.169.254) for its badge."),
+        ("Why it is good", "Nothing to leak", "No long-lived key sits in GitHub. The badge expires by itself.")),
+     "This is safer than pasting an access key into the app's code.",
+     "TEACHER NOTE (plain-language add-on for Week 04, links to Local 02 Part 1 Q1, Q2 and Q5). Badge analogy: the role is a "
+     "temporary visitor badge, the instance metadata service (IMDS) is the badge desk, and only the server standing inside "
+     "the building can walk up to the desk. That is why an outside person cannot fetch it directly. Say that temporary "
+     "credentials still must be protected: a stolen badge works until it expires, so the role should have only the "
+     "permissions it needs (least privilege). Own wording; no AWS Academy slides copied."),
+    ("PLAIN WORDS", "What is SSRF?", (
+        ("A normal feature", "Preview this link", "You type a URL. The server downloads that page and shows it to you."),
+        ("The trick", "Ask for its own desk", "The attacker types the metadata address. The server fetches its own badge."),
+        ("The name", "SSRF", "Server-Side Request Forgery: the server is tricked into making a request for the attacker.")),
+     "The attacker never touches the badge desk. The trusted server does it for them.",
+     "TEACHER NOTE. SSRF = Server-Side Request Forgery. Walk through the local lab in words only: the vulnerable app's "
+     "/fetch-preview does a plain requests.get(url) on whatever URL it is given, so a URL that points at the app's own "
+     "metadata route returns the fake credentials. In the real attack shape the attacker never reaches IMDS directly. "
+     "Do not ask students to probe real metadata endpoints or other systems; use only the supplied local scenario."),
+    ("CHECK THE FIX", "How do we check the fix?", (
+        ("Check 1", "A normal link still works", "Send an ordinary URL. Expected: it is fetched, HTTP 200."),
+        ("Check 2", "A metadata link is refused", "Send localhost or 169.254.169.254. Expected: blocked, HTTP 403."),
+        ("Why both", "Fixed, not broken", "Check 1 shows the feature still works. Check 2 shows the attack is stopped.")),
+     "Blocking only 169.254.169.254 is not enough: the server can also reach itself as localhost.",
+     "TEACHER NOTE. These are the two checks Local 02 Part 1 Q6 asks for. In the local lab the fixed app (:8117) returns "
+     "403 {\"error\":\"blocked\",\"reason\":\"internal/metadata URL not allowed\"} for both the localhost form and the "
+     "169.254.169.254 form, and 200 'fetched' for an ordinary URL; it also rejects a redirect that points at an internal "
+     "target. The fixed app blocks internal targets (loopback, link-local, the metadata path, redirects); it is not a "
+     "strict allowlist, so say 'block internal destinations', and mention that an allowlist of intended hosts is the "
+     "stronger design. Two defenses students may name for Q4: validate the destination (and redirects) before fetching, "
+     "and give the role only the permissions it needs."),
+)
+
+
 def rect(slide, x, y, w, h, fill=WHITE, line=BORDER, line_pt=0.8):
     shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h))
     shape.fill.solid()
@@ -310,6 +347,14 @@ def build_week(week):
 
     if number == 3:
         for section, title, cards, message, note in WEEK3_PLAIN:
+            slide = base(prs, week, section, title, len(prs.slides) + 1)
+            for i, (kicker, headline, body) in enumerate(cards):
+                card(slide, .58 + i * 4.19, 3.78, kicker, headline, body, ORANGE if i == 1 else BLUE)
+            band(slide, message)
+            slide.notes_slide.notes_text_frame.text = note
+
+    if number == 4:
+        for section, title, cards, message, note in WEEK4_PLAIN:
             slide = base(prs, week, section, title, len(prs.slides) + 1)
             for i, (kicker, headline, body) in enumerate(cards):
                 card(slide, .58 + i * 4.19, 3.78, kicker, headline, body, ORANGE if i == 1 else BLUE)
