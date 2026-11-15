@@ -163,6 +163,38 @@ SUPPLEMENTS = {
 }
 
 
+# Plain-language add-on for Week 03 (original wording; no AWS Academy material).
+# Teacher notes hold the answers. NACL and NAT stay for Weeks 13-14 and Local 07.
+WEEK3_PLAIN = (
+    ("PLAIN WORDS", "What is a VPC?", (
+        ("Think of", "VPC = a fenced compound", "Your own private network inside AWS. Nobody else can see inside it."),
+        ("Inside it", "Subnet = a zone", "A VPC is split into zones. Each zone is either public or private."),
+        ("In the zone", "Instance = a server", "Your EC2 server sits in one subnet, like a person in one room.")),
+     "A new VPC is closed. Nothing gets in or out until you open a path.",
+     "TEACHER NOTE (plain-language add-on for Week 03). Use the compound analogy: the fence is the VPC, "
+     "the zones are subnets, the person in a room is the EC2 instance. Say the key idea twice: a VPC starts closed. "
+     "Do not copy AWS Academy slides; this is our own wording. Ask: where would you put a database, and where a website?"),
+    ("PUBLIC OR PRIVATE", "What makes a subnet public?", (
+        ("Public subnet", "Has a way out to the internet", "Its route table sends internet traffic to an internet gateway."),
+        ("Private subnet", "No direct way to the internet", "Used for things like a database. Outside users cannot walk in."),
+        ("Security group", "A guard at the door", "It only lets in the traffic you list, for example web traffic on port 443.")),
+     "Can a public subnet alone make an instance reachable?",
+     "TEACHER NOTE. Answer to the question on the band: NO. A public subnet is not enough. The traffic also needs "
+     "(1) a route to the internet gateway, (2) a public address on the instance, and (3) a security group rule that "
+     "allows that port. If any one is missing the path fails. Let students say which of the three is missing in "
+     "three short cases: no route; no public address; port not allowed. Keep NACLs and NAT for Weeks 13-14 and Local 07."),
+    ("DRAW YOUR PATH", "Draw one traffic path", (
+        ("Step 1", "Write boxes in a line", "Internet, internet gateway, route table, public subnet, security group, web server."),
+        ("Step 2", "Tick each check", "At each box ask: is there a route here? does the security group allow it?"),
+        ("Step 3", "Find the missing box", "Remove one box. Say what breaks. That is the skill you will reuse.")),
+     "Keep your drawing. Local 07 (Week 14) builds on it with network ACLs and NAT.",
+     "TEACHER NOTE. This is the in-class drawing task, with an example format so students know what to draw. "
+     "Model answer for the line: Internet -> internet gateway -> route table (0.0.0.0/0 to the gateway) -> public subnet -> "
+     "security group (allows 443) -> web server. Accept a hand drawing or a photo. Local 07 does not ask for a diagram, "
+     "so say only that the drawing helps them think about Weeks 13-14, not that it is required."),
+)
+
+
 def rect(slide, x, y, w, h, fill=WHITE, line=BORDER, line_pt=0.8):
     shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h))
     shape.fill.solid()
@@ -275,6 +307,14 @@ def build_week(week):
             card(slide, .58 + i * 4.19, 3.78, kicker, headline, body, ORANGE if i == 1 else BLUE)
         band(slide, message)
         notes(slide, week)
+
+    if number == 3:
+        for section, title, cards, message, note in WEEK3_PLAIN:
+            slide = base(prs, week, section, title, len(prs.slides) + 1)
+            for i, (kicker, headline, body) in enumerate(cards):
+                card(slide, .58 + i * 4.19, 3.78, kicker, headline, body, ORANGE if i == 1 else BLUE)
+            band(slide, message)
+            slide.notes_slide.notes_text_frame.text = note
 
     if number == 17:
         slide = base(prs, week, "LOCAL 09 · EVENT PATHS", "Two ways to turn an event into an alert", len(prs.slides) + 1)
