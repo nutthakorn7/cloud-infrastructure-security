@@ -218,11 +218,12 @@ WEEK4_PLAIN = (
      "metadata route returns the fake credentials. In the real attack shape the attacker never reaches IMDS directly. "
      "Do not ask students to probe real metadata endpoints or other systems; use only the supplied local scenario."),
     ("CHECK THE FIX", "How do we check the fix?", (
-        ("Check 1", "A normal link still works", "Send an ordinary URL. Expected: it is fetched, HTTP 200."),
-        ("Check 2", "A metadata link is refused", "Send localhost or 169.254.169.254. Expected: blocked, HTTP 403."),
-        ("Why both", "Fixed, not broken", "Check 1 shows the feature still works. Check 2 shows the attack is stopped.")),
-     "Blocking only 169.254.169.254 is not enough: the server can also reach itself as localhost.",
-     "TEACHER NOTE. These are the two checks Local 02 Part 1 Q6 asks for. In the local lab the fixed app (:8117) returns "
+        ("Check 1", "A normal request", "Name one request that should still work after the fix. What should happen?"),
+        ("Check 2", "An attack request", "Name one request that should be refused after the fix. What should happen?"),
+        ("Why both", "Why do we need both?", "What does each check prove? Answer in your own words.")),
+     "Use only the supplied local scenario. Never probe real metadata endpoints or other systems.",
+     "TEACHER NOTE. The slide poses the questions only; the model answers are in this note and not on the slide, so Local 02 "
+     "Part 1 Q6 stays an assessed answer. These are the two checks Q6 asks for. In the local lab the fixed app (:8117) returns "
      "403 {\"error\":\"blocked\",\"reason\":\"internal/metadata URL not allowed\"} for both the localhost form and the "
      "169.254.169.254 form, and 200 'fetched' for an ordinary URL; it also rejects a redirect that points at an internal "
      "target. The fixed app blocks internal targets (loopback, link-local, the metadata path, redirects); it is not a "
