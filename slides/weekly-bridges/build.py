@@ -166,104 +166,72 @@ SUPPLEMENTS = {
 # Plain-language add-on for Week 03 (original wording; no AWS Academy material).
 # Teacher notes hold the answers. NACL and NAT stay for Weeks 13-14 and Local 07.
 WEEK3_PLAIN = (
-    ("PLAIN WORDS", "What is a VPC?", (
-        ("Think of", "VPC = a fenced compound", "Your own private network inside AWS. Nobody else can see inside it."),
-        ("Inside it", "Subnet = a zone", "A VPC is split into zones. Each zone is either public or private."),
-        ("In the zone", "Instance = a server", "Your EC2 server sits in one subnet, like a person in one room.")),
-     "A new VPC is closed. Nothing gets in or out until you open a path.",
-     "TEACHER NOTE (plain-language add-on for Week 03). Use the compound analogy: the fence is the VPC, "
-     "the zones are subnets, the person in a room is the EC2 instance. Say the key idea twice: a VPC starts closed. "
-     "Do not copy AWS Academy slides; this is our own wording. Ask: where would you put a database, and where a website?"),
-    ("PUBLIC OR PRIVATE", "What makes a subnet public?", (
-        ("Public subnet", "Has a way out to the internet", "Its route table sends internet traffic to an internet gateway."),
-        ("Private subnet", "No direct way to the internet", "Used for things like a database. Outside users cannot walk in."),
-        ("Security group", "A guard at the door", "It only lets in the traffic you list, for example web traffic on port 443.")),
-     "Can a public subnet alone make an instance reachable?",
-     "TEACHER NOTE. Answer to the question on the band: NO. A public subnet is not enough. The traffic also needs "
-     "(1) a route to the internet gateway, (2) a public address on the instance, and (3) a security group rule that "
-     "allows that port. If any one is missing the path fails. Let students say which of the three is missing in "
-     "three short cases: no route; no public address; port not allowed. Keep NACLs and NAT for Weeks 13-14 and Local 07."),
-    ("DRAW YOUR PATH", "Draw one traffic path", (
-        ("Step 1", "Write boxes in a line", "Internet, internet gateway, route table, public subnet, security group, web server."),
-        ("Step 2", "Tick each check", "At each box ask: is there a route here? does the security group allow it?"),
-        ("Step 3", "Find the missing box", "Remove one box. Say what breaks. That is the skill you will reuse.")),
-     "Keep your drawing. Local 07 (Week 14) builds on it with network ACLs and NAT.",
-     "TEACHER NOTE. This is the in-class drawing task, with an example format so students know what to draw. "
-     "Model answer for the line: Internet -> internet gateway -> route table (0.0.0.0/0 to the gateway) -> public subnet -> "
-     "security group (allows 443) -> web server. Accept a hand drawing or a photo. Local 07 does not ask for a diagram, "
-     "so say only that the drawing helps them think about Weeks 13-14, not that it is required."),
+    ('PLAIN WORDS', 'What is a VPC?', (
+        ('Think of', 'VPC = a fenced compound', 'Your own logically separate network in AWS. Access rules decide who can reach what.'),
+        ('Inside it', 'Subnet = a section', 'A VPC is split into subnets. Each subnet sits in one Availability Zone.'),
+        ('In the subnet', 'Instance = a server', 'Your EC2 server sits in one subnet, like a person in one room.')),
+     'A new custom VPC has no internet connection until you add one.',
+     "TEACHER NOTE (plain-language add-on for Week 03). Use the compound analogy: the fence is the VPC, the sections are subnets, the person in a room is the EC2 instance. Be precise on three points. (1) A VPC is logically isolated, not magically private: who can reach what depends on routes and security rules. (2) A newly created custom VPC has no internet connection until an internet gateway and routes are added; the default VPC already has internet connectivity configured; traffic inside the VPC still depends on routing and security rules. (3) Say 'section' or 'subnet', not 'zone': a subnet lives in one Availability Zone, and 'zone' already means something in AWS. Do not copy AWS Academy slides; this is our own wording. Ask: where would you put a database, and where a website?"),
+    ('PUBLIC OR PRIVATE', 'What makes a subnet public?', (
+        ('Public subnet', 'Has a route to the internet', 'Its route table sends internet traffic to an internet gateway.'),
+        ('Private subnet', 'No direct route to the internet', 'Used for things like a database. Access comes only through paths you set up.'),
+        ('Security group', 'A firewall on the server', 'It lists the traffic allowed in and out. Replies to allowed traffic are let through.')),
+     'Can a public subnet alone make an instance reachable?',
+     "TEACHER NOTE. Answer to the question on the band: NO. A public subnet is not enough. This is a simplified checklist for a server reached directly from the internet, and it assumes an internet gateway is attached to the VPC, the network ACLs allow the traffic, and an application is listening: (1) the subnet's route table sends internet traffic to the internet gateway (that route is what makes a subnet public), (2) the instance has a public address, and (3) its security group allows that port. Three short cases to try: a subnet with no route to the gateway is not a public subnet; no public address; port not allowed. A private subnet has no direct route to the internet gateway, but outsiders can still reach things in it through paths someone configures, such as a load balancer or a VPN. Keep NACLs and NAT for Week 13-14 and Local 07."),
+    ('DRAW YOUR PATH', 'Draw one traffic path', (
+        ('Step 1', 'Draw the subnet and server', 'Draw the VPC, a subnet inside it, and the web server inside the subnet.'),
+        ('Step 2', 'Add the path and the checks', "Draw the internet gateway at the VPC edge. Mark the subnet's route and the server's security group."),
+        ('Step 3', 'Find the missing piece', 'Remove one piece. Say what breaks. That is the skill you will reuse.')),
+     'Keep your drawing. Local 07 (Week 14) builds on it with network ACLs and NAT.',
+     "TEACHER NOTE. This is the in-class drawing task, with an example format so students know what to draw. Model drawing: a box for the VPC; inside it a public subnet box; inside that the web server with its security group attached (allowing 443); the subnet's route table with 0.0.0.0/0 pointing to the internet gateway; the internet gateway drawn on the VPC edge; an arrow from the Internet through the gateway to the server. The route table and security group are settings that the traffic is checked against, not boxes the traffic travels through. Accept a hand drawing or a photo. Local 07 does not ask for a diagram, so say only that the drawing helps them think about Weeks 13-14, not that it is required."),
 )
 
 
 # Plain-language add-on for Week 04 (original wording; no AWS Academy material).
 # Teacher notes hold the answers and link to Local 02 Part 1 Q1, Q2, Q4, Q5 and Q6.
 WEEK4_PLAIN = (
-    ("PLAIN WORDS", "What does an instance role do?", (
-        ("Think of", "Role = a visitor badge", "The server gets a temporary badge from AWS. No password is written in the code."),
-        ("Where from", "Metadata = the badge desk", "Only the server itself can ask the desk (169.254.169.254) for its badge."),
-        ("Why it is good", "Nothing to leak", "No long-lived key sits in GitHub. The badge expires by itself.")),
-     "This is safer than pasting an access key into the app's code.",
-     "TEACHER NOTE (plain-language add-on for Week 04, links to Local 02 Part 1 Q1, Q2 and Q5). Badge analogy: the role is a "
-     "temporary visitor badge, the instance metadata service (IMDS) is the badge desk, and only the server standing inside "
-     "the building can walk up to the desk. That is why an outside person cannot fetch it directly. Say that temporary "
-     "credentials still must be protected: a stolen badge works until it expires, so the role should have only the "
-     "permissions it needs (least privilege). Own wording; no AWS Academy slides copied."),
-    ("PLAIN WORDS", "What is SSRF?", (
-        ("A normal feature", "Preview this link", "You type a URL. The server downloads that page and shows it to you."),
-        ("The trick", "Ask for its own desk", "The attacker types the metadata address. The server fetches its own badge."),
-        ("The name", "SSRF", "Server-Side Request Forgery: the server is tricked into making a request for the attacker.")),
-     "The attacker never touches the badge desk. The trusted server does it for them.",
-     "TEACHER NOTE. SSRF = Server-Side Request Forgery. Walk through the local lab in words only: the vulnerable app's "
-     "/fetch-preview does a plain requests.get(url) on whatever URL it is given, so a URL that points at the app's own "
-     "metadata route returns the fake credentials. In the real attack shape the attacker never reaches IMDS directly. "
-     "Do not ask students to probe real metadata endpoints or other systems; use only the supplied local scenario."),
-    ("CHECK THE FIX", "How do we check the fix?", (
-        ("Check 1", "A normal request", "Name one request that should still work after the fix. What should happen?"),
-        ("Check 2", "An attack request", "Name one request that should be refused after the fix. What should happen?"),
-        ("Why both", "Why do we need both?", "What does each check prove? Answer in your own words.")),
-     "Use only the supplied local scenario. Never probe real metadata endpoints or other systems.",
-     "TEACHER NOTE. The slide poses the questions only; the model answers are in this note and not on the slide, so Local 02 "
-     "Part 1 Q6 stays an assessed answer. These are the two checks Q6 asks for. In the local lab the fixed app (:8117) returns "
-     "403 {\"error\":\"blocked\",\"reason\":\"internal/metadata URL not allowed\"} for both the localhost form and the "
-     "169.254.169.254 form, and 200 'fetched' for an ordinary URL; it also rejects a redirect that points at an internal "
-     "target. The fixed app blocks internal targets (loopback, link-local, the metadata path, redirects); it is not a "
-     "strict allowlist, so say 'block internal destinations', and mention that an allowlist of intended hosts is the "
-     "stronger design. Two defenses students may name for Q4: validate the destination (and redirects) before fetching, "
-     "and give the role only the permissions it needs."),
+    ('PLAIN WORDS', 'What does an instance role do?', (
+        ('Think of', 'Role = what it may do', 'A role is a set of permissions. AWS gives the server temporary credentials (a badge) to use it.'),
+        ('Where from', 'IMDS = the badge desk', 'The instance metadata service (IMDS) hands the server its badge. Internet users cannot reach it directly.'),
+        ('Why it is good', 'No key in the code', 'No long-lived key sits in GitHub. But a badge can still be stolen, so protect it.')),
+     'Safer than an access key in the code, but the temporary badge must still be protected.',
+     'TEACHER NOTE (plain-language add-on for Week 04, links to Local 02 Part 1 Q1, Q2 and Q5). Keep three ideas apart: the role is the set of permissions; the temporary credentials are the badge the server uses; the instance metadata service (IMDS, at 169.254.169.254) is the instance-local service that supplies metadata and, when a role is attached, its temporary credentials. Internet clients cannot reach that address directly, but vulnerable software running on the instance can relay a request to it. Temporary credentials still must be protected: a stolen badge works until it expires, so give the role only the permissions it needs (least privilege) to limit the damage. Own wording; no AWS Academy slides copied.'),
+    ('PLAIN WORDS', 'What is SSRF?', (
+        ('A normal feature', 'Preview this link', 'You type a URL. The server downloads that page and shows it to you.'),
+        ('The trick', 'Ask for its own desk', 'In our lab the attacker types the metadata address and the weak app fetches its own badge.'),
+        ('The name', 'SSRF', 'Server-Side Request Forgery: the server is tricked into making a request for the attacker.')),
+     'The attacker never touches the badge desk. The trusted server does it for them.',
+     "TEACHER NOTE. SSRF = Server-Side Request Forgery. Walk through the local lab in words only: the vulnerable app's /fetch-preview does a plain requests.get(url) on whatever URL it is given, so a URL that points at the app's own metadata route returns the fake credentials. Say clearly that this is a local simulation of an IMDSv1-style attack. In real AWS, IMDSv2 asks for a session token first, so a simple relayed GET does not return credentials; requiring IMDSv2 is one real control, and the app should still be fixed. Do not ask students to probe real metadata endpoints or other systems; use only the supplied local scenario."),
+    ('CHECK THE FIX', 'How do we check the fix?', (
+        ('Check 1', 'A normal request', 'Name one request that should still work after the fix. What should happen?'),
+        ('Check 2', 'An attack request', 'Name one request that should be refused after the fix. What should happen?'),
+        ('Why both', 'Why do we need both?', 'What does each check prove? Answer in your own words.')),
+     'Use only the supplied local scenario. Never probe real metadata endpoints or other systems.',
+     'TEACHER NOTE. The slide poses the questions only; the model answers are in this note and not on the slide, so Local 02 Part 1 Q6 stays an assessed answer. These are the two checks Q6 asks for. In the local lab the fixed app (:8117) returns 403 {"error":"blocked","reason":"internal/metadata URL not allowed"} for both the localhost form and the 169.254.169.254 form, and 200 \'fetched\' for an ordinary URL; it also rejects a redirect that points at an internal target. The fixed app blocks internal targets (loopback, link-local, the metadata path, redirects); it is not a strict allowlist, so say \'block internal destinations\', and mention that an allowlist of intended hosts is the stronger design. For Q4 (\'name two ways to stop the attack\'), accept two preventive controls such as: validate the destination and any redirects before fetching (block loopback, link-local and metadata addresses, or use an allowlist); require IMDSv2 or otherwise limit access to the metadata service. Least privilege (giving the role only the permissions it needs) limits the damage if credentials are stolen but does not stop the attack, so credit it under Q5, not as a preventive control for Q4.'),
 )
 
 
 # Plain-language add-on for Week 05 (original wording; no AWS Academy material).
 # Slide 3 poses the Local 03 Q5 questions only; the answers stay in the teacher notes.
 WEEK5_PLAIN = (
-    ("PLAIN WORDS", "What does Lambda do?", (
-        ("Think of", "Lambda = a helper on call", "A small piece of code that runs only when something happens. No server to keep on."),
-        ("What wakes it", "An event", "A file is uploaded, a timer ticks, or a message arrives. Then your code runs."),
-        ("The cost idea", "Pay while it runs", "You pay for the time the code runs, not for the time it waits.")),
-     "Lambda is code that waits for an event, runs, then stops.",
-     "TEACHER NOTE (plain-language add-on for Week 05, links to Local 03 Part 1 Q5). Helper-on-call analogy: nobody pays the "
-     "helper to sit and wait; they are called when there is a job. Keep it to the idea of an event-driven function. The AWS "
-     "Academy Lambda activity is the hands-on part; this slide only supplies the plain words. Own wording; no AWS Academy "
-     "slides copied."),
-    ("PLAIN WORDS", "What is SNS?", (
-        ("Think of", "Topic = a notice board", "Lambda posts a message to the topic. The topic does not send email by itself."),
-        ("Who gets it", "Subscription = a name on the list", "An email address that asked for the notices. It must confirm by clicking a link first."),
-        ("The action", "Publish = pinning a notice", "A successful Publish means SNS accepted the message. It does not prove the email arrived.")),
-     "Topic, subscription and publish are three different things.",
-     "TEACHER NOTE. In the Local 03 scenario a Lambda function publishes a message to an SNS Standard topic that has an email "
-     "subscription. Roles: Lambda publishes; the topic receives and fans the message out; each confirmed subscription gets a "
-     "copy. Why confirm: it shows the owner of the address wants the emails, so nobody can sign someone else up and spam "
-     "them. A successful Publish response only shows SNS accepted the message; delivery to a mailbox can still fail or "
-     "land in spam."),
-    ("CHECK YOURSELF", "Three questions for Local 03 Q5", (
-        ("Question 1", "Who does what?", "Say in one line what Lambda, the topic and the subscription each do."),
-        ("Question 2", "Why confirm?", "Why must an email subscription be confirmed? Does a successful Publish prove the email arrived?"),
-        ("Question 3", "A late subscriber?", "Someone subscribes after a message was sent. Will they get it? Say why.")),
-     "Answer in your own words. The answers are not on this slide.",
-     "TEACHER NOTE. The slide poses the questions only; the model answers are below and are not on the slide, so Q5 stays an assessed answer. These are the parts Local 03 Part 1 Q5 asks for (model answers: Lambda publishes, the topic receives, each confirmed subscription gets a copy; confirmation shows the address owner wants the emails; a successful Publish proves only that SNS accepted the message; a Standard topic does not replay old messages): the roles of Lambda, the topic and the subscription; why "
-     "the email subscription must be confirmed; whether a successful Publish proves the email reached the recipient (no); and "
-     "why a subscriber added later should not expect past messages (a Standard topic does not replay). Accept answers in Thai "
-     "or English; mark the reasoning, not the length. Keep AWS names in English."),
+    ('PLAIN WORDS', 'What does Lambda do?', (
+        ('Think of', 'Lambda = a helper on call', 'A small piece of code that runs only when something happens. No server to keep on.'),
+        ('What wakes it', 'An event', 'A file is uploaded, a timer ticks, or a message arrives. Then your code runs.'),
+        ('The cost idea', 'Requests and run time', 'Normal on-demand Lambda is charged per request and run time, not for waiting.')),
+     'Lambda is code that waits for an event, runs, then stops.',
+     'TEACHER NOTE (plain-language add-on for Week 05, links to Local 03 Part 1 Q5). Helper-on-call analogy: the helper is called when there is a job. Keep it to the idea of an event-driven function. On cost, be accurate: ordinary on-demand Lambda is charged mainly by the number of requests and the run time, so a function that is not running costs nothing; optional settings such as Provisioned Concurrency keep capacity ready and can add charges while the function is idle. The AWS Academy Lambda activity is the hands-on part; this slide only supplies the plain words. Own wording; no AWS Academy slides copied.'),
+    ('PLAIN WORDS', 'What is SNS?', (
+        ('Think of', 'Topic = a notice board', 'Lambda posts a message to the topic. SNS then tries to deliver it to the subscribers.'),
+        ('Who gets it', 'Subscription = a name on the list', 'An email address that asked for the notices. It must confirm by clicking a link first.'),
+        ('The action', 'Publish = pinning a notice', 'A successful Publish means SNS accepted the message. It does not prove the email arrived.')),
+     'Topic, subscription and publish are three different things.',
+     'TEACHER NOTE. In the Local 03 scenario a Lambda function publishes a message to an SNS Standard topic that has an email subscription. Roles: Lambda publishes; the topic receives the message; SNS attempts delivery to each confirmed subscription. Be accurate about delivery: it can fail, and Standard topics can deliver a message more than once. Why confirm: it shows the owner of the address wants the emails, so nobody can sign someone else up and spam them. A successful Publish response only shows SNS accepted the message; delivery to a mailbox can still fail or land in spam.'),
+    ('CHECK YOURSELF', 'Three questions for Local 03 Q5', (
+        ('Question 1', 'Who does what?', 'Say in one line what Lambda, the topic and the subscription each do.'),
+        ('Question 2', 'Why confirm?', 'Why must an email subscription be confirmed? Does a successful Publish prove the email arrived?'),
+        ('Question 3', 'A late subscriber?', 'Someone subscribes after a message was sent. Will they get it? Say why.')),
+     'Answer in your own words. The answers are not on this slide.',
+     'TEACHER NOTE. The slide poses the questions only; the model answers are below and are not on the slide, so Q5 stays an assessed answer. These are the parts Local 03 Part 1 Q5 asks for (model answers: Lambda publishes, the topic receives, SNS attempts delivery to each confirmed subscription; confirmation shows the address owner wants the emails; a successful Publish proves only that SNS accepted the message; a Standard topic does not replay old messages): the roles of Lambda, the topic and the subscription; why the email subscription must be confirmed; whether a successful Publish proves the email reached the recipient (no); and why a subscriber added later should not expect past messages (a Standard topic does not replay). Accept answers in Thai or English; mark the reasoning, not the length. Keep AWS names in English.'),
 )
 
 
