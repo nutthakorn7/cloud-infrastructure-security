@@ -238,37 +238,24 @@ WEEK5_PLAIN = (
 # Plain-language add-on for Week 06 (original wording; no AWS Academy material).
 # Slide 3 poses the Local 03 Q1-Q3 questions only; the answers stay in the teacher notes.
 WEEK6_PLAIN = (
-    ("PLAIN WORDS", "EBS or S3?", (
-        ("Think of", "EBS = a hard disk", "A volume usually attached to one EC2 server. The server uses it like a normal disk."),
-        ("Think of", "S3 = a filing cabinet", "Files (objects) kept in a bucket. Others can reach them over the internet if the rules allow."),
-        ("Why it matters", "Different rules", "A disk belongs to its server. A bucket can be opened to others, so its rules matter.")),
-     "The AWS lab covers EBS. The local lab is about the rules on an S3 bucket.",
-     "TEACHER NOTE (plain-language add-on for Week 06, links to Local 03 Part 1 Q1 to Q3 and Part 2). EBS = block storage that "
-     "behaves like a disk for an EC2 instance (in the lab the volume and the instance must be in the same Availability Zone). "
-     "S3 = object storage: files kept in a bucket and reached by name. The point for Local 03 is that a bucket can be shared, "
-     "so the rules on the bucket decide who can read and who can write. Own wording; no AWS Academy slides copied."),
-    ("PLAIN WORDS", "Who is allowed into the bucket?", (
-        ("Bucket policy", "Rules on the cabinet door", "A bucket policy lists who may do what to the files in a bucket."),
-        ("Principal", "A star means everyone", "Principal: * means every caller, including people who are not logged in."),
-        ("Action", "Read or write?", "GetObject reads a file. PutObject writes a file or replaces one with the same name.")),
-     "Read a rule in three parts: who, which action, which bucket.",
-     "TEACHER NOTE. Principal is the 'who'; a star matches every caller, including anonymous callers with no credentials. "
-     "Action is the 'what': s3:GetObject reads an object, s3:PutObject writes one (and overwrites an existing object with the "
-     "same key). The local lab (:8105 vulnerable, :8106 fixed) shows the same bucket answering an anonymous PUT with 200 on the "
-     "vulnerable app and 403 AccessDenied on the fixed one, while an anonymous GET works on both. Do not tell students the "
-     "answers to Q1 to Q3 here; use this slide only to explain the words."),
-    ("CHECK YOURSELF", "Three questions for Local 03", (
-        ("Question 1", "Public read", "A website bucket lets everyone read. Is that a mistake? Say why or why not."),
-        ("Question 2", "Public write", "If everyone could also write, what could an attacker do that read-only does not allow?"),
-        ("Question 3", "Least privilege", "A bucket must be public to read. What does least privilege mean for its policy?")),
-     "Answer in your own words. The answers are not on this slide.",
-     "TEACHER NOTE. The slide poses the questions only; the model answers are in this note, not on the slide, so Local 03 "
-     "Part 1 Q1 to Q3 stay assessed answers. Model answers: Q1 public read is correct for a website because browsers fetch "
-     "pages anonymously; the mistake would be extra permissions, not read access. Q2 with PutObject open to everyone an "
-     "attacker can overwrite files such as index.html, which is website defacement, and can plant content that visitors "
-     "trust. Q3 least privilege does not mean no public access; it means choosing exactly which actions are public, so "
-     "GetObject only for the objects the site needs, and keeping write for a named role. Accept answers in Thai or English; "
-     "mark the reasoning, not the length. Q4 asks for a real or plausible consequence; Q5 (Lambda and SNS) was taught in Week 05."),
+    ('PLAIN WORDS', 'EBS or S3?', (
+        ('Think of', 'EBS = a disk for a server', 'A volume usually attached to one EC2 server. The server uses it like a normal disk.'),
+        ('Think of', 'S3 = a filing cabinet', 'Files (objects) kept in a bucket. Others can reach them over the internet if the rules allow.'),
+        ('Why it matters', 'Both need access rules', 'A disk is used through its server. A bucket is reached by requests, so its rules matter.')),
+     'The AWS lab covers EBS. The local lab is about the rules on an S3 bucket.',
+     'TEACHER NOTE (plain-language add-on for Week 06, links to Local 03 Part 1 Q1 to Q3 and Part 2). EBS = block storage that behaves like a disk for an EC2 instance (in the lab the volume and the instance must be in the same Availability Zone). A volume is a separate resource: it can be detached and reattached, and it needs access controls too. S3 = object storage: files kept in a bucket and reached by name through service requests. The point for Local 03 is that a bucket can be shared, so the access rules matter. Bucket policies are one part of how S3 decides: IAM policies, explicit denies and S3 Block Public Access can also change the result. Own wording; no AWS Academy slides copied.'),
+    ('PLAIN WORDS', 'Who is allowed into the bucket?', (
+        ('Bucket policy', 'Rules on the cabinet door', 'A bucket policy says allow or deny: who, which action, on which objects, under what conditions.'),
+        ('Principal', 'A star means everyone', 'Principal: * matches every caller, including people who are not logged in.'),
+        ('Action', 'Read or write?', 'GetObject reads an object. PutObject uploads one; the same name replaces it (unless versioning is on).')),
+     'Read a rule in parts: who, which action, which objects, any conditions.',
+     "TEACHER NOTE. Principal is the 'who'; a star matches every caller, including anonymous callers with no credentials, but a match alone grants nothing: the Effect (Allow or Deny), the Resource, any Conditions and other controls also matter. Action is the 'what': s3:GetObject reads an object, s3:PutObject writes one under a key and replaces the current content if the key already exists (with versioning on, the older version can be kept). For object actions the Resource is the objects, for example arn:aws:s3:::bucket-name/*, not just the bucket. The local lab (:8105 vulnerable, :8106 fixed) shows the same bucket answering an anonymous PUT with 200 on the vulnerable app and 403 AccessDenied on the fixed one, while an anonymous GET works on both. Do not tell students the answers to Q1 to Q3 here; use this slide only to explain the words."),
+    ('CHECK YOURSELF', 'Three questions for Local 03', (
+        ('Question 1', 'Public read', 'In this lab a website bucket lets everyone read. Is that a mistake? Say why or why not.'),
+        ('Question 2', 'Public write', 'If everyone could also write, what could an attacker do that read-only does not allow?'),
+        ('Question 3', 'Least privilege', 'In this lab the bucket must be public to read. What does least privilege mean for its policy?')),
+     'Answer in your own words. The answers are not on this slide.',
+     'TEACHER NOTE. The slide poses the questions only; the model answers are in this note, not on the slide, so Local 03 Part 1 Q1 to Q3 stay assessed answers. Model answers: Q1 in this lab the website is served directly from S3, so public read is correct because browsers fetch pages anonymously; the mistake would be extra permissions, not read access (a real site can also serve a private bucket through a CDN such as CloudFront, but that is not this lab). Q2 with PutObject open to everyone an attacker can overwrite files such as index.html, which is website defacement, and can plant content that visitors trust. Q3 least privilege does not mean no public access; it means choosing exactly which actions are public, so GetObject only for the objects the site needs, and keeping write for a named role. Accept answers in Thai or English; mark the reasoning, not the length. Q4 asks for a real or plausible consequence; Q5 (Lambda and SNS) was taught in Week 05.'),
 )
 
 
