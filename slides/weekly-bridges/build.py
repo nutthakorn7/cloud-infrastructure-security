@@ -187,6 +187,30 @@ WEEK3_PLAIN = (
 )
 
 
+# Plain-language add-on for Week 04 (original wording; no AWS Academy material).
+# Teacher notes hold the answers and link to Local 02 Part 1 Q1, Q2, Q4, Q5 and Q6.
+WEEK4_PLAIN = (
+    ('PLAIN WORDS', 'What does an instance role do?', (
+        ('Think of', 'Role = what it may do', 'A role is a set of permissions. AWS gives the server temporary credentials (a badge) to use it.'),
+        ('Where from', 'IMDS = the badge desk', 'The instance metadata service (IMDS) hands the server its badge. Internet users cannot reach it directly.'),
+        ('Why it is good', 'No key in the code', 'No long-lived key sits in GitHub. But a badge can still be stolen, so protect it.')),
+     'Safer than an access key in the code, but the temporary badge must still be protected.',
+     'TEACHER NOTE (plain-language add-on for Week 04, links to Local 02 Part 1 Q1, Q2 and Q5). Keep three ideas apart: the role is the set of permissions; the temporary credentials are the badge the server uses; the instance metadata service (IMDS, at 169.254.169.254) is the instance-local service that supplies metadata and, when a role is attached, its temporary credentials. Internet clients cannot reach that address directly, but vulnerable software running on the instance can relay a request to it. Temporary credentials still must be protected: a stolen badge works until it expires, so give the role only the permissions it needs (least privilege) to limit the damage. Own wording; no AWS Academy slides copied.'),
+    ('PLAIN WORDS', 'What is SSRF?', (
+        ('A normal feature', 'Preview this link', 'You type a URL. The server downloads that page and shows it to you.'),
+        ('The trick', 'Ask for its own desk', 'In our lab the attacker types the metadata address and the weak app fetches its own badge.'),
+        ('The name', 'SSRF', 'Server-Side Request Forgery: the server is tricked into making a request for the attacker.')),
+     'The attacker never touches the badge desk. The trusted server does it for them.',
+     "TEACHER NOTE. SSRF = Server-Side Request Forgery. Walk through the local lab in words only: the vulnerable app's /fetch-preview does a plain requests.get(url) on whatever URL it is given, so a URL that points at the app's own metadata route returns the fake credentials. Say clearly that this is a local simulation of an IMDSv1-style attack. In real AWS, IMDSv2 asks for a session token first, so a simple relayed GET does not return credentials; requiring IMDSv2 is one real control, and the app should still be fixed. Do not ask students to probe real metadata endpoints or other systems; use only the supplied local scenario."),
+    ('CHECK THE FIX', 'How do we check the fix?', (
+        ('Check 1', 'A normal request', 'Name one request that should still work after the fix. What should happen?'),
+        ('Check 2', 'An attack request', 'Name one request that should be refused after the fix. What should happen?'),
+        ('Why both', 'Why do we need both?', 'What does each check prove? Answer in your own words.')),
+     'Use only the supplied local scenario. Never probe real metadata endpoints or other systems.',
+     'TEACHER NOTE. The slide poses the questions only; the model answers are in this note and not on the slide, so Local 02 Part 1 Q6 stays an assessed answer. These are the two checks Q6 asks for. In the local lab the fixed app (:8117) returns 403 {"error":"blocked","reason":"internal/metadata URL not allowed"} for both the localhost form and the 169.254.169.254 form, and 200 \'fetched\' for an ordinary URL; it also rejects a redirect that points at an internal target. The fixed app blocks internal targets (loopback, link-local, the metadata path, redirects); it is not a strict allowlist, so say \'block internal destinations\', and mention that an allowlist of intended hosts is the stronger design. For Q4 (\'name two ways to stop the attack\'), accept two preventive controls such as: validate the destination and any redirects before fetching (block loopback, link-local and metadata addresses, or use an allowlist); require IMDSv2 or otherwise limit access to the metadata service. Least privilege (giving the role only the permissions it needs) limits the damage if credentials are stolen but does not stop the attack, so credit it under Q5, not as a preventive control for Q4.'),
+)
+
+
 def rect(slide, x, y, w, h, fill=WHITE, line=BORDER, line_pt=0.8):
     shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h))
     shape.fill.solid()
@@ -302,6 +326,14 @@ def build_week(week):
 
     if number == 3:
         for section, title, cards, message, note in WEEK3_PLAIN:
+            slide = base(prs, week, section, title, len(prs.slides) + 1)
+            for i, (kicker, headline, body) in enumerate(cards):
+                card(slide, .58 + i * 4.19, 3.78, kicker, headline, body, ORANGE if i == 1 else BLUE)
+            band(slide, message)
+            slide.notes_slide.notes_text_frame.text = note
+
+    if number == 4:
+        for section, title, cards, message, note in WEEK4_PLAIN:
             slide = base(prs, week, section, title, len(prs.slides) + 1)
             for i, (kicker, headline, body) in enumerate(cards):
                 card(slide, .58 + i * 4.19, 3.78, kicker, headline, body, ORANGE if i == 1 else BLUE)
