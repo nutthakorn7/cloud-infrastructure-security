@@ -163,6 +163,30 @@ SUPPLEMENTS = {
 }
 
 
+# Plain-language add-on for Week 03 (original wording; no AWS Academy material).
+# Teacher notes hold the answers. NACL and NAT stay for Weeks 13-14 and Local 07.
+WEEK3_PLAIN = (
+    ('PLAIN WORDS', 'What is a VPC?', (
+        ('Think of', 'VPC = a fenced compound', 'Your own logically separate network in AWS. Access rules decide who can reach what.'),
+        ('Inside it', 'Subnet = a section', 'A VPC is split into subnets. Each subnet sits in one Availability Zone.'),
+        ('In the subnet', 'Instance = a server', 'Your EC2 server sits in one subnet, like a person in one room.')),
+     'A new custom VPC has no internet connection until you add one.',
+     "TEACHER NOTE (plain-language add-on for Week 03). Use the compound analogy: the fence is the VPC, the sections are subnets, the person in a room is the EC2 instance. Be precise on three points. (1) A VPC is logically isolated, not magically private: who can reach what depends on routes and security rules. (2) A newly created custom VPC has no internet connection until an internet gateway and routes are added; the default VPC already has internet connectivity configured; traffic inside the VPC still depends on routing and security rules. (3) Say 'section' or 'subnet', not 'zone': a subnet lives in one Availability Zone, and 'zone' already means something in AWS. Do not copy AWS Academy slides; this is our own wording. Ask: where would you put a database, and where a website?"),
+    ('PUBLIC OR PRIVATE', 'What makes a subnet public?', (
+        ('Public subnet', 'Has a route to the internet', 'Its route table sends internet traffic to an internet gateway.'),
+        ('Private subnet', 'No direct route to the internet', 'Used for things like a database. Access comes only through paths you set up.'),
+        ('Security group', 'A firewall on the server', 'It lists the traffic allowed in and out. Replies to allowed traffic are let through.')),
+     'Can a public subnet alone make an instance reachable?',
+     "TEACHER NOTE. Answer to the question on the band: NO. A public subnet is not enough. This is a simplified checklist for a server reached directly from the internet, and it assumes an internet gateway is attached to the VPC, the network ACLs allow the traffic, and an application is listening: (1) the subnet's route table sends internet traffic to the internet gateway (that route is what makes a subnet public), (2) the instance has a public address, and (3) its security group allows that port. Three short cases to try: a subnet with no route to the gateway is not a public subnet; no public address; port not allowed. A private subnet has no direct route to the internet gateway, but outsiders can still reach things in it through paths someone configures, such as a load balancer or a VPN. Keep NACLs and NAT for Week 13-14 and Local 07."),
+    ('DRAW YOUR PATH', 'Draw one traffic path', (
+        ('Step 1', 'Draw the subnet and server', 'Draw the VPC, a subnet inside it, and the web server inside the subnet.'),
+        ('Step 2', 'Add the path and the checks', "Draw the internet gateway at the VPC edge. Mark the subnet's route and the server's security group."),
+        ('Step 3', 'Find the missing piece', 'Remove one piece. Say what breaks. That is the skill you will reuse.')),
+     'Keep your drawing. Local 07 (Week 14) builds on it with network ACLs and NAT.',
+     "TEACHER NOTE. This is the in-class drawing task, with an example format so students know what to draw. Model drawing: a box for the VPC; inside it a public subnet box; inside that the web server with its security group attached (allowing 443); the subnet's route table with 0.0.0.0/0 pointing to the internet gateway; the internet gateway drawn on the VPC edge; an arrow from the Internet through the gateway to the server. The route table and security group are settings that the traffic is checked against, not boxes the traffic travels through. Accept a hand drawing or a photo. Local 07 does not ask for a diagram, so say only that the drawing helps them think about Weeks 13-14, not that it is required."),
+)
+
+
 def rect(slide, x, y, w, h, fill=WHITE, line=BORDER, line_pt=0.8):
     shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h))
     shape.fill.solid()
@@ -275,6 +299,14 @@ def build_week(week):
             card(slide, .58 + i * 4.19, 3.78, kicker, headline, body, ORANGE if i == 1 else BLUE)
         band(slide, message)
         notes(slide, week)
+
+    if number == 3:
+        for section, title, cards, message, note in WEEK3_PLAIN:
+            slide = base(prs, week, section, title, len(prs.slides) + 1)
+            for i, (kicker, headline, body) in enumerate(cards):
+                card(slide, .58 + i * 4.19, 3.78, kicker, headline, body, ORANGE if i == 1 else BLUE)
+            band(slide, message)
+            slide.notes_slide.notes_text_frame.text = note
 
     if number == 17:
         slide = base(prs, week, "LOCAL 09 · EVENT PATHS", "Two ways to turn an event into an alert", len(prs.slides) + 1)
