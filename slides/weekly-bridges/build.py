@@ -214,34 +214,24 @@ WEEK4_PLAIN = (
 # Plain-language add-on for Week 05 (original wording; no AWS Academy material).
 # Slide 3 poses the Local 03 Q5 questions only; the answers stay in the teacher notes.
 WEEK5_PLAIN = (
-    ("PLAIN WORDS", "What does Lambda do?", (
-        ("Think of", "Lambda = a helper on call", "A small piece of code that runs only when something happens. No server to keep on."),
-        ("What wakes it", "An event", "A file is uploaded, a timer ticks, or a message arrives. Then your code runs."),
-        ("The cost idea", "Pay while it runs", "You pay for the time the code runs, not for the time it waits.")),
-     "Lambda is code that waits for an event, runs, then stops.",
-     "TEACHER NOTE (plain-language add-on for Week 05, links to Local 03 Part 1 Q5). Helper-on-call analogy: nobody pays the "
-     "helper to sit and wait; they are called when there is a job. Keep it to the idea of an event-driven function. The AWS "
-     "Academy Lambda activity is the hands-on part; this slide only supplies the plain words. Own wording; no AWS Academy "
-     "slides copied."),
-    ("PLAIN WORDS", "What is SNS?", (
-        ("Think of", "Topic = a notice board", "Lambda posts a message to the topic. The topic does not send email by itself."),
-        ("Who gets it", "Subscription = a name on the list", "An email address that asked for the notices. It must confirm by clicking a link first."),
-        ("The action", "Publish = pinning a notice", "A successful Publish means SNS accepted the message. It does not prove the email arrived.")),
-     "Topic, subscription and publish are three different things.",
-     "TEACHER NOTE. In the Local 03 scenario a Lambda function publishes a message to an SNS Standard topic that has an email "
-     "subscription. Roles: Lambda publishes; the topic receives and fans the message out; each confirmed subscription gets a "
-     "copy. Why confirm: it shows the owner of the address wants the emails, so nobody can sign someone else up and spam "
-     "them. A successful Publish response only shows SNS accepted the message; delivery to a mailbox can still fail or "
-     "land in spam."),
-    ("CHECK YOURSELF", "Three questions for Local 03 Q5", (
-        ("Question 1", "Who does what?", "Say in one line what Lambda, the topic and the subscription each do."),
-        ("Question 2", "Why confirm?", "Why must an email subscription be confirmed? Does a successful Publish prove the email arrived?"),
-        ("Question 3", "A late subscriber?", "Someone subscribes after a message was sent. Will they get it? Say why.")),
-     "Answer in your own words. The answers are not on this slide.",
-     "TEACHER NOTE. The slide poses the questions only; the model answers are below and are not on the slide, so Q5 stays an assessed answer. These are the parts Local 03 Part 1 Q5 asks for (model answers: Lambda publishes, the topic receives, each confirmed subscription gets a copy; confirmation shows the address owner wants the emails; a successful Publish proves only that SNS accepted the message; a Standard topic does not replay old messages): the roles of Lambda, the topic and the subscription; why "
-     "the email subscription must be confirmed; whether a successful Publish proves the email reached the recipient (no); and "
-     "why a subscriber added later should not expect past messages (a Standard topic does not replay). Accept answers in Thai "
-     "or English; mark the reasoning, not the length. Keep AWS names in English."),
+    ('PLAIN WORDS', 'What does Lambda do?', (
+        ('Think of', 'Lambda = a helper on call', 'A small piece of code that runs only when something happens. No server to keep on.'),
+        ('What wakes it', 'An event', 'A file is uploaded, a timer ticks, or a message arrives. Then your code runs.'),
+        ('The cost idea', 'Requests and run time', 'Normal on-demand Lambda is charged per request and run time, not for waiting.')),
+     'Lambda is code that waits for an event, runs, then stops.',
+     'TEACHER NOTE (plain-language add-on for Week 05, links to Local 03 Part 1 Q5). Helper-on-call analogy: the helper is called when there is a job. Keep it to the idea of an event-driven function. On cost, be accurate: ordinary on-demand Lambda is charged mainly by the number of requests and the run time, so a function that is not running costs nothing; optional settings such as Provisioned Concurrency keep capacity ready and can add charges while the function is idle. The AWS Academy Lambda activity is the hands-on part; this slide only supplies the plain words. Own wording; no AWS Academy slides copied.'),
+    ('PLAIN WORDS', 'What is SNS?', (
+        ('Think of', 'Topic = a notice board', 'Lambda posts a message to the topic. SNS then tries to deliver it to the subscribers.'),
+        ('Who gets it', 'Subscription = a name on the list', 'An email address that asked for the notices. It must confirm by clicking a link first.'),
+        ('The action', 'Publish = pinning a notice', 'A successful Publish means SNS accepted the message. It does not prove the email arrived.')),
+     'Topic, subscription and publish are three different things.',
+     'TEACHER NOTE. In the Local 03 scenario a Lambda function publishes a message to an SNS Standard topic that has an email subscription. Roles: Lambda publishes; the topic receives the message; SNS attempts delivery to each confirmed subscription. Be accurate about delivery: it can fail, and Standard topics can deliver a message more than once. Why confirm: it shows the owner of the address wants the emails, so nobody can sign someone else up and spam them. A successful Publish response only shows SNS accepted the message; delivery to a mailbox can still fail or land in spam.'),
+    ('CHECK YOURSELF', 'Three questions for Local 03 Q5', (
+        ('Question 1', 'Who does what?', 'Say in one line what Lambda, the topic and the subscription each do.'),
+        ('Question 2', 'Why confirm?', 'Why must an email subscription be confirmed? Does a successful Publish prove the email arrived?'),
+        ('Question 3', 'A late subscriber?', 'Someone subscribes after a message was sent. Will they get it? Say why.')),
+     'Answer in your own words. The answers are not on this slide.',
+     'TEACHER NOTE. The slide poses the questions only; the model answers are below and are not on the slide, so Q5 stays an assessed answer. These are the parts Local 03 Part 1 Q5 asks for (model answers: Lambda publishes, the topic receives, SNS attempts delivery to each confirmed subscription; confirmation shows the address owner wants the emails; a successful Publish proves only that SNS accepted the message; a Standard topic does not replay old messages): the roles of Lambda, the topic and the subscription; why the email subscription must be confirmed; whether a successful Publish proves the email reached the recipient (no); and why a subscriber added later should not expect past messages (a Standard topic does not replay). Accept answers in Thai or English; mark the reasoning, not the length. Keep AWS names in English.'),
 )
 
 
